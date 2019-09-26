@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>07-elasticsearch-索引_动词 | Simba</title>
+  <title>15-es-query-bulk_批处理 | Simba</title>
   <meta name="keywords" content=" es ">
-  <meta name="description" content="07-elasticsearch-索引_动词 | Simba">
+  <meta name="description" content="15-es-query-bulk_批处理 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -373,9 +373,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-07-elasticsearch-索引-动词" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-15-es-query-bulk-批处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">07-elasticsearch-索引_动词</h1>
+        <h1 class="article-title">15-es-query-bulk_批处理</h1>
     
     <div class="article-meta">
         
@@ -397,12 +397,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-26 10:19:37'>2019-09-25 23:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-09-26 22:13:52'>2019-09-26 22:12</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:599</span>
+        <span>字数:607</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -421,7 +421,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通创建方式并使用自己的ID"><span class="toc-text">普通创建方式并使用自己的ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自增ID"><span class="toc-text">自增ID</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个新文档"><span class="toc-text">创建一个新文档</span></a>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bulk-批量操作"><span class="toc-text">bulk 批量操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bulk-允许行为"><span class="toc-text">bulk 允许行为</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -436,38 +436,67 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>索引（动词）：</p>
-<pre><code>&quot;索引一份文档&quot; 表示把一个文档存储到索引(名词)里，以便它可以被检索或查询。
+        <h1 id="bulk-批量操作"><a href="#bulk-批量操作" class="headerlink" title="bulk 批量操作"></a>bulk 批量操作</h1><p>bulk api允许我们使用单一请求来实现多个文档的’create、index、update、delete’。</p>
+<h2 id="bulk-允许行为"><a href="#bulk-允许行为" class="headerlink" title="bulk 允许行为"></a>bulk 允许行为</h2><table>
+<thead>
+<tr>
+<th>行为</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>create</td>
+<td>当文档不存在时创建文档</td>
+</tr>
+<tr>
+<td>index</td>
+<td>常见新文档或替换已有文档</td>
+</tr>
+<tr>
+<td>update</td>
+<td>局部更新文档</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>删除一个文档</td>
+</tr>
+</tbody></table>
+<p>在执行上述动作时，必须指定文档的_index、_type、_id 这些元数据</p>
+<p>注意！bulk的请求体有如下规范：</p>
+<ol>
+<li><p>每行必须以”\n”符号结尾，包括最后一行。这些都是作为每行有效分离而做的标记</p>
+</li>
+<li><p>每一行的数据不能包含未被转义的换行符。避免干扰分析，这意味着，json格式不能美化。</p>
+</li>
+</ol>
+<p>请求报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /_bulk</span><br><span class="line">&#123;&quot;delete&quot;:&#123;&quot;_index&quot;: &quot;demo&quot;,&quot;_type&quot;: &quot;testDate&quot;,&quot;_id&quot;: &quot;3&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;create&quot;:&#123;&quot;_index&quot;: &quot;megacorp&quot;,&quot;_type&quot;: &quot;employee&quot;,&quot;_id&quot;: &quot;999&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;last_name&quot;:&quot;ccc999&quot;,&quot;first_name&quot;:&quot;999&quot;,&quot;age&quot;:&quot;999&quot;&#125;</span><br><span class="line">&#123;&quot;update&quot;:&#123;&quot;_index&quot;: &quot;books&quot;,&quot;_type&quot;: &quot;book&quot;,&quot;_id&quot;: &quot;19&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;doc&quot;:&#123;&quot;publish&quot;:&quot;高等教育出版社666666&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-这很像SQL中的insert关键字，差别是，如果文档已经存在，新的文档回覆盖旧的文档。</code></pre><p>使用put，向es中索引(创建)一个文档。</p>
-<p>文档通过 _index 、 _type 、_id唯一确定，我们可以自己提供一个_id，也可以让es为我们生成</p>
-<h2 id="普通创建方式并使用自己的ID"><a href="#普通创建方式并使用自己的ID" class="headerlink" title="普通创建方式并使用自己的ID"></a>普通创建方式并使用自己的ID</h2><p>选择的索引叫做”demo”，类型叫做”testData”，自己选择的id是”123”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">put /demo/testDate/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx1&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;22&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">put /demo/testDate/2</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx2&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;23&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>响应报文</strong></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文指出请求的索引已经被成功创建，这个索引中包含了元数据以及一个新元素：_version。</p>
-<p>es中每个文档都有版本号，每当文档变化(包括删除)都会使_version增加。</p>
-<h2 id="自增ID"><a href="#自增ID" class="headerlink" title="自增ID"></a>自增ID</h2><p>让es自动为我们生成_id。</p>
-<p>请求结构发生了变化，不再使用 PUT 方法，而是 POST 方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">post /demo/testDate/</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx3&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;24&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing3&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>注意：类似create、update之类，有文档参数的，换行在第二行写就行了。</p>
+<p>请求报文做了些什么事？</p>
+<ul>
+<li><p>删除 - 索引demo、类型testDate、id为3 的文档</p>
+</li>
+<li><p>创建 - 索引megacorp、类型employee、id为999 的文档，文档内容为第三行内容</p>
+</li>
+<li><p>更新 - 索引books、类型book、id为19 的文档，更新内容为第五行内容。</p>
+</li>
+</ul>
 <p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"AWwo2-6G-lkrji9etDrN"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span>: <span class="number">360</span>,</span><br><span class="line">  <span class="attr">"errors"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"items"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"delete"</span>: &#123;</span><br><span class="line">        <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"deleted"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"create"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"999"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"created"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">201</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"update"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"updated"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>响应报文和上面的没有什么区别，只是_id变成了自动生成的值。</p>
-<h1 id="创建一个新文档"><a href="#创建一个新文档" class="headerlink" title="创建一个新文档"></a>创建一个新文档</h1><p>当索引一个文档时，我们如何确定是完成创建了一个新的文档 还是 覆盖了一个已经存在的呢？</p>
-<p>最简单的方式是使用es自动生成唯一的id。</p>
-<p>如果非要使用自定义的id，可以使用下面的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /demo/testDate/4/_create</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx444&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;444&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing444&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>确认下es中的结果</p>
+<p><img src="//simba-cheng.github.io/2019/09/26/15-es-query-bulk-批处理/bulk-1.png" alt="bulk-1" title="bulk-1"></p>
+<p><img src="//simba-cheng.github.io/2019/09/26/15-es-query-bulk-批处理/bulk-2.png" alt="bulk-2" title="bulk-2"></p>
+<p><img src="//simba-cheng.github.io/2019/09/26/15-es-query-bulk-批处理/bulk-3.png" alt="bulk-3" title="bulk-3"></p>
+<p>注意</p>
+<pre><code>上面每个子请求都是独立执行的，所以一个子请求的错误并不影响其他请求。
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"4"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+如果任何一个子请求失败，顶层error会标记为true，然后出现错误信息。
 
-<p>如果id存在，则会出现下面的报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"error"</span>: &#123;</span><br><span class="line">    <span class="attr">"root_cause"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"version_conflict_engine_exception"</span>,</span><br><span class="line">        <span class="attr">"reason"</span>: <span class="string">"[testDate][3]: version conflict, document already exists (current version [1])"</span>,</span><br><span class="line">        <span class="attr">"index_uuid"</span>: <span class="string">"y4Q0O4w1QgSnSqYUOg956Q"</span>,</span><br><span class="line">        <span class="attr">"shard"</span>: <span class="string">"4"</span>,</span><br><span class="line">        <span class="attr">"index"</span>: <span class="string">"demo"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"version_conflict_engine_exception"</span>,</span><br><span class="line">    <span class="attr">"reason"</span>: <span class="string">"[testDate][3]: version conflict, document already exists (current version [1])"</span>,</span><br><span class="line">    <span class="attr">"index_uuid"</span>: <span class="string">"y4Q0O4w1QgSnSqYUOg956Q"</span>,</span><br><span class="line">    <span class="attr">"shard"</span>: <span class="string">"4"</span>,</span><br><span class="line">    <span class="attr">"index"</span>: <span class="string">"demo"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"status"</span>: <span class="number">409</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
+<li>如果 bulk 在同一个index、type下，就不用为每个文档指定相同的元数据了，写在url上面就行。</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 simba_cheng@163.com </span>
@@ -481,12 +510,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>07-elasticsearch-索引_动词</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">599</span></p>
+        <p><span class="copy-title">文章标题:</span>15-es-query-bulk_批处理</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">607</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:19</p>
-        <p><span class="copy-title">最后更新:</span>2019-09-26, 10:19:37</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/07-elasticsearch-索引-动词/" title="07-elasticsearch-索引_动词">https://simba-cheng.github.io/2019/09/25/07-elasticsearch-索引-动词/</a>
+        <p><span class="copy-title">发布时间:</span>2019-09-26, 22:12:12</p>
+        <p><span class="copy-title">最后更新:</span>2019-09-26, 22:13:52</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/15-es-query-bulk-批处理/" title="15-es-query-bulk_批处理">https://simba-cheng.github.io/2019/09/26/15-es-query-bulk-批处理/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
