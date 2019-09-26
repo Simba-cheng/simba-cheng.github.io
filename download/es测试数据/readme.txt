@@ -1,0 +1,13 @@
+uniqueMark:数据库、内存中唯一标示(长度不限定)
+news_id:新闻ID，平台内唯一
+title:新闻标题
+source:新闻来源，包括新华社及全国其他几十家媒体机构
+gmt_publish:发布时间，详细到分钟级别
+hot_index:热门指数，表明该新闻热度(最小值为0)
+category:新闻分类，新闻频道详细信息
+thumbnail_img:新闻封面缩略图地址，可以有多个缩略图
+url:分发平台提供的新闻链接
+summary_create_time:摘要创建时间(不提供摘要内容时字段值为null)
+summary_update_time:摘要更新时间(不提供摘要内容时字段值为null)
+summary:新闻内容摘要，250字以内
+content:新闻文本内容。默认不提供

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>05-elasticsearch-映射_Mapping | Simba</title>
+  <meta name="keywords" content=" es ">
+  <meta name="description" content="05-elasticsearch-映射_Mapping | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-22T09:26:19.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(12)</small></div></li>
+    
+        
+            
+            <li><div data-rel="es">es<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="12">
+<input type="hidden" id="yelog_site_word_count" value="12k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">Markdown</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="es "
+           href="/2019/09/25/07-elasticsearch-索引-动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-elasticsearch-索引_动词">07-elasticsearch-索引_动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/25/06-elasticsearch-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-elasticsearch-文档_document">06-elasticsearch-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/25/05-elasticsearch-映射-Mapping/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-elasticsearch-映射_Mapping">05-elasticsearch-映射_Mapping</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/25/04-elasticsearch-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-elasticsearch-索引_名词">04-elasticsearch-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/25/03-elasticsearch-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-elasticsearch-查询语言">03-elasticsearch-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/22/02-elasticsearch-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-elasticsearch-基本概念">02-elasticsearch-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="es "
+           href="/2019/09/22/01-elasticsearch6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-elasticsearch-6.5.0集群搭建">01-elasticsearch-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="Markdown "
+           href="/2019/09/22/Markdown技巧/"
+           data-tag="Markdown"
+           data-author="" >
+            <span class="post-title" title="Markdown技巧">Markdown技巧</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-05-elasticsearch-映射-Mapping" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">05-elasticsearch-映射_Mapping</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="es">es</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">es</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-09-26 10:45:48'>2019-09-25 23:17</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#索引映射类型"><span class="toc-text">索引映射类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapping-元字段"><span class="toc-text">Mapping 元字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段-属性"><span class="toc-text">字段 属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#核心类型"><span class="toc-text">核心类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂数据类型"><span class="toc-text">复杂数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geo-数据类型"><span class="toc-text">Geo 数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专用数据类型"><span class="toc-text">专用数据类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引映射配置"><span class="toc-text">索引映射配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看映射"><span class="toc-text">查看映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态映射"><span class="toc-text">动态映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态映射规则"><span class="toc-text">动态映射规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态映射"><span class="toc-text">静态映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建静态索引映射"><span class="toc-text">新建静态索引映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入数据"><span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检索"><span class="toc-text">检索</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Mapping映射 是定义文档及其包含字段存储和索引方式的过程。</p>
+<p><strong>每个索引都有一种映射类型，用于确定文档的索引方式。</strong></p>
+<pre><code>如果把索引看做数据库、类型看做表、映射就是表结构。
+
+（请注意，这种对比并不好，数据库表可以创建多个，但Elasticsearch6.x版本后，一个index只支持一个type）</code></pre><p>使用映射可以用来定义：</p>
+<ol>
+<li>哪些字段视为全文字段</li>
+<li>哪些字段是包含数字、日期、地理信息的。</li>
+<li>日期值的格式</li>
+<li>动态添加字段的映射的自定义规则。</li>
+<li>等….</li>
+</ol>
+<h1 id="索引映射类型"><a href="#索引映射类型" class="headerlink" title="索引映射类型"></a>索引映射类型</h1><p>在elasticsearch 6.0.0 版本之前，一个索引可以包含多个映射类型</p>
+<pre><code>Indices created in Elasticsearch 6.0.0 or later may only contain a single mapping type. 
+
+Indices created in 5.x with multiple mapping types will continue to function as before in Elasticsearch 6.x. 
+
+Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed in 8.0.0.</code></pre><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html" target="_blank" rel="noopener">Removal of mapping types</a>    </p>
+<p>在elasticsearch 6.0.0 版本之后，索引只能包含一个映射类型。</p>
+<br>
+
+<p><strong>映射类型包含：</strong></p>
+<p><strong>1. 元字段</strong></p>
+<pre><code>元字段用于自定义文档的元数据关联的处理方式。 
+
+元字段的示例包括文档的_index，_type，_id和_source字段。</code></pre><p><strong>2. 字段 属性</strong></p>
+<pre><code>与文档相关的字段或属性列表</code></pre><h2 id="Mapping-元字段"><a href="#Mapping-元字段" class="headerlink" title="Mapping 元字段"></a>Mapping 元字段</h2><p>每篇文档都有与之关联的元数据，例如_index，mapping _type和_id元字段；创建映射类型时，可以自定义某些元字段的行为。</p>
+<table>
+    <tr>
+        <td>分类</td> 
+        <td>元字段</td>
+        <td>描述</td> 
+   </tr>
+    <tr>
+        <td rowspan="4">文档属性元字段</td>    
+        <td>_index</td>
+        <td>文档所属的索引</td>
+    </tr>
+    <tr>
+        <td>_id</td>
+        <td>文档的id</td>
+    </tr>
+    <tr>
+        <td>_type</td>
+        <td>文档所属类型</td>
+    </tr>
+    <tr>
+        <td>_uid</td>
+        <td>由_type和_id字段组成</td>
+    </tr>
+    <tr>
+        <td rowspan="2">文档元字段</td>    
+        <td>_source</td>
+        <td>文档的原生json字符串</td>
+    </tr>
+    <tr>
+        <td>_size</td>
+        <td>整个_source字段的字节数大小</td>
+    </tr>
+    <tr>
+        <td rowspan="3">索引元字段</td>    
+        <td>_all</td>
+        <td>自动组合所有的字段值</td>
+    </tr>
+    <tr>
+        <td>_field_names</td>
+        <td>文档中包含非空值的所有字段</td>
+    </tr>
+    <tr>
+        <td>_ignored</td>
+        <td>文档中由于索引而在索引时被忽略的所有字段</td>
+    </tr>
+    <tr>
+        <td rowspan="1">路由元字段</td>    
+        <td>_routing</td>
+        <td>自定义路由值，用于将文档路由到特定分片</td>
+    </tr>
+    <tr>
+        <td rowspan="1">其他元字段</td>    
+        <td>_meta</td>
+        <td>用于自定义元数据</td>
+    </tr>
+</table>
+
+<h2 id="字段-属性"><a href="#字段-属性" class="headerlink" title="字段 属性"></a>字段 属性</h2><h3 id="核心类型"><a href="#核心类型" class="headerlink" title="核心类型"></a>核心类型</h3><table>
+    <tr>
+        <td>分类</td> 
+        <td>字段类型</td>
+        <td>描述</td>
+   </tr>
+    <tr>
+        <td rowspan="2">String(字符串型)</td>    
+        <td>text</td>
+        <td>text 是一种允许索引全文的字段类型(text类型字段，存储数据时，会自动分词，并生成索引)</td>
+    </tr>
+    <tr>
+        <td>keyword</td>
+        <td>keyword类型的字段只能通过精确值搜索到</td>
+    </tr>
+    <tr>
+        <td rowspan="8">Numeric datatypes(数字类型)</td>    
+        <td>long</td>
+        <td>64位整数</td>
+    </tr>
+    <tr>
+        <td>integer</td>
+        <td>32位整数</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>16位整数</td>
+    </tr>
+    <tr>
+        <td>byte</td>
+        <td>8位整数</td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td>A double-precision 64-bit IEEE 754 floating point number, restricted to finite values.</td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td>A single-precision 32-bit IEEE 754 floating point number, restricted to finite values.</td>
+    </tr>
+    <tr>
+        <td>half_float</td>
+        <td>A half-precision 16-bit IEEE 754 floating point number, restricted to finite values.</td>
+    </tr>
+    <tr>
+        <td>scaled_float</td>
+        <td>A finite floating point number that is backed by a long, scaled by a fixed double scaling factor.</td>
+    </tr>
+    <tr>
+        <td rowspan="1">Date datatype(日期类型)</td>    
+        <td>date</td>
+        <td>es 中的日期可以是：包含格式化日期的字符串，例如"2015-01-01"或"2015/01/01 12:10:30"、一个代表毫秒以来的长数字、表示自纪元以来秒数的整数</td>
+    </tr>
+    <tr>
+        <td rowspan="1">Boolean datatype(布尔类型)</td>    
+        <td>boolean</td>
+        <td>boolean 字段接受JSON true和false值，但也可以接受被解释为true或false的字符串（false，true、"false"，"true"）</td>
+    </tr>
+    <tr>
+        <td rowspan="1">Binary datatype(二进制类型)</td>    
+        <td>binary</td>
+        <td>binary类型接受二进制值作为 Base64编码的字符串。默认情况下不存储该字段，并且不可搜索；
+        <br>注意：Base64编码的二进制值不得包含嵌入的换行符\n
+        </td>
+    </tr>
+</table>
+
+<h3 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h3><table>
+    <tr>
+        <td>分类</td> 
+        <td>字段类型</td>
+        <td>描述</td>
+   </tr>
+   <tr>
+        <td rowspan="6">Range datatypes(范围类型)<br>支持以下范围类型：</td>    
+        <td>integer_range</td>
+        <td>32位整数，最小值：-2^31，最大值：2^31-1</td>
+    </tr>
+    <tr>    
+        <td>float_range</td>
+        <td>A range of single-precision 32-bit IEEE 754 floating point values.</td>
+    </tr>
+    <tr>    
+        <td>long_range</td>
+        <td>64位整数，最小值：-2^63，最大值：2^63-1</td>
+    </tr>
+    <tr>    
+        <td>double_range</td>
+        <td>A range of double-precision 64-bit IEEE 754 floating point values.</td>
+    </tr>
+    <tr>    
+        <td>date_range</td>
+        <td>一系列日期值，表示为自系统纪元以来经过的无符号64位整数毫秒</td>
+    </tr>
+    <tr>    
+        <td>ip_range</td>
+        <td>A range of ip values supporting either IPv4 or IPv6 (or mixed) addresses.</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Complex datatypes(复杂数据类型)</td>    
+        <td>Object datatype</td>
+        <td>文档可能包含内部对象，而内部对象本身可能又包含内部对象</td>
+    </tr>
+    <tr>
+        <td>Nested datatype</td>
+        <td>nested类型是object数据类型的专用版本，它允许对象数组以可以彼此独立查询的方式进行索引</td>
+    </tr>
+</table>
+
+<h3 id="Geo-数据类型"><a href="#Geo-数据类型" class="headerlink" title="Geo 数据类型"></a>Geo 数据类型</h3><p>暂时用不到，后面再研究</p>
+<h3 id="专用数据类型"><a href="#专用数据类型" class="headerlink" title="专用数据类型"></a>专用数据类型</h3><p>暂时用不到，后面再研究</p>
+<h1 id="索引映射配置"><a href="#索引映射配置" class="headerlink" title="索引映射配置"></a>索引映射配置</h1><p>映射可以分为 <strong>动态映射</strong> 和 <strong>静态映射</strong></p>
+<h2 id="查看映射"><a href="#查看映射" class="headerlink" title="查看映射"></a>查看映射</h2><p>使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get /books/_mapping/book</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"books"</span>: &#123;</span><br><span class="line">    <span class="attr">"mappings"</span>: &#123;</span><br><span class="line">      <span class="attr">"book"</span>: &#123;</span><br><span class="line">        <span class="attr">"properties"</span>: &#123;</span><br><span class="line">          <span class="attr">"author"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">              <span class="attr">"keyword"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"ignore_above"</span>: <span class="number">256</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"info"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">              <span class="attr">"keyword"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"ignore_above"</span>: <span class="number">256</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"name"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">              <span class="attr">"keyword"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"ignore_above"</span>: <span class="number">256</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"price"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"publish"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">              <span class="attr">"keyword"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"ignore_above"</span>: <span class="number">256</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"type"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">            <span class="attr">"fields"</span>: &#123;</span><br><span class="line">              <span class="attr">"keyword"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"ignore_above"</span>: <span class="number">256</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h2><p>在关系型数据库中，需要先创建数据库，然后在该数据库实例下创建数据表，然后才能在该表中插入数据。</p>
+<p><strong>在Elasticsearch中不需要事先定义映射(Mapping)，文档写入Elasticsearch时，会根据文档字段自动识别类型，这种机制称之为动态映射</strong></p>
+<h3 id="动态映射规则"><a href="#动态映射规则" class="headerlink" title="动态映射规则"></a>动态映射规则</h3><p>动态映射可以帮助我们在创建索引后直接将文档数据写入ElasticSearch，让我们尽快享受到ElasticSearch检索功能。</p>
+<p>在实际项目中，如果在导入数据前不能确定包含哪些字段或者不方便确定字段类型，可以使用动态映射。</p>
+<p>当向ElasticSearch写入一个新文档时，一个之前没有的字段，会通过动态映射来推断该字段类型。</p>
+<table>
+<thead>
+<tr>
+<th>JSON数据</th>
+<th>自动推测类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>null</td>
+<td>没有字段被添加</td>
+</tr>
+<tr>
+<td>true、false</td>
+<td>boolean型</td>
+</tr>
+<tr>
+<td>小数</td>
+<td>float型</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>long型</td>
+</tr>
+<tr>
+<td>日期</td>
+<td>date或text</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>text</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>由数组第一个非空值决定</td>
+</tr>
+<tr>
+<td>JSON对象</td>
+<td>Object类型</td>
+</tr>
+</tbody></table>
+<h2 id="静态映射"><a href="#静态映射" class="headerlink" title="静态映射"></a>静态映射</h2><p>在Elasticsearch中<strong>事先定义好映射(Mapping)，包含文档的个个字段及其类型等，这种方法称之为静态映射</strong>。</p>
+<p>动态映射的类型自动推测功能有时并不完全正确，这就需要静态映射机制。</p>
+<p>静态映射与关系型数据库中创建表语句，需要事先指定字段类型一样。</p>
+<p>相对于动态映射，静态映射可以添加更加详细字段类型、更精准的配置信息等。</p>
+<h3 id="新建静态索引映射"><a href="#新建静态索引映射" class="headerlink" title="新建静态索引映射"></a>新建静态索引映射</h3><p>索引名称：books</p>
+<p>类型名称：it</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PUT /books</span><br><span class="line">&#123;</span><br><span class="line">  &quot;mappings&quot;:&#123;</span><br><span class="line">    &quot;it&quot;:&#123;</span><br><span class="line">      &quot;properties&quot;: &#123;</span><br><span class="line">        &quot;bookId&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,</span><br><span class="line">        &quot;bookName&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,</span><br><span class="line">        &quot;publishDate&quot;:&#123;&quot;type&quot;:&quot;date&quot;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true,</span><br><span class="line">  &quot;shards_acknowledged&quot;: true,</span><br><span class="line">  &quot;index&quot;: &quot;books&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过head查看</p>
+<p><img src="//simba-cheng.github.io/2019/09/25/05-elasticsearch-映射-Mapping/%E9%9D%99%E6%80%81%E6%98%A0%E5%B0%84-1.png" alt="静态映射-1" title="静态映射-1"></p>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><p>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT books/it/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;bookId&quot;:&quot;1&quot;,</span><br><span class="line">  &quot;bookName&quot;:&quot;Thinking In Java&quot;,</span><br><span class="line">  &quot;publishDate&quot;:&quot;2019-07-30&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot;: &quot;books&quot;,</span><br><span class="line">  &quot;_type&quot;: &quot;it&quot;,</span><br><span class="line">  &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">  &quot;_version&quot;: 1,</span><br><span class="line">  &quot;result&quot;: &quot;created&quot;,</span><br><span class="line">  &quot;_shards&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: 2,</span><br><span class="line">    &quot;successful&quot;: 1,</span><br><span class="line">    &quot;failed&quot;: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;created&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h3><p>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET books/it/1</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot;: &quot;books&quot;,</span><br><span class="line">  &quot;_type&quot;: &quot;it&quot;,</span><br><span class="line">  &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">  &quot;_version&quot;: 1,</span><br><span class="line">  &quot;found&quot;: true,</span><br><span class="line">  &quot;_source&quot;: &#123;</span><br><span class="line">    &quot;bookId&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;bookName&quot;: &quot;Thinking In Java&quot;,</span><br><span class="line">    &quot;publishDate&quot;: &quot;2019-07-30&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/mapping.html" target="_blank" rel="noopener">Mapping</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/mapping-fields.html#mapping-fields" target="_blank" rel="noopener">Meta-Fields</a></li>
+<li><a href="https://blog.csdn.net/chengyuqiang/article/details/79054153" target="_blank" rel="noopener">ElasticSearch 6.x 学习笔记：13.mapping元字段</a></li>
+<li><a href="https://www.cnblogs.com/shoufeng/p/10679725.html" target="_blank" rel="noopener">ES 13 - Elasticsearch的元字段 (_index、_type、_source、_routing等)</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/mapping-types.html" target="_blank" rel="noopener">Field datatypes</a></li>
+<li><a href="https://blog.csdn.net/wwd0501/article/details/78091720" target="_blank" rel="noopener">elasticsearch的keyword与text的区别</a></li>
+<li><a href="https://blog.csdn.net/napoay/article/details/73100110#12-text%E7%B1%BB%E5%9E%8B" target="_blank" rel="noopener">Elasticsearch 5.4 Mapping详解</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/number.html" target="_blank" rel="noopener">Numeric datatypes</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/date.html" target="_blank" rel="noopener">Date datatype</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/boolean.html" target="_blank" rel="noopener">Boolean datatype</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/binary.html#binary" target="_blank" rel="noopener">Binary datatype</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/range.html" target="_blank" rel="noopener">Range datatypes</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/object.html" target="_blank" rel="noopener">Object datatype</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/nested.html#_how_arrays_of_objects_are_flattened" target="_blank" rel="noopener">Nested datatype</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/mapping.html" target="_blank" rel="noopener">Mapping</a></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>05-elasticsearch-映射_Mapping</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:15</p>
+        <p><span class="copy-title">最后更新:</span>2019-09-26, 10:45:48</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/05-elasticsearch-映射-Mapping/" title="05-elasticsearch-映射_Mapping">https://simba-cheng.github.io/2019/09/25/05-elasticsearch-映射-Mapping/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#es','#索引','#Markdown','#资料',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
