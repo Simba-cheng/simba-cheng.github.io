@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>09-elasticsearch-测试数据</title>
+      <link href="/2019/09/26/09-elasticsearch-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/"/>
+      <url>/2019/09/26/09-elasticsearch-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/</url>
+      
+        <content type="html"><![CDATA[<p>很早之前，通过公共API接口，获取了一批新闻数据，大约10万条左右，在MySQL库中。</p><p>正好学习Elasticsearch可以用上，已经转换成可以直接导入Elasticsearch的json格式了。</p><p>本地测试的时候发现，json文件太大导致curl导入失效，只能分割成小文件。</p><pre><code>#对newsData_All.json文件进行分割，每20000行split -l 20000 newsData_All.json#newsData_All.json文件有多少行cat newsData_All.json | wc -l</code></pre><p>json文件导入命令</p><pre><code>curl -H &apos;Content-Type: application/x-ndjson&apos; -XPOST &apos;192.168.137.100:9200/news/new/_bulk?pretty&apos; --data-binary @newsData_1.json</code></pre><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>分享两万条数据，供学习使用。</p><p><a href="/download/es测试数据/readme.txt">字段说明 点击下载</a></p><p><a href="/download/es测试数据/newsData_1.txt">newsData_1 点击下载</a></p><p><a href="/download/es测试数据/newsData_2.txt">newsData_2 点击下载</a></p><p>下载后将后缀改为.json</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>08-elasticsearch-上手Demo</title>
       <link href="/2019/09/26/08-elasticsearch-%E4%B8%8A%E6%89%8BDemo/"/>
       <url>/2019/09/26/08-elasticsearch-%E4%B8%8A%E6%89%8BDemo/</url>
