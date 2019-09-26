@@ -357,7 +357,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-26 18:01:13'>2019-09-26 17:34</time>
+        创建时间:<time class="date" title='更新时间: 2019-09-26 18:05:37'>2019-09-26 17:34</time>
         
     </div>
     <div class="article-meta">
@@ -460,9 +460,36 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">get /books/book/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;:&#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;_id&quot;: &quot;25&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;took&quot; : 28,</span><br><span class="line">  &quot;timed_out&quot; : false,</span><br><span class="line">  &quot;_shards&quot; : &#123;</span><br><span class="line">    &quot;total&quot; : 5,</span><br><span class="line">    &quot;successful&quot; : 5,</span><br><span class="line">    &quot;skipped&quot; : 0,</span><br><span class="line">    &quot;failed&quot; : 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot; : &#123;</span><br><span class="line">    &quot;total&quot; : 1,</span><br><span class="line">    &quot;max_score&quot; : 1.0,</span><br><span class="line">    &quot;hits&quot; : [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;_index&quot; : &quot;books&quot;,</span><br><span class="line">        &quot;_type&quot; : &quot;book&quot;,</span><br><span class="line">        &quot;_id&quot; : &quot;25&quot;,</span><br><span class="line">        &quot;_score&quot; : 1.0,</span><br><span class="line">        &quot;_source&quot; : &#123;</span><br><span class="line">          &quot;name&quot; : &quot;普通高等教育“十一五”国家级规划教材辅助用书：经济法习题与案例集&quot;,</span><br><span class="line">          &quot;publish&quot; : &quot;高等教育出版社&quot;,</span><br><span class="line">          &quot;type&quot; : &quot;大学教材&quot;,</span><br><span class="line">          &quot;author&quot; : &quot;曲振涛&quot;,</span><br><span class="line">          &quot;info&quot; : &quot;《经济法习题与案例集》是普通高等教育“十一五”国家级规划教材（高职高专教育）《经济法》（第三版）的配套习题与案例集。与主教材对应，本习题与案例集共分18章，题型包括名词解释、判断题、单项选择题、多项选择题、填空题、简答题、论述题和案例分析题。&quot;,</span><br><span class="line">          &quot;price&quot; : 16</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="基本匹配查询"><a href="#基本匹配查询" class="headerlink" title="基本匹配查询"></a>基本匹配查询</h1><p>在news索引，new类型下，所有字段中，查询带有’新华社’的结果</p>
+<pre><code>{
+  &quot;took&quot; : 28,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 1,
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;books&quot;,
+        &quot;_type&quot; : &quot;book&quot;,
+        &quot;_id&quot; : &quot;25&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;name&quot; : &quot;普通高等教育“十一五”国家级规划教材辅助用书：经济法习题与案例集&quot;,
+          &quot;publish&quot; : &quot;高等教育出版社&quot;,
+          &quot;type&quot; : &quot;大学教材&quot;,
+          &quot;author&quot; : &quot;曲振涛&quot;,
+          &quot;info&quot; : &quot;《经济法习题与案例集》是普通高等教育“十一五”国家级规划教材（高职高专教育）《经济法》（第三版）的配套习题与案例集。与主教材对应，本习题与案例集共分18章，题型包括名词解释、判断题、单项选择题、多项选择题、填空题、简答题、论述题和案例分析题。&quot;,
+          &quot;price&quot; : 16
+        }
+      }
+    ]
+  }
+}</code></pre><h1 id="基本匹配查询"><a href="#基本匹配查询" class="headerlink" title="基本匹配查询"></a>基本匹配查询</h1><p>在news索引，new类型下，所有字段中，查询带有’新华社’的结果</p>
 <pre><code>GET /news/new/_search?q=新华社</code></pre><p>在news索引，new类型下，所有字段中，查询带有’2018’的结果</p>
 <pre><code>curl -XGET &apos;127.0.0.1:9200/news/new/_search?q=2018&amp;pretty&apos;</code></pre><p>指定字段</p>
 <pre><code>curl -XGET &apos;127.0.0.1:9200/news/new/_search?q=content:2018&amp;pretty&apos;</code></pre><p>指定查询数量</p>
@@ -482,9 +509,28 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/2?_source=address</span><br><span class="line"></span><br><span class="line">GET /demo/testDate/1?_source=name,address</span><br></pre></td></tr></table></figure>
 
 <p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot;: &quot;demo&quot;,</span><br><span class="line">  &quot;_type&quot;: &quot;testDate&quot;,</span><br><span class="line">  &quot;_id&quot;: &quot;2&quot;,</span><br><span class="line">  &quot;_version&quot;: 1,</span><br><span class="line">  &quot;found&quot;: true,</span><br><span class="line">  &quot;_source&quot;: &#123;</span><br><span class="line">    &quot;address&quot;: &quot;nanjing2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot;: &quot;demo&quot;,</span><br><span class="line">  &quot;_type&quot;: &quot;testDate&quot;,</span><br><span class="line">  &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">  &quot;_version&quot;: 1,</span><br><span class="line">  &quot;found&quot;: true,</span><br><span class="line">  &quot;_source&quot;: &#123;</span><br><span class="line">    &quot;address&quot;: &quot;nanjing&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;cyx1&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>{
+  &quot;_index&quot;: &quot;demo&quot;,
+  &quot;_type&quot;: &quot;testDate&quot;,
+  &quot;_id&quot;: &quot;2&quot;,
+  &quot;_version&quot;: 1,
+  &quot;found&quot;: true,
+  &quot;_source&quot;: {
+    &quot;address&quot;: &quot;nanjing2&quot;
+  }
+}
 
-<p>_source节点中只有我们指定的字段</p>
+{
+  &quot;_index&quot;: &quot;demo&quot;,
+  &quot;_type&quot;: &quot;testDate&quot;,
+  &quot;_id&quot;: &quot;1&quot;,
+  &quot;_version&quot;: 1,
+  &quot;found&quot;: true,
+  &quot;_source&quot;: {
+    &quot;address&quot;: &quot;nanjing&quot;,
+    &quot;name&quot;: &quot;cyx1&quot;
+  }
+}</code></pre><p>_source节点中只有我们指定的字段</p>
 <br>
 
 <p>如果只想得到_source节点下的数据，不想要元数据，可以这样</p>
@@ -584,7 +630,7 @@
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-26, 17:34:31</p>
-        <p><span class="copy-title">最后更新:</span>2019-09-26, 18:01:13</p>
+        <p><span class="copy-title">最后更新:</span>2019-09-26, 18:05:37</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/10-elasticsearch-简单查询/" title="10-elasticsearch-简单查询">https://simba-cheng.github.io/2019/09/26/10-elasticsearch-简单查询/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
