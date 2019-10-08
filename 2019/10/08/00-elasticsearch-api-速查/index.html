@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>14-es-query-multi_get批处理 | Simba</title>
+  <title>00-elasticsearch api 速查 | Simba</title>
   <meta name="keywords" content=" es ">
-  <meta name="description" content="14-es-query-multi_get批处理 | Simba">
+  <meta name="description" content="00-elasticsearch api 速查 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -389,9 +389,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-14-es-query-multi-get批处理" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-00-elasticsearch-api-速查" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">14-es-query-multi_get批处理</h1>
+        <h1 class="article-title">00-elasticsearch api 速查</h1>
     
     <div class="article-meta">
         
@@ -413,12 +413,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-26 22:12:41'>2019-09-26 21:51</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-08 23:19:39'>2019-10-08 23:18</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:522</span>
+        <span>字数:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -437,7 +437,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#multi-get-mget-检索多个文档-批处理"><span class="toc-text">multi-get/mget 检索多个文档/批处理</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-DSL-API-速查"><span class="toc-text">Elasticsearch DSL API 速查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#合并检索"><span class="toc-text">合并检索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新"><span class="toc-text">更新</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#复制"><span class="toc-text">复制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-text">集群</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -452,34 +452,182 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="multi-get-mget-检索多个文档-批处理"><a href="#multi-get-mget-检索多个文档-批处理" class="headerlink" title="multi-get/mget 检索多个文档/批处理"></a>multi-get/mget 检索多个文档/批处理</h1><p>在Elasticsearch中，检索多个文档虽然很快，但合并多个请求可以减轻网络开销。</p>
-<p>可以使用 multi-get 或者 mget。</p>
-<p>模拟，从三个索引中查找文档</p>
-<pre><code>如果想指定返回字段，增加一个_source参数</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GET /_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_index&quot;:&quot;demo&quot;,</span><br><span class="line">      &quot;_type&quot;:&quot;testDate&quot;,</span><br><span class="line">      &quot;_id&quot;:&quot;1&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;megacorp&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;employee&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;5&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;books&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;book&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;19&quot;,</span><br><span class="line">      &quot;_source&quot;:&quot;publish&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"5"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"about"</span>: <span class="string">"i love evertything"</span>,</span><br><span class="line">        <span class="attr">"last_name"</span>: <span class="string">"yixin"</span>,</span><br><span class="line">        <span class="attr">"interests"</span>: [</span><br><span class="line">          <span class="string">"read book"</span>,</span><br><span class="line">          <span class="string">"swim"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"first_name"</span>: <span class="string">"cheng"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"22"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"publish"</span>: <span class="string">"高等教育出版社"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>如果你想检索的多个文档，都在一个_index中（甚至在一个_type中），url中就可以指定_index、_type</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_id&quot;:&quot;2&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_id&quot;:&quot;3&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx333"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"333"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing333"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>如果，多个文档都是同一个索引、类型下，可以换这种写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;ids&quot;:[&quot;1&quot;,&quot;2&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果，其中某个文档不存在，返回的结果如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"pppp"</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不存在的文档，并不影响第一个文档的检索，每个文档的检索都是独立的。</p>
+        <h1 id="Elasticsearch-DSL-API-速查"><a href="#Elasticsearch-DSL-API-速查" class="headerlink" title="Elasticsearch DSL API 速查"></a>Elasticsearch DSL API 速查</h1><h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html" target="_blank" rel="noopener">Create index API</a></td>
+<td>PUT /blog2 {<br> &nbsp;&nbsp;&nbsp; “settings”:{<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “number_of_shards”:”2”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “number_of_replicas”:”2”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>创建文档<br>（自定义_id）</td>
+<td>PUT /my_index/my_type/1 {<br> &nbsp;&nbsp;&nbsp;&nbsp; “my_field” : “my_value”<br>}<br><br>PUT /my_index/my_type/1/_create {<br>…​<br>}</td>
+</tr>
+<tr>
+<td>创建文档<br>（es自增id）</td>
+<td>POST /my_index/my_type/ {<br>…<br>}<br></td>
+</tr>
+</tbody></table>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询所有数据</td>
+<td>GET /my_index/my_type/<strong>_search</strong></td>
+</tr>
+<tr>
+<td>查询文档<br>根据id</td>
+<td>GET /my_index/my_type/_id</td>
+</tr>
+<tr>
+<td>查询文档<br>根据字段/字段值</td>
+<td>GET /my_index/my_type/_search?q=my_filed : my_filed_valye<br><br>GET /testdata/data/_search {<br>“query” : {<br> &nbsp;&nbsp;&nbsp; “term” : { “my_field” : “my_field_value” }<br> &nbsp;&nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>查询文档数量<br>根据字段/字段值</td>
+<td>GET /my_index/my_type/<strong>_count</strong>?q=my_field:my_field_value <br><br> GET /testdata/data/<strong>_count</strong> {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “term”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”: “18”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>验证查询是否合法<br>在执行某语句之前先验证是否合法，是否有错误</td>
+<td>GET /my_index/<strong>_validate</strong>/query?q=my_field:my_field_value <br><br> GET /testdata/data/<strong>_validate</strong>/query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “tweet” : {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match” : “really powerful”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>} <br><br> GET /testdata/data/<strong>_validate</strong>/query?explain {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “tweet” : {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match” : “really powerful”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>评分分析<br>询问es，文档是如何匹配/没匹配上的</td>
+<td>GET /testdata/data/YkEv3WwBtpDj1QTWFaTU/<strong>_explain</strong>?q=name:cyx</td>
+</tr>
+<tr>
+<td>&otimes;查看查询语句耗时分析</td>
+<td>GET /testdata/data/_search {<br> &nbsp;&nbsp;&nbsp; <strong>“profile”: true</strong>,<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “term”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”: “18”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>查询索引信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-get-index.html" target="_blank" rel="noopener">Get index API</a></td>
+<td>GET /testdata <br>GET /testdata/_settings<br>GET /testdata/_mappings<br></td>
+</tr>
+</tbody></table>
+<h1 id="合并检索"><a href="#合并检索" class="headerlink" title="合并检索"></a>合并检索</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询多个文档<br>合并检索<br>(自由选择index、type)</td>
+<td>GET /_mget {<br>“docs”: [<br> &nbsp;&nbsp;&nbsp; { <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_index”: “testdata”, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “WkFq3GwBtpDj1QTWqqTf”<br> &nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_index”: “news”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “new”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “19”<br> &nbsp;&nbsp;&nbsp; }<br>]<br>}<br></td>
+</tr>
+<tr>
+<td>查询多个文档<br>合并检索<br>(指定index)</td>
+<td>GET /testdata/_mget {<br>“docs”: [<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “WkFq3GwBtpDj1QTWqqTf”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “W0GX3GwBtpDj1QTWa6SP”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; ]<br>}<br></td>
+</tr>
+<tr>
+<td>查询多个文档<br>合并检索<br>(指定index、type)</td>
+<td>GET /testdata/data/_mget {<br>“docs”:[<br> &nbsp;&nbsp;&nbsp; {“_id”: “WkFq3GwBtpDj1QTWqqTf”},<br> &nbsp;&nbsp;&nbsp; {“_id”: “W0GX3GwBtpDj1QTWa6SP”}<br> &nbsp;&nbsp;&nbsp; ]<br>}<br></td>
+</tr>
+<tr>
+<td>查询多个文档<br>合并检索(简写)</td>
+<td>GET /testdata/data/_mget {<br> &nbsp;&nbsp;&nbsp; “ids” : [“WkFq3GwBtpDj1QTWqqTf”, “W0GX3GwBtpDj1QTWa6SP”]<br>}<br></td>
+</tr>
+</tbody></table>
+<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>更新文档<br>整体更新(整体覆盖)</td>
+<td>PUT /my_index/my_type/_id {<br> &nbsp;&nbsp;&nbsp; “my_field”:”my_field_value”<br>}<br></td>
+</tr>
+<tr>
+<td>更新文档<br>局部更新</td>
+<td>POST /my_index/my_type/_id/_update {<br>“doc”:{<br> &nbsp;&nbsp;&nbsp; “my_field”:”my_field_value”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+</tbody></table>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>删除索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html" target="_blank" rel="noopener">Delete index API</a></td>
+<td>DELETE /my_index<br>DELETE /my_index1,my_index2<br>DELETE /my_index*<br>DELETE /_all<br></td>
+</tr>
+<tr>
+<td>删除文档</td>
+<td>DELETE /my_index/my_type/_id</td>
+</tr>
+<tr>
+<td>查询匹配到的每个文档上执行删除<br>&otimes;谨慎使用</td>
+<td>POST /testdata/_delete_by_query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “name”: “cyx”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br><br>POST /testdata/data/_delete_by_query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “name”: “eva eva”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+<tr>
+<td>删除文档中某个字段中的值</td>
+<td>POST /my_index/my_type/_id/_update {<br> &nbsp;&nbsp;&nbsp; “script” : “ctx._source.remove(&quot;name&quot;)”<br>}<br></td>
+</tr>
+<tr>
+<td>删除索引下所有数据<br>&otimes;谨慎使用</td>
+<td>POST index_name/_delete_by_query<br>{  &nbsp;&nbsp;&nbsp; <br> “query”: { <br> &nbsp;&nbsp;&nbsp; “match_all”: {} <br> &nbsp;&nbsp;&nbsp; } <br> }</td>
+</tr>
+</tbody></table>
+<h1 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>复制索引</td>
+<td>POST /_reindex {<br> &nbsp;&nbsp;&nbsp; “source”:{<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “index”:”old_index”<br> &nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp; “dest”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “index”:”new_index”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
+</tr>
+</tbody></table>
+<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看index分片</td>
+<td>GET /testdata/_search_shards</td>
+</tr>
+<tr>
+<td>检查索引是否存在<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-exists.html" target="_blank" rel="noopener">Indices exists API</a></td>
+<td>HEAD /my_index</td>
+</tr>
+<tr>
+<td>打开/关闭索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html" target="_blank" rel="noopener">Open/Close index API</a></td>
+<td>POST /testdata/_close<br>POST /testdata/_open</td>
+</tr>
+<tr>
+<td>集群节点信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html" target="_blank" rel="noopener">Nodes Info</a></td>
+<td>GET /_nodes<br>GET /_nodes/my_node_name<br>GET /_nodes/my_node_name_1,my_node_name_2</td>
+</tr>
+<tr>
+<td>集群节点统计信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html" target="_blank" rel="noopener">Nodes Stats</a></td>
+<td>GET /_nodes/stats<br>GET /_nodes/node-1/stats<br>GET /_nodes/127.0.0.1/stats</td>
+</tr>
+<tr>
+<td>返回集群中每个选定节点上的热线程<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-hot-threads.html" target="_blank" rel="noopener">Nodes hot_threads</a></td>
+<td>GET /_nodes/hot_threads<br>GET /_nodes/my_node_name/hot_threads</td>
+</tr>
+<tr>
+<td>查询集群中所有索引</td>
+<td>GET /_cat/indices <br> curl -XGET 127.0.0.1:9200/_cat/indices</td>
+</tr>
+</tbody></table>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -493,12 +641,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>14-es-query-multi_get批处理</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">522</span></p>
+        <p><span class="copy-title">文章标题:</span>00-elasticsearch api 速查</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-26, 21:51:07</p>
-        <p><span class="copy-title">最后更新:</span>2019-09-26, 22:12:41</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/14-es-query-multi-get批处理/" title="14-es-query-multi_get批处理">https://simba-cheng.github.io/2019/09/26/14-es-query-multi-get批处理/</a>
+        <p><span class="copy-title">发布时间:</span>2019-10-08, 23:18:46</p>
+        <p><span class="copy-title">最后更新:</span>2019-10-08, 23:19:39</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/08/00-elasticsearch-api-速查/" title="00-elasticsearch api 速查">https://simba-cheng.github.io/2019/10/08/00-elasticsearch-api-速查/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
