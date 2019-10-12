@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>01-elasticsearch-6.5.0集群搭建 | Simba</title>
+  <title>17-es-query-bulk-批处理 | Simba</title>
   <meta name="keywords" content=" es ">
-  <meta name="description" content="01-elasticsearch-6.5.0集群搭建 | Simba">
+  <meta name="description" content="17-es-query-bulk-批处理 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -397,9 +397,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-01-elasticsearch6-5-0集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-17-es-query-bulk-批处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">01-elasticsearch-6.5.0集群搭建</h1>
+        <h1 class="article-title">17-es-query-bulk-批处理</h1>
     
     <div class="article-meta">
         
@@ -421,12 +421,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-09-26 10:29:49'>2019-09-22 18:43</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-12 21:03:36'>2019-10-12 21:01</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:242</span>
+        <span>字数:607</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -445,7 +445,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注意事项："><span class="toc-text">注意事项：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#重要配置"><span class="toc-text">重要配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器关闭防火墙"><span class="toc-text">服务器关闭防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户权限"><span class="toc-text">用户权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群机器配置信任"><span class="toc-text">集群机器配置信任</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bulk-批量操作"><span class="toc-text">bulk 批量操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bulk-允许行为"><span class="toc-text">bulk 允许行为</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -460,42 +460,66 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>elasticsearch和kibana 的下载地址官网就有。</p>
-<p>安装步骤，按照这篇博文没啥问题：<a href="https://www.2cto.com/net/201712/705987.html" target="_blank" rel="noopener">https://www.2cto.com/net/201712/705987.html</a></p>
-<h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><h2 id="重要配置"><a href="#重要配置" class="headerlink" title="重要配置"></a>重要配置</h2><p>别问那么多，干就是了…</p>
-<pre><code>vim /etc/security/limits.conf
-es hard nofile 65536
-es soft nofile 65536
-
-vim /etc/sysctl.conf
-vm.max_map_count=262144
-
-vim elasticsearch.yml
-bootstrap.system_call_filter: false</code></pre><h2 id="服务器关闭防火墙"><a href="#服务器关闭防火墙" class="headerlink" title="服务器关闭防火墙"></a>服务器关闭防火墙</h2><pre><code>查看防火墙状态
-firewall-cmd --state
-
-关闭防火墙
-systemctl stop firewalld.service
-
-禁止开机启动
-systemctl disable firewalld.service</code></pre><h2 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h2><pre><code>新增es专用用户
-groupadd es
-useradd es -g es -p 密码
-
-#删除用户
-userdel -r es
-
-切回root用户，赋予权限
-chown es elasticsearch -R</code></pre><h2 id="集群机器配置信任"><a href="#集群机器配置信任" class="headerlink" title="集群机器配置信任"></a>集群机器配置信任</h2><pre><code>ssh-keygen -t rsa -P &apos;&apos; -f ~/.ssh/id_rsa
-cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys
-
-cat /root/.ssh/id_rsa.pub | ssh ....25.135 &apos;cat &gt;&gt; .ssh/authorized_keys&apos;
-cat /root/.ssh/id_rsa.pub | ssh ....25.134 &apos;cat &gt;&gt; .ssh/authorized_keys&apos;
-cat /root/.ssh/id_rsa.pub | ssh ....25.136 &apos;cat &gt;&gt; .ssh/authorized_keys&apos; </code></pre><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><p><a href="https://www.elastic.co/cn/downloads/past-releases/elasticsearch-6-5-0" target="_blank" rel="noopener">elasticsearch-6-5-0 官网下载</a></p>
+        <h1 id="bulk-批量操作"><a href="#bulk-批量操作" class="headerlink" title="bulk 批量操作"></a>bulk 批量操作</h1><p>bulk api允许我们使用单一请求来实现多个文档的’create、index、update、delete’。</p>
+<h2 id="bulk-允许行为"><a href="#bulk-允许行为" class="headerlink" title="bulk 允许行为"></a>bulk 允许行为</h2><table>
+<thead>
+<tr>
+<th>行为</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>create</td>
+<td>当文档不存在时创建文档</td>
+</tr>
+<tr>
+<td>index</td>
+<td>常见新文档或替换已有文档</td>
+</tr>
+<tr>
+<td>update</td>
+<td>局部更新文档</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>删除一个文档</td>
+</tr>
+</tbody></table>
+<p>在执行上述动作时，必须指定文档的_index、_type、_id 这些元数据</p>
+<p>注意！bulk的请求体有如下规范：</p>
+<ol>
+<li><p>每行必须以”\n”符号结尾，包括最后一行。这些都是作为每行有效分离而做的标记</p>
 </li>
-<li><p><a href="https://www.elastic.co/cn/downloads/past-releases/kibana-6-5-0" target="_blank" rel="noopener">Kibana 6.5.0 官网下载</a></p>
+<li><p>每一行的数据不能包含未被转义的换行符。避免干扰分析，这意味着，json格式不能美化。</p>
 </li>
+</ol>
+<p>请求报文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /_bulk</span><br><span class="line">&#123;&quot;delete&quot;:&#123;&quot;_index&quot;: &quot;demo&quot;,&quot;_type&quot;: &quot;testDate&quot;,&quot;_id&quot;: &quot;3&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;create&quot;:&#123;&quot;_index&quot;: &quot;megacorp&quot;,&quot;_type&quot;: &quot;employee&quot;,&quot;_id&quot;: &quot;999&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;last_name&quot;:&quot;ccc999&quot;,&quot;first_name&quot;:&quot;999&quot;,&quot;age&quot;:&quot;999&quot;&#125;</span><br><span class="line">&#123;&quot;update&quot;:&#123;&quot;_index&quot;: &quot;books&quot;,&quot;_type&quot;: &quot;book&quot;,&quot;_id&quot;: &quot;19&quot;&#125;&#125;</span><br><span class="line">&#123;&quot;doc&quot;:&#123;&quot;publish&quot;:&quot;高等教育出版社666666&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：类似create、update之类，有文档参数的，换行在第二行写就行了。</p>
+<p>请求报文做了些什么事？</p>
+<ul>
+<li><p>删除 - 索引demo、类型testDate、id为3 的文档</p>
+</li>
+<li><p>创建 - 索引megacorp、类型employee、id为999 的文档，文档内容为第三行内容</p>
+</li>
+<li><p>更新 - 索引books、类型book、id为19 的文档，更新内容为第五行内容。</p>
+</li>
+</ul>
+<p>响应报文</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span>: <span class="number">360</span>,</span><br><span class="line">  <span class="attr">"errors"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"items"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"delete"</span>: &#123;</span><br><span class="line">        <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"deleted"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"create"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"999"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"created"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">201</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"update"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"updated"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>确认下es中的结果</p>
+<p><img src="//simba-cheng.github.io/2019/10/12/17-es-query-bulk-批处理/bulk-1.png" alt="bulk-1" title="bulk-1"></p>
+<p><img src="//simba-cheng.github.io/2019/10/12/17-es-query-bulk-批处理/bulk-2.png" alt="bulk-2" title="bulk-2"></p>
+<p><img src="//simba-cheng.github.io/2019/10/12/17-es-query-bulk-批处理/bulk-3.png" alt="bulk-3" title="bulk-3"></p>
+<p>注意</p>
+<pre><code>上面每个子请求都是独立执行的，所以一个子请求的错误并不影响其他请求。
+
+如果任何一个子请求失败，顶层error会标记为true，然后出现错误信息。
+
+bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
+<li>如果 bulk 在同一个index、type下，就不用为每个文档指定相同的元数据了，写在url上面就行。</li>
 </ul>
 
       
@@ -510,12 +534,12 @@ cat /root/.ssh/id_rsa.pub | ssh ....25.136 &apos;cat &gt;&gt; .ssh/authorized_ke
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>01-elasticsearch-6.5.0集群搭建</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">242</span></p>
+        <p><span class="copy-title">文章标题:</span>17-es-query-bulk-批处理</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">607</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-22, 18:43:10</p>
-        <p><span class="copy-title">最后更新:</span>2019-09-26, 10:29:49</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/01-elasticsearch6-5-0集群搭建/" title="01-elasticsearch-6.5.0集群搭建">https://simba-cheng.github.io/2019/09/22/01-elasticsearch6-5-0集群搭建/</a>
+        <p><span class="copy-title">发布时间:</span>2019-10-12, 21:01:38</p>
+        <p><span class="copy-title">最后更新:</span>2019-10-12, 21:03:36</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/12/17-es-query-bulk-批处理/" title="17-es-query-bulk-批处理">https://simba-cheng.github.io/2019/10/12/17-es-query-bulk-批处理/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
