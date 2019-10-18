@@ -101,7 +101,19 @@
     
         
             
-            <li><div data-rel="es">es<small>(18)</small></div>
+            <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(18)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="es 概念">es 概念<small>(9)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es query">es query<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
                 
             </li>
             
@@ -112,6 +124,14 @@
             <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
+            
+        
+    
+        
+            
+        
+    
+        
             
         
     
@@ -181,6 +201,14 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">es 概念</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -265,23 +293,23 @@
             <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es query "
            href="/2019/09/26/10-es-query-简单查询/"
-           data-tag="es"
+           data-tag="es query"
            data-author="" >
             <span class="post-title" title="10-es-query-简单查询">10-es-query-简单查询</span>
             <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/26/09-elasticsearch-测试数据/"
-           data-tag="es"
+           data-tag="es 概念"
            data-author="" >
             <span class="post-title" title="09-elasticsearch-测试数据">09-elasticsearch-测试数据</span>
             <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/26/08-elasticsearch-上手Demo/"
            data-tag="es"
            data-author="" >
@@ -289,7 +317,7 @@
             <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/25/07-elasticsearch-索引-动词/"
            data-tag="es"
            data-author="" >
@@ -297,7 +325,7 @@
             <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/25/06-elasticsearch-文档-document/"
            data-tag="es"
            data-author="" >
@@ -305,7 +333,7 @@
             <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/25/05-elasticsearch-映射-Mapping/"
            data-tag="es"
            data-author="" >
@@ -313,7 +341,7 @@
             <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/25/04-elasticsearch-索引-名词/"
            data-tag="es"
            data-author="" >
@@ -321,7 +349,7 @@
             <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/25/03-elasticsearch-查询语言/"
            data-tag="es"
            data-author="" >
@@ -337,7 +365,7 @@
             <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/22/02-elasticsearch-基本概念/"
            data-tag="es"
            data-author="" >
@@ -353,7 +381,7 @@
             <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
         </a>
         
-        <a  class="es "
+        <a  class="es es 概念 "
            href="/2019/09/22/01-elasticsearch6-5-0集群搭建/"
            data-tag="es"
            data-author="" >
@@ -600,7 +628,7 @@ bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#es','#索引','#Markdown','#资料',],
+            'data': ['#es','#索引','#es 概念','#es query','#Markdown','#资料',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
