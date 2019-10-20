@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>08-es-query-bulk-批处理 | Simba</title>
-  <meta name="keywords" content=" es_query ">
-  <meta name="description" content="08-es-query-bulk-批处理 | Simba">
+  <title>01-es-batch-bulk-批处理 | Simba</title>
+  <meta name="keywords" content=" es_batch ">
+  <meta name="description" content="01-es-batch-bulk-批处理 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -101,14 +101,6 @@
     
         
             
-            <li><div data-rel="索引">索引<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(18)</small></div>
                 
                     <ul class="sub hide">
@@ -117,11 +109,23 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
             
@@ -140,6 +144,10 @@
             <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -196,11 +204,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -215,6 +223,10 @@
         <a href="javascript:" class="color4">es_query</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -225,11 +237,11 @@
     
     <nav id="title-list-nav">
         
-        <a  class="es es_query "
-           href="/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/"
-           data-tag="es_query"
+        <a  class="es es_batch "
+           href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/"
+           data-tag="es_batch"
            data-author="" >
-            <span class="post-title" title="08-es-query-bulk-批处理">08-es-query-bulk-批处理</span>
+            <span class="post-title" title="01-es-batch-bulk-批处理">01-es-batch-bulk-批处理</span>
             <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
         </a>
         
@@ -421,9 +433,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/02-es-query/08-es-query-bulk-批处理" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-elasticsearch/03-es-batch/01-es-batch-bulk-批处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">08-es-query-bulk-批处理</h1>
+        <h1 class="article-title">01-es-batch-bulk-批处理</h1>
     
     <div class="article-meta">
         
@@ -433,21 +445,21 @@
             
                 <a href="javascript:" data-rel="es">es</a>/
             
-                <a href="javascript:" data-rel="es_query">es_query</a>
+                <a href="javascript:" data-rel="es_batch">es_batch</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color4">es_query</a>
+            <a href="javascript:" class="color4">es_batch</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-20 20:03:13'>2019-10-12 21:01</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-20 20:23:10'>2019-10-12 21:01</time>
         
     </div>
     <div class="article-meta">
@@ -536,9 +548,9 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span>: <span class="number">360</span>,</span><br><span class="line">  <span class="attr">"errors"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"items"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"delete"</span>: &#123;</span><br><span class="line">        <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"deleted"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"create"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"999"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"created"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">201</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"update"</span>: &#123;</span><br><span class="line">        <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">        <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">        <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">        <span class="attr">"_version"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"result"</span>: <span class="string">"updated"</span>,</span><br><span class="line">        <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">          <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">200</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>确认下es中的结果</p>
-<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/bulk-1.png" alt="bulk-1" title="bulk-1"></p>
-<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/bulk-2.png" alt="bulk-2" title="bulk-2"></p>
-<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/bulk-3.png" alt="bulk-3" title="bulk-3"></p>
+<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/bulk-1.png" alt="bulk-1" title="bulk-1"></p>
+<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/bulk-2.png" alt="bulk-2" title="bulk-2"></p>
+<p><img src="//simba-cheng.github.io/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/bulk-3.png" alt="bulk-3" title="bulk-3"></p>
 <p>注意</p>
 <pre><code>上面每个子请求都是独立执行的，所以一个子请求的错误并不影响其他请求。
 
@@ -560,12 +572,12 @@ bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>08-es-query-bulk-批处理</p>
+        <p><span class="copy-title">文章标题:</span>01-es-batch-bulk-批处理</p>
         <p><span class="copy-title">文章字数:</span><span class="post-count">607</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-10-12, 21:01:38</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-20, 20:03:13</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/" title="08-es-query-bulk-批处理">https://simba-cheng.github.io/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/</a>
+        <p><span class="copy-title">最后更新:</span>2019-10-20, 20:23:10</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/" title="01-es-batch-bulk-批处理">https://simba-cheng.github.io/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
@@ -626,7 +638,7 @@ bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#es','#Markdown','#资料','#es_query',],
+            'data': ['#es','#索引','#Markdown','#资料','#es_query','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

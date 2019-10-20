@@ -101,14 +101,6 @@
     
         
             
-            <li><div data-rel="索引">索引<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(18)</small></div>
                 
                     <ul class="sub hide">
@@ -117,11 +109,23 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
             
@@ -140,6 +144,10 @@
             <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -196,11 +204,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -215,6 +223,10 @@
         <a href="javascript:" class="color4">es_query</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -225,11 +237,11 @@
     
     <nav id="title-list-nav">
         
-        <a  class="es es_query "
-           href="/2019/10/12/elasticsearch/02-es-query/08-es-query-bulk-批处理/"
-           data-tag="es_query"
+        <a  class="es es_batch "
+           href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/"
+           data-tag="es_batch"
            data-author="" >
-            <span class="post-title" title="08-es-query-bulk-批处理">08-es-query-bulk-批处理</span>
+            <span class="post-title" title="01-es-batch-bulk-批处理">01-es-batch-bulk-批处理</span>
             <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
         </a>
         
@@ -507,7 +519,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#es','#Markdown','#资料','#es_query',],
+            'data': ['#es','#索引','#Markdown','#资料','#es_query','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
