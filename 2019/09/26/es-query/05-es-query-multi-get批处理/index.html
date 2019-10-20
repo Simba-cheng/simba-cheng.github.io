@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>04-es-query-multi_match多匹配查询 | Simba</title>
+  <title>05-es-query-multi_get批处理 | Simba</title>
   <meta name="keywords" content=" es_query ">
-  <meta name="description" content="04-es-query-multi_match多匹配查询 | Simba">
+  <meta name="description" content="05-es-query-multi_get批处理 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -121,10 +121,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
@@ -148,6 +144,10 @@
             <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -200,10 +200,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
     </li>
     
@@ -213,6 +209,10 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <div class="clearfix"></div>
@@ -226,7 +226,7 @@
     <nav id="title-list-nav">
         
         <a  class="es es_query "
-           href="/2019/10/12/08-es-query-bulk-批处理/"
+           href="/2019/10/12/es-query/08-es-query-bulk-批处理/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="08-es-query-bulk-批处理">08-es-query-bulk-批处理</span>
@@ -242,7 +242,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/27/07-es-query-match-phrase短语查询/"
+           href="/2019/09/27/es-query/07-es-query-match-phrase短语查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="07-es-query-match_phrase短语查询">07-es-query-match_phrase短语查询</span>
@@ -250,7 +250,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/27/06-es-query-filtered-bool组合过滤查询/"
+           href="/2019/09/27/es-query/06-es-query-filtered-bool组合过滤查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="06-es-query-filtered_bool组合过滤查询">06-es-query-filtered_bool组合过滤查询</span>
@@ -258,7 +258,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/26/05-es-query-multi-get批处理/"
+           href="/2019/09/26/es-query/05-es-query-multi-get批处理/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="05-es-query-multi_get批处理">05-es-query-multi_get批处理</span>
@@ -266,7 +266,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/26/04-es-query-multi-match多匹配查询/"
+           href="/2019/09/26/es-query/04-es-query-multi-match多匹配查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="04-es-query-multi_match多匹配查询">04-es-query-multi_match多匹配查询</span>
@@ -274,7 +274,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/26/03-es-query-match_匹配查询/"
+           href="/2019/09/26/es-query/03-es-query-match_匹配查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="03-es-query_match_匹配查询">03-es-query_match_匹配查询</span>
@@ -282,7 +282,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/26/02-es-query-term_精确查询/"
+           href="/2019/09/26/es-query/02-es-query-term_精确查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="02-es-query_term_精确查询">02-es-query_term_精确查询</span>
@@ -290,7 +290,7 @@
         </a>
         
         <a  class="es es_query "
-           href="/2019/09/26/01-es-query-简单查询/"
+           href="/2019/09/26/es-query/01-es-query-简单查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="01-es-query-简单查询">01-es-query-简单查询</span>
@@ -421,9 +421,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-04-es-query-multi-match多匹配查询" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-es-query/05-es-query-multi-get批处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">04-es-query-multi_match多匹配查询</h1>
+        <h1 class="article-title">05-es-query-multi_get批处理</h1>
     
     <div class="article-meta">
         
@@ -447,12 +447,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-19 11:26:20'>2019-09-26 21:47</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-19 11:26:20'>2019-09-26 21:51</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:321</span>
+        <span>字数:522</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -471,7 +471,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#multi-match-多匹配查询"><span class="toc-text">multi_match 多匹配查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#multi-get-mget-检索多个文档-批处理"><span class="toc-text">multi-get/mget 检索多个文档/批处理</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -486,58 +486,34 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="multi-match-多匹配查询"><a href="#multi-match-多匹配查询" class="headerlink" title="multi_match 多匹配查询"></a>multi_match 多匹配查询</h1><p>关键字multi_match，通常用在查询多个fields时。</p>
-<p>fields属性指定需要查询的字段。</p>
-<p>在news索引，new类型下，所有字段中，查询带有’江苏’的结果</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;江苏&quot;
-    }
-  }
-}</code></pre><p>在news索引，new类型下，所有字段中，查询带有’18’的结果</p>
-<pre><code>curl -H &quot;Content-Type: application/json&quot; -XGET &apos;127.0.0.1:9200/news/new/_search&apos; -d &apos;
-{
-    &quot;query&quot;:{
-        &quot;multi_match&quot;:{
-            &quot;query&quot;:&quot;18&quot;
-        }
-    }
-}&apos;</code></pre><p>在news索引，new类型下，’title’、’cont*’ 字段中，查询带有’江苏’的结果</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;江苏&quot;,
-      &quot;fields&quot;:[&quot;title&quot;,&quot;cont*&quot;]
-    }
-  }
-}</code></pre><p>news索引、new类型下，查询source、content两个字段包含’赌博’的document，返回数量为2。</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;赌博&quot;,
-      &quot;fields&quot;:[&quot;source&quot;,&quot;content&quot;]
-    }
-  },
-  &quot;size&quot;: 2
-}</code></pre><p>news索引、new类型下，查询source、content两个字段包含’赌博’的document，返回数量为2，只返回三个指定字段：’title’,’gmt_publish’,’category’</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;赌博&quot;,
-      &quot;fields&quot;:[&quot;source&quot;,&quot;content&quot;]
-    }
-  },
-  &quot;size&quot;: 2,
-  &quot;_source&quot;: [&quot;title&quot;,&quot;gmt_publish&quot;,&quot;category&quot;]
-}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/cn/multi-match-query.html" target="_blank" rel="noopener">multi-match-query</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/multi-fields.html" target="_blank" rel="noopener">multi-fields</a></li>
-</ul>
+        <h1 id="multi-get-mget-检索多个文档-批处理"><a href="#multi-get-mget-检索多个文档-批处理" class="headerlink" title="multi-get/mget 检索多个文档/批处理"></a>multi-get/mget 检索多个文档/批处理</h1><p>在Elasticsearch中，检索多个文档虽然很快，但合并多个请求可以减轻网络开销。</p>
+<p>可以使用 multi-get 或者 mget。</p>
+<p>模拟，从三个索引中查找文档</p>
+<pre><code>如果想指定返回字段，增加一个_source参数</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GET /_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_index&quot;:&quot;demo&quot;,</span><br><span class="line">      &quot;_type&quot;:&quot;testDate&quot;,</span><br><span class="line">      &quot;_id&quot;:&quot;1&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;megacorp&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;employee&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;5&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;books&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;book&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;19&quot;,</span><br><span class="line">      &quot;_source&quot;:&quot;publish&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"5"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"about"</span>: <span class="string">"i love evertything"</span>,</span><br><span class="line">        <span class="attr">"last_name"</span>: <span class="string">"yixin"</span>,</span><br><span class="line">        <span class="attr">"interests"</span>: [</span><br><span class="line">          <span class="string">"read book"</span>,</span><br><span class="line">          <span class="string">"swim"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"first_name"</span>: <span class="string">"cheng"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"22"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"publish"</span>: <span class="string">"高等教育出版社"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>如果你想检索的多个文档，都在一个_index中（甚至在一个_type中），url中就可以指定_index、_type</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_id&quot;:&quot;2&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_id&quot;:&quot;3&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx333"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"333"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing333"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>如果，多个文档都是同一个索引、类型下，可以换这种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;ids&quot;:[&quot;1&quot;,&quot;2&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果，其中某个文档不存在，返回的结果如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"pppp"</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不存在的文档，并不影响第一个文档的检索，每个文档的检索都是独立的。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -551,12 +527,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>04-es-query-multi_match多匹配查询</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">321</span></p>
+        <p><span class="copy-title">文章标题:</span>05-es-query-multi_get批处理</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">522</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-26, 21:47:22</p>
+        <p><span class="copy-title">发布时间:</span>2019-09-26, 21:51:07</p>
         <p><span class="copy-title">最后更新:</span>2019-10-19, 11:26:20</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/04-es-query-multi-match多匹配查询/" title="04-es-query-multi_match多匹配查询">https://simba-cheng.github.io/2019/09/26/04-es-query-multi-match多匹配查询/</a>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/es-query/05-es-query-multi-get批处理/" title="05-es-query-multi_get批处理">https://simba-cheng.github.io/2019/09/26/es-query/05-es-query-multi-get批处理/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
@@ -617,7 +593,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#es','#es_query','#索引','#Markdown','#资料',],
+            'data': ['#es','#索引','#Markdown','#资料','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
