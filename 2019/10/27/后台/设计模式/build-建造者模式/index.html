@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>build-建造者模式 | Simba</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="build-建造者模式 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(26)</small></div></li>
+    
+        
+            
+            <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(19)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="es_概念">es_概念<small>(9)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_client">es_client<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="其他">其他<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="26">
+<input type="hidden" id="yelog_site_word_count" value="23.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">Markdown</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="es "
+           href="/2019/10/08/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="es es_client "
+           href="/2019/10/26/elasticsearch/07-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="es es_batch "
+           href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="01-es-batch-bulk-批处理">01-es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/07-es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="07-es-query-match_phrase短语查询">07-es-query-match_phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/06-es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="06-es-query-filtered_bool组合过滤查询">06-es-query-filtered_bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/05-es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="05-es-query-multi_get批处理">05-es-query-multi_get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/04-es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="04-es-query-multi_match多匹配查询">04-es-query-multi_match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/03-es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="03-es-query_match_匹配查询">03-es-query_match_匹配查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/02-es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="02-es-query_term_精确查询">02-es-query_term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="01-es-query-简单查询">01-es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/26/elasticsearch/01-es-concept/09-elasticsearch-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-elasticsearch-测试数据">09-elasticsearch-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/26/elasticsearch/01-es-concept/08-elasticsearch-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-elasticsearch-上手Demo">08-elasticsearch-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/07-elasticsearch-索引-动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-elasticsearch-索引_动词">07-elasticsearch-索引_动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/06-elasticsearch-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-elasticsearch-文档_document">06-elasticsearch-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-映射-Mapping/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-elasticsearch-映射_Mapping">05-elasticsearch-映射_Mapping</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-elasticsearch-索引_名词">04-elasticsearch-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/03-elasticsearch-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-elasticsearch-查询语言">03-elasticsearch-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-elasticsearch-基本概念">02-elasticsearch-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/22/elasticsearch/01-es-concept/01-elasticsearch6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-elasticsearch-6.5.0集群搭建">01-elasticsearch-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="Markdown "
+           href="/2019/09/22/relatedData/Markdown技巧/"
+           data-tag="Markdown"
+           data-author="" >
+            <span class="post-title" title="Markdown技巧">Markdown技巧</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-后台/设计模式/build-建造者模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">build-建造者模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="后台">后台</a>/
+            
+                <a href="javascript:" data-rel="设计模式">设计模式</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">设计模式</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-10-27 20:03:18'>2019-10-27 19:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#builder-建造者模式"><span class="toc-text">builder 建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-1"><span class="toc-text">Demo-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-2"><span class="toc-text">Demo-2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前写 elasticsearch java client，在构造 HTTP客户端 时，发现用了builder建造者模式，而且在《Effective Java》第一章提到过，当时没细看，于是记在心头。</p>
+<p>现在空闲了，来瞅瞅看</p>
+<h1 id="builder-建造者模式"><a href="#builder-建造者模式" class="headerlink" title="builder 建造者模式"></a>builder 建造者模式</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p><strong><font color="#DC143C"><br>    分离 对象的属性 与 对象创建的过程<br></font></strong></p>
+<p>敲黑板，划重点！</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>builder建造者模式 是 Java对象 构造方法 的代替方案。</p>
+<p>试想一个对象有几十个属性(成员变量)，我们需要使用它时，需要了解每个属性的含义，为每一个属性set值，是不是非常麻烦？</p>
+<p>builder建造者模式 可以解决以上痛点：</p>
+<pre><code>对象中属性众多，重要的就那么几个，因此，建造者模式中，开发者需要指定一些重要的属性，然后让建造者去实现构建对象的过程。
+
+这就是对象的属性与创建分离
+
+这样 对于建造者而言 隐藏了复杂的对象构建细节</code></pre><h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo-1"></a>Demo-1</h2><p>ReactorConfig对象 有两个构造方法，一个是默认形式，一个是入参形式。<br></p>
+<p>两个构造函数都是 private修饰符，这样外部就无法通过new方法来构造 ReactorConfig对象，(当然也可以放开)<br></p>
+<p>ReactorConfig对象 的创建托管给了 常量DEFAULT 和 Builder静态内部类</p>
+<pre><code>package org.code.builder;
+
+/**
+ * @author: CYX
+ * @create: 2019-10-10 20:23
+ **/
+public class AppCode {
+    public static void main(String[] args) {
+        ReactorConfigBuilder reactorConfig = ReactorConfigBuilder.custom().setIoThreadCount(66).build();
+        System.out.println(reactorConfig.toString());
+
+        ReactorCacheBuilder cacheBuilder = ReactorCacheBuilder.newBuilder().initialCapacity(1).maximumSize(2).maximumWeight(3);
+        System.out.println(cacheBuilder.toString());
+    }
+}
+
+
+/**
+ * 建造者模式
+ * &lt;p&gt;
+ * 参考IOReactorConfig
+ *
+ * @author: CYX
+ * @create: 2019-10-10 19:34
+ * @see org.apache.http.impl.nio.reactor.IOReactorConfig
+ **/
+public final class ReactorConfig {
+
+    /**
+     * 获取可用于Java虚拟机的处理器数量
+     */
+    private static final int AVAIL_PROCS = Runtime.getRuntime().availableProcessors();
+
+    public static final ReactorConfig DEFAULT = new Builder().build();
+
+    private long selectInterval;
+    private long shutdownGracePeriod;
+    private boolean interestOpQueued;
+    private int ioThreadCount;
+    private int soTimeout;
+    private boolean soReuseAddress;
+    private int soLinger;
+    private boolean soKeepAlive;
+    private boolean tcpNoDelay;
+    private int connectTimeout;
+    private int sndBufSize;
+    private int rcvBufSize;
+    private int backlogSize;
+
+    private ReactorConfig() {
+    }
+
+    private ReactorConfig(
+            final long selectInterval,
+            final long shutdownGracePeriod,
+            final boolean interestOpQueued,
+            final int ioThreadCount,
+            final int soTimeout,
+            final boolean soReuseAddress,
+            final int soLinger,
+            final boolean soKeepAlive,
+            final boolean tcpNoDelay,
+            final int connectTimeout,
+            final int sndBufSize,
+            final int rcvBufSize,
+            final int backlogSize) {
+        this.selectInterval = selectInterval;
+        this.shutdownGracePeriod = shutdownGracePeriod;
+        this.interestOpQueued = interestOpQueued;
+        this.ioThreadCount = ioThreadCount;
+        this.soTimeout = soTimeout;
+        this.soReuseAddress = soReuseAddress;
+        this.soLinger = soLinger;
+        this.soKeepAlive = soKeepAlive;
+        this.tcpNoDelay = tcpNoDelay;
+        this.connectTimeout = connectTimeout;
+        this.sndBufSize = sndBufSize;
+        this.rcvBufSize = rcvBufSize;
+        this.backlogSize = backlogSize;
+    }
+
+    public long getSelectInterval() {
+        return selectInterval;
+    }
+
+    public long getShutdownGracePeriod() {
+        return shutdownGracePeriod;
+    }
+
+    public boolean isInterestOpQueued() {
+        return interestOpQueued;
+    }
+
+    public int getIoThreadCount() {
+        return ioThreadCount;
+    }
+
+    public int getSoTimeout() {
+        return soTimeout;
+    }
+
+    public boolean isSoReuseAddress() {
+        return soReuseAddress;
+    }
+
+    public int getSoLinger() {
+        return soLinger;
+    }
+
+    public boolean isSoKeepAlive() {
+        return soKeepAlive;
+    }
+
+    public boolean isTcpNoDelay() {
+        return tcpNoDelay;
+    }
+
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public int getSndBufSize() {
+        return sndBufSize;
+    }
+
+    public int getRcvBufSize() {
+        return rcvBufSize;
+    }
+
+    public int getBacklogSize() {
+        return backlogSize;
+    }
+
+    public static Builder custom() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private long selectInterval;
+        private long shutdownGracePeriod;
+        private boolean interestOpQueued;
+        private int ioThreadCount;
+        private int soTimeout;
+        private boolean soReuseAddress;
+        private int soLinger;
+        private boolean soKeepAlive;
+        private boolean tcpNoDelay;
+        private int connectTimeout;
+        private int sndBufSize;
+        private int rcvBufSize;
+        private int backlogSize;
+
+        //
+        public Builder() {
+            this.selectInterval = 1000;
+            this.shutdownGracePeriod = 500;
+            this.interestOpQueued = false;
+            this.ioThreadCount = AVAIL_PROCS;
+            this.soTimeout = 0;
+            this.soReuseAddress = false;
+            this.soLinger = -1;
+            this.soKeepAlive = false;
+            this.tcpNoDelay = true;
+            this.connectTimeout = 0;
+            this.sndBufSize = 0;
+            this.rcvBufSize = 0;
+            this.backlogSize = 0;
+        }
+
+        public Builder setSelectInterval(long selectInterval) {
+            this.selectInterval = selectInterval;
+            return this;
+        }
+
+        public Builder setShutdownGracePeriod(long shutdownGracePeriod) {
+            this.shutdownGracePeriod = shutdownGracePeriod;
+            return this;
+        }
+
+        public Builder setInterestOpQueued(boolean interestOpQueued) {
+            this.interestOpQueued = interestOpQueued;
+            return this;
+        }
+
+        public Builder setIoThreadCount(int ioThreadCount) {
+            this.ioThreadCount = ioThreadCount;
+            return this;
+        }
+
+        public Builder setSoTimeout(int soTimeout) {
+            this.soTimeout = soTimeout;
+            return this;
+        }
+
+        public Builder setSoReuseAddress(boolean soReuseAddress) {
+            this.soReuseAddress = soReuseAddress;
+            return this;
+        }
+
+        public Builder setSoLinger(int soLinger) {
+            this.soLinger = soLinger;
+            return this;
+        }
+
+        public Builder setSoKeepAlive(boolean soKeepAlive) {
+            this.soKeepAlive = soKeepAlive;
+            return this;
+        }
+
+        public Builder setTcpNoDelay(boolean tcpNoDelay) {
+            this.tcpNoDelay = tcpNoDelay;
+            return this;
+        }
+
+        public Builder setConnectTimeout(int connectTimeout) {
+            this.connectTimeout = connectTimeout;
+            return this;
+        }
+
+        public Builder setSndBufSize(int sndBufSize) {
+            this.sndBufSize = sndBufSize;
+            return this;
+        }
+
+        public Builder setRcvBufSize(int rcvBufSize) {
+            this.rcvBufSize = rcvBufSize;
+            return this;
+        }
+
+        public Builder setBacklogSize(int backlogSize) {
+            this.backlogSize = backlogSize;
+            return this;
+        }
+
+        public ReactorConfig build() {
+            return new ReactorConfig(
+                    selectInterval, shutdownGracePeriod, interestOpQueued, ioThreadCount,
+                    soTimeout, soReuseAddress, soLinger, soKeepAlive, tcpNoDelay,
+                    connectTimeout, sndBufSize, rcvBufSize, backlogSize);
+        }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(&quot;[selectInterval=&quot;).append(this.selectInterval)
+                .append(&quot;, shutdownGracePeriod=&quot;).append(this.shutdownGracePeriod)
+                .append(&quot;, interestOpQueued=&quot;).append(this.interestOpQueued)
+                .append(&quot;, ioThreadCount=&quot;).append(this.ioThreadCount)
+                .append(&quot;, soTimeout=&quot;).append(this.soTimeout)
+                .append(&quot;, soReuseAddress=&quot;).append(this.soReuseAddress)
+                .append(&quot;, soLinger=&quot;).append(this.soLinger)
+                .append(&quot;, soKeepAlive=&quot;).append(this.soKeepAlive)
+                .append(&quot;, tcpNoDelay=&quot;).append(this.tcpNoDelay)
+                .append(&quot;, connectTimeout=&quot;).append(this.connectTimeout)
+                .append(&quot;, sndBufSize=&quot;).append(this.sndBufSize)
+                .append(&quot;, rcvBufSize=&quot;).append(this.rcvBufSize)
+                .append(&quot;, backlogSize=&quot;).append(this.backlogSize)
+                .append(&quot;]&quot;);
+        return builder.toString();
+    }
+}</code></pre><h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo-2"></a>Demo-2</h2><p>相对于Demo-1，Demo-2就简单一些。</p>
+<p>ReactorCache 对象 的创建托管给了 Builder静态方法，然后</p>
+<pre><code>package org.code.builder;
+
+/**
+ * 建造者模式
+ * 
+ * 参考：com.google.common.cache.CacheBuilder
+ *
+ * @author: CYX
+ * @create: 2019-10-11 19:26
+ **/
+public final class ReactorCache {
+
+    private static final int UNSET_INT = -1;
+
+    /**
+     * 设置内部哈希表的最小总大小
+     */
+    private int initialCapacity = UNSET_INT;
+
+    /**
+     * 最大数量
+     */
+    private long maximumSize = UNSET_INT;
+
+    /**
+     * 最大权重
+     */
+    private long maximumWeight = UNSET_INT;
+
+    private ReactorCache() {
+    }
+
+    public static ReactorCache newBuilder() {
+        return new ReactorCache();
+    }
+
+    /**
+     * 设置内部哈希表的最小总大小
+     *
+     * @return
+     */
+    public ReactorCache initialCapacity(int initialCapacity) {
+        //check
+        this.initialCapacity = initialCapacity;
+        return this;
+    }
+
+    /**
+     * 最大数量
+     *
+     * @param maximumSize
+     * @return
+     */
+    public ReactorCache maximumSize(long maximumSize) {
+        //check
+        this.maximumSize = maximumSize;
+        return this;
+    }
+
+    /**
+     * 最大权重
+     *
+     * @param maximumWeight
+     * @return
+     */
+    public ReactorCache maximumWeight(long maximumWeight) {
+        this.maximumWeight = maximumWeight;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(&quot;ReactorCache{&quot;);
+        sb.append(&quot;initialCapacity=&quot;).append(initialCapacity);
+        sb.append(&quot;, maximumSize=&quot;).append(maximumSize);
+        sb.append(&quot;, maximumWeight=&quot;).append(maximumWeight);
+        sb.append(&apos;}&apos;);
+        return sb.toString();
+    }
+}</code></pre><h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>org.apache.http.impl.nio.reactor.IOReactorConfig、com.google.common.cache.CacheBuilder</p>
+<p>翻阅了一些源码（参照以上两个类），建造者模式有两种实现写法：</p>
+<ul>
+<li><p>直接new</p>
+<p>  在Builder里面直接new对象的方式，如 ReactorCache、com.google.common.cache.CacheBuilder 中的实现方法。</p>
+</li>
+<li><p>间接new</p>
+<p>  间接new对象方式，如 ReactorConfig、org.apache.http.impl.nio.reactor.IOReactorConfig 中的实现方法。</p>
+</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/xrq730/p/11344541.html" target="_blank" rel="noopener">Java设计模式14：建造者模式</a></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>build-建造者模式</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:05</p>
+        <p><span class="copy-title">最后更新:</span>2019-10-27, 20:03:18</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/设计模式/build-建造者模式/" title="build-建造者模式">https://simba-cheng.github.io/2019/10/27/后台/设计模式/build-建造者模式/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#es','#Markdown','#资料','#索引','#es_query','#es_batch','#es_client','#后台_其他','#设计模式',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

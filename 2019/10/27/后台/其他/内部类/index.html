@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>内部类 | Simba</title>
+  <meta name="keywords" content=" 后台_其他 ">
+  <meta name="description" content="内部类 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(26)</small></div></li>
+    
+        
+            
+            <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(19)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="es_概念">es_概念<small>(9)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_client">es_client<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="其他">其他<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="26">
+<input type="hidden" id="yelog_site_word_count" value="23.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">Markdown</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="es "
+           href="/2019/10/08/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="es es_client "
+           href="/2019/10/26/elasticsearch/07-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="es es_batch "
+           href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="01-es-batch-bulk-批处理">01-es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/07-es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="07-es-query-match_phrase短语查询">07-es-query-match_phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/06-es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="06-es-query-filtered_bool组合过滤查询">06-es-query-filtered_bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/05-es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="05-es-query-multi_get批处理">05-es-query-multi_get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/04-es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="04-es-query-multi_match多匹配查询">04-es-query-multi_match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/03-es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="03-es-query_match_匹配查询">03-es-query_match_匹配查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/02-es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="02-es-query_term_精确查询">02-es-query_term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="01-es-query-简单查询">01-es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/26/elasticsearch/01-es-concept/09-elasticsearch-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-elasticsearch-测试数据">09-elasticsearch-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/26/elasticsearch/01-es-concept/08-elasticsearch-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-elasticsearch-上手Demo">08-elasticsearch-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/07-elasticsearch-索引-动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-elasticsearch-索引_动词">07-elasticsearch-索引_动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/06-elasticsearch-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-elasticsearch-文档_document">06-elasticsearch-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-映射-Mapping/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-elasticsearch-映射_Mapping">05-elasticsearch-映射_Mapping</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-elasticsearch-索引_名词">04-elasticsearch-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/25/elasticsearch/01-es-concept/03-elasticsearch-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-elasticsearch-查询语言">03-elasticsearch-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-elasticsearch-基本概念">02-elasticsearch-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="es es_概念 "
+           href="/2019/09/22/elasticsearch/01-es-concept/01-elasticsearch6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-elasticsearch-6.5.0集群搭建">01-elasticsearch-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="索引 "
+           href="/2019/09/22/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="Markdown "
+           href="/2019/09/22/relatedData/Markdown技巧/"
+           data-tag="Markdown"
+           data-author="" >
+            <span class="post-title" title="Markdown技巧">Markdown技巧</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-后台/其他/内部类" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">内部类</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="后台">后台</a>/
+            
+                <a href="javascript:" data-rel="其他">其他</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color1">后台_其他</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-10-27 20:03:18'>2019-10-27 19:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类-嵌套类-和-静态嵌套类"><span class="toc-text">内部类(嵌套类) 和 静态嵌套类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态嵌套类"><span class="toc-text">静态嵌套类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要使用-内部类"><span class="toc-text">为什么要使用 内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="内部类-嵌套类-和-静态嵌套类"><a href="#内部类-嵌套类-和-静态嵌套类" class="headerlink" title="内部类(嵌套类) 和 静态嵌套类"></a>内部类(嵌套类) 和 静态嵌套类</h1><p>在Oracle官方文档中有这么一句：</p>
+<pre><code>Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner classes.
+
+术语：嵌套类分为两类：静态和非静态。 声明为静态的嵌套类称为静态嵌套类。 非静态嵌套类称为内部类。</code></pre><p>Java中允许我们在一个类(A)中定义另一个类(b)。</p>
+<p>这样的类(b)被称作 内部类</p>
+<p>嵌套类可以分为两类：</p>
+<pre><code>静态嵌套类 和 内部类</code></pre><br>
+
+<p>二者如何理解？</p>
+<p>借用知乎上大佬的回答：</p>
+<pre><code>什么是嵌套？
+    嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己。
+
+什么是内部？
+    内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）</code></pre><h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类 是封闭类(外部类)的成员，例如：NestedClass 内部类是 OuterClass 的成员。</p>
+<p>内部类 可以访问 封闭类的其他成员，即使 其他成员 也被声明为私有。</p>
+<pre><code>class OuterClass {
+
+    //...
+
+    class NestedClass {
+        //...
+    }
+
+}</code></pre><p>demo</p>
+<pre><code>public class AppTest {
+
+    public static void main(String[] args) {
+
+        RollsRoyce rollsRoyce = new RollsRoyce(&quot;罗尔斯-罗伊斯&quot;, &quot;2019-10-20&quot;, &quot;英国&quot;);
+
+        String result;
+
+        //获取一个 罗罗的航空发动机
+        result = rollsRoyce.getAeroEngine();
+        System.out.println(result);
+
+        //获取一个船舶动力
+        result = rollsRoyce.getShipPower();
+        System.out.println(result);
+    }
+}
+
+/**
+ * 罗尔斯罗伊斯
+ * &lt;p&gt;
+ * 产品线有 航空发动机、船舶动力、火车动力、汽车
+ *
+ * @author: CYX
+ * @create: 2019/10/22 11:33
+ **/
+public class RollsRoyce {
+
+    /**
+     * 品牌名称
+     */
+    private String brandName;
+
+    /**
+     * 生产日期（出厂日期）
+     */
+    private String dateManufacture;
+
+    /**
+     * 产地
+     */
+    private String placeOrigin;
+
+    /**
+     * 获取航空发动机
+     *
+     * @return
+     */
+    public String getAeroEngine() {
+        return new AeroEngine().getAeroEngine();
+    }
+
+    /**
+     * 获取船舶动力
+     *
+     * @return
+     */
+    public String getShipPower() {
+        return new ShipPower().getShipPower();
+    }
+
+    /**
+     * 航空发动机
+     */
+    class AeroEngine {
+        public String getAeroEngine() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(brandName).append(&quot; / &quot;);
+            sb.append(&quot;民用航空发动机&quot;).append(&quot; / &quot;);
+            sb.append(dateManufacture).append(&quot; / &quot;);
+            sb.append(placeOrigin);
+            return sb.toString();
+        }
+    }
+
+    /**
+     * 船舶动力
+     */
+    class ShipPower {
+        public String getShipPower() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(brandName).append(&quot; / &quot;);
+            sb.append(&quot;燃气轮机&quot;).append(&quot; / &quot;);
+            sb.append(dateManufacture).append(&quot; / &quot;);
+            sb.append(placeOrigin);
+            return sb.toString();
+        }
+    }
+
+    public RollsRoyce() {
+    }
+
+    public RollsRoyce(String brandName, String dateManufacture, String placeOrigin) {
+        this.brandName = brandName;
+        this.dateManufacture = dateManufacture;
+        this.placeOrigin = placeOrigin;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getDateManufacture() {
+        return dateManufacture;
+    }
+
+    public void setDateManufacture(String dateManufacture) {
+        this.dateManufacture = dateManufacture;
+    }
+
+    public String getPlaceOrigin() {
+        return placeOrigin;
+    }
+
+    public void setPlaceOrigin(String placeOrigin) {
+        this.placeOrigin = placeOrigin;
+    }
+}</code></pre><h2 id="静态嵌套类"><a href="#静态嵌套类" class="headerlink" title="静态嵌套类"></a>静态嵌套类</h2><p>与静态类方法一样，静态嵌套类 不能直接引用其 封闭类 中定义的实例变量或方法：它只能通过对象引用来使用它们。</p>
+<p>静态嵌套类 和 其他类的成员交互，就像其他顶级类一样。</p>
+<p>静态嵌套类 在行为上是顶级类；在代码层面，只是为了降低包的深度。</p>
+<pre><code>class OuterClass {
+
+    //...
+
+    static class StaticNestedClass {
+        //...
+    }
+
+    class InnerClass {
+        //...
+    }
+}</code></pre><p>demo</p>
+<pre><code>public class AppTest {
+
+    public static void main(String[] args) {
+
+        String result;
+
+        GeneralMotorsCompany.Buick buick = new GeneralMotorsCompany.Buick(&quot;黑色&quot;,&quot;四驱&quot;);
+        result = buick.getBuick();
+        System.out.println(result);
+
+        GeneralMotorsCompany.Chevrolet chevrolet = new GeneralMotorsCompany.Chevrolet(&quot;白色&quot;, &quot;两驱&quot;);
+        result = chevrolet.getChevrolet();
+        System.out.println(result);
+    }
+}
+
+/**
+ * @author: CYX
+ * @create: 2019-10-22 14:31
+ **/
+public class GeneralMotorsCompany {
+
+    /**
+     * 品牌名称
+     */
+    private String brandName;
+
+    /**
+     * 生产日期（出厂日期）
+     */
+    private String dateManufacture;
+
+    /**
+     * 产地
+     */
+    private String placeOrigin;
+
+    /**
+     * 别克汽车
+     */
+    static class Buick {
+
+        /**
+         * 颜色
+         */
+        private String colour;
+
+        /**
+         * 驱动
+         */
+        private String drive;
+
+        public String getBuick() {
+            final StringBuilder sb = new StringBuilder(&quot;Buick{&quot;);
+            sb.append(&quot;colour=&apos;&quot;).append(colour).append(&apos;\&apos;&apos;);
+            sb.append(&quot;, drive=&apos;&quot;).append(drive).append(&apos;\&apos;&apos;);
+            sb.append(&apos;}&apos;);
+            return sb.toString();
+        }
+
+        public Buick() {
+        }
+
+        public Buick(String colour, String drive) {
+            this.colour = colour;
+            this.drive = drive;
+        }
+
+        public String getColour() {
+            return colour;
+        }
+
+        public void setColour(String colour) {
+            this.colour = colour;
+        }
+
+        public String getDrive() {
+            return drive;
+        }
+
+        public void setDrive(String drive) {
+            this.drive = drive;
+        }
+    }
+
+    /**
+     * 雪佛兰
+     */
+    static class Chevrolet {
+
+        /**
+         * 颜色
+         */
+        private String colour;
+
+        /**
+         * 驱动
+         */
+        private String drive;
+
+        public String getChevrolet() {
+            final StringBuilder sb = new StringBuilder(&quot;Chevrolet{&quot;);
+            sb.append(&quot;colour=&apos;&quot;).append(colour).append(&apos;\&apos;&apos;);
+            sb.append(&quot;, drive=&apos;&quot;).append(drive).append(&apos;\&apos;&apos;);
+            sb.append(&apos;}&apos;);
+            return sb.toString();
+        }
+
+        public Chevrolet() {
+        }
+
+        public Chevrolet(String colour, String drive) {
+            this.colour = colour;
+            this.drive = drive;
+        }
+
+        public String getColour() {
+            return colour;
+        }
+
+        public void setColour(String colour) {
+            this.colour = colour;
+        }
+
+        public String getDrive() {
+            return drive;
+        }
+
+        public void setDrive(String drive) {
+            this.drive = drive;
+        }
+    }
+
+}</code></pre><h1 id="为什么要使用-内部类"><a href="#为什么要使用-内部类" class="headerlink" title="为什么要使用 内部类"></a>为什么要使用 内部类</h1><ol>
+<li><p>逻辑分组</p>
+<p> 如果 一个类(b)，仅对 另一个类(A) 有用，那可以考虑将b嵌入到A中，使得代码更加简洁。</p>
+</li>
+<li><p>封装性 </p>
+<p> 通过将 b类 隐藏在 A类 中，可以将A的成员声明为私有，而b可以访问它们。 另外，b本身可以对外界隐藏</p>
+</li>
+<li><p>代码</p>
+<p> 代码更具有可读性、可维护性。</p>
+<p> 将小类嵌套在顶级类中，使得代码更靠近使用的位置。</p>
+</li>
+</ol>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><pre><code>Oracle官方文档中，不建议对内部类进行序列化 </code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html</a></li>
+<li><a href="https://www.zhihu.com/question/28197253" target="_blank" rel="noopener">https://www.zhihu.com/question/28197253</a></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>内部类</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:55</p>
+        <p><span class="copy-title">最后更新:</span>2019-10-27, 20:03:18</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/其他/内部类/" title="内部类">https://simba-cheng.github.io/2019/10/27/后台/其他/内部类/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#es','#Markdown','#资料','#索引','#es_query','#es_batch','#es_client','#后台_其他','#设计模式',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
