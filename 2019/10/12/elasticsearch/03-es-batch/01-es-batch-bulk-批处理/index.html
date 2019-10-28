@@ -6,17 +6,18 @@
   <meta name="keywords" content=" es_batch ">
   <meta name="description" content="01-es-batch-bulk-批处理 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="内部类(嵌套类) 和 静态嵌套类在Oracle官方文档中有这么一句： Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-sta">
+<meta name="keywords" content="后台_其他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内部类">
+<meta property="og:url" content="https://simba-cheng.github.io/2019/10/27/后台/其他/内部类/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:description" content="内部类(嵌套类) 和 静态嵌套类在Oracle官方文档中有这么一句： Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-sta">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta property="og:updated_time" content="2019-10-27T12:03:18.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta name="twitter:title" content="内部类">
+<meta name="twitter:description" content="内部类(嵌套类) 和 静态嵌套类在Oracle官方文档中有这么一句： Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-sta">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -39,6 +40,8 @@
 <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 
 
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 <script src="/js/iconfont.js?v=1.0.1"></script>
 
@@ -129,6 +132,14 @@
     
         
             
+            <li><div data-rel="索引">索引<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
@@ -138,14 +149,6 @@
         
             
             <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
             
@@ -244,15 +247,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">资料</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -551,6 +554,17 @@
         </span>
         
         
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
     </div>
     
     <div class="toc-ref">
@@ -657,6 +671,27 @@ bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
 
 
 
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '6592b307f042d0354bda',
+            clientSecret: 'd772b921c2b1225dcd0e1d95068ba31b6101ff4a',
+            repo: 'simba-cheng.github.io',
+            owner: 'Simba-cheng',
+            admin: ['Simba-cheng'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
 
 
     
@@ -710,7 +745,7 @@ bulk请求不是原子操作，他们不能实现事务。</code></pre><ul>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#es','#Markdown','#资料','#索引','#es_query','#es_batch','#es_client','#后台_其他','#设计模式',],
+            'data': ['#es','#索引','#Markdown','#资料','#es_query','#es_batch','#es_client','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
