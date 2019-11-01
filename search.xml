@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>10-IDEA编译elasticsearch6.5.0源码</title>
+      <link href="/2019/11/01/elasticsearch/01-es-concept/10-IDEA%E7%BC%96%E8%AF%91elasticsearch6-5-0%E6%BA%90%E7%A0%81/"/>
+      <url>/2019/11/01/elasticsearch/01-es-concept/10-IDEA%E7%BC%96%E8%AF%91elasticsearch6-5-0%E6%BA%90%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>环境配置很重要！！配套软件的版本很重要！！</p><ol><li><p>JDK 版本建议直接用JDK12</p></li><li><p>6.5.0里使用的Gradle-4.10（具体你可以在 elasticsearch\gradle\wrapper\gradle-wrapper.properties 文件中找到）</p></li></ol><h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><p>具体配置可以参考： <a href="https://laijianfeng.org/2018/08/%E6%95%99%E4%BD%A0%E7%BC%96%E8%AF%91%E8%B0%83%E8%AF%95Elasticsearch-6-3-2%E6%BA%90%E7%A0%81/" target="_blank" rel="noopener">教你编译调试Elasticsearch 6.3.2源码</a></p><p>这个博文中写了大部分的坑，可以借鉴；</p><p>不过我遇到了一个网上找不到的坑，使用modules中插件时，遇到了这个报错：</p><pre><code>org.elasticsearch.bootstrap.StartupException: java.lang.IllegalArgumentException: Plugin [percolator] was built for Elasticsearch version 6.5.0 but version 6.5.5 is running</code></pre><p>反正modules文件夹下，大部分的插件都会报这个错误，网上找不到。</p><p>最后我尝试，将modules中所有插件的properties配置文件中的 elasticsearch.version改为6.5.5</p><p>然后就本地启动成功了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+          <category> es_概念 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>内部类</title>
       <link href="/2019/10/27/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
       <url>/2019/10/27/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%86%85%E9%83%A8%E7%B1%BB/</url>

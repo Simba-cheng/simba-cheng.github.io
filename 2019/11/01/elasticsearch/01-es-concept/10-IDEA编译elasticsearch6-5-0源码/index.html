@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>04-elasticsearch-索引_名词 | Simba</title>
+  <title>10-IDEA编译elasticsearch6.5.0源码 | Simba</title>
   <meta name="keywords" content=" es ">
-  <meta name="description" content="04-elasticsearch-索引_名词 | Simba">
+  <meta name="description" content="10-IDEA编译elasticsearch6.5.0源码 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -515,9 +515,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/01-es-concept/04-elasticsearch-索引-名词" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-elasticsearch/01-es-concept/10-IDEA编译elasticsearch6-5-0源码" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">04-elasticsearch-索引_名词</h1>
+        <h1 class="article-title">10-IDEA编译elasticsearch6.5.0源码</h1>
     
     <div class="article-meta">
         
@@ -541,12 +541,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-18 23:30:09'>2019-09-25 23:17</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-01 23:48:58'>2019-11-01 23:46</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:541</span>
+        <span>字数:207</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -565,7 +565,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建索引"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#手动创建索引"><span class="toc-text">手动创建索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除索引"><span class="toc-text">删除索引</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体配置"><span class="toc-text">具体配置</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -580,48 +580,19 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>索引（名词）：</p>
-<pre><code>这个索引，就像是传统关系型数据库中的数据库，在Elasticsearch中它是相关文档存储的地方。
-
-index的复数是 indices 或 indexes。</code></pre><h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p>使用如下的命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">put /demo/testDate/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx1&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;22&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果URL中的索引不存在，es会为我们自动创建索引。</p>
-<p>还可以通过下面的命令来创建索引。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /blog</span><br></pre></td></tr></table></figure>
-
-<p>响应报文 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true,</span><br><span class="line">  &quot;shards_acknowledged&quot;: true,</span><br><span class="line">  &quot;index&quot;: &quot;blog&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们看下head插件中的结果：</p>
-<p><img src="//simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/head-1.png" alt="head-信息-1" title="head-信息-1"></p>
-<p>很多时候，需要自定义设置(设置索引结果、分片数目)时，需要手动创建索引。</p>
-<h2 id="手动创建索引"><a href="#手动创建索引" class="headerlink" title="手动创建索引"></a>手动创建索引</h2><p>如果输错了单词，却被es自动创建了索引，这是很麻烦的。</p>
-<p>我们可以通过修改修改elasticsearch.yml配置文件，来关闭自动创建索引功能。</p>
-<pre><code>action.auto_create_index: false</code></pre><p>修改完上面的配置以后，我们再尝试创建一个文档，指定新的index名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">put /blog2/blogData/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx111&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;11&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing11&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;error&quot;: &#123;</span><br><span class="line">    &quot;root_cause&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;type&quot;: &quot;index_not_found_exception&quot;,</span><br><span class="line">        &quot;reason&quot;: &quot;no such index&quot;,</span><br><span class="line">        &quot;resource.type&quot;: &quot;index_expression&quot;,</span><br><span class="line">        &quot;resource.id&quot;: &quot;blog2&quot;,</span><br><span class="line">        &quot;index_uuid&quot;: &quot;_na_&quot;,</span><br><span class="line">        &quot;index&quot;: &quot;blog2&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;type&quot;: &quot;index_not_found_exception&quot;,</span><br><span class="line">    &quot;reason&quot;: &quot;no such index&quot;,</span><br><span class="line">    &quot;resource.type&quot;: &quot;index_expression&quot;,</span><br><span class="line">    &quot;resource.id&quot;: &quot;blog2&quot;,</span><br><span class="line">    &quot;index_uuid&quot;: &quot;_na_&quot;,</span><br><span class="line">    &quot;index&quot;: &quot;blog2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;status&quot;: 404</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过响应报文发现，es已经不再为我们自动创建索引了。</p>
-<p>我们通过指定命令创建索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT /blog2</span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;:&#123;</span><br><span class="line">    &quot;number_of_shards&quot;:&quot;2&quot;,</span><br><span class="line">    &quot;number_of_replicas&quot;:&quot;2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>指定分片数量2,，副本数量2</p>
-<p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true,</span><br><span class="line">  &quot;shards_acknowledged&quot;: true,</span><br><span class="line">  &quot;index&quot;: &quot;blog2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们看下head上面的信息：</p>
-<p><img src="//simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/head-2.png" alt="head-信息-2" title="head-信息-2"></p>
-<p>没问题，已经创建了blog2索引</p>
-<h2 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h2><p>执行以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /blog2</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样子，上面创建的索引就被删除了。</p>
+        <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>环境配置很重要！！配套软件的版本很重要！！</p>
+<ol>
+<li><p>JDK 版本建议直接用JDK12</p>
+</li>
+<li><p>6.5.0里使用的Gradle-4.10（具体你可以在 elasticsearch\gradle\wrapper\gradle-wrapper.properties 文件中找到）</p>
+</li>
+</ol>
+<h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><p>具体配置可以参考： <a href="https://laijianfeng.org/2018/08/%E6%95%99%E4%BD%A0%E7%BC%96%E8%AF%91%E8%B0%83%E8%AF%95Elasticsearch-6-3-2%E6%BA%90%E7%A0%81/" target="_blank" rel="noopener">教你编译调试Elasticsearch 6.3.2源码</a></p>
+<p>这个博文中写了大部分的坑，可以借鉴；</p>
+<p>不过我遇到了一个网上找不到的坑，使用modules中插件时，遇到了这个报错：</p>
+<pre><code>org.elasticsearch.bootstrap.StartupException: java.lang.IllegalArgumentException: Plugin [percolator] was built for Elasticsearch version 6.5.0 but version 6.5.5 is running</code></pre><p>反正modules文件夹下，大部分的插件都会报这个错误，网上找不到。</p>
+<p>最后我尝试，将modules中所有插件的properties配置文件中的 elasticsearch.version改为6.5.5</p>
+<p>然后就本地启动成功了。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -635,12 +606,12 @@ index的复数是 indices 或 indexes。</code></pre><h2 id="创建索引"><a hr
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>04-elasticsearch-索引_名词</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">541</span></p>
+        <p><span class="copy-title">文章标题:</span>10-IDEA编译elasticsearch6.5.0源码</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">207</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:03</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-18, 23:30:09</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/" title="04-elasticsearch-索引_名词">https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/</a>
+        <p><span class="copy-title">发布时间:</span>2019-11-01, 23:46:24</p>
+        <p><span class="copy-title">最后更新:</span>2019-11-01, 23:48:58</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/01/elasticsearch/01-es-concept/10-IDEA编译elasticsearch6-5-0源码/" title="10-IDEA编译elasticsearch6.5.0源码">https://simba-cheng.github.io/2019/11/01/elasticsearch/01-es-concept/10-IDEA编译elasticsearch6-5-0源码/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
