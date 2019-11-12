@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>build-建造者模式 | Simba</title>
-  <meta name="keywords" content=" 设计模式 ">
-  <meta name="description" content="build-建造者模式 | Simba">
+  <title>01-elasticsearch-index-operate | Simba</title>
+  <meta name="keywords" content=" es ">
+  <meta name="description" content="01-elasticsearch-index-operate | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -531,9 +531,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-后台/设计模式/build-建造者模式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-elasticsearch/08-es-index/01-elasticsearch-index-operate" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">build-建造者模式</h1>
+        <h1 class="article-title">01-elasticsearch-index-operate</h1>
     
     <div class="article-meta">
         
@@ -541,28 +541,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="后台">后台</a>/
+                <a href="javascript:" data-rel="es">es</a>/
             
-                <a href="javascript:" data-rel="设计模式">设计模式</a>
+                <a href="javascript:" data-rel="es_index">es_index</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">设计模式</a>
+            <a href="javascript:" class="color3">es</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-27 20:03:18'>2019-10-27 19:42</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-12 20:28:27'>2019-11-12 20:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.3k</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -581,7 +581,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#builder-建造者模式"><span class="toc-text">builder 建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-1"><span class="toc-text">Demo-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-2"><span class="toc-text">Demo-2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#elasticsearch-index-索引-操作"><span class="toc-text">elasticsearch index(索引) 操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引名格式限制"><span class="toc-text">索引名格式限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动创建索引"><span class="toc-text">手动创建索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动创建索引-并-设置索引分片"><span class="toc-text">手动创建索引 并 设置索引分片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动创建索引-并-设置映射"><span class="toc-text">手动创建索引 并 设置映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手动创建索引-并-设置映射-2"><span class="toc-text">手动创建索引 并 设置映射(2)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询-索引-Mappings映射"><span class="toc-text">查询 索引 Mappings映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速创建索引（自动创建索引）"><span class="toc-text">快速创建索引（自动创建索引）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除索引"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询索引相关信息"><span class="toc-text">查询索引相关信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引是否存在"><span class="toc-text">索引是否存在</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打开-关闭-索引"><span class="toc-text">打开/关闭 索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型是否存在"><span class="toc-text">类型是否存在</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看索引设置"><span class="toc-text">查看索引设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -596,375 +596,253 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前写 elasticsearch java client，在构造 HTTP客户端 时，发现用了builder建造者模式，而且在《Effective Java》第一章提到过，当时没细看，于是记在心头。</p>
-<p>现在空闲了，来瞅瞅看</p>
-<h1 id="builder-建造者模式"><a href="#builder-建造者模式" class="headerlink" title="builder 建造者模式"></a>builder 建造者模式</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p><strong><font color="#DC143C"><br>    分离 对象的属性 与 对象创建的过程<br></font></strong></p>
-<p>敲黑板，划重点！</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>builder建造者模式 是 Java对象 构造方法 的代替方案。</p>
-<p>试想一个对象有几十个属性(成员变量)，我们需要使用它时，需要了解每个属性的含义，为每一个属性set值，是不是非常麻烦？</p>
-<p>builder建造者模式 可以解决以上痛点：</p>
-<pre><code>对象中属性众多，重要的就那么几个，因此，建造者模式中，开发者需要指定一些重要的属性，然后让建造者去实现构建对象的过程。
-
-这就是对象的属性与创建分离
-
-这样 对于建造者而言 隐藏了复杂的对象构建细节</code></pre><h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo-1"></a>Demo-1</h2><p>ReactorConfig对象 有两个构造方法，一个是默认形式，一个是入参形式。<br></p>
-<p>两个构造函数都是 private修饰符，这样外部就无法通过new方法来构造 ReactorConfig对象，(当然也可以放开)<br></p>
-<p>ReactorConfig对象 的创建托管给了 常量DEFAULT 和 Builder静态内部类</p>
-<pre><code>package org.code.builder;
-
-/**
- * @author: CYX
- * @create: 2019-10-10 20:23
- **/
-public class AppCode {
-    public static void main(String[] args) {
-        ReactorConfigBuilder reactorConfig = ReactorConfigBuilder.custom().setIoThreadCount(66).build();
-        System.out.println(reactorConfig.toString());
-
-        ReactorCacheBuilder cacheBuilder = ReactorCacheBuilder.newBuilder().initialCapacity(1).maximumSize(2).maximumWeight(3);
-        System.out.println(cacheBuilder.toString());
-    }
-}
-
-
-/**
- * 建造者模式
- * &lt;p&gt;
- * 参考IOReactorConfig
- *
- * @author: CYX
- * @create: 2019-10-10 19:34
- * @see org.apache.http.impl.nio.reactor.IOReactorConfig
- **/
-public final class ReactorConfig {
-
-    /**
-     * 获取可用于Java虚拟机的处理器数量
-     */
-    private static final int AVAIL_PROCS = Runtime.getRuntime().availableProcessors();
-
-    public static final ReactorConfig DEFAULT = new Builder().build();
-
-    private long selectInterval;
-    private long shutdownGracePeriod;
-    private boolean interestOpQueued;
-    private int ioThreadCount;
-    private int soTimeout;
-    private boolean soReuseAddress;
-    private int soLinger;
-    private boolean soKeepAlive;
-    private boolean tcpNoDelay;
-    private int connectTimeout;
-    private int sndBufSize;
-    private int rcvBufSize;
-    private int backlogSize;
-
-    private ReactorConfig() {
-    }
-
-    private ReactorConfig(
-            final long selectInterval,
-            final long shutdownGracePeriod,
-            final boolean interestOpQueued,
-            final int ioThreadCount,
-            final int soTimeout,
-            final boolean soReuseAddress,
-            final int soLinger,
-            final boolean soKeepAlive,
-            final boolean tcpNoDelay,
-            final int connectTimeout,
-            final int sndBufSize,
-            final int rcvBufSize,
-            final int backlogSize) {
-        this.selectInterval = selectInterval;
-        this.shutdownGracePeriod = shutdownGracePeriod;
-        this.interestOpQueued = interestOpQueued;
-        this.ioThreadCount = ioThreadCount;
-        this.soTimeout = soTimeout;
-        this.soReuseAddress = soReuseAddress;
-        this.soLinger = soLinger;
-        this.soKeepAlive = soKeepAlive;
-        this.tcpNoDelay = tcpNoDelay;
-        this.connectTimeout = connectTimeout;
-        this.sndBufSize = sndBufSize;
-        this.rcvBufSize = rcvBufSize;
-        this.backlogSize = backlogSize;
-    }
-
-    public long getSelectInterval() {
-        return selectInterval;
-    }
-
-    public long getShutdownGracePeriod() {
-        return shutdownGracePeriod;
-    }
-
-    public boolean isInterestOpQueued() {
-        return interestOpQueued;
-    }
-
-    public int getIoThreadCount() {
-        return ioThreadCount;
-    }
-
-    public int getSoTimeout() {
-        return soTimeout;
-    }
-
-    public boolean isSoReuseAddress() {
-        return soReuseAddress;
-    }
-
-    public int getSoLinger() {
-        return soLinger;
-    }
-
-    public boolean isSoKeepAlive() {
-        return soKeepAlive;
-    }
-
-    public boolean isTcpNoDelay() {
-        return tcpNoDelay;
-    }
-
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public int getSndBufSize() {
-        return sndBufSize;
-    }
-
-    public int getRcvBufSize() {
-        return rcvBufSize;
-    }
-
-    public int getBacklogSize() {
-        return backlogSize;
-    }
-
-    public static Builder custom() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private long selectInterval;
-        private long shutdownGracePeriod;
-        private boolean interestOpQueued;
-        private int ioThreadCount;
-        private int soTimeout;
-        private boolean soReuseAddress;
-        private int soLinger;
-        private boolean soKeepAlive;
-        private boolean tcpNoDelay;
-        private int connectTimeout;
-        private int sndBufSize;
-        private int rcvBufSize;
-        private int backlogSize;
-
-        //
-        public Builder() {
-            this.selectInterval = 1000;
-            this.shutdownGracePeriod = 500;
-            this.interestOpQueued = false;
-            this.ioThreadCount = AVAIL_PROCS;
-            this.soTimeout = 0;
-            this.soReuseAddress = false;
-            this.soLinger = -1;
-            this.soKeepAlive = false;
-            this.tcpNoDelay = true;
-            this.connectTimeout = 0;
-            this.sndBufSize = 0;
-            this.rcvBufSize = 0;
-            this.backlogSize = 0;
-        }
-
-        public Builder setSelectInterval(long selectInterval) {
-            this.selectInterval = selectInterval;
-            return this;
-        }
-
-        public Builder setShutdownGracePeriod(long shutdownGracePeriod) {
-            this.shutdownGracePeriod = shutdownGracePeriod;
-            return this;
-        }
-
-        public Builder setInterestOpQueued(boolean interestOpQueued) {
-            this.interestOpQueued = interestOpQueued;
-            return this;
-        }
-
-        public Builder setIoThreadCount(int ioThreadCount) {
-            this.ioThreadCount = ioThreadCount;
-            return this;
-        }
-
-        public Builder setSoTimeout(int soTimeout) {
-            this.soTimeout = soTimeout;
-            return this;
-        }
-
-        public Builder setSoReuseAddress(boolean soReuseAddress) {
-            this.soReuseAddress = soReuseAddress;
-            return this;
-        }
-
-        public Builder setSoLinger(int soLinger) {
-            this.soLinger = soLinger;
-            return this;
-        }
-
-        public Builder setSoKeepAlive(boolean soKeepAlive) {
-            this.soKeepAlive = soKeepAlive;
-            return this;
-        }
-
-        public Builder setTcpNoDelay(boolean tcpNoDelay) {
-            this.tcpNoDelay = tcpNoDelay;
-            return this;
-        }
-
-        public Builder setConnectTimeout(int connectTimeout) {
-            this.connectTimeout = connectTimeout;
-            return this;
-        }
-
-        public Builder setSndBufSize(int sndBufSize) {
-            this.sndBufSize = sndBufSize;
-            return this;
-        }
-
-        public Builder setRcvBufSize(int rcvBufSize) {
-            this.rcvBufSize = rcvBufSize;
-            return this;
-        }
-
-        public Builder setBacklogSize(int backlogSize) {
-            this.backlogSize = backlogSize;
-            return this;
-        }
-
-        public ReactorConfig build() {
-            return new ReactorConfig(
-                    selectInterval, shutdownGracePeriod, interestOpQueued, ioThreadCount,
-                    soTimeout, soReuseAddress, soLinger, soKeepAlive, tcpNoDelay,
-                    connectTimeout, sndBufSize, rcvBufSize, backlogSize);
-        }
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(&quot;[selectInterval=&quot;).append(this.selectInterval)
-                .append(&quot;, shutdownGracePeriod=&quot;).append(this.shutdownGracePeriod)
-                .append(&quot;, interestOpQueued=&quot;).append(this.interestOpQueued)
-                .append(&quot;, ioThreadCount=&quot;).append(this.ioThreadCount)
-                .append(&quot;, soTimeout=&quot;).append(this.soTimeout)
-                .append(&quot;, soReuseAddress=&quot;).append(this.soReuseAddress)
-                .append(&quot;, soLinger=&quot;).append(this.soLinger)
-                .append(&quot;, soKeepAlive=&quot;).append(this.soKeepAlive)
-                .append(&quot;, tcpNoDelay=&quot;).append(this.tcpNoDelay)
-                .append(&quot;, connectTimeout=&quot;).append(this.connectTimeout)
-                .append(&quot;, sndBufSize=&quot;).append(this.sndBufSize)
-                .append(&quot;, rcvBufSize=&quot;).append(this.rcvBufSize)
-                .append(&quot;, backlogSize=&quot;).append(this.backlogSize)
-                .append(&quot;]&quot;);
-        return builder.toString();
-    }
-}</code></pre><h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo-2"></a>Demo-2</h2><p>相对于Demo-1，Demo-2就简单一些。</p>
-<p>ReactorCache 对象 的创建托管给了 Builder静态方法，然后</p>
-<pre><code>package org.code.builder;
-
-/**
- * 建造者模式
- * 
- * 参考：com.google.common.cache.CacheBuilder
- *
- * @author: CYX
- * @create: 2019-10-11 19:26
- **/
-public final class ReactorCache {
-
-    private static final int UNSET_INT = -1;
-
-    /**
-     * 设置内部哈希表的最小总大小
-     */
-    private int initialCapacity = UNSET_INT;
-
-    /**
-     * 最大数量
-     */
-    private long maximumSize = UNSET_INT;
-
-    /**
-     * 最大权重
-     */
-    private long maximumWeight = UNSET_INT;
-
-    private ReactorCache() {
-    }
-
-    public static ReactorCache newBuilder() {
-        return new ReactorCache();
-    }
-
-    /**
-     * 设置内部哈希表的最小总大小
-     *
-     * @return
-     */
-    public ReactorCache initialCapacity(int initialCapacity) {
-        //check
-        this.initialCapacity = initialCapacity;
-        return this;
-    }
-
-    /**
-     * 最大数量
-     *
-     * @param maximumSize
-     * @return
-     */
-    public ReactorCache maximumSize(long maximumSize) {
-        //check
-        this.maximumSize = maximumSize;
-        return this;
-    }
-
-    /**
-     * 最大权重
-     *
-     * @param maximumWeight
-     * @return
-     */
-    public ReactorCache maximumWeight(long maximumWeight) {
-        this.maximumWeight = maximumWeight;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder(&quot;ReactorCache{&quot;);
-        sb.append(&quot;initialCapacity=&quot;).append(initialCapacity);
-        sb.append(&quot;, maximumSize=&quot;).append(maximumSize);
-        sb.append(&quot;, maximumWeight=&quot;).append(maximumWeight);
-        sb.append(&apos;}&apos;);
-        return sb.toString();
-    }
-}</code></pre><h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>org.apache.http.impl.nio.reactor.IOReactorConfig、com.google.common.cache.CacheBuilder</p>
-<p>翻阅了一些源码（参照以上两个类），建造者模式有两种实现写法：</p>
-<ul>
-<li><p>直接new</p>
-<p>  在Builder里面直接new对象的方式，如 ReactorCache、com.google.common.cache.CacheBuilder 中的实现方法。</p>
+        <h1 id="elasticsearch-index-索引-操作"><a href="#elasticsearch-index-索引-操作" class="headerlink" title="elasticsearch index(索引) 操作"></a>elasticsearch index(索引) 操作</h1><h1 id="索引名格式限制"><a href="#索引名格式限制" class="headerlink" title="索引名格式限制"></a>索引名格式限制</h1><ul>
+<li><p>仅小写</p>
 </li>
-<li><p>间接new</p>
-<p>  间接new对象方式，如 ReactorConfig、org.apache.http.impl.nio.reactor.IOReactorConfig 中的实现方法。</p>
+<li><p>不能包含\ , / , * , ？ , “ , &lt; , &gt; , | , ‘’(空格字符) , 、 , #</p>
+</li>
+<li><p>7.0版本之前可以含有’:’冒号；7.0版本之后不再支持</p>
+</li>
+<li><p>不允许 以 - , _ , + 开头</p>
+</li>
+<li><p>索引名称长度不能超过 255字节</p>
 </li>
 </ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.cnblogs.com/xrq730/p/11344541.html" target="_blank" rel="noopener">Java设计模式14：建造者模式</a></li>
+<h1 id="手动创建索引"><a href="#手动创建索引" class="headerlink" title="手动创建索引"></a>手动创建索引</h1><p>创建一个空索引</p>
+<pre><code>PUT twitter
+
+curl -XPUT &apos;http://127.0.0.1:9200/twitter&apos;    </code></pre><p>返回结果</p>
+<pre><code>{
+  &quot;acknowledged&quot; : true,
+  &quot;shards_acknowledged&quot; : true,
+  &quot;index&quot; : &quot;facebook&quot;
+}</code></pre><p>acknowledged：</p>
+<pre><code>集群是否成功创建索引</code></pre><p>shards_acknowledged：</p>
+<pre><code>索引中每个分片是否成功启动所需数量的分片副本 </code></pre><h1 id="手动创建索引-并-设置索引分片"><a href="#手动创建索引-并-设置索引分片" class="headerlink" title="手动创建索引 并 设置索引分片"></a>手动创建索引 并 设置索引分片</h1><p>手动创建索引，并 设置索引的 分片数量 和 副本分片数量</p>
+<pre><code>PUT twitter
+{
+  &quot;settings&quot;: {
+    &quot;index&quot;: {
+      &quot;number_of_shards&quot;: 5,
+      &quot;number_of_replicas&quot;: 0
+    }
+  }
+}</code></pre><p>OR</p>
+<pre><code>PUT twitter
+{
+    &quot;settings&quot; : {
+        &quot;number_of_shards&quot; : 5,
+        &quot;number_of_replicas&quot; : 0
+    }
+}</code></pre><p>number_of_shards：</p>
+<pre><code>每个索引的主分片数，默认值是5，索引创建后不能修改</code></pre><p>number_of_replicas：</p>
+<pre><code>每个主分片的副本数，默认值是1，这个配置可以随时修改</code></pre><p>如果要实时修改 number_of_replicas ，使用如下命令</p>
+<pre><code>PUT /twitter/_settings
+{
+    &quot;number_of_replicas&quot;: 1
+}</code></pre><h1 id="手动创建索引-并-设置映射"><a href="#手动创建索引-并-设置映射" class="headerlink" title="手动创建索引 并 设置映射"></a>手动创建索引 并 设置映射</h1><p>关于”映射”,请移步 <a href="https://simba-cheng.cn/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-%E6%98%A0%E5%B0%84-Mapping/" target="_blank" rel="noopener">05-elasticsearch-映射_Mapping</a></p>
+<p>创建名称’twitter’的索引；</p>
+<p>设置5个主分片，0个副本分片；</p>
+<p>mapping设置三个字段，并分别设置字段类型。</p>
+<pre><code>PUT twitter
+{
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 5,
+    &quot;number_of_replicas&quot;: 0
+  },
+  &quot;mappings&quot;: {
+    &quot;_doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;user&quot;: {
+          &quot;type&quot;: &quot;text&quot;
+        },
+        &quot;post_date&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;message&quot;: {
+          &quot;type&quot;: &quot;text&quot;
+        }
+      }
+    }
+  }
+}</code></pre><h1 id="手动创建索引-并-设置映射-2"><a href="#手动创建索引-并-设置映射-2" class="headerlink" title="手动创建索引 并 设置映射(2)"></a>手动创建索引 并 设置映射(2)</h1><p>先创建一个索引，然后再追加mappings设置</p>
+<pre><code>PUT twitter
+{
+  &quot;settings&quot;: {
+    &quot;index&quot;: {
+      &quot;number_of_shards&quot;: 5,
+      &quot;number_of_replicas&quot;: 0
+    }
+  }
+}</code></pre><p>追加mappings设置</p>
+<pre><code>put twitter/_mapping/_doc
+{
+  &quot;properties&quot;: {
+    &quot;user&quot;: {
+      &quot;type&quot;: &quot;text&quot;
+    },
+    &quot;post_date&quot;: {
+      &quot;type&quot;: &quot;keyword&quot;
+    },
+    &quot;message&quot;: {
+      &quot;type&quot;: &quot;text&quot;
+    }
+  }
+}</code></pre><h1 id="查询-索引-Mappings映射"><a href="#查询-索引-Mappings映射" class="headerlink" title="查询 索引 Mappings映射"></a>查询 索引 Mappings映射</h1><p>查询twitter索引的映射</p>
+<pre><code>GET /twitter/_mapping/_doc
+
+GET /_mapping/_doc</code></pre><p>查询 所有索引的 Mappings映射</p>
+<pre><code>GET /_all/_mapping
+
+GET /_mapping</code></pre><h1 id="快速创建索引（自动创建索引）"><a href="#快速创建索引（自动创建索引）" class="headerlink" title="快速创建索引（自动创建索引）"></a>快速创建索引（自动创建索引）</h1><p>使用 ‘PUT’ 方法，将数据插入到索引中。</p>
+<p>如果索引还不存在，会自动创建一个索引（通过 action.auto_create_index 配置，默认为true）</p>
+<p>例子：</p>
+<p>创建名为’twitter’的索引</p>
+<pre><code>PUT twitter/_doc/1
+{
+    &quot;user&quot; : &quot;kimchy&quot;,
+    &quot;post_date&quot; : &quot;2019-10-30&quot;,
+    &quot;message&quot; : &quot;trying out Elasticsearch&quot;
+}</code></pre><p>返回结果</p>
+<pre><code>{
+  &quot;_index&quot; : &quot;twitter&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 2,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}</code></pre><p>_shards 节点：</p>
+<pre><code>索引操作相关信息</code></pre><p>total：</p>
+<pre><code>索引操作执行多少个分片副本，包含主副本分片
+
+针对这条数据，一条数据只会写在一个分片上；
+
+也就是会写在它的一个主分片、一个副本分片，一共两个。
+
+
+注意：total 要看 number_of_replicas、number_of_shards 的设置。
+
+举个栗子：
+
+    twitter索引有5个主分片，每个主分片0个副本分片。
+
+    再执行上面的put操作，返回的 total 就是1</code></pre><p>successful：</p>
+<pre><code>索引成功操作分片的数量</code></pre><p><strong>(注意，自动创建索引，使用的是动态映射，生产环境慎用。)</strong></p>
+<h1 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h1><p>删除索引，使用 DELETE 关键字</p>
+<pre><code>DELETE twitter
+
+curl -XDELETE &apos;http://127.0.0.1:9200/twitter?pretty&apos;</code></pre><h1 id="查询索引相关信息"><a href="#查询索引相关信息" class="headerlink" title="查询索引相关信息"></a>查询索引相关信息</h1><pre><code>GET twitter
+
+curl -XGET &apos;127.0.0.1:9200/twitter?pretty&apos;
+
+curl -XGET &apos;http://127.0.0.1:9200/twitter?pretty&apos;</code></pre><p>返回结果</p>
+<p>返回结果中，包含 mappings映射信息、索引创建时间、主副分片数量、索引名称</p>
+<pre><code>{
+  &quot;twitter&quot; : {
+    &quot;aliases&quot; : { },
+    &quot;mappings&quot; : {
+      &quot;_doc&quot; : {
+        &quot;properties&quot; : {
+          &quot;message&quot; : {
+            &quot;type&quot; : &quot;text&quot;
+          },
+          &quot;post_date&quot; : {
+            &quot;type&quot; : &quot;keyword&quot;
+          },
+          &quot;user&quot; : {
+            &quot;type&quot; : &quot;text&quot;
+          }
+        }
+      }
+    },
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1572504908444&quot;,
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;number_of_replicas&quot; : &quot;0&quot;,
+        &quot;uuid&quot; : &quot;5vvAhRzASJSbA4dIXFghRw&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6050099&quot;
+        },
+        &quot;provided_name&quot; : &quot;twitter&quot;
+      }
+    }
+  }
+}</code></pre><h1 id="索引是否存在"><a href="#索引是否存在" class="headerlink" title="索引是否存在"></a>索引是否存在</h1><p>查询索引是否存在</p>
+<pre><code>HEAD twitter</code></pre><p>返回结果</p>
+<pre><code>200 - OK</code></pre><h1 id="打开-关闭-索引"><a href="#打开-关闭-索引" class="headerlink" title="打开/关闭 索引"></a>打开/关闭 索引</h1><p>为了维护index索引的元数据，或是其他原因， index索引 允许 关闭/打开。</p>
+<p>索引关闭之后，会被禁止读写。</p>
+<p>关闭索引几乎没有集群消耗。</p>
+<p>关闭索引</p>
+<pre><code>POST /twitter/_close
+
+curl -XPOST &apos;http://127.0.0.1:9200/twitter/_close?pretty&apos;</code></pre><p>打开索引</p>
+<pre><code>post /twitter/_open
+
+curl -XPOST &apos;http://127.0.0.1:9200/twitter/_open?pretty&apos;</code></pre><h1 id="类型是否存在"><a href="#类型是否存在" class="headerlink" title="类型是否存在"></a>类型是否存在</h1><p>检查twitter索引中是否存在_doc类型</p>
+<pre><code>HEAD twitter/_mapping/_doc</code></pre><h1 id="查看索引设置"><a href="#查看索引设置" class="headerlink" title="查看索引设置"></a>查看索引设置</h1><p>查看索引的设置</p>
+<pre><code>GET /twitter/_settings</code></pre><p>response</p>
+<pre><code>{
+  &quot;twitter&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1573376199157&quot;,
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;number_of_replicas&quot; : &quot;0&quot;,
+        &quot;uuid&quot; : &quot;sUrSGMf6SZiRzgPW87wGhQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6050099&quot;
+        },
+        &quot;provided_name&quot; : &quot;twitter&quot;
+      }
+    }
+  }
+}</code></pre><p>creation_date：创建时间</p>
+<p>number_of_shards：每个索引的主分片数</p>
+<p>number_of_replicas：每个主分片的副本数</p>
+<p><strong>可以同时查看多个索引</strong></p>
+<pre><code>GET /twitter,testdata/_settings</code></pre><p>response</p>
+<pre><code>{
+  &quot;testdata&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1567758185892&quot;,
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;number_of_replicas&quot; : &quot;1&quot;,
+        &quot;uuid&quot; : &quot;OYPXyTPzQLak711_nBzCsQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6050099&quot;
+        },
+        &quot;provided_name&quot; : &quot;testdata&quot;
+      }
+    }
+  },
+  &quot;twitter&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1573376199157&quot;,
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;number_of_replicas&quot; : &quot;0&quot;,
+        &quot;uuid&quot; : &quot;sUrSGMf6SZiRzgPW87wGhQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6050099&quot;
+        },
+        &quot;provided_name&quot; : &quot;twitter&quot;
+      }
+    }
+  }
+}</code></pre><p><strong>查看进集群中所有索引的设置</strong></p>
+<pre><code>get /_all/_settings</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/indices-put-mapping.html" target="_blank" rel="noopener">indices-put-mapping</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/indices-create-index.html" target="_blank" rel="noopener">indices-create-index</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/index-modules.html" target="_blank" rel="noopener">index-modules</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/docs-replication.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/6.5/docs-replication.html</a></li>
 </ul>
 
       
@@ -979,12 +857,12 @@ public final class ReactorCache {
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>build-建造者模式</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
+        <p><span class="copy-title">文章标题:</span>01-elasticsearch-index-operate</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:05</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-27, 20:03:18</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/设计模式/build-建造者模式/" title="build-建造者模式">https://simba-cheng.github.io/2019/10/27/后台/设计模式/build-建造者模式/</a>
+        <p><span class="copy-title">发布时间:</span>2019-11-12, 20:09:15</p>
+        <p><span class="copy-title">最后更新:</span>2019-11-12, 20:28:27</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/12/elasticsearch/08-es-index/01-elasticsearch-index-operate/" title="01-elasticsearch-index-operate">https://simba-cheng.github.io/2019/11/12/elasticsearch/08-es-index/01-elasticsearch-index-operate/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
