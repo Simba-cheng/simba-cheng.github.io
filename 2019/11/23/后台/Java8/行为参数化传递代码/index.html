@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>05-es-query-multi_get批处理 | Simba</title>
-  <meta name="keywords" content=" es_query ">
-  <meta name="description" content="05-es-query-multi_get批处理 | Simba">
+  <title>行为参数化传递代码 | Simba</title>
+  <meta name="keywords" content=" Java8 ">
+  <meta name="description" content="行为参数化传递代码 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -579,9 +579,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/02-es-query/05-es-query-multi-get批处理" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-后台/Java8/行为参数化传递代码" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">05-es-query-multi_get批处理</h1>
+        <h1 class="article-title">行为参数化传递代码</h1>
     
     <div class="article-meta">
         
@@ -589,28 +589,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="es">es</a>/
+                <a href="javascript:" data-rel="后台">后台</a>/
             
-                <a href="javascript:" data-rel="es_query">es_query</a>
+                <a href="javascript:" data-rel="Java8">Java8</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color4">es_query</a>
+            <a href="javascript:" class="color1">Java8</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-20 20:03:13'>2019-09-26 21:51</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-23 23:18:49'>2019-11-23 23:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:522</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -629,7 +629,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#multi-get-mget-检索多个文档-批处理"><span class="toc-text">multi-get/mget 检索多个文档/批处理</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo"><span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-1"><span class="toc-text">Demo-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-2"><span class="toc-text">Demo-2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-3"><span class="toc-text">Demo-3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-4"><span class="toc-text">Demo-4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-5"><span class="toc-text">Demo-5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-6"><span class="toc-text">Demo-6</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -644,35 +644,223 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="multi-get-mget-检索多个文档-批处理"><a href="#multi-get-mget-检索多个文档-批处理" class="headerlink" title="multi-get/mget 检索多个文档/批处理"></a>multi-get/mget 检索多个文档/批处理</h1><p>在Elasticsearch中，检索多个文档虽然很快，但合并多个请求可以减轻网络开销。</p>
-<p>可以使用 multi-get 或者 mget。</p>
-<p>模拟，从三个索引中查找文档</p>
-<pre><code>如果想指定返回字段，增加一个_source参数</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GET /_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_index&quot;:&quot;demo&quot;,</span><br><span class="line">      &quot;_type&quot;:&quot;testDate&quot;,</span><br><span class="line">      &quot;_id&quot;:&quot;1&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;megacorp&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;employee&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;5&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_index&quot;: &quot;books&quot;,</span><br><span class="line">      &quot;_type&quot;: &quot;book&quot;,</span><br><span class="line">      &quot;_id&quot;: &quot;19&quot;,</span><br><span class="line">      &quot;_source&quot;:&quot;publish&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>行为参数化，它是可以帮助你处理频繁变更需求的一种开发模式，可让代码更好地适应不断变化的要求，减轻未来的工作量</p>
+<p>‘行为参数化’就是传递代码，一个方法接受多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>上手几个demo，切实体会下</p>
+<p>参照《Java8实战》中的例子：</p>
+<h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo-1"></a>Demo-1</h2><p>筛选绿色苹果</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;Apple&gt; apples;
+    List&lt;Apple&gt; appleList = getApples();
+    apples = filterApples(appleList, Apple::isGreenApple);
+    for (Apple apple : apples) {
+        System.out.println(&quot;greenApple:&quot; + apple.toString());
+    }
+}
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"megacorp"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"employee"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"5"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"about"</span>: <span class="string">"i love evertything"</span>,</span><br><span class="line">        <span class="attr">"last_name"</span>: <span class="string">"yixin"</span>,</span><br><span class="line">        <span class="attr">"interests"</span>: [</span><br><span class="line">          <span class="string">"read book"</span>,</span><br><span class="line">          <span class="string">"swim"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"first_name"</span>: <span class="string">"cheng"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"22"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"books"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"book"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"19"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"publish"</span>: <span class="string">"高等教育出版社"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; inventory, Apple.Predicate&lt;Apple&gt; p) {
+    List&lt;Apple&gt; result = new ArrayList&lt;&gt;();
+    for (Apple apple : inventory) {
+        if (p.filter(apple)) {
+            result.add(apple);
+        }
+    }
+    return result;
+}
 
-<br>
+private static List&lt;Apple&gt; getApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+        } else {
+            apple.setColor(&quot;green&quot;);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo-2"></a>Demo-2</h2><p>筛选重量大于1010的苹果</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;Apple&gt; apples;
+    List&lt;Apple&gt; appleList = getApples();
+    apples = filterApples(appleList, Apple::isHeavyApple);
+    for (Apple apple : apples) {
+        System.out.println(&quot;heavyApple:&quot; + apple.toString());
+    }
+}
 
-<p>如果你想检索的多个文档，都在一个_index中（甚至在一个_type中），url中就可以指定_index、_type</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;docs&quot;:[</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;_id&quot;:&quot;2&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;_id&quot;:&quot;3&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; inventory, Apple.Predicate&lt;Apple&gt; p) {
+    List&lt;Apple&gt; result = new ArrayList&lt;&gt;();
+    for (Apple apple : inventory) {
+        if (p.filter(apple)) {
+            result.add(apple);
+        }
+    }
+    return result;
+}
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"3"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx333"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"333"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing333"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+private static List&lt;Apple&gt; getApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+        } else {
+            apple.setColor(&quot;green&quot;);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h2 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo-3"></a>Demo-3</h2><p>行为参数化，Lambda表达式</p>
+<p>分别筛选绿色，重量大于1010的苹果</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;Apple&gt; result;
+    List&lt;Apple&gt; appleList = getApples();
+    result = filterApples(appleList, (Apple a) -&gt; &quot;green&quot;.equals(a.getColor()));
+    for (Apple a : result) {
+        System.out.println(a.toString());
+    }
+    System.out.println();
+    result = filterApples(appleList, (Apple a) -&gt; a.getWeight() &gt; 1010);
+    for (Apple a : result) {
+        System.out.println(a.toString());
+    }
+}
 
-<br>
+public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; inventory, Apple.Predicate&lt;Apple&gt; p) {
+    List&lt;Apple&gt; result = new ArrayList&lt;&gt;();
+    for (Apple apple : inventory) {
+        if (p.filter(apple)) {
+            result.add(apple);
+        }
+    }
+    return result;
+}
 
-<p>如果，多个文档都是同一个索引、类型下，可以换这种写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/_mget</span><br><span class="line">&#123;</span><br><span class="line">  &quot;ids&quot;:[&quot;1&quot;,&quot;2&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+private static List&lt;Apple&gt; getApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+        } else {
+            apple.setColor(&quot;green&quot;);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h2 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo-4"></a>Demo-4</h2><p>行为参数化，Lambda表达式，进一步抽象</p>
+<p>还是在之前的例子上优化，自定义了一个函数接口</p>
+<pre><code>public interface ApplePredicate {
+    boolean filter(Apple apple);
+}
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing2"</span>,</span><br><span class="line">        <span class="attr">"price"</span>: <span class="string">"100.00"</span>,</span><br><span class="line">        <span class="attr">"tags"</span>: [</span><br><span class="line">          <span class="string">"test"</span>,</span><br><span class="line">          <span class="string">"test2"</span>,</span><br><span class="line">          <span class="string">"test3"</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+public class AppleRedAndHeavyPredicate implements ApplePredicate {
+    @Override
+    public boolean filter(Apple apple) {
+        return &quot;red&quot;.equals(apple.getColor()) &amp;&amp; apple.getWeight() &gt; 1010;
+    }
+}
 
-<p>如果，其中某个文档不存在，返回的结果如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"docs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="attr">"_version"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"_source"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"cyx111"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"11"</span>,</span><br><span class="line">        <span class="attr">"address"</span>: <span class="string">"nanjing11"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">      <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">      <span class="attr">"_id"</span>: <span class="string">"pppp"</span>,</span><br><span class="line">      <span class="attr">"found"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+public static void main(String[] args) {
+    List&lt;Apple&gt; appleList = getApples();
+    List&lt;Apple&gt; apples = filterApples(appleList, new AppleRedAndHeavyPredicate());
+    for (Apple a : apples) {
+        System.out.println(a.toString());
+    }
+}
 
-<p>不存在的文档，并不影响第一个文档的检索，每个文档的检索都是独立的。</p>
+public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; inventory, ApplePredicate p) {
+    List&lt;Apple&gt; result = new ArrayList&lt;&gt;();
+    for (Apple apple : inventory) {
+        if (p.filter(apple)) {
+            result.add(apple);
+        }
+    }
+    return result;
+}
 
+private static List&lt;Apple&gt; getApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+        } else {
+            apple.setColor(&quot;green&quot;);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h2 id="Demo-5"><a href="#Demo-5" class="headerlink" title="Demo-5"></a>Demo-5</h2><p>行为参数化，Lambda表达式，自定义函数接口，抽象化并引入泛型。</p>
+<pre><code>public interface Analysis&lt;T&gt; {
+    boolean analysis(T t);
+}
+
+public class FruitAnalysis {
+    public static &lt;T&gt; List&lt;T&gt; filter(List&lt;T&gt; list, Analysis&lt;T&gt; p) {
+        List&lt;T&gt; result = new ArrayList&lt;&gt;();
+        for (T t : list) {
+            if (p.analysis(t)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+}
+
+public static void main(String[] args) {
+    List&lt;Apple&gt; appleList = getApples();
+    List&lt;Apple&gt; appleResult = FruitAnalysis.filter(appleList, (Apple a) -&gt; &quot;red&quot;.equals(a.getColor()));
+    for (Apple a : appleResult) {
+        System.out.println(a.toString());
+    }
+    System.out.println();
+    appleResult = FruitAnalysis.filter(appleList, (Apple a) -&gt; a.getWeight() &gt; 10010);
+    for (Apple a : appleResult) {
+        System.out.println(a.toString());
+    }
+}
+
+private static List&lt;Apple&gt; getApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+        } else {
+            apple.setColor(&quot;green&quot;);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h2 id="Demo-6"><a href="#Demo-6" class="headerlink" title="Demo-6"></a>Demo-6</h2><p>行为参数化，Lambda表达式在其他地方的使用</p>
+<pre><code>public static void main(String[] args) {
+
+    //老的写法
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(&quot;1-2-3-4-5&quot;);
+        }
+    });
+    thread.start();
+
+    //使用lambda，简化内部类写法
+    Thread thread1 = new Thread(() -&gt; System.out.println(&quot;2-4-6-8-10&quot;));
+    thread1.start();
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -685,12 +873,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>05-es-query-multi_get批处理</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">522</span></p>
+        <p><span class="copy-title">文章标题:</span>行为参数化传递代码</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-26, 21:51:07</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-20, 20:03:13</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/elasticsearch/02-es-query/05-es-query-multi-get批处理/" title="05-es-query-multi_get批处理">https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/05-es-query-multi-get批处理/</a>
+        <p><span class="copy-title">发布时间:</span>2019-11-23, 23:16:19</p>
+        <p><span class="copy-title">最后更新:</span>2019-11-23, 23:18:49</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/23/后台/Java8/行为参数化传递代码/" title="行为参数化传递代码">https://simba-cheng.github.io/2019/11/23/后台/Java8/行为参数化传递代码/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
