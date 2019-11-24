@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>内部类 | Simba</title>
-  <meta name="keywords" content=" 后台_其他 ">
-  <meta name="description" content="内部类 | Simba">
+  <title>Lambda表达式 | Simba</title>
+  <meta name="keywords" content=" Java8 ">
+  <meta name="description" content="Lambda表达式 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -595,9 +595,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-后台/其他/内部类" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-后台/Java8/Lambda表达式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">内部类</h1>
+        <h1 class="article-title">Lambda表达式</h1>
     
     <div class="article-meta">
         
@@ -607,26 +607,26 @@
             
                 <a href="javascript:" data-rel="后台">后台</a>/
             
-                <a href="javascript:" data-rel="其他">其他</a>
+                <a href="javascript:" data-rel="Java8">Java8</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color1">后台_其他</a>
+            <a href="javascript:" class="color1">Java8</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-27 20:03:18'>2019-10-27 19:42</time>
+        创建时间:<time class="date" title='更新时间: 2019-11-24 22:10:42'>2019-11-24 22:07</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -645,7 +645,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类-嵌套类-和-静态嵌套类"><span class="toc-text">内部类(嵌套类) 和 静态嵌套类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态嵌套类"><span class="toc-text">静态嵌套类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要使用-内部类"><span class="toc-text">为什么要使用 内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在哪里使用lambda"><span class="toc-text">在哪里使用lambda</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo-1"><span class="toc-text">Demo-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo-2"><span class="toc-text">Demo-2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo-3"><span class="toc-text">Demo-3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用函数式接口"><span class="toc-text">常用函数式接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用函数式接口-1"><span class="toc-text">常用函数式接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用局部变量"><span class="toc-text">使用局部变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么局部变量有这些限制？"><span class="toc-text">为什么局部变量有这些限制？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -660,315 +660,329 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="内部类-嵌套类-和-静态嵌套类"><a href="#内部类-嵌套类-和-静态嵌套类" class="headerlink" title="内部类(嵌套类) 和 静态嵌套类"></a>内部类(嵌套类) 和 静态嵌套类</h1><p>在Oracle官方文档中有这么一句：</p>
-<pre><code>Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner classes.
+        <p>Lambda表达式:</p>
+<pre><code>它可以让你很简洁地表示一个行为或传递代码。</code></pre><p>你可以把Lambda表达式看作匿名功能，它基本上就是没有声明名称的方法，但和匿名类一样，它也可以作为参数传递给一个方法。</p>
+<p>初始化匿名实例的另外一种简洁且高效的写法</p>
+<h1 id="在哪里使用lambda"><a href="#在哪里使用lambda" class="headerlink" title="在哪里使用lambda"></a>在哪里使用lambda</h1><p>lambda表达式，使用在函数式接口上。</p>
+<p>什么是函数式接口？</p>
+<pre><code>接口只定义了一个抽象方法，它就是一个函数式接口</code></pre><p>注意：</p>
+<pre><code>函数式接口只能有一个抽象方法，如果你尝试添加第二个抽象方法，将抛出编译时错误
 
-术语：嵌套类分为两类：静态和非静态。 声明为静态的嵌套类称为静态嵌套类。 非静态嵌套类称为内部类。</code></pre><p>Java中允许我们在一个类(A)中定义另一个类(b)。</p>
-<p>这样的类(b)被称作 内部类</p>
-<p>嵌套类可以分为两类：</p>
-<pre><code>静态嵌套类 和 内部类</code></pre><br>
-
-<p>二者如何理解？</p>
-<p>借用知乎上大佬的回答：</p>
-<pre><code>什么是嵌套？
-    嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己。
-
-什么是内部？
-    内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）</code></pre><h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类 是封闭类(外部类)的成员，例如：NestedClass 内部类是 OuterClass 的成员。</p>
-<p>内部类 可以访问 封闭类的其他成员，即使 其他成员 也被声明为私有。</p>
-<pre><code>class OuterClass {
-
-    //...
-
-    class NestedClass {
-        //...
+IDEA中，自动完成lambda表达式，快捷键：Ctrl + Shift + Space</code></pre><h1 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo-1"></a>Demo-1</h1><p>排序</p>
+<pre><code>public static void main(String[] args) throws Exception {
+    List&lt;Apple&gt; yanTaiApples = getYanTaiApples();
+    for (Apple a : yanTaiApples) {
+        System.out.println(a.toString());
     }
 
-}</code></pre><p>demo</p>
-<pre><code>public class AppTest {
+    System.out.println();
+
+    //使用lambda表达式
+    yanTaiApples.sort((Apple a1, Apple a2) -&gt; a1.getWeight().compareTo(a2.getWeight()));
+
+    for (Apple a : yanTaiApples) {
+        System.out.println(a.toString());
+    }
+}
+
+//烟台苹果
+private static List&lt;Apple&gt; getYanTaiApples() {
+    List&lt;Apple&gt; appleList = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; 20; i++) {
+        Apple apple = new Apple();
+        apple.setAppleName(&quot;烟台红富士&quot; + i);
+        if (i % 2 == 0) {
+            apple.setColor(&quot;red&quot;);
+            apple.setWeight(Integer.parseInt(&quot;100&quot; + i));
+        } else {
+            apple.setColor(&quot;green&quot;);
+            apple.setWeight(Integer.parseInt(&quot;100&quot; + i) * 2);
+        }
+        appleList.add(apple);
+    }
+    return appleList;
+}</code></pre><h1 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo-2"></a>Demo-2</h1><p>可以发现，lambda主体，其实是以前内部类中的处理代码</p>
+<p>自定义函数式接口</p>
+<pre><code>public class TestApp2 {
 
     public static void main(String[] args) {
+        DoSomeWorkInterfaceProcess.execute(() -&gt; System.out.println(&quot;123&quot;));
 
-        RollsRoyce rollsRoyce = new RollsRoyce(&quot;罗尔斯-罗伊斯&quot;, &quot;2019-10-20&quot;, &quot;英国&quot;);
-
-        String result;
-
-        //获取一个 罗罗的航空发动机
-        result = rollsRoyce.getAeroEngine();
-        System.out.println(result);
-
-        //获取一个船舶动力
-        result = rollsRoyce.getShipPower();
+        String result = PrintStrInterfaceProcess.execute(100, (number) -&gt; String.valueOf(number));
         System.out.println(result);
     }
 }
 
-/**
- * 罗尔斯罗伊斯
- * &lt;p&gt;
- * 产品线有 航空发动机、船舶动力、火车动力、汽车
- *
- * @author: CYX
- * @create: 2019/10/22 11:33
- **/
-public class RollsRoyce {
-
-    /**
-     * 品牌名称
-     */
-    private String brandName;
-
-    /**
-     * 生产日期（出厂日期）
-     */
-    private String dateManufacture;
-
-    /**
-     * 产地
-     */
-    private String placeOrigin;
-
-    /**
-     * 获取航空发动机
-     *
-     * @return
-     */
-    public String getAeroEngine() {
-        return new AeroEngine().getAeroEngine();
-    }
-
-    /**
-     * 获取船舶动力
-     *
-     * @return
-     */
-    public String getShipPower() {
-        return new ShipPower().getShipPower();
-    }
-
-    /**
-     * 航空发动机
-     */
-    class AeroEngine {
-        public String getAeroEngine() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(brandName).append(&quot; / &quot;);
-            sb.append(&quot;民用航空发动机&quot;).append(&quot; / &quot;);
-            sb.append(dateManufacture).append(&quot; / &quot;);
-            sb.append(placeOrigin);
-            return sb.toString();
-        }
-    }
-
-    /**
-     * 船舶动力
-     */
-    class ShipPower {
-        public String getShipPower() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(brandName).append(&quot; / &quot;);
-            sb.append(&quot;燃气轮机&quot;).append(&quot; / &quot;);
-            sb.append(dateManufacture).append(&quot; / &quot;);
-            sb.append(placeOrigin);
-            return sb.toString();
-        }
-    }
-
-    public RollsRoyce() {
-    }
-
-    public RollsRoyce(String brandName, String dateManufacture, String placeOrigin) {
-        this.brandName = brandName;
-        this.dateManufacture = dateManufacture;
-        this.placeOrigin = placeOrigin;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getDateManufacture() {
-        return dateManufacture;
-    }
-
-    public void setDateManufacture(String dateManufacture) {
-        this.dateManufacture = dateManufacture;
-    }
-
-    public String getPlaceOrigin() {
-        return placeOrigin;
-    }
-
-    public void setPlaceOrigin(String placeOrigin) {
-        this.placeOrigin = placeOrigin;
-    }
-}</code></pre><h2 id="静态嵌套类"><a href="#静态嵌套类" class="headerlink" title="静态嵌套类"></a>静态嵌套类</h2><p>与静态类方法一样，静态嵌套类 不能直接引用其 封闭类 中定义的实例变量或方法：它只能通过对象引用来使用它们。</p>
-<p>静态嵌套类 和 其他类的成员交互，就像其他顶级类一样。</p>
-<p>静态嵌套类 在行为上是顶级类；在代码层面，只是为了降低包的深度。</p>
-<pre><code>class OuterClass {
-
-    //...
-
-    static class StaticNestedClass {
-        //...
-    }
-
-    class InnerClass {
-        //...
-    }
-}</code></pre><p>demo</p>
-<pre><code>public class AppTest {
-
-    public static void main(String[] args) {
-
-        String result;
-
-        GeneralMotorsCompany.Buick buick = new GeneralMotorsCompany.Buick(&quot;黑色&quot;,&quot;四驱&quot;);
-        result = buick.getBuick();
-        System.out.println(result);
-
-        GeneralMotorsCompany.Chevrolet chevrolet = new GeneralMotorsCompany.Chevrolet(&quot;白色&quot;, &quot;两驱&quot;);
-        result = chevrolet.getChevrolet();
-        System.out.println(result);
+class DoSomeWorkInterfaceProcess {
+    static void execute(DoSomeWorkInterface worker) {
+        worker.doSomeWork();
     }
 }
 
 /**
- * @author: CYX
- * @create: 2019-10-22 14:31
- **/
-public class GeneralMotorsCompany {
+ * 定义一个函数式接口
+ */
+@FunctionalInterface
+interface DoSomeWorkInterface {
+    void doSomeWork();
+}
 
-    /**
-     * 品牌名称
-     */
-    private String brandName;
+class PrintStrInterfaceProcess {
+    static String execute(Integer num , Conversion function) {
+        return function.convert(num) + &quot; 999&quot;;
+    }
+}
 
-    /**
-     * 生产日期（出厂日期）
-     */
-    private String dateManufacture;
+/**
+ * 定义一个函数式接口
+ */
+@FunctionalInterface
+interface Conversion {
+    String convert(Integer number);
+}</code></pre><h1 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo-3"></a>Demo-3</h1><pre><code>public class TestApp3 {
 
-    /**
-     * 产地
-     */
-    private String placeOrigin;
+    public static void main(String[] args) throws Exception {
 
-    /**
-     * 别克汽车
-     */
-    static class Buick {
+        //old
+        processFile();
 
-        /**
-         * 颜色
-         */
-        private String colour;
+        //new
+        AnalysisFileToReader.execute((BufferedReader bufferedReader) -&gt; bufferedReader.readLine());
 
-        /**
-         * 驱动
-         */
-        private String drive;
+        AnalysisFileToReader.execute((BufferedReader bufferedReader) -&gt; bufferedReader.readLine() + bufferedReader.readLine());
 
-        public String getBuick() {
-            final StringBuilder sb = new StringBuilder(&quot;Buick{&quot;);
-            sb.append(&quot;colour=&apos;&quot;).append(colour).append(&apos;\&apos;&apos;);
-            sb.append(&quot;, drive=&apos;&quot;).append(drive).append(&apos;\&apos;&apos;);
-            sb.append(&apos;}&apos;);
-            return sb.toString();
-        }
-
-        public Buick() {
-        }
-
-        public Buick(String colour, String drive) {
-            this.colour = colour;
-            this.drive = drive;
-        }
-
-        public String getColour() {
-            return colour;
-        }
-
-        public void setColour(String colour) {
-            this.colour = colour;
-        }
-
-        public String getDrive() {
-            return drive;
-        }
-
-        public void setDrive(String drive) {
-            this.drive = drive;
-        }
+        AnalysisFileToReader.execute(&quot;test.txt&quot;,(BufferedReader bufferedReader) -&gt; bufferedReader.readLine() + bufferedReader.readLine());
     }
 
-    /**
-     * 雪佛兰
-     */
-    static class Chevrolet {
-
-        /**
-         * 颜色
-         */
-        private String colour;
-
-        /**
-         * 驱动
-         */
-        private String drive;
-
-        public String getChevrolet() {
-            final StringBuilder sb = new StringBuilder(&quot;Chevrolet{&quot;);
-            sb.append(&quot;colour=&apos;&quot;).append(colour).append(&apos;\&apos;&apos;);
-            sb.append(&quot;, drive=&apos;&quot;).append(drive).append(&apos;\&apos;&apos;);
-            sb.append(&apos;}&apos;);
-            return sb.toString();
+    public static String processFile() throws IOException {
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(&quot;&quot;));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-
-        public Chevrolet() {
-        }
-
-        public Chevrolet(String colour, String drive) {
-            this.colour = colour;
-            this.drive = drive;
-        }
-
-        public String getColour() {
-            return colour;
-        }
-
-        public void setColour(String colour) {
-            this.colour = colour;
-        }
-
-        public String getDrive() {
-            return drive;
-        }
-
-        public void setDrive(String drive) {
-            this.drive = drive;
-        }
+        return bufferedReader.readLine();
     }
 
-}</code></pre><h1 id="为什么要使用-内部类"><a href="#为什么要使用-内部类" class="headerlink" title="为什么要使用 内部类"></a>为什么要使用 内部类</h1><ol>
-<li><p>逻辑分组</p>
-<p> 如果 一个类(b)，仅对 另一个类(A) 有用，那可以考虑将b嵌入到A中，使得代码更加简洁。</p>
+}
+
+class AnalysisFileToReader {
+    static String execute(BufferedReaderProcessor processor) throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(&quot;&quot;));
+        processor.process(bufferedReader);
+        return &quot;success&quot;;
+    }
+
+    static String execute(String fileName , BufferedReaderProcessor processor) throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        processor.process(bufferedReader);
+        return &quot;success&quot;;
+    }
+}
+
+@FunctionalInterface
+interface BufferedReaderProcessor {
+    String process(BufferedReader b) throws IOException;
+}</code></pre><h1 id="常用函数式接口"><a href="#常用函数式接口" class="headerlink" title="常用函数式接口"></a>常用函数式接口</h1><h1 id="常用函数式接口-1"><a href="#常用函数式接口-1" class="headerlink" title="常用函数式接口"></a>常用函数式接口</h1><p>Java8中新增了一个包：java.util.function，其中包含了普遍会使用的功能接口。</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BiConsumer&lt;T,U&gt;</td>
+<td>一个接收两个输入参数的操作，不返回任何结果</td>
+</tr>
+<tr>
+<td>BiFunction&lt;T,U,R&gt;</td>
+<td>一个接收两个输入参数的方法，并且返回一个结果</td>
+</tr>
+<tr>
+<td>BinaryOperator<t></t></td>
+<td>一个作用于两个同类型操作符的操作，并且返回了操作符同类型的结果</td>
+</tr>
+<tr>
+<td>BiPredicate&lt;T,U&gt;</td>
+<td>一个接收两个不同类型参数的操作，返回boolean值方法</td>
+</tr>
+<tr>
+<td>BooleanSupplier</td>
+<td>一个boolean值结果的提供方</td>
+</tr>
+<tr>
+<td>Consumer<t></t></td>
+<td>接收一个输入参数并且无返回的操作</td>
+</tr>
+<tr>
+<td>DoubleBinaryOperator</td>
+<td>一个作用于两个double值操作符的操作，并且返回了一个double值的结果</td>
+</tr>
+<tr>
+<td>DoubleConsumer</td>
+<td>一个接收double值参数的操作，并且不返回结果</td>
+</tr>
+<tr>
+<td>DoubleFunction<r></r></td>
+<td>一个double值参数的方法，并且返回结果</td>
+</tr>
+<tr>
+<td>DoublePredicate</td>
+<td>一个拥有double值参数的boolean值方法</td>
+</tr>
+<tr>
+<td>DoubleSupplier</td>
+<td>一个double值结构的提供方</td>
+</tr>
+<tr>
+<td>DoubleToIntFunction</td>
+<td>接收一个double类型输入，返回一个int类型结果</td>
+</tr>
+<tr>
+<td>DoubleToLongFunction</td>
+<td>接收一个double类型输入，返回一个long类型结果</td>
+</tr>
+<tr>
+<td>DoubleUnaryOperator</td>
+<td>接收一个参数同为类型double,返回值类型也为double</td>
+</tr>
+<tr>
+<td>Function&lt;T,R&gt;</td>
+<td>接收一个输入参数，返回一个结果</td>
+</tr>
+<tr>
+<td>IntBinaryOperator</td>
+<td>接收两个参数同为类型int,返回值类型也为int</td>
+</tr>
+<tr>
+<td>IntConsumer</td>
+<td>接收一个int类型的输入参数，无返回值</td>
+</tr>
+<tr>
+<td>IntFunction<r></r></td>
+<td>接收一个int类型输入参数，返回一个结果</td>
+</tr>
+<tr>
+<td>IntPredicate</td>
+<td>接收一个int输入参数，返回一个布尔值的结果</td>
+</tr>
+<tr>
+<td>IntSupplier</td>
+<td>无参数，返回一个int类型结果</td>
+</tr>
+<tr>
+<td>IntToDoubleFunction</td>
+<td>接收一个int类型输入，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>IntToLongFunction</td>
+<td>接收一个int类型输入，返回一个long类型结果</td>
+</tr>
+<tr>
+<td>IntUnaryOperator</td>
+<td>接收一个参数同为类型int,返回值类型也为int</td>
+</tr>
+<tr>
+<td>LongBinaryOperator</td>
+<td>接收两个参数同为类型long,返回值类型也为long</td>
+</tr>
+<tr>
+<td>LongConsumer</td>
+<td>接收一个long类型的输入参数，无返回值</td>
+</tr>
+<tr>
+<td>LongFunction<r></r></td>
+<td>接收一个long类型输入参数，返回一个结果</td>
+</tr>
+<tr>
+<td>LongPredicateR</td>
+<td>接收一个long输入参数，返回一个布尔值类型结果</td>
+</tr>
+<tr>
+<td>LongSupplier</td>
+<td>无参数，返回一个结果long类型的值</td>
+</tr>
+<tr>
+<td>LongToDoubleFunction</td>
+<td>接收一个long类型输入，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>LongToIntFunction</td>
+<td>接收一个long类型输入，返回一个int类型结果</td>
+</tr>
+<tr>
+<td>LongUnaryOperator</td>
+<td>接收一个参数同为类型long,返回值类型也为long</td>
+</tr>
+<tr>
+<td>ObjDoubleConsumer<t></t></td>
+<td>接收一个object类型和一个double类型的输入参数，无返回值</td>
+</tr>
+<tr>
+<td>ObjIntConsumer<t></t></td>
+<td>接收一个object类型和一个int类型的输入参数，无返回值</td>
+</tr>
+<tr>
+<td>ObjLongConsumer<t></t></td>
+<td>接收一个object类型和一个long类型的输入参数，无返回值</td>
+</tr>
+<tr>
+<td>Predicate<t></t></td>
+<td>接收一个输入参数，返回一个布尔值结果</td>
+</tr>
+<tr>
+<td>Supplier<t></t></td>
+<td>无参数，返回一个结果</td>
+</tr>
+<tr>
+<td>ToDoubleBiFunction&lt;T,U&gt;</td>
+<td>接收两个输入参数，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>ToDoubleFunction<t></t></td>
+<td>接收一个输入参数，返回一个double类型结果</td>
+</tr>
+<tr>
+<td>ToIntBiFunction&lt;T,U&gt;</td>
+<td>接收两个输入参数，返回一个int类型结果</td>
+</tr>
+<tr>
+<td>ToIntFunction<t></t></td>
+<td>接收一个输入参数，返回一个int类型结果</td>
+</tr>
+<tr>
+<td>ToLongBiFunction&lt;T,U&gt;</td>
+<td>接收两个输入参数，返回一个long类型结果</td>
+</tr>
+<tr>
+<td>ToLongFunction<t></t></td>
+<td>接收一个输入参数，返回一个long类型结果</td>
+</tr>
+<tr>
+<td>UnaryOperator<t></t></td>
+<td>接收一个参数为类型T,返回值类型也为T</td>
+</tr>
+</tbody></table>
+<p>注意，任何函数式接口都不允许抛出受检异常（checked exception）。</p>
+<p>如果你需要Lambda表达式来抛出异常，有两种办法：定义一个自己的函数式接口，并声明受检异常，或者把Lambda包在一个try/catch块中。</p>
+<h1 id="使用局部变量"><a href="#使用局部变量" class="headerlink" title="使用局部变量"></a>使用局部变量</h1><p>Lambda可以没有限制地使用、获取 实例变量 和 静态变量；但局部变量必须显式声明为final，或事实上是final。</p>
+<h2 id="为什么局部变量有这些限制？"><a href="#为什么局部变量有这些限制？" class="headerlink" title="为什么局部变量有这些限制？"></a>为什么局部变量有这些限制？</h2><p>实例变量都存储在堆中，而局部变量则保存在栈上。</p>
+<p>如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul>
+<li><a href="https://github.com/Simba-cheng/Miscellaneous-Items-Code/tree/master/ModuleDemo/src/main/java/org/java8/Apple/test04" target="_blank" rel="noopener">本文完整代码示例</a></li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><p><a href="http://blog.oneapm.com/apm-tech/226.html" target="_blank" rel="noopener">深入浅出 Java 8 Lambda 表达式</a></p>
 </li>
-<li><p>封装性 </p>
-<p> 通过将 b类 隐藏在 A类 中，可以将A的成员声明为私有，而b可以访问它们。 另外，b本身可以对外界隐藏</p>
+<li><p><a href="https://www.cnblogs.com/IcanFixIt/p/6744973.html" target="_blank" rel="noopener">Java 8 Lambda 表达式</a></p>
 </li>
-<li><p>代码</p>
-<p> 代码更具有可读性、可维护性。</p>
-<p> 将小类嵌套在顶级类中，使得代码更靠近使用的位置。</p>
+<li><p><a href="http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html" target="_blank" rel="noopener">State of the Lambda</a></p>
 </li>
-</ol>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><pre><code>Oracle官方文档中，不建议对内部类进行序列化 </code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html</a></li>
-<li><a href="https://www.zhihu.com/question/28197253" target="_blank" rel="noopener">https://www.zhihu.com/question/28197253</a></li>
+<li><p><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html" target="_blank" rel="noopener">Lambda-QuickStart</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000019377220" target="_blank" rel="noopener">乐字节-Java8核心特性实战之函数式接口</a></p>
+</li>
 </ul>
 
       
@@ -983,12 +997,12 @@ public class GeneralMotorsCompany {
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>内部类</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+        <p><span class="copy-title">文章标题:</span>Lambda表达式</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:55</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-27, 20:03:18</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/其他/内部类/" title="内部类">https://simba-cheng.github.io/2019/10/27/后台/其他/内部类/</a>
+        <p><span class="copy-title">发布时间:</span>2019-11-24, 22:07:44</p>
+        <p><span class="copy-title">最后更新:</span>2019-11-24, 22:10:42</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/24/后台/Java8/Lambda表达式/" title="Lambda表达式">https://simba-cheng.github.io/2019/11/24/后台/Java8/Lambda表达式/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
