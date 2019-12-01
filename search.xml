@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Stream 流</title>
+      <link href="/2019/12/01/%E5%90%8E%E5%8F%B0/Java8/%E6%B5%81/"/>
+      <url>/2019/12/01/%E5%90%8E%E5%8F%B0/Java8/%E6%B5%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Stream-流-是什么？"><a href="#Stream-流-是什么？" class="headerlink" title="Stream(流)是什么？"></a>Stream(流)是什么？</h1><p>简短的定义：从支持数据处理操作的源生成的元素序列</p><p>Stream 是Java API的新功能；你可以通过声明性方式处理数据集合。</p><p>可以粗浅的将其看成：遍历数据集的高级迭代器。</p><p>流只能遍历一次。</p><p>废话再多，不如一个Demo实在。</p><h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo-1"></a>Demo-1</h2><ol><li><p>筛选Calories小于400</p></li><li><p>根据Calories排序</p></li><li><p>获取排序后的名字</p></li></ol><p>先看oldMethod()方法，飒飒洋洋十几行代码。</p><p>tempResult变量是一个”垃圾变量”，唯一作用就是一次性临时容器。</p><p>再看newMethod()方法，不看换行，一行代码足以完成上面的需求。</p><p>在Java8中，这些细节都被封装起来了。</p><p>观察newMethod()方法，可以发现：</p><ul><li><p>代码是以声明方式写的：要完成什么动作，而不是说明如何实现一个操作（利用循环 + if条件）；这种写法，可以轻松应对变化的需求。</p></li><li><p>将几个基础操作链接起来，表达复杂的数据处理流水线，同时保持代码清晰可读（在filter后面接上sorted、 map和collect操作）。</p></li></ul><p>因为filter、 sorted、 map和collect等操作是与具体线程模型无关的高层次构件，所以它们的内部实现可以是单线程的。</p><p>不着为了让某些数据处理任务并行而去操心线程和锁了， Stream API都替你做好了</p><pre><code>public class StreamTestApp {    public static void main(String[] args) {        oldMethod();        System.out.println();        newMethod();        System.out.println();        newMethod2();    }    public static void newMethod2() {        List&lt;Dish&gt; dishes = getDish();        List&lt;String&gt; resultDish = dishes.parallelStream().filter(d -&gt; d.getCalories() &lt; 400)                .sorted(Comparator.comparing(Dish::getCalories))                .map(Dish::getName)                .collect(Collectors.toList());        for (String dishName : resultDish) {            System.out.println(dishName);        }    }    public static void newMethod() {        List&lt;Dish&gt; dishes = getDish();        List&lt;String&gt; resultDish = dishes.stream().filter(d -&gt; d.getCalories() &lt; 400)                .sorted(Comparator.comparing(Dish::getCalories))                .map(Dish::getName)                .collect(Collectors.toList());        for (String dishName : resultDish) {            System.out.println(dishName);        }    }    public static void oldMethod() {        List&lt;String&gt; result = new ArrayList&lt;&gt;();        List&lt;Dish&gt; tempResult = new ArrayList&lt;&gt;();        List&lt;Dish&gt; dishes = getDish();        //筛选        for (Dish dish : dishes) {            if (dish.getCalories() &lt; 400) {                tempResult.add(dish);            }        }        //排序        Collections.sort(tempResult, new Comparator&lt;Dish&gt;() {            @Override            public int compare(Dish o1, Dish o2) {                return Integer.compare(o1.getCalories(), o2.getCalories());            }        });        //获取        for (Dish dish : tempResult) {            result.add(dish.getName());        }        for (String dishName : result) {            System.out.println(dishName);        }    }}</code></pre><h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo-2"></a>Demo-2</h2><p>再来一个小栗子体会下</p><p>先对dishes调用stream()方法，由此得到一个菜单流。</p><p>数据源是菜肴列表（菜单），它给流提供一个元素序列。</p><p>接下来，对流应用一系列数据处理操作： filter、 map、 limit和collect。</p><p>除了collect之外，所有这些操作都会返回另一个流，这样它们就可以接成一条流水线，于是就可以看作对源的一个查询。</p><p>在调用collect之前，没有任何结果产生，实际上根本就没有从 dishes 里选择元素（链中的方法调用都在排队等待，直到调用collect）。</p><pre><code>public class StreamTestApp02 {    public static void main(String[] args) {        newTest();    }    public static void newTest() {        List&lt;Dish&gt; dishes = getDish();        List&lt;String&gt; collect = dishes.stream().filter(dish -&gt; dish.getCalories() &gt; 300)                .map(Dish::getName)                .limit(3).collect(Collectors.toList());        for (String name : collect) {            System.out.println(name);        }    }}</code></pre><h1 id="流与集合"><a href="#流与集合" class="headerlink" title="流与集合"></a>流与集合</h1><p>简单的讲，集合与流之间的差异就在于什么时候进行计算。</p><ul><li><p>集合是一个内存中的数据结构，它包含数据结构中目前所有的值（集合中的每个元素都得先算出来才能添加到集合中）。</p></li><li><p>流则是在概念上固定的数据结构（不能添加或删除元素），其元素则是按需计算的，按需生成。</p></li></ul><p>从另一个角度看，流就像是一个延迟创建的集合：只有在消费者要求的时候才会计算值。</p><p>与此相反，集合则是急切创建的</p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul><li><a href="https://github.com/Simba-cheng/Miscellaneous-Items-Code/tree/master/ModuleDemo/src/main/java/org/java8/stream" target="_blank" rel="noopener">完整代码示例</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> Java8 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java8 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>大促宕机的思考</title>
       <link href="/2019/11/30/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/%E5%A4%A7%E4%BF%83%E5%AE%95%E6%9C%BA%E7%9A%84%E6%80%9D%E8%80%83/"/>
       <url>/2019/11/30/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/%E5%A4%A7%E4%BF%83%E5%AE%95%E6%9C%BA%E7%9A%84%E6%80%9D%E8%80%83/</url>
