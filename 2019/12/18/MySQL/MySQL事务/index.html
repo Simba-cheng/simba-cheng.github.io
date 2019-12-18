@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>01-es-query-简单查询 | Simba</title>
-  <meta name="keywords" content=" es_query ">
-  <meta name="description" content="01-es-query-简单查询 | Simba">
+  <title>MySQL事务 | Simba</title>
+  <meta name="keywords" content=" MySQL ">
+  <meta name="description" content="MySQL事务 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -631,9 +631,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/02-es-query/01-es-query-简单查询" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-MySQL/MySQL事务" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">01-es-query-简单查询</h1>
+        <h1 class="article-title">MySQL事务</h1>
     
     <div class="article-meta">
         
@@ -641,28 +641,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="es">es</a>/
-            
-                <a href="javascript:" data-rel="es_query">es_query</a>
+                <a href="javascript:" data-rel="MySQL">MySQL</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color4">es_query</a>
+            <a href="javascript:" class="color1">MySQL</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-19 11:26:20'>2019-09-26 17:34</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-18 11:41:36'>2019-12-18 11:33</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -681,7 +679,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#elasticsearch-返回体字段含义"><span class="toc-text">elasticsearch 返回体字段含义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检索文档"><span class="toc-text">检索文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本匹配查询"><span class="toc-text">基本匹配查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#match-all-最简单的查询，匹配所有文档"><span class="toc-text">match_all(最简单的查询，匹配所有文档)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检索文档指定字段"><span class="toc-text">检索文档指定字段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查文档是否存在"><span class="toc-text">检查文档是否存在</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指定文档返回数量"><span class="toc-text">指定文档返回数量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ACID"><span class="toc-text">ACID</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#隔离级别"><span class="toc-text">隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#未提交读（read-uncommitted）"><span class="toc-text">未提交读（read-uncommitted）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交读（read-committed）"><span class="toc-text">提交读（read-committed）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可重复读（repeatable-read）"><span class="toc-text">可重复读（repeatable-read）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可串行化（serializable）"><span class="toc-text">可串行化（serializable）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脏读"><span class="toc-text">脏读</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幻读"><span class="toc-text">幻读</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -696,179 +694,83 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="elasticsearch-返回体字段含义"><a href="#elasticsearch-返回体字段含义" class="headerlink" title="elasticsearch 返回体字段含义"></a>elasticsearch 返回体字段含义</h1><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>took</td>
-<td>Elasticsearch执行搜索的时间（以毫秒为单位）</td>
-</tr>
-<tr>
-<td>timed_out</td>
-<td>告诉我们搜索是否超时</td>
-</tr>
-<tr>
-<td>_shards</td>
-<td>告诉我们搜索了多少个分片，以及搜索成功/失败分片的数量</td>
-</tr>
-<tr>
-<td>hits</td>
-<td>搜索结果</td>
-</tr>
-<tr>
-<td>hits.total</td>
-<td>符合我们搜索条件的文档总数</td>
-</tr>
-<tr>
-<td>hits.hits</td>
-<td>实际的搜索结果数组（默认为前10个文档）</td>
-</tr>
-<tr>
-<td>hits.sort</td>
-<td>对结果进行排序键（如果按分数排序则丢失）</td>
-</tr>
-</tbody></table>
-<h1 id="检索文档"><a href="#检索文档" class="headerlink" title="检索文档"></a>检索文档</h1><p>要从es中获取文档，同样适用_index、_type、_id进行定位，使用GET方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/2</span><br><span class="line"></span><br><span class="line">GET /demo/testDate/2?pretty</span><br></pre></td></tr></table></figure>
+        <p>事务就是一组原子性的SQL查询</p>
+<p>事务内的语句，要么全部执行成功，要么全部执行失败</p>
+<h1 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h1><p>ACID是数据库事务中的一组属性，即在发生错误/灾难的情况下，也能保证数据的有效性。</p>
+<p>在数据库环境中，满足ACID属性的数据库操作(逻辑操作)称为事务。</p>
+<ul>
+<li><p>原子性(Atomicity)</p>
+<pre><code>一个事务 必须视为不可分割的最小工作单元，整个事务要么全部成功，要么全部失败；不可能只执行其中的一部分。</code></pre></li>
+<li><p>一致性(Consistency)</p>
+<pre><code>数据库从一个一致性的状态转换到另一个一致性的状态
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"found"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"_source"</span>: &#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"cyx2"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="string">"23"</span>,</span><br><span class="line">    <span class="attr">"address"</span>: <span class="string">"nanjing2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+事务执行前后，数据处于一种合法的状态。
 
-<p>响应中的节点都熟悉，增加了_source节点，它包含了原始文档。</p>
-<p>响应消息中包含 {“found”:true},意味着文档已经找到。</p>
-<br>
+在事务过程中，即便出现异常，因为事务没有最终提交，所以之前做的修改也不会保存到数据库中</code></pre></li>
+<li><p>隔离性(Isolation)</p>
+<pre><code>一个事务中的操作/修改，在最终提交以前，对其他的事务是不可见的。
 
-<p>如果我们请求一个不存在的文档，依旧会得到一个json，不过found变成了flase</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"aaaa"</span>,</span><br><span class="line">  <span class="attr">"found"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+并发执行的多个事务，不能相互干扰。</code></pre></li>
+<li><p>持久性(Durability)</p>
+<pre><code>事务一旦提交，其所做的修改就会永久保存到数据库中。</code></pre></li>
+</ul>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>一个事务中的操作/修改，在最终提交以前，对其他的事务是不可见的。</p>
+<p>在SQL标准中定义了四种隔离级别</p>
+<pre><code>级别越低的隔离性可以带来更高的并发，系统开销也越低
 
-<p>此外，HTTP状态码变成了”404 Not Found”</p>
-<p><img src="//simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/3-curl.png" alt="curl" title="curl"></p>
-<br>
+注意：每种存储引擎实现的隔离级别都不一样，MySQL-InnoDB 默认是 可重复读（repeatable-read）</code></pre><h3 id="未提交读（read-uncommitted）"><a href="#未提交读（read-uncommitted）" class="headerlink" title="未提交读（read-uncommitted）"></a>未提交读（read-uncommitted）</h3><pre><code>事务中的修改，即使没有提交，对其他事务也是可见的。
 
-<p><strong>pretty的作用</strong></p>
-<p>我们使用普通 curl时，返回的json数据格式，没有格式化</p>
-<p><img src="//simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/1-pretty-curl.png" alt="pretty-curl" title="pretty-curl"></p>
-<p>使用pretty可以格式化输出的数据</p>
-<p><img src="//simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/2-pretty-curl.png" alt="pretty-curl" title="pretty-curl"></p>
-<br>
+也被称为：脏读（Dirty Read）。</code></pre><h3 id="提交读（read-committed）"><a href="#提交读（read-committed）" class="headerlink" title="提交读（read-committed）"></a>提交读（read-committed）</h3><pre><code>一个事务，从开始执行到提交之前，所做的任何修改对其他事务都是不可见的。
 
-<p>查询条件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">get /books/book/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;:&#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;_id&quot;: &quot;25&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+一个事务执行过程中，另外一个事务提交了新数据，因此本事务先后两次读到的数据结果会不一致。
 
-<p>输出结果</p>
-<pre><code>{
-  &quot;took&quot; : 28,
-  &quot;timed_out&quot; : false,
-  &quot;_shards&quot; : {
-    &quot;total&quot; : 5,
-    &quot;successful&quot; : 5,
-    &quot;skipped&quot; : 0,
-    &quot;failed&quot; : 0
-  },
-  &quot;hits&quot; : {
-    &quot;total&quot; : 1,
-    &quot;max_score&quot; : 1.0,
-    &quot;hits&quot; : [
-      {
-        &quot;_index&quot; : &quot;books&quot;,
-        &quot;_type&quot; : &quot;book&quot;,
-        &quot;_id&quot; : &quot;25&quot;,
-        &quot;_score&quot; : 1.0,
-        &quot;_source&quot; : {
-          &quot;name&quot; : &quot;普通高等教育“十一五”国家级规划教材辅助用书：经济法习题与案例集&quot;,
-          &quot;publish&quot; : &quot;高等教育出版社&quot;,
-          &quot;type&quot; : &quot;大学教材&quot;,
-          &quot;author&quot; : &quot;曲振涛&quot;,
-          &quot;info&quot; : &quot;《经济法习题与案例集》是普通高等教育“十一五”国家级规划教材（高职高专教育）《经济法》（第三版）的配套习题与案例集。与主教材对应，本习题与案例集共分18章，题型包括名词解释、判断题、单项选择题、多项选择题、填空题、简答题、论述题和案例分析题。&quot;,
-          &quot;price&quot; : 16
-        }
-      }
-    ]
-  }
-}</code></pre><h1 id="基本匹配查询"><a href="#基本匹配查询" class="headerlink" title="基本匹配查询"></a>基本匹配查询</h1><p>在news索引，new类型下，所有字段中，查询带有’新华社’的结果</p>
-<pre><code>GET /news/new/_search?q=新华社</code></pre><p>在news索引，new类型下，所有字段中，查询带有’2018’的结果</p>
-<pre><code>curl -XGET &apos;127.0.0.1:9200/news/new/_search?q=2018&amp;pretty&apos;</code></pre><p>指定字段</p>
-<pre><code>curl -XGET &apos;127.0.0.1:9200/news/new/_search?q=content:2018&amp;pretty&apos;</code></pre><p>指定查询数量</p>
-<pre><code>curl -XGET &apos;127.0.0.1:9200/books/book/_search?size=2&amp;q=name:2010&amp;pretty&apos;</code></pre><h1 id="match-all-最简单的查询，匹配所有文档"><a href="#match-all-最简单的查询，匹配所有文档" class="headerlink" title="match_all(最简单的查询，匹配所有文档)"></a>match_all(最简单的查询，匹配所有文档)</h1><p>查询 books 索引，所有文档</p>
-<pre><code>GET /books/_search
-{
-  &quot;query&quot;: {
-    &quot;match_all&quot;: {}
-  }
-}</code></pre><p>查询 books 索引，book类型下，所有文档</p>
-<pre><code>GET /books/book/_search
-{
-  &quot;query&quot;: {
-    &quot;match_all&quot;: {}
-  }
-}</code></pre><h1 id="检索文档指定字段"><a href="#检索文档指定字段" class="headerlink" title="检索文档指定字段"></a>检索文档指定字段</h1><p>在_source参数中，可能感觉兴趣的只有address，指定个别字段可以使用_source参数，多个字段用逗号分割。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /demo/testDate/2?_source=address</span><br><span class="line"></span><br><span class="line">GET /demo/testDate/1?_source=name,address</span><br></pre></td></tr></table></figure>
+也被称为：不可重复读（因为两次执行同样的查询，可能得到不同的结果）</code></pre><h3 id="可重复读（repeatable-read）"><a href="#可重复读（repeatable-read）" class="headerlink" title="可重复读（repeatable-read）"></a>可重复读（repeatable-read）</h3><pre><code>在同一个事务内的查询都是事务开始时刻一致的。
 
-<p>响应报文</p>
-<pre><code>{
-  &quot;_index&quot;: &quot;demo&quot;,
-  &quot;_type&quot;: &quot;testDate&quot;,
-  &quot;_id&quot;: &quot;2&quot;,
-  &quot;_version&quot;: 1,
-  &quot;found&quot;: true,
-  &quot;_source&quot;: {
-    &quot;address&quot;: &quot;nanjing2&quot;
-  }
-}
+在同一事务中发起多个普通（非锁定）SELECT 语句，其查询结果是相互一致的。
 
-{
-  &quot;_index&quot;: &quot;demo&quot;,
-  &quot;_type&quot;: &quot;testDate&quot;,
-  &quot;_id&quot;: &quot;1&quot;,
-  &quot;_version&quot;: 1,
-  &quot;found&quot;: true,
-  &quot;_source&quot;: {
-    &quot;address&quot;: &quot;nanjing&quot;,
-    &quot;name&quot;: &quot;cyx1&quot;
-  }
-}</code></pre><p>_source节点中只有我们指定的字段</p>
-<br>
+存在幻读问题。</code></pre><h3 id="可串行化（serializable）"><a href="#可串行化（serializable）" class="headerlink" title="可串行化（serializable）"></a>可串行化（serializable）</h3><pre><code>最高级别的隔离级别
 
-<p>如果只想得到_source节点下的数据，不想要元数据，可以这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET demo/testDate/1/_source</span><br></pre></td></tr></table></figure>
+通过强制事务串行执行，避免出现幻读。
 
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"cyx1"</span>,</span><br><span class="line">  <span class="attr">"age"</span>: <span class="string">"22"</span>,</span><br><span class="line">  <span class="attr">"address"</span>: <span class="string">"nanjing"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+并发性不好，只有在非常需要确保数据一致和没有并发的情况下，才考虑。
 
-<h1 id="检查文档是否存在"><a href="#检查文档是否存在" class="headerlink" title="检查文档是否存在"></a>检查文档是否存在</h1><p>对文档内容不感兴趣，只想知道文档是否存在，使用HEAD方法 代替 GET方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAD demo/testDate/1</span><br></pre></td></tr></table></figure>
+采用上面四种不同的隔离级别，会带来不同的问题：</code></pre><h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>采用’未提交读’隔离级别，会出现脏读的情况，一个事务读取到另一个事务未提交的更新数据。</p>
+<p>举个例子：</p>
+<pre><code>A事务正在访问number字段，并对number字段进行了修改，而这个修改还未提交到数据库中（可能会回滚）;
 
-<p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">200 - OK</span><br></pre></td></tr></table></figure>
+这时B事务也访问了number字段，拿到了A事务还未提交的值。
 
-<br>
+如果A事务发生了回滚，那B事务中获取number字段的值就是错误的。</code></pre><h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>采用’可重复读’隔离级别，会出现幻读。</p>
+<p>参考《mysql 幻读的详解、实例及解决办法》和《Repeatable Read》中的解释：</p>
+<p>在一个事务中，第一次查询某条记录，发现没有，但是，当试图更新这条不存在的记录时，竟然能成功，并且，再次读取同一条记录，它就神奇地出现了。</p>
+<p>更白话一些：</p>
+<p>幻读 侧重的方面是：</p>
+<pre><code>某一个select操作得到的结果所表现的状态，无法支撑后续业务操作。</code></pre><p>更具体的描述：</p>
+<pre><code>select某条记录是否存在，不存在就插入；但是执行insert的时候，发现这条记录已经存在，无法插入，此时就发生了幻读。</code></pre><p>《mysql 幻读的详解、实例及解决办法》中的栗子：</p>
+<pre><code>step1 T1: SELECT * FROM `users` WHERE `id` = 1;
 
-<p>如果文档不存在</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAD demo/testDate/t</span><br></pre></td></tr></table></figure>
+step2 T2: INSERT INTO `users` VALUES (1, &apos;big cat&apos;); //并且commit提交事务
 
-<p>响应报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">404 - Not Found</span><br></pre></td></tr></table></figure>
+step3 T1: INSERT INTO `users` VALUES (1, &apos;big cat&apos;);
 
-<h1 id="指定文档返回数量"><a href="#指定文档返回数量" class="headerlink" title="指定文档返回数量"></a>指定文档返回数量</h1><p>books索引、book类型下，查询name包含’中国’的文档，限制返回数量为2。</p>
-<pre><code>GET /books/book/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;name&quot;: &quot;中国&quot;
-    }
-  },
-  &quot;size&quot;: 2
-}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.iteblog.com/archives/1741.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1741.html</a> </li>
-<li><a href="https://www.iteblog.com/archives/1746.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1746.html</a></li>
-<li><a href="https://www.iteblog.com/archives/1747.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1747.html</a></li>
-<li><a href="https://www.iteblog.com/archives/1730.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1730.html</a></li>
-<li><a href="https://www.iteblog.com/archives/1779.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1779.html</a></li>
-<li><a href="https://www.iteblog.com/archives/1768.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1768.html</a></li>
+step4 T1: SELECT * FROM `users` WHERE `id` = 1;
+
+T1 ：主事务，检测表中是否有 id 为 1 的记录，没有则插入，这是我们期望的正常业务逻辑。
+T2 ：干扰事务，目的在于扰乱 T1 的正常的事务执行。
+
+在 RR 隔离级别下，step1、step2 是会正常执行的，step3 则会报错主键冲突，对于 T1 的业务来说是执行失败的，这里 T1 就是发生了幻读；
+
+因为 T1 在 step1 中读取的数据状态并不能支撑后续的业务操作，T1：&quot;见鬼了，我刚才读到的结果应该可以支持我这样操作才对啊，为什么现在不可以&quot;。
+T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样的（RR下的 MMVC机制）。
+
+此时，幻读无疑已经发生，T1 无论读取多少次，都查不到 id = 1 的记录，但它的确无法插入这条他通过读取来认定不存在的记录（此数据已被T2插入），对于T1来说，它幻读了。</code></pre><ul>
+<li>不可重复读</li>
+</ul>
+<p>深坑待填。。。。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>《高性能MySQL（第三版）》</li>
+<li><a href="https://segmentfault.com/a/1190000016566788" target="_blank" rel="noopener">mysql 幻读的详解、实例及解决办法</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1245268672511968" target="_blank" rel="noopener">Repeatable Read</a></li>
 </ul>
 
       
@@ -883,12 +785,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>01-es-query-简单查询</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+        <p><span class="copy-title">文章标题:</span>MySQL事务</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-26, 17:34:31</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-19, 11:26:20</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/" title="01-es-query-简单查询">https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/</a>
+        <p><span class="copy-title">发布时间:</span>2019-12-18, 11:33:05</p>
+        <p><span class="copy-title">最后更新:</span>2019-12-18, 11:41:36</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/18/MySQL/MySQL事务/" title="MySQL事务">https://simba-cheng.github.io/2019/12/18/MySQL/MySQL事务/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>

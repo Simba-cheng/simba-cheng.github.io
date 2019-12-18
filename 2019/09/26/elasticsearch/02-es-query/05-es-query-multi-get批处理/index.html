@@ -99,7 +99,15 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(35)</small></div></li>
+    <li><div class="all active">全部文章<small>(36)</small></div></li>
+    
+        
+            
+            <li><div data-rel="MySQL">MySQL<small>(1)</small></div>
+                
+            </li>
+            
+        
     
         
             
@@ -143,11 +151,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -231,8 +239,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="35">
-<input type="hidden" id="yelog_site_word_count" value="32.2k">
+<input type="hidden" id="yelog_site_posts_number" value="36">
+<input type="hidden" id="yelog_site_word_count" value="33.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -266,6 +274,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">MySQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
     </li>
     
@@ -286,11 +298,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -325,6 +337,14 @@
            data-author="" >
             <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
             <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="MySQL "
+           href="/2019/12/18/MySQL/MySQL事务/"
+           data-tag="MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL事务">MySQL事务</span>
+            <span class="post-date" title="2019-12-18 11:33:05">2019/12/18</span>
         </a>
         
         <a  class="后台 Java8 "
@@ -783,7 +803,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#问题-思考','#es','#es_batch','#es_query','#es_client','#Java8','#后台_其他','#设计模式',],
+            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_batch','#es_client','#Java8','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
