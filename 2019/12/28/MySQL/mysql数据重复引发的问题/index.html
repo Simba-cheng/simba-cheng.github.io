@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>elasticsearch api 速查 | Simba</title>
-  <meta name="keywords" content=" es ">
-  <meta name="description" content="elasticsearch api 速查 | Simba">
+  <title>mysql数据重复引发的问题 | Simba</title>
+  <meta name="keywords" content=" MySQL ">
+  <meta name="description" content="mysql数据重复引发的问题 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -647,38 +647,36 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/elasticsearch-api-速查" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-MySQL/mysql数据重复引发的问题" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">elasticsearch api 速查</h1>
+        <h1 class="article-title">mysql数据重复引发的问题</h1>
     
     <div class="article-meta">
-        
-        <span class="top"><a href="javascript:">置顶</a></span>
         
         
         
         <span class="book">
             
-                <a href="javascript:" data-rel="es">es</a>
+                <a href="javascript:" data-rel="MySQL">MySQL</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">es</a>
+            <a href="javascript:" class="color1">MySQL</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-04 22:30:28'>2019-10-08 23:18</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-28 19:17:42'>2019-12-28 19:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:1.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -697,7 +695,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-DSL-API-速查"><span class="toc-text">Elasticsearch DSL API 速查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通用"><span class="toc-text">通用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#合并检索"><span class="toc-text">合并检索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新"><span class="toc-text">更新</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#复制"><span class="toc-text">复制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-text">集群</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#表重复数据问题"><span class="toc-text">表重复数据问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自增主键消失问题"><span class="toc-text">自增主键消失问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#insert-into"><span class="toc-text">insert into</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ignore-关键字"><span class="toc-text">ignore 关键字</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#replace-into"><span class="toc-text">replace into</span></a>
     
 <style>
     .left-col .switch-btn,
@@ -712,233 +710,210 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Elasticsearch-DSL-API-速查"><a href="#Elasticsearch-DSL-API-速查" class="headerlink" title="Elasticsearch DSL API 速查"></a>Elasticsearch DSL API 速查</h1><h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><p>在命令后面追加 ?v ,可以展示相对完整描述</p>
-<p>如果对某个API命令的返回参数不明确，可以再末尾追加’help’，获取返回参数的解释</p>
-<p>例如：</p>
-<pre><code>GET /_cat/master?help</code></pre><p>response</p>
-<pre><code>id   |   | node id    
-host | h | host name  
-ip   |   | ip address 
-node | n | node name  </code></pre><h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>创建文档<br>（自定义_id）</td>
-<td>PUT /my_index/my_type/1 {<br> &nbsp;&nbsp;&nbsp;&nbsp; “my_field” : “my_value”<br>}<br><br>PUT /my_index/my_type/1/_create {<br>…​<br>}</td>
-</tr>
-<tr>
-<td>创建文档<br>（es自增id）</td>
-<td>POST /my_index/my_type/ {<br>…<br>}<br></td>
-</tr>
-</tbody></table>
-<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查询所有数据</td>
-<td>GET /my_index/my_type/<strong>_search</strong></td>
-</tr>
-<tr>
-<td>查询文档<br>根据id</td>
-<td>GET /my_index/my_type/_id</td>
-</tr>
-<tr>
-<td>查询文档<br>根据字段/字段值</td>
-<td>GET /my_index/my_type/_search?q=my_filed : my_filed_valye<br><br>GET /testdata/data/_search {<br>“query” : {<br> &nbsp;&nbsp;&nbsp; “term” : { “my_field” : “my_field_value” }<br> &nbsp;&nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-<tr>
-<td>查询文档数量<br>根据字段/字段值</td>
-<td>GET /my_index/my_type/<strong>_count</strong>?q=my_field:my_field_value <br><br> GET /testdata/data/<strong>_count</strong> {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “term”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”: “18”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-<tr>
-<td>验证查询是否合法<br>在执行某语句之前先验证是否合法，是否有错误</td>
-<td>GET /my_index/<strong>_validate</strong>/query?q=my_field:my_field_value <br><br> GET /testdata/data/<strong>_validate</strong>/query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “tweet” : {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match” : “really powerful”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>} <br><br> GET /testdata/data/<strong>_validate</strong>/query?explain {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “tweet” : {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match” : “really powerful”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-<tr>
-<td>评分分析<br>询问es，文档是如何匹配/没匹配上的</td>
-<td>GET /testdata/data/YkEv3WwBtpDj1QTWFaTU/<strong>_explain</strong>?q=name:cyx</td>
-</tr>
-<tr>
-<td>&otimes;查看查询语句耗时分析</td>
-<td>GET /testdata/data/_search {<br> &nbsp;&nbsp;&nbsp; <strong>“profile”: true</strong>,<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “term”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “age”: “18”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-<tr>
-<td>查询索引信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-get-index.html" target="_blank" rel="noopener">Get index API</a></td>
-<td>GET /testdata <br>GET /testdata/_settings<br>GET /testdata/_mappings<br></td>
-</tr>
-</tbody></table>
-<h1 id="合并检索"><a href="#合并检索" class="headerlink" title="合并检索"></a>合并检索</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查询多个文档<br>合并检索<br>(自由选择index、type)</td>
-<td>GET /_mget {<br>“docs”: [<br> &nbsp;&nbsp;&nbsp; { <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_index”: “testdata”, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “WkFq3GwBtpDj1QTWqqTf”<br> &nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_index”: “news”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “new”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “19”<br> &nbsp;&nbsp;&nbsp; }<br>]<br>}<br></td>
-</tr>
-<tr>
-<td>查询多个文档<br>合并检索<br>(指定index)</td>
-<td>GET /testdata/_mget {<br>“docs”: [<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “WkFq3GwBtpDj1QTWqqTf”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_type”: “data”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “_id”: “W0GX3GwBtpDj1QTWa6SP”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; ]<br>}<br></td>
-</tr>
-<tr>
-<td>查询多个文档<br>合并检索<br>(指定index、type)</td>
-<td>GET /testdata/data/_mget {<br>“docs”:[<br> &nbsp;&nbsp;&nbsp; {“_id”: “WkFq3GwBtpDj1QTWqqTf”},<br> &nbsp;&nbsp;&nbsp; {“_id”: “W0GX3GwBtpDj1QTWa6SP”}<br> &nbsp;&nbsp;&nbsp; ]<br>}<br></td>
-</tr>
-<tr>
-<td>查询多个文档<br>合并检索(简写)</td>
-<td>GET /testdata/data/_mget {<br> &nbsp;&nbsp;&nbsp; “ids” : [“WkFq3GwBtpDj1QTWqqTf”, “W0GX3GwBtpDj1QTWa6SP”]<br>}<br></td>
-</tr>
-</tbody></table>
-<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>更新文档<br>整体更新(整体覆盖)</td>
-<td>PUT /my_index/my_type/_id {<br> &nbsp;&nbsp;&nbsp; “my_field”:”my_field_value”<br>}<br></td>
-</tr>
-<tr>
-<td>更新文档<br>局部更新</td>
-<td>POST /my_index/my_type/_id/_update {<br>“doc”:{<br> &nbsp;&nbsp;&nbsp; “my_field”:”my_field_value”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-</tbody></table>
-<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>删除索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html" target="_blank" rel="noopener">Delete index API</a></td>
-<td>DELETE /my_index<br>DELETE /my_index1,my_index2<br>DELETE /my_index*<br>DELETE /_all<br></td>
-</tr>
-<tr>
-<td>删除文档</td>
-<td>DELETE /my_index/my_type/_id</td>
-</tr>
-<tr>
-<td>查询匹配到的每个文档上执行删除<br>&otimes;谨慎使用</td>
-<td>POST /testdata/_delete_by_query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “name”: “cyx”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br><br>POST /testdata/data/_delete_by_query {<br> &nbsp;&nbsp;&nbsp; “query”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “match”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “name”: “eva eva”<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-<tr>
-<td>删除文档中某个字段中的值</td>
-<td>POST /my_index/my_type/_id/_update {<br> &nbsp;&nbsp;&nbsp; “script” : “ctx._source.remove(&quot;name&quot;)”<br>}<br></td>
-</tr>
-<tr>
-<td>删除索引下所有数据<br>&otimes;谨慎使用</td>
-<td>POST index_name/_delete_by_query<br>{  &nbsp;&nbsp;&nbsp; <br> “query”: { <br> &nbsp;&nbsp;&nbsp; “match_all”: {} <br> &nbsp;&nbsp;&nbsp; } <br> }</td>
-</tr>
-</tbody></table>
-<h1 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>复制索引</td>
-<td>POST /_reindex {<br> &nbsp;&nbsp;&nbsp; “source”:{<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “index”:”old_index”<br> &nbsp;&nbsp;&nbsp; },<br> &nbsp;&nbsp;&nbsp; “dest”: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “index”:”new_index”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-</tr>
-</tbody></table>
-<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>request示例</th>
-<th>response示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>创建索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html" target="_blank" rel="noopener">Create index API</a></td>
-<td>PUT /blog2 {<br> &nbsp;&nbsp;&nbsp; “settings”:{<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “number_of_shards”:”2”,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “number_of_replicas”:”2”<br> &nbsp;&nbsp;&nbsp; }<br>}<br></td>
-<td></td>
-</tr>
-<tr>
-<td>检查索引是否存在<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-exists.html" target="_blank" rel="noopener">Indices exists API</a></td>
-<td>HEAD /my_index</td>
-<td></td>
-</tr>
-<tr>
-<td>打开/关闭索引<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html" target="_blank" rel="noopener">Open/Close index API</a></td>
-<td>POST /testdata/_close<br>POST /testdata/_open</td>
-<td></td>
-</tr>
-<tr>
-<td>统计索引内文档数</td>
-<td>GET /_cat/count/books?v</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><table>
-<thead>
-<tr>
-<th>描述</th>
-<th>request示例</th>
-<th>response示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查看index分片</td>
-<td>GET /testdata/_search_shards</td>
-<td></td>
-</tr>
-<tr>
-<td>集群节点信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html" target="_blank" rel="noopener">Nodes Info</a></td>
-<td>GET /_nodes<br>GET /_nodes/my_node_name<br>GET /_nodes/my_node_name_1,my_node_name_2</td>
-<td></td>
-</tr>
-<tr>
-<td>集群节点统计信息<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html" target="_blank" rel="noopener">Nodes Stats</a></td>
-<td>GET /_nodes/stats<br>GET /_nodes/node-1/stats<br>GET /_nodes/127.0.0.1/stats</td>
-<td></td>
-</tr>
-<tr>
-<td>返回集群中每个选定节点上的热线程<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-hot-threads.html" target="_blank" rel="noopener">Nodes hot_threads</a></td>
-<td>GET /_nodes/hot_threads<br>GET /_nodes/my_node_name/hot_threads</td>
-<td></td>
-</tr>
-<tr>
-<td>查询集群中所有索引</td>
-<td>GET /_cat/indices <br> curl -XGET 127.0.0.1:9200/_cat/indices</td>
-<td>health-索引健康状况<br><br>status-状态<br><br>index-索引名称<br><br>pri-主分片数量<br><br>rep-副本分片数量<br><br>docs.count-文档数量<br><br>docs.deleted-删除文档数量<br><br>store.size-主存储和副本存储大小<br><br>pri.store.size-原始存储大小</td>
-</tr>
-<tr>
-<td>查看集群master信息</td>
-<td>GET /_cat/master?v</td>
-<td></td>
-</tr>
-<tr>
-<td>查看集群节点 磁盘使用情况<br>(查看每个节点 分片数量 以及 已使用磁盘空间快照)</td>
-<td>GET /_cat/allocation?v</td>
-<td>shards - 分片 <br><br> disk.indices - 磁盘索引占用空间 <br><br> disk.used - 已使用磁盘空间 <br><br> disk.avail - 磁盘可用空间 <br><br> disk.total - 磁盘空间 <br><br> disk.percent - 磁盘已用空间占比</td>
-</tr>
-<tr>
-<td>统计集群 所有索引内文档数</td>
-<td>GET /_cat/count?v</td>
-<td></td>
-</tr>
-<tr>
-<td>集群拓扑<br>(所有节点机器信息)</td>
-<td>get /_cat/nodes?v</td>
-<td>heap.percent - 使用堆率 <br><br> ram.percent - 已用机器内存比例 <br><br> cpu - 最近CPU使用情况 <br><br> load_1m - 平均负载(1分钟) <br><br> load_5m - 平均负载(5分钟) <br><br> load_15m - 平均负载(15分钟) <br><br> node.role - 节点角色(m-主节点 d-数据节点 i-目的节点(???) -:仅协调节点) <br><br> master - *主节点 <br><br> name - 节点名称</td>
-</tr>
-</tbody></table>
+        <p>背景：</p>
+<p>后台系统，底层切换数据库，从DB2切到MySQL</p>
+<p>为了保持统一，所有的建表语句、索引都是从DB2导出，然后进行mysql改造的。</p>
+<h2 id="表重复数据问题"><a href="#表重复数据问题" class="headerlink" title="表重复数据问题"></a>表重复数据问题</h2><p>在生产灰度期间，发现了一个问题，A表中出现了不少重复数据(除了自增主键以外，其他字段值一模一样)</p>
+<p>然后瞅了一眼 mysql-A表的索引，除开常规索引，就是自增主键了；然后又看了下DB2-A表的，一模一样啊…</p>
+<p>好吧，我承认，MySQL没有加唯一索引…想当然觉得从DB2迁移过来就行了，疏忽了…</p>
+<p>测试在测试环境，模拟数据时，业务数据量太小，也没有测出来…</p>
+<br>
 
+<p>然后有一个问题，一直缠绕在我的心头:”业务逻辑代码都一样，DB2、MySQL都没有唯一索引，为啥MySQL会出现重复，而DB2不会？”</p>
+<p>咨询了坐在旁边的架构师，他的意思是:”DB2作为商业数据库，可能会有优化…”(￣□￣｜｜)</p>
+<br>
+
+<p>好吧，暂且不管了，先解决问题。</p>
+<p>解决方法：</p>
+<ul>
+<li><p>索引层面：根据A表的业务字段，新建 UNIQUE 唯一索引</p>
+</li>
+<li><p>代码层面：用 replace into 代替 普通的 insert into(这个细节给后面埋下了坑..)</p>
+</li>
+</ul>
+<p>为什么用 replace into 代替 insert into？</p>
+<p>因为 replace into 在插入时，如果存在重复，会将上一条删除，然后插入一条新的。<br>(当时想的太简单了，把自己坑死了…)</p>
+<h2 id="自增主键消失问题"><a href="#自增主键消失问题" class="headerlink" title="自增主键消失问题"></a>自增主键消失问题</h2><p>新建 UNIQUE 唯一索引和使用 replace into 之后，表中的重复数据解决了</p>
+<p>叮嘱测试，在测试环境重新造数据，模拟生产环境大批量数据，又发现了一个新的问题。</p>
+<p>A表中的主键自增字段会作为一个标识，存到B表中，测试在校对数据的发现，B表中有几条数据，字段和A表中的字段值对不上。</p>
+<p>然后加日志，各种定位排查…甚至想到，是不是并发、数据库幻读？</p>
+<p>后来无意中瘪了一眼插入语句，心里想：</p>
+<p>“replace into…嗯，看着没问题…”</p>
+<p>“等等..似乎哪里感觉不对…”</p>
+<p>“….”</p>
+<p>“replace into…好像重复数据，会删数据吧？然后再新增一条？”</p>
+<p>“嗯？？？？删除…再新增… 那不就是改变了主键吗？？”</p>
+<p>“(￣□￣｜｜)”</p>
+<p>然后把 replace into 改成 insert into。</p>
+<p>如果出现重复唯一主键重复，抛出异常信息…问题就解决了…</p>
+<p>哎，可能因为加班太多，脑子转不过来，看了大半天，才解决问题…</p>
+<br>
+
+<p>下面让我们看下 replace into 和 insert into</p>
+<p>注意：</p>
+<pre><code>下面的操作都是基于唯一索引进行操作的。
+
+唯一索引一定要创建!!</code></pre><p>建表语句</p>
+<pre><code>DROP TABLE IF EXISTS GOODS_INFO;
+
+-- 商品信息表
+CREATE TABLE `GOODS_INFO`(
+    `GOODS_PRIMARY_ID` BIGINT NOT NULL AUTO_INCREMENT COMMENT &apos;商品主键ID(无业务含义)&apos;,
+    `GOODS_CODE` BIGINT NOT NULL COMMENT &apos;商品编码&apos;,
+    `GOODS_NAME` VARCHAR(500) COMMENT &apos;商品名称&apos;,
+    `GOODS_STATUS` INT COMMENT &apos;商品状态(0-下架 1-上架)&apos;,
+    `SELL_ADDRESS_CODE` VARCHAR (500) COMMENT &apos;商品投放地域&apos;,
+    `SELL_DATE` DATE NOT NULL COMMENT &apos;投放日期&apos;,
+    CONSTRAINT PK_GOODS_INFO PRIMARY KEY (GOODS_PRIMARY_ID)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;</code></pre><p>创建唯一索引</p>
+<pre><code>-- 唯一索引(商品编码+投放日期)
+CREATE UNIQUE INDEX GOODS_CODE_SELL_DATE_UNIQUE ON GOODS_INFO(GOODS_CODE,SELL_DATE); </code></pre><p>初始化数据</p>
+<pre><code>INSERT INTO GOODS_INFO 
+    ( GOODS_CODE, GOODS_NAME, GOODS_STATUS, SELL_ADDRESS_CODE, SELL_DATE ) 
+VALUES 
+    ( 00001, &quot;康师傅红烧牛肉面&quot;, 1, &apos;010,025&apos;, &apos;2019-12-23&apos; );</code></pre><h1 id="insert-into"><a href="#insert-into" class="headerlink" title="insert into"></a>insert into</h1><p>目前数据库已经有一条 GOODS_CODE=00001 和 SELL_DATE=2019-12-23 的数据了</p>
+<table>
+<thead>
+<tr>
+<th>GOODS_PRIMARY_ID</th>
+<th>GOODS_CODE</th>
+<th>GOODS_NAME</th>
+<th>GOODS_STATUS</th>
+<th>SELL_ADDRESS_CODE</th>
+<th>SELL_DATE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>康师傅红烧牛肉面</td>
+<td>1</td>
+<td>010,025</td>
+<td>2019-12-23</td>
+</tr>
+</tbody></table>
+<p>使用普通的 insert into 再插入一条 GOODS_CODE 和 SELL_DATE 一样的数据，看看会怎么样</p>
+<pre><code>-- INSERT 模拟唯一索引冲突
+INSERT INTO GOODS_INFO 
+    ( GOODS_CODE, GOODS_NAME, GOODS_STATUS, SELL_ADDRESS_CODE, SELL_DATE ) 
+VALUES 
+    ( 00001, &quot;康师傅老坛酸菜面&quot;, 1, &apos;010,025&apos;, &apos;2019-12-23&apos; );</code></pre><p>抛出异常信息：</p>
+<pre><code>1062 - Duplicate entry &apos;1-2019-12-23&apos; for key &apos;GOODS_CODE_SELL_DATE_UNIQUE&apos;, Time: 0.018000s</code></pre><p>对于这个异常，在某些业务场景中，是必要的(比如我项目业务场景中)。</p>
+<p>注意：</p>
+<pre><code>这里抛出唯一索引冲突异常后，mysql的主键自增依旧被消耗掉了</code></pre><p>比如现在再插入一条新的数据：</p>
+<pre><code>INSERT INTO GOODS_INFO 
+    ( GOODS_CODE, GOODS_NAME, GOODS_STATUS, SELL_ADDRESS_CODE, SELL_DATE ) 
+VALUES 
+    ( 00002, &quot;日清豚骨拉面&quot;, 1, &apos;010&apos;, &apos;2019-12-27&apos; );</code></pre><p>然后在 select 一下：</p>
+<pre><code>SELECT * FROM goods_info;</code></pre><p>结果：</p>
+<table>
+<thead>
+<tr>
+<th>GOODS_PRIMARY_ID</th>
+<th>GOODS_CODE</th>
+<th>GOODS_NAME</th>
+<th>GOODS_STATUS</th>
+<th>SELL_ADDRESS_CODE</th>
+<th>SELL_DATE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>康师傅红烧牛肉面</td>
+<td>1</td>
+<td>010,025</td>
+<td>2019-12-23</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>日清豚骨拉面</td>
+<td>1</td>
+<td>010</td>
+<td>2019-12-27</td>
+</tr>
+</tbody></table>
+<p>当然，如果你希望在用 insert into 插入重复数据这个动作时，不抛出唯一索引异常，可以配合 ignore 关键字服用。</p>
+<h2 id="ignore-关键字"><a href="#ignore-关键字" class="headerlink" title="ignore 关键字"></a>ignore 关键字</h2><p>在 insert into 语句中加入 ignore 关键字，mysql在执行插入动作，发现唯一索引冲突，就不会去执行这条语句，当然也不会抛出异常。</p>
+<p>遇到唯一索引冲突直接就跳过了。</p>
+<pre><code>-- INSERT_IGNORE 模拟唯一索引冲突
+INSERT IGNORE INTO GOODS_INFO 
+    ( GOODS_CODE, GOODS_NAME, GOODS_STATUS, SELL_ADDRESS_CODE, SELL_DATE ) 
+VALUES 
+    ( 00001, &quot;康师傅海鲜面&quot;, 1, &apos;010,025&apos;, &apos;2019-12-23&apos; );</code></pre><p>执行结果：</p>
+<pre><code>Affected rows: 0, Time: 0.056000s</code></pre><p>从返回结果看，受影响的行为0，这条语句没有产生结果。</p>
+<p>注意：</p>
+<pre><code>同上面一样，使用 ignore 关键字 唯一索引冲突后，自增主键依旧会增加。</code></pre><h1 id="replace-into"><a href="#replace-into" class="headerlink" title="replace into"></a>replace into</h1><p>现在把表直接 drop ，重新创建表/初始化数据</p>
+<pre><code>SELECT * FROM goods_info;</code></pre><table>
+<thead>
+<tr>
+<th>GOODS_PRIMARY_ID</th>
+<th>GOODS_CODE</th>
+<th>GOODS_NAME</th>
+<th>GOODS_STATUS</th>
+<th>SELL_ADDRESS_CODE</th>
+<th>SELL_DATE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>康师傅红烧牛肉面</td>
+<td>1</td>
+<td>010,025</td>
+<td>2019-12-23</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>日清豚骨拉面</td>
+<td>1</td>
+<td>010</td>
+<td>2019-12-27</td>
+</tr>
+</tbody></table>
+<p>插入一条主键冲突的数据：</p>
+<pre><code>-- REPLACE INTO 模拟唯一索引冲突
+REPLACE INTO GOODS_INFO 
+    ( GOODS_CODE, GOODS_NAME, GOODS_STATUS, SELL_ADDRESS_CODE, SELL_DATE ) 
+VALUES 
+    ( 00002, &quot;老北京麻辣方便面&quot;, 1, &apos;025&apos;, &apos;2019-12-27&apos; );</code></pre><p>返回结果：</p>
+<pre><code>Affected rows: 2, Time: 0.060000s</code></pre><p>看的出来，它修改了两行数据，是那两行呢？select 下表数据看看</p>
+<table>
+<thead>
+<tr>
+<th>GOODS_PRIMARY_ID</th>
+<th>GOODS_CODE</th>
+<th>GOODS_NAME</th>
+<th>GOODS_STATUS</th>
+<th>SELL_ADDRESS_CODE</th>
+<th>SELL_DATE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>康师傅红烧牛肉面</td>
+<td>1</td>
+<td>010,025</td>
+<td>2019-12-23</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>老北京麻辣方便面</td>
+<td>1</td>
+<td>025</td>
+<td>2019-12-27</td>
+</tr>
+</tbody></table>
+<p>可以看出，原来的’日清豚骨拉面’被替换成了’老北京麻辣方便面’。</p>
+<p>同时，新增数据的自增主键id变成了3，自动+1了，因为是两步操作嘛，同时可以看出，它执行的并不是更新，而是<strong>直接删除</strong>，然后新增数据。</p>
+<p><strong>replace into</strong></p>
+<pre><code>它会首先尝试插入数据到表中，如果发现表中已经存在此数据（根据主键或唯一索引判断），则会先删除表中老数据，然后插入新数据
+
+如果不存在，唯一索引（作为判断标准），则会直接插入数据，最终会导致重复数据。</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -951,12 +926,12 @@ node | n | node name  </code></pre><h1 id="创建"><a href="#创建" class="head
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>elasticsearch api 速查</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+        <p><span class="copy-title">文章标题:</span>mysql数据重复引发的问题</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-10-08, 23:18:46</p>
-        <p><span class="copy-title">最后更新:</span>2019-11-04, 22:30:28</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/08/elasticsearch/elasticsearch-api-速查/" title="elasticsearch api 速查">https://simba-cheng.github.io/2019/10/08/elasticsearch/elasticsearch-api-速查/</a>
+        <p><span class="copy-title">发布时间:</span>2019-12-28, 19:16:55</p>
+        <p><span class="copy-title">最后更新:</span>2019-12-28, 19:17:42</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/28/MySQL/mysql数据重复引发的问题/" title="mysql数据重复引发的问题">https://simba-cheng.github.io/2019/12/28/MySQL/mysql数据重复引发的问题/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
