@@ -119,7 +119,7 @@
     
         
             
-            <li><div data-rel="索引">索引<small>(2)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -127,7 +127,7 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
             
@@ -147,7 +147,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_相关">es_相关<small>(10)</small></div>
                             
                         </li>
                             
@@ -155,7 +155,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_相关">es_相关<small>(10)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -282,11 +282,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -298,11 +298,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -804,7 +804,7 @@ cat newsData_All.json | wc -l</code></pre><p>json文件导入命令</p>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#Markdown','#索引','#资料','#问题-思考','#es','#es_batch','#es_query','#es_client','#Java8','#后台_其他','#设计模式',],
+            'data': ['#MySQL','#Markdown','#资料','#索引','#问题-思考','#es','#es_query','#es_batch','#es_client','#Java8','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
