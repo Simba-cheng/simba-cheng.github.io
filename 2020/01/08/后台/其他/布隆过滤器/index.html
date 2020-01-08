@@ -135,14 +135,6 @@
     
         
             
-            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(21)</small></div>
                 
                     <ul class="sub hide">
@@ -155,11 +147,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_client">es_client<small>(1)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_client">es_client<small>(1)</small></div>
                             
                         </li>
                             
@@ -168,6 +160,14 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
                 
             </li>
             
@@ -290,11 +290,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">问题-思考</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color1">问题-思考</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -302,11 +302,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_client</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_client</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -318,11 +318,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">bitmap</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color2">bitmap</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -697,7 +697,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-08 23:01:08'>2020-01-08 22:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-08 23:04:03'>2020-01-08 22:41</time>
         
     </div>
     <div class="article-meta">
@@ -764,7 +764,7 @@
 <li>根据n个hash值，再把数组中把对应下标的值标记为1</li>
 <li>判断某个key是否在集合中，用n个哈希函数计算出n个hash值，然后查询对应的bit位置，如果所有位置的bit值都是1，则认为在集合中</li>
 </ol>
-<p><img src="/.io//%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.jpg" alt="布隆过滤器处理过程" title="布隆过滤器处理过程"><br>(图片来自网络，具体出处，请看水印)</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/23/169a878fc1c67913?imageslim" alt="布隆过滤器处理过程" title="布隆过滤器处理过程"><br>(图片来自网络，具体出处，请看水印)</p>
 <p>布隆过滤器准确性很大程度上依赖于hash函数的选取，只有hash选择的合适才能够提取出数据值的特征。</p>
 <h1 id="Bloom-Filter-的实现"><a href="#Bloom-Filter-的实现" class="headerlink" title="Bloom Filter 的实现"></a>Bloom Filter 的实现</h1><p>先看下成熟的实现/解决方案，毕竟生产环境用成熟方案靠谱；</p>
 <p>自己造的轮子缺陷/不确定性太多，但可以加速自己的理解</p>
@@ -948,7 +948,7 @@ public class TestRedissonBloomFilterApp {
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-01-08, 22:41:59</p>
-        <p><span class="copy-title">最后更新:</span>2020-01-08, 23:01:08</p>
+        <p><span class="copy-title">最后更新:</span>2020-01-08, 23:04:03</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/08/后台/其他/布隆过滤器/" title="布隆过滤器">https://simba-cheng.github.io/2020/01/08/后台/其他/布隆过滤器/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1010,7 +1010,7 @@ public class TestRedissonBloomFilterApp {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_client','#es_batch','#Java8','#后台_其他','#bitmap','#布隆过滤器','#设计模式',],
+            'data': ['#MySQL','#索引','#Markdown','#资料','#es','#问题-思考','#es_query','#es_batch','#es_client','#Java8','#后台_其他','#布隆过滤器','#bitmap','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
