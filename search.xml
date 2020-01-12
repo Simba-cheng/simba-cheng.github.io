@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>hash</title>
+      <link href="/2020/01/12/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/hash/"/>
+      <url>/2020/01/12/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/hash/</url>
+      
+        <content type="html"><![CDATA[<p>老早之前看 HashMap 源码时，里面有hash；</p><p>之前看 布隆过滤器/BitMap 其中也有hash；</p><p>于是来了兴趣了，什么是hash？</p><h1 id="什么是hash"><a href="#什么是hash" class="headerlink" title="什么是hash"></a>什么是hash</h1><p>较为抽象的解释</p><pre><code>hash(hash函数) 相当于将原空间的数据，映射到另一个空间。在 关键字 与 记录的存储地址 之间建立的一种对应关系叫 哈希函数。哈希函数就是一种映射，是从关键字到存储地址的映射。</code></pre><p>直观解释起来</p><pre><code>将任意长度的&apos;数据值m&apos;，通过hash算法转换成固定长度的&apos;输出值h&apos;，这个&apos;输出值h&apos;，就是hash值或将任意长度的原始数据压缩为一个固定长度的数字指纹</code></pre><br><p>由于用途不同，hash函数在数据结构中的含义和密码学中的含义并不相同，所以各自 算法设计/实现 的侧重点也不一样。</p><p>比如 抗碰撞能力，抗篡改能力，不可逆性，混淆性。<br>(篇幅和能力有限，只了解下hash碰撞….)</p><h2 id="hash碰撞问题"><a href="#hash碰撞问题" class="headerlink" title="hash碰撞问题"></a>hash碰撞问题</h2><p>两个不同的输入值，从同一个hash函数计算出相同的hash值的现象叫hash碰撞。</p><p>同一hash函数计算的hash值不同，入参值肯定不同；<br>同一hash函数计算的hash值相同，入参值可能不相同(hash碰撞)</p><p>现在对Java中equals和hashCode有了更深刻的理解</p><pre><code>&apos;equals相等，hashCode一定相同；hashCode相同，equals不一定相同&apos;</code></pre><p>hash碰撞的问题是无法避免的。</p><p>既然无法避免，只能尽可能减少碰撞带来的损失；一个好的hash函数应具有以下特点：</p><pre><code>1.尽量使数据值的记录，均匀分配在哈希表中(防止数据倾斜)。    比如说，操场站队，A区站了2个人，B区站了1个人，C区站了15个人    如果有人去C区找人，最坏的情况也要找15次。2.关键字极小的变化可以引起hash值极大的变化</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul><li><a href="https://www.zhihu.com/question/20507188" target="_blank" rel="noopener">hash算法的数学原理是什么，如何保证尽可能少的碰撞？</a></li><li><a href="https://www.zhihu.com/question/26762707" target="_blank" rel="noopener">什么是 hash？</a></li><li><a href="https://www.jianshu.com/p/ad9756fe21c8" target="_blank" rel="noopener">漫谈散列函数</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>布隆过滤器</title>
       <link href="/2020/01/08/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/"/>
       <url>/2020/01/08/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
