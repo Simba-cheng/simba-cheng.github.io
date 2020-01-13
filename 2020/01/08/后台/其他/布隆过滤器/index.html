@@ -119,6 +119,14 @@
     
         
             
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
@@ -127,7 +135,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
                 
             </li>
             
@@ -143,11 +151,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -162,18 +170,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
             
         
     
@@ -229,6 +225,10 @@
             
         
     
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -240,7 +240,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="41">
-<input type="hidden" id="yelog_site_word_count" value="44.4k">
+<input type="hidden" id="yelog_site_word_count" value="45.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -282,15 +282,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -298,7 +294,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -306,15 +302,19 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_client</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -326,11 +326,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <div class="clearfix"></div>
@@ -709,12 +709,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-10 13:36:43'>2020-01-08 22:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-13 22:42:00'>2020-01-08 22:41</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.7k</span>
+        <span>字数:2.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -944,7 +944,176 @@ public class TestRedissonBloomFilterApp {
         redisson = Redisson.create(config);
     }
 
-}</code></pre><h2 id="自己实现"><a href="#自己实现" class="headerlink" title="自己实现"></a>自己实现</h2><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+}</code></pre><h2 id="自己实现"><a href="#自己实现" class="headerlink" title="自己实现"></a>自己实现</h2><pre><code>public interface BloomFilter {
+
+    /**
+     * 添加元素
+     *
+     * @param key
+     */
+    void put(String key);
+
+    /**
+     * 判断元素是否存在
+     *
+     * @param key
+     * @return
+     */
+    boolean mightContain(String key);
+
+}
+
+/**
+ * 乘法Hash算法
+ *
+ * @author CYX
+ * @date 2020/1/8 19:48
+ */
+public class Hash {
+
+    /**
+     * bit数组容量
+     */
+    private int capacity;
+
+    /**
+     * 哈希因子
+     */
+    private int seed;
+
+    public Hash(int capacity, int seed) {
+        this.capacity = capacity;
+        this.seed = seed;
+    }
+
+    /**
+     * hash计算
+     *
+     * @param key
+     * @return
+     */
+    public int hash(String key) {
+        int res = 0;
+        int length = key.length();
+
+        for (int i = 0; i &lt; length; i++) {
+            res = seed * res + key.charAt(i);
+        }
+
+        //将结果限定在capacity内
+        return (capacity - 1) &amp; res;
+    }
+
+}
+
+/**
+ * @author CYX
+ * @date 2020/1/8 19:52
+ */
+public class SimpleBloomFilter implements BloomFilter {
+
+    /**
+     * bit数组的长度
+     *
+     * 16,777,216
+     */
+    private static final int DEFAULT_SIZE = 2 &lt;&lt; 24;
+
+    /**
+     * Hash算法中所有的乘数
+     */
+    private static final int[] seeds = new int[]{3, 5, 7, 11, 13, 17, 19, 23};
+
+    /**
+     * bit数组
+     */
+    private static BitSet bitSet = new BitSet(DEFAULT_SIZE);
+
+    /**
+     * Hash 函数
+     */
+    private static Hash[] hashes = new Hash[seeds.length];
+
+    @Override
+    public void put(String key) {
+        if (StringUtils.isNotEmpty(key)) {
+            for (Hash hash : hashes) {
+                bitSet.set(hash.hash(key), true);
+            }
+        }
+    }
+
+    @Override
+    public boolean mightContain(String key) {
+
+        if (StringUtils.isEmpty(key)) {
+            return false;
+        }
+
+        boolean result = true;
+        for (Hash hash : hashes) {
+            result = result &amp;&amp; bitSet.get(hash.hash(key));
+            if (!result) {
+                return result;
+            }
+        }
+        return result;
+    }
+
+    public Hash[] build() {
+        Hash[] hashArr = new Hash[seeds.length];
+        for (int i = 0; i &lt; seeds.length; i++) {
+            hashArr[i] = new Hash(DEFAULT_SIZE, seeds[i]);
+        }
+        hashes = hashArr;
+        return hashArr;
+    }
+
+}
+
+/**
+ * @author CYX
+ * @date 2020/1/8 19:39
+ */
+public class TestBloomFilterAppDemo {
+
+    private static SimpleBloomFilter bloomFilter = new SimpleBloomFilter();
+
+    private static final int indexNum = 2000000;
+
+    private static final int maxNum = 4000000;
+
+    //数据准备
+    static {
+        bloomFilter.build();
+        for (int i = 0; i &lt; indexNum; i++) {
+            bloomFilter.put(String.valueOf(i));
+        }
+    }
+
+    public static void main(String[] args) {
+
+        String testKey = &quot;9999&quot;;
+        long startTime = System.nanoTime();
+
+        if (bloomFilter.mightContain(testKey)) {
+            System.out.println(&quot;key:&quot; + testKey + &quot;包含在布隆过滤器中.....&quot;);
+        }
+
+        long endTime = System.nanoTime();
+        System.out.println(&quot;耗时:&quot; + (endTime - startTime) + &quot; ns&quot;);
+
+        //计算误差
+        //构造一组完全不在过滤器中的数据，查看过滤器的误判率
+        double errNum = 0;
+        for (int i = indexNum; i &lt; maxNum; i++) {
+            if (bloomFilter.mightContain(String.valueOf(i))) {
+                ++errNum;
+            }
+        }
+        System.out.println(&quot;误判:&quot; + (errNum / indexNum) * 100 + &quot; %&quot;);
+    }
+}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li><a href="https://www.cnblogs.com/liyulong1982/p/6013002.html" target="_blank" rel="noopener">布隆过滤器(Bloom Filter)详解</a></li>
 <li><a href="http://vearne.cc/archives/39181" target="_blank" rel="noopener">聊聊布隆过滤器</a></li>
 <li><a href="https://www.cnblogs.com/hxsyl/p/4176280.html" target="_blank" rel="noopener">海量数据处理利器之布隆过滤器</a></li>
@@ -966,10 +1135,10 @@ public class TestRedissonBloomFilterApp {
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>布隆过滤器</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">2.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-01-08, 22:41:59</p>
-        <p><span class="copy-title">最后更新:</span>2020-01-10, 13:36:43</p>
+        <p><span class="copy-title">最后更新:</span>2020-01-13, 22:42:00</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/08/后台/其他/布隆过滤器/" title="布隆过滤器">https://simba-cheng.github.io/2020/01/08/后台/其他/布隆过滤器/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1031,7 +1200,7 @@ public class TestRedissonBloomFilterApp {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#资料','#Markdown','#es','#问题-思考','#es_batch','#es_query','#es_client','#hash','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
+            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_batch','#es_client','#Java8','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
