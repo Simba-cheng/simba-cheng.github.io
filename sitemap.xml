@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-%E6%98%A0%E5%B0%84-Mapping/</loc>
+    
+    <lastmod>2020-01-15T23:55:50.972Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/01/12/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/hash/</loc>
     
     <lastmod>2020-01-13T14:48:18.529Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/06-elasticsearch-%E6%96%87%E6%A1%A3-document/</loc>
     
     <lastmod>2019-11-12T12:08:28.507Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-%E6%98%A0%E5%B0%84-Mapping/</loc>
-    
-    <lastmod>2019-11-12T12:08:28.504Z</lastmod>
     
   </url>
   

@@ -762,7 +762,7 @@ index的复数是 indices 或 indexes。</code></pre><h2 id="创建索引"><a hr
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true,</span><br><span class="line">  &quot;shards_acknowledged&quot;: true,</span><br><span class="line">  &quot;index&quot;: &quot;blog&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们看下head插件中的结果：</p>
-<p><img src="/.io//head-1.png" alt="head-信息-1" title="head-信息-1"></p>
+<p><img src="//simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/head-1.png" alt="head-信息-1" title="head-信息-1"></p>
 <p>很多时候，需要自定义设置(设置索引结果、分片数目)时，需要手动创建索引。</p>
 <h2 id="手动创建索引"><a href="#手动创建索引" class="headerlink" title="手动创建索引"></a>手动创建索引</h2><p>如果输错了单词，却被es自动创建了索引，这是很麻烦的。</p>
 <p>我们可以通过修改修改elasticsearch.yml配置文件，来关闭自动创建索引功能。</p>
@@ -781,7 +781,7 @@ index的复数是 indices 或 indexes。</code></pre><h2 id="创建索引"><a hr
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot;: true,</span><br><span class="line">  &quot;shards_acknowledged&quot;: true,</span><br><span class="line">  &quot;index&quot;: &quot;blog2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们看下head上面的信息：</p>
-<p><img src="/.io//head-2.png" alt="head-信息-2" title="head-信息-2"></p>
+<p><img src="//simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/head-2.png" alt="head-信息-2" title="head-信息-2"></p>
 <p>没问题，已经创建了blog2索引</p>
 <h2 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h2><p>执行以下命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /blog2</span><br></pre></td></tr></table></figure>

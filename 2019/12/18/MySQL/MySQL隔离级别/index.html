@@ -824,7 +824,7 @@ T2 ：干扰事务，目的在于扰乱 T1 的正常的事务执行。
 因为 T1 在 step1 中读取的数据状态并不能支撑后续的业务操作，T1：&quot;见鬼了，我刚才读到的结果应该可以支持我这样操作才对啊，为什么现在不可以&quot;。
 T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样的（RR下的 MMVC机制）。
 
-此时，幻读无疑已经发生，T1 无论读取多少次，都查不到 id = 1 的记录，但它的确无法插入这条他通过读取来认定不存在的记录（此数据已被T2插入），对于T1来说，它幻读了。</code></pre><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><img src="/.io//mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.jpg" alt="mysql隔离级别" title="mysql隔离级别"></p>
+此时，幻读无疑已经发生，T1 无论读取多少次，都查不到 id = 1 的记录，但它的确无法插入这条他通过读取来认定不存在的记录（此数据已被T2插入），对于T1来说，它幻读了。</code></pre><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><img src="//simba-cheng.github.io/2019/12/18/MySQL/MySQL隔离级别/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.jpg" alt="mysql隔离级别" title="mysql隔离级别"></p>
 <h1 id="不可重复读-和-幻读-的区别"><a href="#不可重复读-和-幻读-的区别" class="headerlink" title="不可重复读 和 幻读 的区别"></a>不可重复读 和 幻读 的区别</h1><p>不可重复读 和 幻读 有时候会搞混，因为两者有些相似。</p>
 <p>不可重复读重点在于：update 和 delete</p>
 <p>幻读的重点在于：insert</p>
