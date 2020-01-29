@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>04-es-query-multi_match多匹配查询 | Simba</title>
-  <meta name="keywords" content=" es_query ">
-  <meta name="description" content="04-es-query-multi_match多匹配查询 | Simba">
+  <title>es存储不足，索引只读 | Simba</title>
+  <meta name="keywords" content=" es问题 ">
+  <meta name="description" content="es存储不足，索引只读 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -703,9 +703,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/02-es-query/04-es-query-multi-match多匹配查询" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-elasticsearch/es-问题/es存储不足，索引只读" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">04-es-query-multi_match多匹配查询</h1>
+        <h1 class="article-title">es存储不足，索引只读</h1>
     
     <div class="article-meta">
         
@@ -715,26 +715,26 @@
             
                 <a href="javascript:" data-rel="es">es</a>/
             
-                <a href="javascript:" data-rel="es_query">es_query</a>
+                <a href="javascript:" data-rel="es_问题">es_问题</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color4">es_query</a>
+            <a href="javascript:" class="color5">es问题</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-19 11:26:20'>2019-09-26 21:47</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-29 19:44:39'>2020-01-29 19:35</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:321</span>
+        <span>字数:121</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -753,7 +753,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#multi-match-多匹配查询"><span class="toc-text">multi_match 多匹配查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -768,59 +768,19 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="multi-match-多匹配查询"><a href="#multi-match-多匹配查询" class="headerlink" title="multi_match 多匹配查询"></a>multi_match 多匹配查询</h1><p>关键字multi_match，通常用在查询多个fields时。</p>
-<p>fields属性指定需要查询的字段。</p>
-<p>在news索引，new类型下，所有字段中，查询带有’江苏’的结果</p>
-<pre><code>GET /news/new/_search
+        <p>好久不用的 测试环境elasticsearch集群</p>
+<p>准备写入一批测试数据时，报下面这个异常信息：</p>
+<pre><code>&quot;Elasticsearch exception [type=cluster_block_exception, reason=blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];]&quot;</code></pre><p>网上查了以下，有的说法是”存储空间不足，导致索引只读”</p>
+<p>看了一下，还有百分之六十左右，感觉存储应该还够啊…</p>
+<p>先记录解决方案，后面遇到再看：</p>
+<pre><code>PUT _settings
 {
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;江苏&quot;
+  &quot;index&quot;: {
+    &quot;blocks&quot;: {
+      &quot;read_only_allow_delete&quot;: &quot;false&quot;
     }
   }
-}</code></pre><p>在news索引，new类型下，所有字段中，查询带有’18’的结果</p>
-<pre><code>curl -H &quot;Content-Type: application/json&quot; -XGET &apos;127.0.0.1:9200/news/new/_search&apos; -d &apos;
-{
-    &quot;query&quot;:{
-        &quot;multi_match&quot;:{
-            &quot;query&quot;:&quot;18&quot;
-        }
-    }
-}&apos;</code></pre><p>在news索引，new类型下，’title’、’cont*’ 字段中，查询带有’江苏’的结果</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;江苏&quot;,
-      &quot;fields&quot;:[&quot;title&quot;,&quot;cont*&quot;]
-    }
-  }
-}</code></pre><p>news索引、new类型下，查询source、content两个字段包含’赌博’的document，返回数量为2。</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;赌博&quot;,
-      &quot;fields&quot;:[&quot;source&quot;,&quot;content&quot;]
-    }
-  },
-  &quot;size&quot;: 2
-}</code></pre><p>news索引、new类型下，查询source、content两个字段包含’赌博’的document，返回数量为2，只返回三个指定字段：’title’,’gmt_publish’,’category’</p>
-<pre><code>GET /news/new/_search
-{
-  &quot;query&quot;: {
-    &quot;multi_match&quot;: {
-      &quot;query&quot;: &quot;赌博&quot;,
-      &quot;fields&quot;:[&quot;source&quot;,&quot;content&quot;]
-    }
-  },
-  &quot;size&quot;: 2,
-  &quot;_source&quot;: [&quot;title&quot;,&quot;gmt_publish&quot;,&quot;category&quot;]
-}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/cn/multi-match-query.html" target="_blank" rel="noopener">multi-match-query</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/multi-fields.html" target="_blank" rel="noopener">multi-fields</a></li>
-</ul>
-
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -833,12 +793,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>04-es-query-multi_match多匹配查询</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">321</span></p>
+        <p><span class="copy-title">文章标题:</span>es存储不足，索引只读</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">121</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-26, 21:47:22</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-19, 11:26:20</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/elasticsearch/02-es-query/04-es-query-multi-match多匹配查询/" title="04-es-query-multi_match多匹配查询">https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/04-es-query-multi-match多匹配查询/</a>
+        <p><span class="copy-title">发布时间:</span>2020-01-29, 19:35:43</p>
+        <p><span class="copy-title">最后更新:</span>2020-01-29, 19:44:39</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/29/elasticsearch/es-问题/es存储不足，索引只读/" title="es存储不足，索引只读">https://simba-cheng.github.io/2020/01/29/elasticsearch/es-问题/es存储不足，索引只读/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>

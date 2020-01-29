@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>es存储不足，索引只读</title>
+      <link href="/2020/01/29/elasticsearch/es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/"/>
+      <url>/2020/01/29/elasticsearch/es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/</url>
+      
+        <content type="html"><![CDATA[<p>好久不用的 测试环境elasticsearch集群</p><p>准备写入一批测试数据时，报下面这个异常信息：</p><pre><code>&quot;Elasticsearch exception [type=cluster_block_exception, reason=blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];]&quot;</code></pre><p>网上查了以下，有的说法是”存储空间不足，导致索引只读”</p><p>看了一下，还有百分之六十左右，感觉存储应该还够啊…</p><p>先记录解决方案，后面遇到再看：</p><pre><code>PUT _settings{  &quot;index&quot;: {    &quot;blocks&quot;: {      &quot;read_only_allow_delete&quot;: &quot;false&quot;    }  }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+          <category> es_问题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hash</title>
       <link href="/2020/01/12/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/hash/"/>
       <url>/2020/01/12/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/hash/</url>
