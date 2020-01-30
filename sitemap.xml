@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/01/30/elasticsearch/07-es-client/es-java-client/</loc>
+    
+    <lastmod>2020-01-30T06:27:54.004Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2019/11/30/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/%E5%A4%A7%E4%BF%83%E5%AE%95%E6%9C%BA%E7%9A%84%E6%80%9D%E8%80%83/</loc>
     
     <lastmod>2020-01-30T05:23:42.374Z</lastmod>

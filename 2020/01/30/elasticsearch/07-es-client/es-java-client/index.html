@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Simba</title>
-  <meta name="keywords" content>
-  <meta name="description" content="Simba">
+  <title>es-java-client | Simba</title>
+  <meta name="keywords" content=" es_client ">
+  <meta name="description" content="es-java-client | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -709,12 +709,59 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-elasticsearch/07-es-client/es-java-client" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Simba-cheng"><span class="toc-text">Simba_cheng</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人简介"><span class="toc-text">个人简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他博客"><span class="toc-text">其他博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络信息"><span class="toc-text">网络信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于本站"><span class="toc-text">关于本站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">es-java-client</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="es">es</a>/
+            
+                <a href="javascript:" data-rel="es_client">es_client</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">es_client</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 14:27:54'>2020-01-30 13:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:604</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-Java-Client"><span class="toc-text">Elasticsearch Java Client</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-Low-Level-Rest-Client（Java-低级客户端）"><span class="toc-text">Java Low Level Rest Client（Java 低级客户端）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-High-Level-Rest-Client-（Java-高级客户端）"><span class="toc-text">Java High Level Rest Client （Java 高级客户端）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例Demo"><span class="toc-text">实例Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -727,30 +774,112 @@
     }
 </style>
 </div>
-            <h1 id="Simba-cheng"><a href="#Simba-cheng" class="headerlink" title="Simba_cheng"></a>Simba_cheng</h1><h2 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h2><ul>
-<li>2015年加入编程、开发圈子；</li>
-<li>目前就职于 南京本土某大型”互联网”企业</li>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Elasticsearch-Java-Client"><a href="#Elasticsearch-Java-Client" class="headerlink" title="Elasticsearch Java Client"></a>Elasticsearch Java Client</h1><p>elasticsearch java client 分为两种：</p>
+<ul>
+<li><p>Java Low Level Rest Client（Java 低级客户端）</p>
+</li>
+<li><p>Java High Level Rest Client （Java 高级客户端）</p>
+</li>
 </ul>
-<h2 id="其他博客"><a href="#其他博客" class="headerlink" title="其他博客"></a>其他博客</h2><ul>
-<li>CSDN的博客地址(已不更新)：<a href="https://blog.csdn.net/Simba_cheng">https://blog.csdn.net/Simba_cheng</a></li>
-<li>GitHub：<a href="https://github.com/Simba-cheng">https://github.com/Simba-cheng</a></li>
-</ul>
-<h2 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h2><ul>
-<li>邮箱: <a href="mailto:simba_cheng@163.com">simba_cheng@163.com</a></li>
-</ul>
-<h2 id="关于本站"><a href="#关于本站" class="headerlink" title="关于本站"></a>关于本站</h2><p>本站是Simba的个人站。</p>
-<p>本站所有文章，均由我一人发布；是日常工作、学习中积累下来的；如有错误，烦请指正。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ，访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/">Hexo</a> 生成，部署在 <a href="https://pages.github.com/">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源；感谢主题作者</p>
+<h2 id="Java-Low-Level-Rest-Client（Java-低级客户端）"><a href="#Java-Low-Level-Rest-Client（Java-低级客户端）" class="headerlink" title="Java Low Level Rest Client（Java 低级客户端）"></a>Java Low Level Rest Client（Java 低级客户端）</h2><p>通过Http协议与Elasticsearch服务进行通信；请求编码和响应解码保留给用户实现；低级客户端与所有Elasticsearch版本兼容。</p>
+<p>Java Low Level Rest Client（Java 低级客户端）内部使用 Apache Http Async Client 发送 http 请求。</p>
+<p>Apache Http Async Client默认启动一个调度线程，连接管理器使用多个worker线程，线程的数量和CPU核数量相同，线程数可以修改。</p>
+<p>低级客户端包含以下功能：</p>
+<pre><code>最小依赖
+负载均衡
+故障转移
+故障连续策略（是否重新连接故障节点取决于连续失败多少次；失败次数越多，在再次尝试同一个节点之前，客户端等待的时间越长）
+持久化连接
+跟踪记录请求和响应
+自动发现集群节点</code></pre><h2 id="Java-High-Level-Rest-Client-（Java-高级客户端）"><a href="#Java-High-Level-Rest-Client-（Java-高级客户端）" class="headerlink" title="Java High Level Rest Client （Java 高级客户端）"></a>Java High Level Rest Client （Java 高级客户端）</h2><p>高级客户端 基于 低级客户端，提供特定的方法的API；</p>
+<p>其主要目标是公开特定方法的API，接受请求对象作为参数并返回响应对象，以便客户端自己处理请求编组和响应解组。</p>
+<p>每个API可以同步或异步地调用。</p>
+<p>同步方法返回一个响应对象，而名称以 async 后缀结尾的异步方法需要收到响应或错误后才会通知（在低级别客户端管理的线程池上）的侦听器参数。</p>
+<h2 id="实例Demo"><a href="#实例Demo" class="headerlink" title="实例Demo"></a>实例Demo</h2><pre><code>/**
+ * 创建 elasticsearch high level client
+ * &lt;p&gt;
+ * 包含 超时时间/线程数
+ *
+ * @param connectTimeout        连接超时时间
+ * @param maxRetryTimeoutMillis 连接最大超时时间
+ * @param threadCount           线程数
+ */
+public RestHighClient(int connectTimeout, int maxRetryTimeoutMillis, int threadCount) {
 
-        </article>
-        
+    RestClientBuilder restClientBuilder = RestClient.builder(httpHosts);
+
+    //IO线程
+    restClientBuilder.setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
+        @Override
+        public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
+            //return httpClientBuilder.setDefaultIOReactorConfig(IOReactorConfig.custom()
+            //        .setIoThreadCount(threadCount)
+            //        .setConnectTimeout(connectTimeout)
+            //        .build());
+            return httpClientBuilder.setDefaultIOReactorConfig(
+                    IOReactorConfig.custom().setSoKeepAlive(true).build());
+        }
+    });
+
+    //超时
+    restClientBuilder.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
+        @Override
+        public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder requestConfigBuilder) {
+            return requestConfigBuilder
+                    //连接超时,连接建立时间,三次握手完成时间
+                    .setConnectTimeout(800)
+                    //请求超时,数据传输过程中数据包之间间隔的最大时间
+                    .setSocketTimeout(60000);
+        }
+    });
+
+    //设置最大超时时间
+    restClientBuilder.setMaxRetryTimeoutMillis(maxRetryTimeoutMillis);
+    restHighLevelClient = new RestHighLevelClient(restClientBuilder);
+}</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul>
+<li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client/6.5.0/org/elasticsearch/client/package-summary.html" target="_blank" rel="noopener">elasticsearch rest client 6.5.0 java doc</a></li>
+<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-timeouts.md" target="_blank" rel="noopener">超时</a></li>
+<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-number-of-threads.md" target="_blank" rel="noopener">线程数</a></li>
+<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-basic-authentication.md" target="_blank" rel="noopener">基本认证</a></li>
+<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-encrypted-communication.md" target="_blank" rel="noopener">加密传输</a></li>
+<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-sniffer.md" target="_blank" rel="noopener">嗅探器</a></li>
+<li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client-sniffer/6.5.0/org/elasticsearch/client/sniff/package-summary.html" target="_blank" rel="noopener">嗅探器 java doc</a></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>es-java-client</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">604</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2020-01-30, 13:30:08</p>
+        <p><span class="copy-title">最后更新:</span>2020-01-30, 14:27:54</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/30/elasticsearch/07-es-client/es-java-client/" title="es-java-client">https://simba-cheng.github.io/2020/01/30/elasticsearch/07-es-client/es-java-client/</a>
         <p>
-            <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
-        
-        
+    </div>
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019-2020 Simba_cheng</p>

@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>es-java-client</title>
+      <link href="/2020/01/30/elasticsearch/07-es-client/es-java-client/"/>
+      <url>/2020/01/30/elasticsearch/07-es-client/es-java-client/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Elasticsearch-Java-Client"><a href="#Elasticsearch-Java-Client" class="headerlink" title="Elasticsearch Java Client"></a>Elasticsearch Java Client</h1><p>elasticsearch java client 分为两种：</p><ul><li><p>Java Low Level Rest Client（Java 低级客户端）</p></li><li><p>Java High Level Rest Client （Java 高级客户端）</p></li></ul><h2 id="Java-Low-Level-Rest-Client（Java-低级客户端）"><a href="#Java-Low-Level-Rest-Client（Java-低级客户端）" class="headerlink" title="Java Low Level Rest Client（Java 低级客户端）"></a>Java Low Level Rest Client（Java 低级客户端）</h2><p>通过Http协议与Elasticsearch服务进行通信；请求编码和响应解码保留给用户实现；低级客户端与所有Elasticsearch版本兼容。</p><p>Java Low Level Rest Client（Java 低级客户端）内部使用 Apache Http Async Client 发送 http 请求。</p><p>Apache Http Async Client默认启动一个调度线程，连接管理器使用多个worker线程，线程的数量和CPU核数量相同，线程数可以修改。</p><p>低级客户端包含以下功能：</p><pre><code>最小依赖负载均衡故障转移故障连续策略（是否重新连接故障节点取决于连续失败多少次；失败次数越多，在再次尝试同一个节点之前，客户端等待的时间越长）持久化连接跟踪记录请求和响应自动发现集群节点</code></pre><h2 id="Java-High-Level-Rest-Client-（Java-高级客户端）"><a href="#Java-High-Level-Rest-Client-（Java-高级客户端）" class="headerlink" title="Java High Level Rest Client （Java 高级客户端）"></a>Java High Level Rest Client （Java 高级客户端）</h2><p>高级客户端 基于 低级客户端，提供特定的方法的API；</p><p>其主要目标是公开特定方法的API，接受请求对象作为参数并返回响应对象，以便客户端自己处理请求编组和响应解组。</p><p>每个API可以同步或异步地调用。</p><p>同步方法返回一个响应对象，而名称以 async 后缀结尾的异步方法需要收到响应或错误后才会通知（在低级别客户端管理的线程池上）的侦听器参数。</p><h2 id="实例Demo"><a href="#实例Demo" class="headerlink" title="实例Demo"></a>实例Demo</h2><pre><code>/** * 创建 elasticsearch high level client * &lt;p&gt; * 包含 超时时间/线程数 * * @param connectTimeout        连接超时时间 * @param maxRetryTimeoutMillis 连接最大超时时间 * @param threadCount           线程数 */public RestHighClient(int connectTimeout, int maxRetryTimeoutMillis, int threadCount) {    RestClientBuilder restClientBuilder = RestClient.builder(httpHosts);    //IO线程    restClientBuilder.setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {        @Override        public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {            //return httpClientBuilder.setDefaultIOReactorConfig(IOReactorConfig.custom()            //        .setIoThreadCount(threadCount)            //        .setConnectTimeout(connectTimeout)            //        .build());            return httpClientBuilder.setDefaultIOReactorConfig(                    IOReactorConfig.custom().setSoKeepAlive(true).build());        }    });    //超时    restClientBuilder.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {        @Override        public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder requestConfigBuilder) {            return requestConfigBuilder                    //连接超时,连接建立时间,三次握手完成时间                    .setConnectTimeout(800)                    //请求超时,数据传输过程中数据包之间间隔的最大时间                    .setSocketTimeout(60000);        }    });    //设置最大超时时间    restClientBuilder.setMaxRetryTimeoutMillis(maxRetryTimeoutMillis);    restHighLevelClient = new RestHighLevelClient(restClientBuilder);}</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul><li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client/6.5.0/org/elasticsearch/client/package-summary.html" target="_blank" rel="noopener">elasticsearch rest client 6.5.0 java doc</a></li><li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-timeouts.md" target="_blank" rel="noopener">超时</a></li><li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-number-of-threads.md" target="_blank" rel="noopener">线程数</a></li><li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-basic-authentication.md" target="_blank" rel="noopener">基本认证</a></li><li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-encrypted-communication.md" target="_blank" rel="noopener">加密传输</a></li><li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-sniffer.md" target="_blank" rel="noopener">嗅探器</a></li><li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client-sniffer/6.5.0/org/elasticsearch/client/sniff/package-summary.html" target="_blank" rel="noopener">嗅探器 java doc</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+          <category> es_client </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es_client </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>es存储不足，索引只读</title>
       <link href="/2020/01/29/elasticsearch/es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/"/>
       <url>/2020/01/29/elasticsearch/es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/</url>
