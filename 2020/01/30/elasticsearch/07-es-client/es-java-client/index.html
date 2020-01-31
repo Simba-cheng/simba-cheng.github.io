@@ -248,7 +248,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="43">
-<input type="hidden" id="yelog_site_word_count" value="46.4k">
+<input type="hidden" id="yelog_site_word_count" value="46.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -737,12 +737,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-30 14:27:54'>2020-01-30 13:30</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-31 14:06:40'>2020-01-30 13:30</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:604</span>
+        <span>字数:492</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -797,47 +797,16 @@
 <p>其主要目标是公开特定方法的API，接受请求对象作为参数并返回响应对象，以便客户端自己处理请求编组和响应解组。</p>
 <p>每个API可以同步或异步地调用。</p>
 <p>同步方法返回一个响应对象，而名称以 async 后缀结尾的异步方法需要收到响应或错误后才会通知（在低级别客户端管理的线程池上）的侦听器参数。</p>
-<h2 id="实例Demo"><a href="#实例Demo" class="headerlink" title="实例Demo"></a>实例Demo</h2><pre><code>/**
- * 创建 elasticsearch high level client
- * &lt;p&gt;
- * 包含 超时时间/线程数
- *
- * @param connectTimeout        连接超时时间
- * @param maxRetryTimeoutMillis 连接最大超时时间
- * @param threadCount           线程数
- */
-public RestHighClient(int connectTimeout, int maxRetryTimeoutMillis, int threadCount) {
+<h2 id="实例Demo"><a href="#实例Demo" class="headerlink" title="实例Demo"></a>实例Demo</h2><pre><code>public RestHighClient() {
+    try {
+        RestClientBuilder clientBuilder = RestClient.builder(HTTP_HOSTS);
 
-    RestClientBuilder restClientBuilder = RestClient.builder(httpHosts);
-
-    //IO线程
-    restClientBuilder.setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
-        @Override
-        public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
-            //return httpClientBuilder.setDefaultIOReactorConfig(IOReactorConfig.custom()
-            //        .setIoThreadCount(threadCount)
-            //        .setConnectTimeout(connectTimeout)
-            //        .build());
-            return httpClientBuilder.setDefaultIOReactorConfig(
-                    IOReactorConfig.custom().setSoKeepAlive(true).build());
-        }
-    });
-
-    //超时
-    restClientBuilder.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
-        @Override
-        public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder requestConfigBuilder) {
-            return requestConfigBuilder
-                    //连接超时,连接建立时间,三次握手完成时间
-                    .setConnectTimeout(800)
-                    //请求超时,数据传输过程中数据包之间间隔的最大时间
-                    .setSocketTimeout(60000);
-        }
-    });
-
-    //设置最大超时时间
-    restClientBuilder.setMaxRetryTimeoutMillis(maxRetryTimeoutMillis);
-    restHighLevelClient = new RestHighLevelClient(restClientBuilder);
+        //设置在多次重试同一请求时要遵守的最大超时（以毫秒为单位）,默认30s
+        clientBuilder.setMaxRetryTimeoutMillis(5000);
+        restHighLevelClient = new RestHighLevelClient(clientBuilder);
+    } catch (Exception e) {
+        LOGGER.error(e.getMessage(), e);
+    }
 }</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ul>
 <li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client/6.5.0/org/elasticsearch/client/package-summary.html" target="_blank" rel="noopener">elasticsearch rest client 6.5.0 java doc</a></li>
 <li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-timeouts.md" target="_blank" rel="noopener">超时</a></li>
@@ -861,10 +830,10 @@ public RestHighClient(int connectTimeout, int maxRetryTimeoutMillis, int threadC
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>es-java-client</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">604</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">492</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-01-30, 13:30:08</p>
-        <p><span class="copy-title">最后更新:</span>2020-01-30, 14:27:54</p>
+        <p><span class="copy-title">最后更新:</span>2020-01-31, 14:06:40</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/30/elasticsearch/07-es-client/es-java-client/" title="es-java-client">https://simba-cheng.github.io/2020/01/30/elasticsearch/07-es-client/es-java-client/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
