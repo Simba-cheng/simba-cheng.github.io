@@ -6,17 +6,18 @@
   <meta name="keywords" content=" es ">
   <meta name="description" content="02-elasticsearch-基本概念 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="Elasticsearch Java Clientelasticsearch java client 分为两种：  Java Low Level Rest Client（Java 低级客户端）  Java High Level Rest Client （Java 高级客户端）   Java Low Level Rest Client（Java 低级客户端）通过Http协议与Elasticsearc">
+<meta name="keywords" content="es_client">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es-java-client">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/01/30/elasticsearch/07-es-client/es-java-client/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:description" content="Elasticsearch Java Clientelasticsearch java client 分为两种：  Java Low Level Rest Client（Java 低级客户端）  Java High Level Rest Client （Java 高级客户端）   Java Low Level Rest Client（Java 低级客户端）通过Http协议与Elasticsearc">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta property="og:updated_time" content="2020-01-31T06:06:40.930Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta name="twitter:title" content="es-java-client">
+<meta name="twitter:description" content="Elasticsearch Java Clientelasticsearch java client 分为两种：  Java Low Level Rest Client（Java 低级客户端）  Java High Level Rest Client （Java 高级客户端）   Java Low Level Rest Client（Java 低级客户端）通过Http协议与Elasticsearc">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -103,6 +104,14 @@
     
         
             
+            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
@@ -127,14 +136,6 @@
     
         
             
-            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
                 
             </li>
@@ -151,11 +152,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -174,10 +175,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
             
         
     
@@ -237,6 +234,10 @@
             
         
     
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -248,7 +249,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="43">
-<input type="hidden" id="yelog_site_word_count" value="46.8k">
+<input type="hidden" id="yelog_site_word_count" value="47.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -282,6 +283,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">MySQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
     </li>
     
@@ -294,10 +299,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">MySQL</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">问题-思考</a>
     </li>
     
@@ -306,11 +307,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -322,11 +323,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -334,11 +335,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -737,12 +738,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-01 21:35:08'>2019-09-22 19:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-01 23:13:11'>2019-09-22 19:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:2.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -761,7 +762,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实时"><span class="toc-text">实时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式"><span class="toc-text">分布式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全文"><span class="toc-text">全文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-text">集群</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群健康"><span class="toc-text">集群健康</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分片、副本"><span class="toc-text">分片、副本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分片"><span class="toc-text">分片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本"><span class="toc-text">副本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加深理解"><span class="toc-text">加深理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型"><span class="toc-text">类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文档"><span class="toc-text">文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实时"><span class="toc-text">实时</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式"><span class="toc-text">分布式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全文"><span class="toc-text">全文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#节点"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-text">集群</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#节点角色"><span class="toc-text">节点角色</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主节点-master-node"><span class="toc-text">主节点 master node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据节点-data-node"><span class="toc-text">数据节点 data node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预处理节点-ingest-node"><span class="toc-text">预处理节点 ingest node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协调节点-coordinating-node"><span class="toc-text">协调节点 coordinating node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部落节点-tribe-node"><span class="toc-text">部落节点 tribe node</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群健康"><span class="toc-text">集群健康</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分片、副本"><span class="toc-text">分片、副本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分片"><span class="toc-text">分片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本"><span class="toc-text">副本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加深理解"><span class="toc-text">加深理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型"><span class="toc-text">类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文档"><span class="toc-text">文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -784,10 +785,45 @@
 <br>
 
 <h1 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h1><p>节点是一个服务器，它是集群的一部分，存储数据，并参与集群的索引和搜索功能</p>
-<p>节点有一个名称标识，该名称在缺省情况下是在启动时分配给节点的随机全局惟一标识符（UUID）    </p>
+<p>节点有一个名称标识，该名称在缺省情况下是在启动时分配给节点的随机全局惟一标识符（UUID）</p>
 <h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><p>一个集群（cluster）由一个或多个节点（node）组成。</p>
 <p>集群中的节点，拥有相同的cluster.name；当新加入节点或删除节点，<font color="#FF4500">集群会感知并平衡数据</font>。</p>
 <p>集群中的某个节点会被选举为 主/管理节点（Master）；<font color="#FF4500">集群中的任何节点都有可能成为 主/管理节点（配置）</font>。</p>
+<h1 id="节点角色"><a href="#节点角色" class="headerlink" title="节点角色"></a>节点角色</h1><p>集群节点角色有：<strong>主节点(master node)</strong>，<strong>数据节点(data node)</strong>，<strong>预处理节点(ingest node)</strong>，<strong>协调节点(coordinating node)</strong>，<strong>部落节点(tribe node)</strong></p>
+<h2 id="主节点-master-node"><a href="#主节点-master-node" class="headerlink" title="主节点 master node"></a>主节点 master node</h2><p>主节点 负责集群层面的操作，管理集群变更。</p>
+<p>在 elasticsearch.yml 配置文件中，通过配置 node.master: true 使节点具有被选举为master的资格。</p>
+<p>主节点是全局唯一的，从有资格成为master的节点中进行选举。</p>
+<p>注意：</p>
+<pre><code>主节点也可以作为数据节点，但应该尽可能减少其工作；生产环境尽量分离 主节点 和 数据节点
+
+创建独立主节点配置：
+    elasticsearch.yml
+        node.master: true
+        node.data: false</code></pre><h2 id="数据节点-data-node"><a href="#数据节点-data-node" class="headerlink" title="数据节点 data node"></a>数据节点 data node</h2><p>数据节点 负责保存数据，执行数据的相关操作，例如：CRUD/搜索/聚合等。</p>
+<p>数据节点对 CPU 和 IO要求较高</p>
+<p>一般情况下，数据的读写流程只和数据节点打交道，除非是异常情况，才会和主节点交互。</p>
+<p>创建独立数据节点配置：</p>
+<pre><code>elasticsearch.yml
+    node.master: false
+    node.data: true
+    node.ingest: false</code></pre><h2 id="预处理节点-ingest-node"><a href="#预处理节点-ingest-node" class="headerlink" title="预处理节点 ingest node"></a>预处理节点 ingest node</h2><p><strong>预处理节点是 5.0版本开始引入的</strong></p>
+<p>它允许在写入数据之前，通过事先定义好的processes(处理器)或pipeline(管道)，对数据进行某种转换/富化</p>
+<p>processes 和 pipeline 会拦截 bulk 和 index请求，在处理后，将文档回传给 index 或 bulk api。</p>
+<p>默认情况下，是启用ingest的，</p>
+<p>创建一个仅用于预处理的节点：</p>
+<pre><code>elasticsearch.yml
+    node.master: false
+    node.data: false
+    node.ingest: true</code></pre><h2 id="协调节点-coordinating-node"><a href="#协调节点-coordinating-node" class="headerlink" title="协调节点 coordinating node"></a>协调节点 coordinating node</h2><p><del>客户端的请求可以发送到集群中任意节点，每个节点都知道任意文档所处的位置，然后转发这些请求，收集数据并返回给客户端，处理客户端请求的节点称为协调节点。</del></p>
+<p>协调节点将请求转发给保存数据的数据节点。</p>
+<p>每个数据节点在本地执行请求，并将结果返回协调节点。</p>
+<p>协调节点收集完数据，将每个数据节点的结果合并为单个全局结果，对结果收集和排序的过程可能需要很多CPU和内存资源。（存疑？？）</p>
+<p>（类似一个代理节点，转发请求并处理结果）</p>
+<p>创建一个仅用于协调的节点：</p>
+<pre><code>elasticsearch.yml
+    node.master: false
+    node.data: false
+    node.ingest: false</code></pre><h2 id="部落节点-tribe-node"><a href="#部落节点-tribe-node" class="headerlink" title="部落节点 tribe node"></a>部落节点 tribe node</h2><p><del>暂不研究</del></p>
 <h1 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h1><pre><code>集群健康有三种状态：green、yellow、red。</code></pre><p>green   所有主要分片和复制分片都可用</p>
 <p>yellow  所有主要分片可用，但不是所有复制分片都可用</p>
 <p>red    有主要分片不可用</p>
@@ -890,10 +926,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>02-elasticsearch-基本概念</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-22, 19:49:02</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-01, 21:35:08</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-01, 23:13:11</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/" title="02-elasticsearch-基本概念">https://simba-cheng.github.io/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -955,7 +991,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#MySQL','#问题-思考','#es','#es_batch','#es_query','#es_client','#es问题','#hash','#Java8','#bitmap','#布隆过滤器','#后台_其他','#设计模式',],
+            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_batch','#es_client','#es问题','#Java8','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
