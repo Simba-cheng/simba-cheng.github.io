@@ -103,14 +103,6 @@
     
         
             
-            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
@@ -119,7 +111,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
                 
             </li>
             
@@ -128,6 +120,14 @@
         
             
             <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
             
@@ -282,19 +282,19 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">MySQL</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color1">MySQL</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -338,11 +338,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <div class="clearfix"></div>
@@ -737,7 +737,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-02 15:02:12'>2019-09-22 19:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-05 11:37:36'>2019-09-22 19:49</time>
         
     </div>
     <div class="article-meta">
@@ -776,7 +776,7 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Elasticsearch是一个实时分布式搜索分析引擎，它基于Apache Lucene。</p>
+        <p>Elasticsearch是一个实时分布式全文搜索引擎，它基于Apache Lucene。</p>
 <h1 id="实时"><a href="#实时" class="headerlink" title="实时"></a>实时</h1><p>何谓实时？</p>
 <p>新增到 elasticsearch 中的数据在1秒后就可以被检索到，这种 新增数据对搜索的可见行称为”准实时搜索”</p>
 <h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><p>分布式意味着可以动态调整集群规模，弹性扩容，而且操作起来非常简便。</p>
@@ -928,7 +928,7 @@
         <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-22, 19:49:02</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-02, 15:02:12</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-05, 11:37:36</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/" title="02-elasticsearch-基本概念">https://simba-cheng.github.io/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -990,7 +990,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_client','#es_batch','#es问题','#Java8','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
+            'data': ['#索引','#MySQL','#资料','#Markdown','#问题-思考','#es','#es_query','#es_client','#es_batch','#es问题','#Java8','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
