@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
@@ -127,6 +135,14 @@
     
         
             
+            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(23)</small></div>
                 
                     <ul class="sub hide">
@@ -135,11 +151,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -158,26 +174,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
             
         
     
@@ -222,6 +218,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -282,6 +282,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">MySQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">索引</a>
     </li>
     
@@ -294,23 +298,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">MySQL</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">问题-思考</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -322,11 +322,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -895,7 +895,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#es','#MySQL','#问题-思考','#es_batch','#es_query','#es_client','#es问题','#hash','#Java8','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
+            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_batch','#es_client','#es问题','#Java8','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
