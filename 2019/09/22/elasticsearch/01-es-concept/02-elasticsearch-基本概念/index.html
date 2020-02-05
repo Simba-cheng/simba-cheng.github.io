@@ -103,7 +103,7 @@
     
         
             
-            <li><div data-rel="索引">索引<small>(2)</small></div>
+            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
                 
             </li>
             
@@ -111,7 +111,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="索引">索引<small>(2)</small></div>
                 
             </li>
             
@@ -127,7 +127,7 @@
     
         
             
-            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
             
@@ -151,11 +151,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
@@ -203,11 +203,11 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
                             
                         </li>
                             
@@ -248,7 +248,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="43">
-<input type="hidden" id="yelog_site_word_count" value="47.7k">
+<input type="hidden" id="yelog_site_word_count" value="47.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -282,11 +282,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">MySQL</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -294,7 +294,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">MySQL</a>
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -306,11 +306,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -322,15 +322,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -339,10 +343,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <div class="clearfix"></div>
@@ -737,12 +737,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-05 22:53:18'>2019-09-22 19:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-05 22:59:11'>2019-09-22 19:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.3k</span>
+        <span>字数:2.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -843,7 +843,11 @@
 <p>我们的文档被存储到分片内，应用程序直接与索引交互而不是分片。</p>
 <p>分片是数据的容器，文档保存在分片内，分片又被分配到集群中的各个节点中。</p>
 <p>elasticsearch 将分片区分成两部分，即 <strong>主分片</strong> 和 <strong>副本分片</strong>。</p>
+<br>
+
 <p><strong>索引内任意一个文档都归属于一个主分片，所以 主分片的数量决定了索引能够保存的最大数据量。</strong></p>
+<p>一个副本分片只是一个主分片的拷贝。<strong>副本分片作为故障时保护数据不丢失的冗余备份</strong>，并且为搜索/读操作提供服务。</p>
+<p>注意：索引建立的时候就已经确定主分片数量，索引建立后不可更改，但副本分片数量可以随时更改。</p>
 <h2 id="主分片"><a href="#主分片" class="headerlink" title="主分片"></a>主分片</h2><p>主分片：作为权威数据，写过程中 先写主分片，成功后再写副本分片；恢复阶段以主分片为准。</p>
 <h2 id="副本分片"><a href="#副本分片" class="headerlink" title="副本分片"></a>副本分片</h2><p>副本指的是主分片的副本，是shard的复制（分片的冗余备份，防止某个分片挂了，数据丢失）</p>
 <p>副本之所以重要，主要有两个原因：</p>
@@ -931,10 +935,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>02-elasticsearch-基本概念</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">2.3k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">2.4k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-22, 19:49:02</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-05, 22:53:18</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-05, 22:59:11</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/" title="02-elasticsearch-基本概念">https://simba-cheng.github.io/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -996,7 +1000,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#MySQL','#问题-思考','#es','#es_batch','#es_query','#es_client','#es问题','#hash','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
+            'data': ['#MySQL','#索引','#资料','#Markdown','#问题-思考','#es','#es_query','#es_batch','#es_client','#es问题','#Java8','#hash','#bitmap','#布隆过滤器','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
