@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>elasticsearch-文档更新</title>
+      <link href="/2020/02/06/elasticsearch/05-es-update/elasticsearch-%E6%96%87%E6%A1%A3%E6%9B%B4%E6%96%B0/"/>
+      <url>/2020/02/06/elasticsearch/05-es-update/elasticsearch-%E6%96%87%E6%A1%A3%E6%9B%B4%E6%96%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="查询更新"><a href="#查询更新" class="headerlink" title="查询更新"></a>查询更新</h1><p>最近有个需求，需要 elasticsearch对文档进行局部更新，而且并不知道被更新文档的id。</p><p>但是有能够定位到文档的其他字段信息，于是那些用id去定位文档的方法就不能用了。</p><p>翻API的时候看到了，update_by_query：查询更新</p><p>查询更新，顾名思义；先根据查询条件进行查询，查询出结果了，再对文档进行更新内容。</p><br><p>这个查询更新API可以用来批量更新，需求需要</p><p>我先用条件精确查询出文档，然后再进行更新</p><p>DSL样例</p><pre><code>POST /books/book/_update_by_query{  &quot;query&quot;: {    &quot;bool&quot;: {      &quot;must&quot;: [        {          &quot;term&quot;: {            &quot;_id&quot;: {              &quot;value&quot;: &quot;60&quot;            }          }        }      ]    }  },  &quot;script&quot;: {    &quot;source&quot;: &quot;ctx._source[&apos;author&apos;]=&apos;张立波2222&apos;&quot;  }}</code></pre><p>Java-RestHighLevelClient</p><pre><code>/** * 查询更新(局部更新) * &lt;p&gt; * queryParam 例子： * &lt;p&gt; * &lt;code&gt; * Map&lt;String, Object&gt; objectMap = new HashMap&lt;&gt;();&lt;br&gt; * objectMap.put(&quot;news_id&quot;, &quot;143851577156830217&quot;);&lt;br&gt; * objectMap.put(&quot;category.keyword&quot;, &quot;社会&quot;);&lt;br&gt; * &lt;/code&gt; * &lt;p&gt; * 当查询key为中文时,需要加&apos;.keyword&apos;精确查询，否则中文默认分词 * * @param index       索引 * @param type        类型 * @param queryParam  查询条件 * @param updateKey   更新key * @param updateValue 更新value值 */public BulkByScrollResponse updateDocumentByQuery(String index, String type, Map&lt;String, Object&gt; queryParam, String updateKey, String updateValue) {    //query condition    BoolQueryBuilder queryBuilder = new BoolQueryBuilder();    queryParam.forEach((k, v) -&gt; queryBuilder.must(QueryBuilders.termQuery(k, v)));    //update condition    Script updateScript = new Script(&quot;ctx._source[&apos;&quot; + updateKey + &quot;&apos;]=&apos;&quot; + updateValue + &quot;&apos;&quot;);    //assemble    UpdateByQueryRequest updateByQueryRequest = new UpdateByQueryRequest();    updateByQueryRequest.indices(index);    updateByQueryRequest.setDocTypes(type);    updateByQueryRequest.setQuery(queryBuilder);    updateByQueryRequest.setScript(updateScript);    return elasticsearchActionImpl.execute(            (RestHighLevelClient restHighLevelClient) -&gt; restHighLevelClient.updateByQuery(updateByQueryRequest, RequestOptions.DEFAULT));}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+          <category> es_update </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es_update </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12-elasticsearch-别名</title>
+      <link href="/2020/02/06/elasticsearch/01-es-concept/12-elasticsearch-%E5%88%AB%E5%90%8D/"/>
+      <url>/2020/02/06/elasticsearch/01-es-concept/12-elasticsearch-%E5%88%AB%E5%90%8D/</url>
+      
+        <content type="html"><![CDATA[<p>elasticsearch索引别名</p><p>在 <a href="https://simba-cheng.cn/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-%E7%B4%A2%E5%BC%95-%E5%90%8D%E8%AF%8D/" target="_blank" rel="noopener">《04-elasticsearch-索引_名词》</a>中大概了解索引别名的使用场景</p><p>为了在不停服务的情况下增加容量，实现零停机，使用索引别名是一个很好的解决方案</p><pre><code>1.创建一个新的索引存储新的数据2.同时搜索两个索引来获取新数据和旧数据</code></pre><p>使用别名的话，对于查询系统而言，添加一个新索引，是毫无感觉的。    </p><h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>创建几个名字差不多的索引，my_index_1/my_index_2</p><pre><code>PUT /my_index_1{  &quot;settings&quot;: {    &quot;number_of_shards&quot;: 5,    &quot;number_of_replicas&quot;: 1  },  &quot;mappings&quot;: {    &quot;my_index_type&quot;: {      &quot;properties&quot;: {        &quot;bookId&quot;: {          &quot;type&quot;: &quot;long&quot;        },        &quot;bookName&quot;: {          &quot;type&quot;: &quot;text&quot;        },        &quot;publishDate&quot;: {          &quot;type&quot;: &quot;date&quot;        }      }    }  }}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/multiple-indices.html" target="_blank" rel="noopener">多索引</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> es </category>
+          
+          <category> es_相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>11-elasticsearch-分片</title>
       <link href="/2020/02/05/elasticsearch/01-es-concept/11-elasticsearch-%E5%88%86%E7%89%87/"/>
       <url>/2020/02/05/elasticsearch/01-es-concept/11-elasticsearch-%E5%88%86%E7%89%87/</url>
