@@ -103,7 +103,7 @@
     
         
             
-            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
             
@@ -119,7 +119,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -127,7 +127,7 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
                 
             </li>
             
@@ -143,15 +143,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="es_update">es_update<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_query">es_query<small>(7)</small></div>
                             
                         </li>
                             
@@ -178,6 +178,10 @@
             <li><div data-rel="问题-思考">问题-思考<small>(2)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -241,10 +245,6 @@
             
         
     
-        
-            
-        
-    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -256,7 +256,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="46">
-<input type="hidden" id="yelog_site_word_count" value="49.5k">
+<input type="hidden" id="yelog_site_word_count" value="49.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -290,7 +290,7 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">MySQL</a>
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -298,11 +298,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">MySQL</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -314,15 +314,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_update</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -334,11 +334,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -346,15 +350,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <div class="clearfix"></div>
@@ -989,7 +989,7 @@ T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#Markdown','#资料','#es','#问题-思考','#es_query','#es_batch','#es_update','#es_client','#es问题','#Java8','#hash','#bitmap','#设计模式','#后台_其他','#布隆过滤器',],
+            'data': ['#Markdown','#索引','#资料','#MySQL','#es','#问题-思考','#es_batch','#es_update','#es_query','#es_client','#es问题','#hash','#Java8','#布隆过滤器','#bitmap','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
