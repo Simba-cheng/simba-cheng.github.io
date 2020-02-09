@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>07-elasticsearch-索引_动词 | Simba</title>
-  <meta name="keywords" content=" es ">
-  <meta name="description" content="07-elasticsearch-索引_动词 | Simba">
+  <title>Flink预研 | Simba</title>
+  <meta name="keywords" content=" 问题-思考 ">
+  <meta name="description" content="Flink预研 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -779,9 +779,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/01-es-concept/07-elasticsearch-索引-动词" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-问题-思考/Flink预研" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">07-elasticsearch-索引_动词</h1>
+        <h1 class="article-title">Flink预研</h1>
     
     <div class="article-meta">
         
@@ -789,28 +789,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="es">es</a>/
-            
-                <a href="javascript:" data-rel="es_相关">es_相关</a>
+                <a href="javascript:" data-rel="问题-思考">问题-思考</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">es</a>
+            <a href="javascript:" class="color1">问题-思考</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-11-12 20:08:28'>2019-09-25 23:17</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-09 22:38:44'>2020-02-09 13:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:599</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -829,7 +827,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通创建方式并使用自己的ID"><span class="toc-text">普通创建方式并使用自己的ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自增ID"><span class="toc-text">自增ID</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个新文档"><span class="toc-text">创建一个新文档</span></a>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#业务描述"><span class="toc-text">业务描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问题点"><span class="toc-text">问题点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flink"><span class="toc-text">Flink</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思考-分析"><span class="toc-text">思考/分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -844,38 +842,70 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>索引（动词）：</p>
-<pre><code>&quot;索引一份文档&quot; 表示把一个文档存储到索引(名词)里，以便它可以被检索或查询。
+        <p>Flink预研这篇我将其放在了”问题-思考”一栏中。 </p>
+<p>因为更多的是基于目前工作中的业务，思考Flink在目前业务场景中应用的思考。</p>
+<h1 id="业务描述"><a href="#业务描述" class="headerlink" title="业务描述"></a>业务描述</h1><p>系统A：对外提供查询服务（查询es/solr）</p>
+<p>系统B：kafka接收上游原始数据，对其进行转换/富化，落库/写es(solr)，供系统A查询</p>
+<p>系统C：系统B的上游，通过kafka推送数据与系统B交互</p>
+<p>系统B生产环境有8台机器。</p>
+<br>
 
-这很像SQL中的insert关键字，差别是，如果文档已经存在，新的文档回覆盖旧的文档。</code></pre><p>使用put，向es中索引(创建)一个文档。</p>
-<p>文档通过 _index 、 _type 、_id唯一确定，我们可以自己提供一个_id，也可以让es为我们生成</p>
-<h2 id="普通创建方式并使用自己的ID"><a href="#普通创建方式并使用自己的ID" class="headerlink" title="普通创建方式并使用自己的ID"></a>普通创建方式并使用自己的ID</h2><p>选择的索引叫做”demo”，类型叫做”testData”，自己选择的id是”123”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">put /demo/testDate/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx1&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;22&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">put /demo/testDate/2</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx2&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;23&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>响应报文</strong></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"2"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文指出请求的索引已经被成功创建，这个索引中包含了元数据以及一个新元素：_version。</p>
-<p>es中每个文档都有版本号，每当文档变化(包括删除)都会使_version增加。</p>
-<h2 id="自增ID"><a href="#自增ID" class="headerlink" title="自增ID"></a>自增ID</h2><p>让es自动为我们生成_id。</p>
-<p>请求结构发生了变化，不再使用 PUT 方法，而是 POST 方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">post /demo/testDate/</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx3&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;24&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing3&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"AWwo2-6G-lkrji9etDrN"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文和上面的没有什么区别，只是_id变成了自动生成的值。</p>
-<h1 id="创建一个新文档"><a href="#创建一个新文档" class="headerlink" title="创建一个新文档"></a>创建一个新文档</h1><p>当索引一个文档时，我们如何确定是完成创建了一个新的文档 还是 覆盖了一个已经存在的呢？</p>
-<p>最简单的方式是使用es自动生成唯一的id。</p>
-<p>如果非要使用自定义的id，可以使用下面的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /demo/testDate/4/_create</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;cyx444&quot;,</span><br><span class="line">  &quot;age&quot;:&quot;444&quot;,</span><br><span class="line">  &quot;address&quot;:&quot;nanjing444&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>响应报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span>: <span class="string">"demo"</span>,</span><br><span class="line">  <span class="attr">"_type"</span>: <span class="string">"testDate"</span>,</span><br><span class="line">  <span class="attr">"_id"</span>: <span class="string">"4"</span>,</span><br><span class="line">  <span class="attr">"_version"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"result"</span>: <span class="string">"created"</span>,</span><br><span class="line">  <span class="attr">"_shards"</span>: &#123;</span><br><span class="line">    <span class="attr">"total"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"successful"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"failed"</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"created"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果id存在，则会出现下面的报文</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"error"</span>: &#123;</span><br><span class="line">    <span class="attr">"root_cause"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"version_conflict_engine_exception"</span>,</span><br><span class="line">        <span class="attr">"reason"</span>: <span class="string">"[testDate][3]: version conflict, document already exists (current version [1])"</span>,</span><br><span class="line">        <span class="attr">"index_uuid"</span>: <span class="string">"y4Q0O4w1QgSnSqYUOg956Q"</span>,</span><br><span class="line">        <span class="attr">"shard"</span>: <span class="string">"4"</span>,</span><br><span class="line">        <span class="attr">"index"</span>: <span class="string">"demo"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"version_conflict_engine_exception"</span>,</span><br><span class="line">    <span class="attr">"reason"</span>: <span class="string">"[testDate][3]: version conflict, document already exists (current version [1])"</span>,</span><br><span class="line">    <span class="attr">"index_uuid"</span>: <span class="string">"y4Q0O4w1QgSnSqYUOg956Q"</span>,</span><br><span class="line">    <span class="attr">"shard"</span>: <span class="string">"4"</span>,</span><br><span class="line">    <span class="attr">"index"</span>: <span class="string">"demo"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"status"</span>: <span class="number">409</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>系统C会有 实时/全量 两种类型的推送。</p>
+<p>实时类型：就是上游收到参数变更，实时下发，这个没啥解释的。</p>
+<p>全量类型：推送收集到的第二天的数据，其中全量类型为定时任务，细分为三个定时任务：全量/增量/补救，它们的执行时间都是分散的</p>
+<p>流程图如下</p>
+<p><img src="//simba-cheng.github.io/2020/02/09/问题-思考/Flink预研/%E6%B5%81%E7%A8%8B%E5%9B%BE-1.png" alt="流程图-1" title="流程图-1"></p>
+<p>实时推送的数据量不会太大，这个没问题。</p>
+<p>主要是全量数据的推送，数据量会很大。</p>
+<p>而且由于业务的特殊性，上游推送过来一条数据，系统B转换/富化后，到落库、写es(solr)里，就是10条数据，1:10(有些业务更多)</p>
+<p>当时一开始的消费时间是 三个小时～四个小时</p>
+<p>于是开始了持续业务和技术优化，技术方面的优化主要是代码层面和底层基础组件(solr切换es)。</p>
+<p>终于在去年双十一之前，处理时间降到了一个小时左右。</p>
+<p>由于定时任务时间的特殊性(晚上八点)，在双十一之前，还做了一个方案的调整。</p>
+<p>将全量数据的推送，划分成三个子任务，分别在四点、六点、八点执行，以此防止八点一次性全部推送过来，数据堆积问题。</p>
+<h1 id="问题点"><a href="#问题点" class="headerlink" title="问题点"></a>问题点</h1><p>随着业务扩张、海量商品扩充，可以预见，系统B的处理模式似乎快要达到瓶颈；</p>
+<p>而且上游C系统，也不可能跟随业务拓展，一直加topic和定时任务。</p>
+<pre><code>因为从业务区分来说，不同数据源走不同的topic</code></pre><p>所以，基于现有业务，进行预研。</p>
+<h1 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h1><p>很早时候，中心内部曾有一次Flink的内部分享，嗯～…讲的不是很好..而且当时也没有想那么远，所以没放心上。</p>
+<p>直到之前，参加一个大需求的系统方案评审，发现他们使用了Flink进行流式业务处理。</p>
+<p>这才引起我的兴趣，看看Flink是否能用在现有业务中。</p>
+<p>简短的看下，官方介绍中的Flink的应用场景</p>
+<ol>
+<li>事件驱动型应用</li>
+</ol>
+<p>从一个或多个事件流提取数据，并根据到来的事件触发计算、状态更新或其他外部动作。</p>
+<p>典型实例：</p>
+<pre><code>反欺诈
+异常检测
+基于规则的报警
+业务流程监控
+社交网站Web应用</code></pre><ol start="2">
+<li>数据分析应用</li>
+</ol>
+<p>从原始数据中提取有价值的信息和指标。</p>
+<p>典型实例：</p>
+<pre><code>电信网络质量监控
+移动应用中的产品更新及实验评估分析
+消费者技术中的实时数据即席分析
+大规模图分析</code></pre><ol start="3">
+<li>数据管道应用</li>
+</ol>
+<p>提取-转换-加载（ETL）是一种在存储系统之间进行数据转换和迁移的常用方法</p>
+<p>数据管道和 ETL 作业的用途相似，都可以转换、丰富数据，并将其从某个存储系统移动到另一个。</p>
+<p>但数据管道是以持续流模式运行，而非周期性触发。</p>
+<p>典型实例：</p>
+<pre><code>实时查询索引构建
+持续ETL</code></pre><h1 id="思考-分析"><a href="#思考-分析" class="headerlink" title="思考/分析"></a>思考/分析</h1><p>简单思考分析一下。</p>
+<p>目前看，Flink的数据管道应用场景，感觉比较贴合我目前的业务场景。</p>
+<p>(事件驱动场景还要再想想…)</p>
+<p>以前上游，收集到第二天的数据，都是集中式(批量)推送给我的。</p>
+<p>如果采用Flink数据管道，那就可以实时推送第二天的数据。</p>
+<p>只是要在报文设计上面花些心思。</p>
+<p>虽然将大的定时任务，拆分成小的子任务，也是一个解决办法；但这个解决方案并不优雅。</p>
+<p>先预研下看看</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://flink.apache.org/zh/usecases.html#eventDrivenApps" target="_blank" rel="noopener">Apache Flink 应用场景</a></li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -889,12 +919,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>07-elasticsearch-索引_动词</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">599</span></p>
+        <p><span class="copy-title">文章标题:</span>Flink预研</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:19</p>
-        <p><span class="copy-title">最后更新:</span>2019-11-12, 20:08:28</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/elasticsearch/01-es-concept/07-elasticsearch-索引-动词/" title="07-elasticsearch-索引_动词">https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/07-elasticsearch-索引-动词/</a>
+        <p><span class="copy-title">发布时间:</span>2020-02-09, 13:17:18</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-09, 22:38:44</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/09/问题-思考/Flink预研/" title="Flink预研">https://simba-cheng.github.io/2020/02/09/问题-思考/Flink预研/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
