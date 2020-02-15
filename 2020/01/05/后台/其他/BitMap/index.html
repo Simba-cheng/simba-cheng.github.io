@@ -6,17 +6,21 @@
   <meta name="keywords" content=" bitmap ">
   <meta name="description" content="BitMap | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="Flink部署模式有三种：Local本地部署，Standalone Cluster集群部署，Flink ON YARN 这里有现成的三台虚拟机，也不需要Hadoop，所以只看 Standalone Cluster集群部署。 SSH，机器之间免密配置，JDK什么的，就不赘述了Flink版本我选择的是1.8.3 Flink下载：flink-1.8.3-bin-scala_2.11.tgz Standa">
+<meta name="keywords" content="flink">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink集群搭建">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/02/09/flink/集群/flink集群搭建/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:description" content="Flink部署模式有三种：Local本地部署，Standalone Cluster集群部署，Flink ON YARN 这里有现成的三台虚拟机，也不需要Hadoop，所以只看 Standalone Cluster集群部署。 SSH，机器之间免密配置，JDK什么的，就不赘述了Flink版本我选择的是1.8.3 Flink下载：flink-1.8.3-bin-scala_2.11.tgz Standa">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/02/09/flink/集群/flink集群搭建/flink%E9%9B%86%E7%BE%A4-%E5%90%AF%E5%8A%A8.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/02/09/flink/集群/flink集群搭建/flink-jps.png">
+<meta property="og:updated_time" content="2020-02-09T04:43:52.050Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta name="twitter:title" content="flink集群搭建">
+<meta name="twitter:description" content="Flink部署模式有三种：Local本地部署，Standalone Cluster集群部署，Flink ON YARN 这里有现成的三台虚拟机，也不需要Hadoop，所以只看 Standalone Cluster集群部署。 SSH，机器之间免密配置，JDK什么的，就不赘述了Flink版本我选择的是1.8.3 Flink下载：flink-1.8.3-bin-scala_2.11.tgz Standa">
+<meta name="twitter:image" content="https://simba-cheng.github.io/2020/02/09/flink/集群/flink集群搭建/flink%E9%9B%86%E7%BE%A4-%E5%90%AF%E5%8A%A8.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -103,6 +107,30 @@
     
         
             
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="索引">索引<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(25)</small></div>
                 
                     <ul class="sub hide">
@@ -136,30 +164,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="索引">索引<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -310,7 +314,7 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -318,11 +322,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -366,19 +370,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">bitmap</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1851,7 +1855,7 @@ public static void testBitSet() {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#es','#索引','#Markdown','#资料','#MySQL','#问题-思考','#es_batch','#es_query','#es_update','#es_client','#es问题','#flink','#hash','#Java8','#布隆过滤器','#bitmap','#设计模式','#后台_其他',],
+            'data': ['#Markdown','#索引','#资料','#es','#MySQL','#问题-思考','#es_batch','#es_query','#es_update','#es_client','#es问题','#flink','#hash','#Java8','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
