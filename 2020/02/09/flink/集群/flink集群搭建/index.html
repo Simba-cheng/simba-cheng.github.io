@@ -119,7 +119,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -127,7 +127,7 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
             
@@ -155,6 +155,10 @@
                             
                         </li>
                             
+                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
@@ -167,10 +171,6 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="es_index">es_index<small>(1)</small></div>
                             
                         </li>
@@ -178,6 +178,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -214,10 +218,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
             
         
     
@@ -318,11 +318,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -335,6 +335,10 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -354,10 +358,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -370,11 +370,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -972,7 +972,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_query','#es_batch','#es_client','#es问题','#flink','#es_update','#Java8','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式',],
+            'data': ['#MySQL','#索引','#资料','#Markdown','#问题-思考','#es','#es_query','#es_update','#es_batch','#es_client','#es问题','#flink','#Java8','#hash','#bitmap','#布隆过滤器','#后台_其他','#设计模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
