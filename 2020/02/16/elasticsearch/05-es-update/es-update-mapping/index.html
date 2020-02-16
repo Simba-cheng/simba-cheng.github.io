@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>11-elasticsearch-别名 | Simba</title>
-  <meta name="keywords" content=" es ">
-  <meta name="description" content="11-elasticsearch-别名 | Simba">
+  <title>es-update_mapping | Simba</title>
+  <meta name="keywords" content=" es_update ">
+  <meta name="description" content="es-update_mapping | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:type" content="website">
@@ -795,9 +795,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/01-es-concept/11-elasticsearch-别名" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-elasticsearch/05-es-update/es-update-mapping" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">11-elasticsearch-别名</h1>
+        <h1 class="article-title">es-update_mapping</h1>
     
     <div class="article-meta">
         
@@ -807,26 +807,26 @@
             
                 <a href="javascript:" data-rel="es">es</a>/
             
-                <a href="javascript:" data-rel="es_相关">es_相关</a>
+                <a href="javascript:" data-rel="es_update">es_update</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">es</a>
+            <a href="javascript:" class="color5">es_update</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-07 14:46:03'>2020-02-06 11:41</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-16 22:38:50'>2020-02-16 22:37</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:974</span>
+        <span>字数:869</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -845,7 +845,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#效率"><span class="toc-text">效率</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#官方示例"><span class="toc-text">官方示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -860,206 +860,158 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在<a href="https://simba-cheng.cn/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-%E7%B4%A2%E5%BC%95-%E5%90%8D%E8%AF%8D/" target="_blank" rel="noopener">《04-elasticsearch-索引_名词》</a>中介绍了别名</p>
-<p>别名可以映射到多个索引。</p>
-<p>别名不能与索引的名字一样。</p>
-<p>为了在不停服务的情况下增加容量，实现零停机，使用索引别名是一个很好的解决方案</p>
-<pre><code>1.创建一个新的索引存储新的数据
-
-2.同时搜索两个索引来获取新数据和旧数据</code></pre><p>使用别名的话，对于查询系统而言，添加一个新索引，是毫无感觉的。    </p>
-<h1 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h1><p>使用别名的效率和直接索引效率一样吗？</p>
-<p>它们的效率是一致的。</p>
-<p>前提是，别名和索引都指向相同的数据。</p>
-<p>因为，索引别名只是 物理索引的软连接而已。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>创建几个名字差不多的索引，my_index_1/my_index_2</p>
-<pre><code>PUT /my_index_1
+        <p>已存在的索引mapping，新增字段，并设置初始值</p>
+<p>新建测试索引</p>
+<pre><code>PUT /my_test_index
 {
   &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 5,
-    &quot;number_of_replicas&quot;: 1
+    &quot;number_of_shards&quot;: 4
   },
   &quot;mappings&quot;: {
-    &quot;my_index_type&quot;: {
+    &quot;my_test_type&quot;: {
       &quot;properties&quot;: {
-        &quot;bookId&quot;: {
-          &quot;type&quot;: &quot;long&quot;
+        &quot;goodsCmdCode&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
         },
-        &quot;bookName&quot;: {
+        &quot;goodsPriceUrl&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;goodsTitle&quot;: {
           &quot;type&quot;: &quot;text&quot;
         },
-        &quot;publishDate&quot;: {
-          &quot;type&quot;: &quot;date&quot;
+        &quot;userId&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;userPrice&quot;: {
+          &quot;type&quot;: &quot;integer&quot;
         }
       }
     }
   }
-}</code></pre><p>设置索引别名：my_index，并指向my_index_1/my_index_2</p>
-<pre><code>PUT /my_index_1/_alias/my_index
+}</code></pre><p>插入测试数据</p>
+<pre><code>POST /my_test_index/my_test_type/_bulk
+{&quot;index&quot;:{&quot;_id&quot;:1}}
+{&quot;goodsCmdCode&quot;:&quot;000001&quot;,&quot;goodsPriceUrl&quot;:&quot;https://baidu.com&quot;,&quot;goodsTitle&quot;:&quot;商品1&quot;,&quot;userId&quot;:&quot;987987&quot;,&quot;userPrice&quot;:12}
+{&quot;index&quot;:{&quot;_id&quot;:2}}
+{&quot;goodsCmdCode&quot;:&quot;000002&quot;,&quot;goodsPriceUrl&quot;:&quot;https://baidu.com&quot;,&quot;goodsTitle&quot;:&quot;商品2&quot;,&quot;userId&quot;:&quot;876876&quot;,&quot;userPrice&quot;:14}
+{&quot;index&quot;:{&quot;_id&quot;:3}}
+{&quot;goodsCmdCode&quot;:&quot;000003&quot;,&quot;goodsPriceUrl&quot;:&quot;https://baidu.com&quot;,&quot;goodsTitle&quot;:&quot;商品3&quot;,&quot;userId&quot;:&quot;765765&quot;,&quot;userPrice&quot;:19}
+{&quot;index&quot;:{&quot;_id&quot;:4}}
+{&quot;goodsCmdCode&quot;:&quot;000004&quot;,&quot;goodsPriceUrl&quot;:&quot;https://baidu.com&quot;,&quot;goodsTitle&quot;:&quot;商品4&quot;,&quot;userId&quot;:&quot;654654&quot;,&quot;userPrice&quot;:11}
+{&quot;index&quot;:{&quot;_id&quot;:5}}
+{&quot;goodsCmdCode&quot;:&quot;000005&quot;,&quot;goodsPriceUrl&quot;:&quot;https://baidu.com&quot;,&quot;goodsTitle&quot;:&quot;商品5&quot;,&quot;userId&quot;:&quot;543543&quot;,&quot;userPrice&quot;:9}</code></pre><br>
 
-PUT /my_index_2/_alias/my_index</code></pre><p>通过 elasticsearch-head工具可以看到，索引名字下已经标注别名</p>
-<p><img src="//simba-cheng.github.io/2020/02/06/elasticsearch/01-es-concept/11-elasticsearch-别名/%E7%B4%A2%E5%BC%95%E5%88%AB%E5%90%8D.png" alt="索引别名-head" title="索引别名-head"></p>
-<p>查看my_index别名，指向了哪些索引</p>
-<pre><code>GET /*/_alias/my_index</code></pre><p>返回结果</p>
-<pre><code>{
-  &quot;my_index_2&quot; : {
-    &quot;aliases&quot; : {
-      &quot;my_index&quot; : { }
-    }
-  },
-  &quot;my_index_1&quot; : {
-    &quot;aliases&quot; : {
-      &quot;my_index&quot; : { }
+<p>按照两篇文章(参考资料)内容的意思，先更新mapping，添加指定字段，并设置字段类型；然后通过’update_by_query’，对字段值统一进行初始化。</p>
+<p>假设要添加一个keyword字段，goodsStatus</p>
+<p>1.添加mapping中字段类型</p>
+<pre><code>PUT /my_test_index/_mapping/my_test_type
+{
+  &quot;properties&quot;: {
+    &quot;goodsStatus&quot;:{
+      &quot;type&quot;:&quot;keyword&quot;,
+      &quot;null_value&quot;: &quot;NULL&quot;
     }
   }
-}</code></pre><p>查看my_index_1索引，指向了哪些别名</p>
-<pre><code>GET /my_index_1/_alias/*</code></pre><p>返回结果</p>
-<pre><code>{
-  &quot;my_index_1&quot; : {
-    &quot;aliases&quot; : {
-      &quot;my_index&quot; : { }
-    }
+}</code></pre><p>通过’GET /my_test_index/_mapping’命令，可以确认mapping新增字段成功。</p>
+<p>2.通过’update_by_query’API，更新所有数据，对新增字段进行初始化</p>
+<pre><code>POST /my_test_index/_update_by_query
+{
+  &quot;script&quot;: {
+    &quot;lang&quot;: &quot;painless&quot;,
+    &quot;inline&quot;: &quot;if (ctx._source.goodsStatus == null) {ctx._source.goodsStatus=&apos;01&apos;}&quot;
   }
 }</code></pre><br>
 
-<h1 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h1><p>添加索引到别名</p>
-<pre><code>POST /_aliases
-{
-    &quot;actions&quot; : [
-        { &quot;add&quot; : { &quot;index&quot; : &quot;test1&quot;, &quot;alias&quot; : &quot;alias1&quot; } }
-    ]
-}</code></pre><p>同时添加多个</p>
-<pre><code>POST /_aliases
-{
-    &quot;actions&quot; : [
-        { &quot;add&quot; : { &quot;indices&quot; : [&quot;test1&quot;, &quot;test2&quot;], &quot;alias&quot; : &quot;alias1&quot; } }
-    ]
-}
-
-或
-
-POST /_aliases
-{
-    &quot;actions&quot; : [
-        { &quot;add&quot; : { &quot;index&quot; : &quot;test1&quot;, &quot;alias&quot; : &quot;alias1&quot; } },
-        { &quot;add&quot; : { &quot;index&quot; : &quot;test2&quot;, &quot;alias&quot; : &quot;alias1&quot; } }
-    ]
-}</code></pre><p>删除别名下的索引</p>
-<pre><code>POST /_aliases
-{
-    &quot;actions&quot; : [
-        { &quot;remove&quot; : { &quot;index&quot; : &quot;test1&quot;, &quot;alias&quot; : &quot;alias1&quot; } }
-    ]
-}</code></pre><p>新增和删除可以一起</p>
-<pre><code>POST /_aliases
-{
-    &quot;actions&quot; : [
-        { &quot;remove&quot; : { &quot;index&quot; : &quot;test1&quot;, &quot;alias&quot; : &quot;alias1&quot; } },
-        { &quot;add&quot; : { &quot;index&quot; : &quot;test2&quot;, &quot;alias&quot; : &quot;alias1&quot; } }
-    ]
-}</code></pre><h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>假如现在需要新增一个字段，修改my_index_1/my_index_2的mapping。</p>
-<p>此时我们需要重新创建索引my_index_3，并设置mapping。</p>
-<p>接下来要做的是，将my_index_3加入my_index别名中，同时将my_index_1/my_index_2从my_index别名中移除。</p>
-<p>1.创建新的索引 my_index_3 和 my_index_4，并设置mapping</p>
-<pre><code>PUT /my_index_3
-{
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 5,
-    &quot;number_of_replicas&quot;: 1
+<p>通过查询命令，发现更新成功了，新增goodsStatus字段，并对其进行初始化。</p>
+<pre><code>{
+  &quot;took&quot; : 13,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 4,
+    &quot;successful&quot; : 4,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
   },
-  &quot;mappings&quot;: {
-    &quot;my_index_type&quot;: {
-      &quot;properties&quot;: {
-        &quot;bookId&quot;: {
-          &quot;type&quot;: &quot;long&quot;
-        },
-        &quot;bookName&quot;: {
-          &quot;type&quot;: &quot;text&quot;
-        },
-        &quot;publishDate&quot;: {
-          &quot;type&quot;: &quot;date&quot;
-        },
-        &quot;price&quot;:{
-          &quot;type&quot;:&quot;double&quot;
+  &quot;hits&quot; : {
+    &quot;total&quot; : 5,
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;my_test_index&quot;,
+        &quot;_type&quot; : &quot;my_test_type&quot;,
+        &quot;_id&quot; : &quot;3&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;goodsCmdCode&quot; : &quot;000003&quot;,
+          &quot;goodsStatus&quot; : &quot;01&quot;,
+          &quot;goodsPriceUrl&quot; : &quot;https://baidu.com&quot;,
+          &quot;userPrice&quot; : 19,
+          &quot;goodsTitle&quot; : &quot;商品3&quot;,
+          &quot;userId&quot; : &quot;765765&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;my_test_index&quot;,
+        &quot;_type&quot; : &quot;my_test_type&quot;,
+        &quot;_id&quot; : &quot;1&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;goodsCmdCode&quot; : &quot;000001&quot;,
+          &quot;goodsStatus&quot; : &quot;01&quot;,
+          &quot;goodsPriceUrl&quot; : &quot;https://baidu.com&quot;,
+          &quot;userPrice&quot; : 12,
+          &quot;goodsTitle&quot; : &quot;商品1&quot;,
+          &quot;userId&quot; : &quot;987987&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;my_test_index&quot;,
+        &quot;_type&quot; : &quot;my_test_type&quot;,
+        &quot;_id&quot; : &quot;2&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;goodsCmdCode&quot; : &quot;000002&quot;,
+          &quot;goodsStatus&quot; : &quot;01&quot;,
+          &quot;goodsPriceUrl&quot; : &quot;https://baidu.com&quot;,
+          &quot;userPrice&quot; : 14,
+          &quot;goodsTitle&quot; : &quot;商品2&quot;,
+          &quot;userId&quot; : &quot;876876&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;my_test_index&quot;,
+        &quot;_type&quot; : &quot;my_test_type&quot;,
+        &quot;_id&quot; : &quot;4&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;goodsCmdCode&quot; : &quot;000004&quot;,
+          &quot;goodsStatus&quot; : &quot;01&quot;,
+          &quot;goodsPriceUrl&quot; : &quot;https://baidu.com&quot;,
+          &quot;userPrice&quot; : 11,
+          &quot;goodsTitle&quot; : &quot;商品4&quot;,
+          &quot;userId&quot; : &quot;654654&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;my_test_index&quot;,
+        &quot;_type&quot; : &quot;my_test_type&quot;,
+        &quot;_id&quot; : &quot;5&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;goodsCmdCode&quot; : &quot;000005&quot;,
+          &quot;goodsStatus&quot; : &quot;01&quot;,
+          &quot;goodsPriceUrl&quot; : &quot;https://baidu.com&quot;,
+          &quot;userPrice&quot; : 9,
+          &quot;goodsTitle&quot; : &quot;商品5&quot;,
+          &quot;userId&quot; : &quot;543543&quot;
         }
       }
-    }
+    ]
   }
-}
-
-PUT /my_index_4
-{
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 5,
-    &quot;number_of_replicas&quot;: 1
-  },
-  &quot;mappings&quot;: {
-    &quot;my_index_type&quot;: {
-      &quot;properties&quot;: {
-        &quot;bookId&quot;: {
-          &quot;type&quot;: &quot;long&quot;
-        },
-        &quot;bookName&quot;: {
-          &quot;type&quot;: &quot;text&quot;
-        },
-        &quot;publishDate&quot;: {
-          &quot;type&quot;: &quot;date&quot;
-        },
-        &quot;price&quot;:{
-          &quot;type&quot;:&quot;double&quot;
-        }
-      }
-    }
-  }
-}</code></pre><p>2.将my_index_3 和 my_index_4 索引加入 my_index别名，同时移别名下除旧的索引</p>
-<pre><code>POST /_aliases
-{
-  &quot;actions&quot;: [
-    {
-      &quot;remove&quot;: {
-        &quot;index&quot;: &quot;my_index_1&quot;,
-        &quot;alias&quot;: &quot;my_index&quot;
-      }
-    },
-    {
-      &quot;remove&quot;: {
-        &quot;index&quot;: &quot;my_index_2&quot;,
-        &quot;alias&quot;: &quot;my_index&quot;
-      }
-    },
-    {
-      &quot;add&quot;: {
-        &quot;index&quot;: &quot;my_index_3&quot;,
-        &quot;alias&quot;: &quot;my_index&quot;
-      }
-    },
-    {
-      &quot;add&quot;: {
-        &quot;index&quot;: &quot;my_index_4&quot;,
-        &quot;alias&quot;: &quot;my_index&quot;
-      }
-    }
-  ]
-}</code></pre><p>查看elasticsearch-head</p>
-<p><img src="//simba-cheng.github.io/2020/02/06/elasticsearch/01-es-concept/11-elasticsearch-别名/%E6%96%B0%E5%A2%9E-%E7%A7%BB%E9%99%A4-%E5%88%AB%E5%90%8D.png" alt="新增-移除-别名" title="新增-移除-别名"></p>
-<p>在没有重启的情况下，动态转移了底层的索引，对上层应用毫无感知。</p>
-<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>查询的话，和普通查询没有区别，只是将索引名称替换为别名（不过要注意，不建议加type）</p>
-<p>例如：</p>
-<pre><code>GET /test_alias/_search
-{
-  &quot;query&quot;: {
-    &quot;match&quot;: {
-      &quot;_id&quot;: &quot;jgHedm0BlZflrSMOm5pD&quot;
-    }
-  }
-}</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>索引的别名不是所有地方都通用，写数据的时候，需要指明物理索引的名字，不要向别名写数据。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/indices-aliases.html" target="_blank" rel="noopener">indices-aliases</a></p>
+}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><p><a href="https://elasticsearch.cn/question/1319" target="_blank" rel="noopener">elasticsearch如何为类型添加字段并赋初值</a></p>
 </li>
-<li><p><a href="https://blog.csdn.net/laoyang360/article/details/90743369" target="_blank" rel="noopener">干货 | Elasticsearch基础但非常有用的功能之一：别名</a></p>
-</li>
-<li><p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/multiple-indices.html" target="_blank" rel="noopener">多索引</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/junjiang3/p/11114521.html" target="_blank" rel="noopener">Elasticsearch索引别名使用</a></p>
+<li><p><a href="https://blog.csdn.net/qq_34624315/article/details/83084291" target="_blank" rel="noopener">elasticsearch中给已存在的mapping增加新字段并赋值</a></p>
 </li>
 </ul>
 
@@ -1075,12 +1027,12 @@ PUT /my_index_4
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>11-elasticsearch-别名</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">974</span></p>
+        <p><span class="copy-title">文章标题:</span>es-update_mapping</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">869</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-02-06, 11:41:46</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-07, 14:46:03</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/06/elasticsearch/01-es-concept/11-elasticsearch-别名/" title="11-elasticsearch-别名">https://simba-cheng.github.io/2020/02/06/elasticsearch/01-es-concept/11-elasticsearch-别名/</a>
+        <p><span class="copy-title">发布时间:</span>2020-02-16, 22:37:41</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-16, 22:38:50</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/16/elasticsearch/05-es-update/es-update-mapping/" title="es-update_mapping">https://simba-cheng.github.io/2020/02/16/elasticsearch/05-es-update/es-update-mapping/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
