@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-%E6%98%A0%E5%B0%84-Mapping/</loc>
+    
+    <lastmod>2020-02-16T10:28:25.690Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://simba-cheng.github.io/2019/09/24/relatedData/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0_%E8%B5%84%E6%96%99%E5%90%88%E9%9B%86/</loc>
+    
+    <lastmod>2020-02-16T10:24:24.972Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2019/10/26/elasticsearch/07-es-client/es-java-restClient-sniffer%E5%97%85%E6%8E%A2%E5%99%A8/</loc>
     
     <lastmod>2020-02-16T07:49:34.141Z</lastmod>
@@ -19,13 +33,6 @@
     <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-query/01-es-query-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-02-15T14:57:37.954Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/24/relatedData/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0_%E8%B5%84%E6%96%99%E5%90%88%E9%9B%86/</loc>
-    
-    <lastmod>2020-02-15T14:12:59.662Z</lastmod>
     
   </url>
   
@@ -110,13 +117,6 @@
     <loc>https://simba-cheng.github.io/2020/01/29/elasticsearch/es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/</loc>
     
     <lastmod>2020-01-29T11:44:39.984Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-%E6%98%A0%E5%B0%84-Mapping/</loc>
-    
-    <lastmod>2020-01-15T23:55:50.972Z</lastmod>
     
   </url>
   

@@ -127,6 +127,14 @@
     
         
             
+            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(26)</small></div>
                 
                     <ul class="sub hide">
@@ -139,7 +147,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
                             
                         </li>
                             
@@ -147,7 +155,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
                             
                         </li>
                             
@@ -168,14 +176,6 @@
         
             
             <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
                 
             </li>
             
@@ -322,6 +322,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">问题-思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">es</a>
     </li>
     
@@ -330,15 +334,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">问题-思考</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -346,7 +346,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1122,7 +1122,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#es','#MySQL','#问题-思考','#es_batch','#es_update','#es_client','#es_query','#es问题','#hash','#flink','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
+            'data': ['#索引','#Markdown','#资料','#问题-思考','#es','#MySQL','#es_batch','#es_query','#es_client','#es_update','#es问题','#hash','#flink','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

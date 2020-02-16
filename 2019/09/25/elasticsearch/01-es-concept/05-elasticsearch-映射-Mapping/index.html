@@ -127,6 +127,14 @@
     
         
             
+            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(26)</small></div>
                 
                     <ul class="sub hide">
@@ -139,7 +147,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
+                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
                             
                         </li>
                             
@@ -147,7 +155,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                        <li><div data-rel="es_update">es_update<small>(1)</small></div>
                             
                         </li>
                             
@@ -168,14 +176,6 @@
         
             
             <li><div data-rel="MySQL">MySQL<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
                 
             </li>
             
@@ -322,6 +322,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">问题-思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">es</a>
     </li>
     
@@ -330,15 +334,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">问题-思考</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -346,7 +346,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -813,12 +813,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-16 07:55:50'>2019-09-25 23:17</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-16 18:28:25'>2019-09-25 23:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.9k</span>
+        <span>字数:2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -936,7 +936,8 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     </tr>
 </table>
 
-<h2 id="字段-属性"><a href="#字段-属性" class="headerlink" title="字段 属性"></a>字段 属性</h2><h3 id="核心类型"><a href="#核心类型" class="headerlink" title="核心类型"></a>核心类型</h3><table>
+<h2 id="字段-属性"><a href="#字段-属性" class="headerlink" title="字段 属性"></a>字段 属性</h2><p>注意：</p>
+<pre><code>String类型在ElasticSearch旧版本中使用较多，从ElasticSearch5.X开始不再支持String，由text和keyword类型代替。</code></pre><h3 id="核心类型"><a href="#核心类型" class="headerlink" title="核心类型"></a>核心类型</h3><table>
     <tr>
         <td>分类</td> 
         <td>字段类型</td>
@@ -962,11 +963,11 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     </tr>
     <tr>
         <td>short</td>
-        <td>16位整数</td>
+        <td>16位整数（-32768~32767）</td>
     </tr>
     <tr>
         <td>byte</td>
-        <td>8位整数</td>
+        <td>8位整数（-128~127）</td>
     </tr>
     <tr>
         <td>double</td>
@@ -1155,10 +1156,10 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>05-elasticsearch-映射_Mapping</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:15</p>
-        <p><span class="copy-title">最后更新:</span>2020-01-16, 07:55:50</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-16, 18:28:25</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-映射-Mapping/" title="05-elasticsearch-映射_Mapping">https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-映射-Mapping/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1220,7 +1221,7 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#索引','#Markdown','#资料','#es','#MySQL','#问题-思考','#es_batch','#es_update','#es_client','#es_query','#es问题','#hash','#flink','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
+            'data': ['#索引','#Markdown','#资料','#问题-思考','#es','#MySQL','#es_batch','#es_query','#es_client','#es_update','#es问题','#hash','#flink','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
