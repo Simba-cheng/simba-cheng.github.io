@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/02/18/elasticsearch/01-es-concept/es-analysis-ik%E5%88%86%E8%AF%8D/</loc>
+    
+    <lastmod>2020-02-18T14:38:25.374Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/02/16/elasticsearch/05-es-update/es-update-mapping/</loc>
     
     <lastmod>2020-02-16T16:16:41.468Z</lastmod>
