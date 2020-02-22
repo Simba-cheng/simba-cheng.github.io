@@ -6,20 +6,17 @@
   <meta name="keywords" content=" Java8 ">
   <meta name="description" content="Java8初体验 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Spring 支持两种类型的事务管理： 1.编程式事务管理 2.声明式事务管理 Spring的事务管理器Spring 将 事务管理 委托给 底层具体的持久化实现框架完成。 因此，Spring为不同的持久化框架提供了 PlatformTransactionManager 接口的实现类，如下    事务 说明    org.springframework.orm.jpa.JpaTransaction">
-<meta name="keywords" content="spring_事务">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spring 事务使用">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/02/22/spring/spring 事务/Spring-事务使用/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Spring 支持两种类型的事务管理： 1.编程式事务管理 2.声明式事务管理 Spring的事务管理器Spring 将 事务管理 委托给 底层具体的持久化实现框架完成。 因此，Spring为不同的持久化框架提供了 PlatformTransactionManager 接口的实现类，如下    事务 说明    org.springframework.orm.jpa.JpaTransaction">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/02/22/spring/spring%20事务/Spring-事务使用/spring-%E4%BA%8B%E5%8A%A1-%E5%AF%BC%E5%9B%BE.png">
-<meta property="og:updated_time" content="2020-02-22T11:59:53.891Z">
+<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring 事务使用">
-<meta name="twitter:description" content="Spring 支持两种类型的事务管理： 1.编程式事务管理 2.声明式事务管理 Spring的事务管理器Spring 将 事务管理 委托给 底层具体的持久化实现框架完成。 因此，Spring为不同的持久化框架提供了 PlatformTransactionManager 接口的实现类，如下    事务 说明    org.springframework.orm.jpa.JpaTransaction">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/02/22/spring/spring%20事务/Spring-事务使用/spring-%E4%BA%8B%E5%8A%A1-%E5%AF%BC%E5%9B%BE.png">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -122,7 +119,7 @@
     
         
             
-            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -130,7 +127,7 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="Markdown">Markdown<small>(1)</small></div>
                 
             </li>
             
@@ -154,6 +151,10 @@
                             
                         </li>
                             
+                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
@@ -162,11 +163,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                        <li><div data-rel="es_client">es_client<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                        <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                             
                         </li>
                             
@@ -175,10 +176,6 @@
                         </li>
                             
                         <li><div data-rel="es_index">es_index<small>(1)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                             
                         </li>
                             
@@ -217,6 +214,18 @@
         
     
         
+            
+            <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="flink_集群">flink_集群<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
             
         
     
@@ -245,18 +254,6 @@
         
     
         
-            
-            <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(1)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="flink_集群">flink_集群<small>(1)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
             
         
     
@@ -349,11 +346,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">Markdown</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color4">Markdown</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -365,15 +362,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_update</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -385,10 +382,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">flink</a>
     </li>
     
@@ -397,7 +390,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -406,10 +407,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1230,7 +1227,7 @@ result = filterApples(appleList, (Apple a) -&gt; a.getWeight() &gt; 1000);</code
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#MySQL','#索引','#Markdown','#资料','#问题-思考','#es','#es_batch','#es_update','#es_query','#es_client','#es问题','#hash','#flink','#Java8','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring_事务',],
+            'data': ['#MySQL','#索引','#资料','#Markdown','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#Java8','#hash','#bitmap','#布隆过滤器','#后台_其他','#设计模式','#spring_事务',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
