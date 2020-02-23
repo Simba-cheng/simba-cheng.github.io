@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>mysql主从环境搭建</title>
+      <link href="/2020/02/23/MySQL/mysql%E4%B8%BB%E4%BB%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2020/02/23/MySQL/mysql%E4%B8%BB%E4%BB%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h1><p>部门业务需求扩张，承接海量商品商品数据，需自己组建一个商品库。</p><p>在方案设计时，选定用MySQL在存储商品数据。</p><p>技术细节中，设定MySQL采用主从同步的方式，系统A写主库，系统B读从库(备库)，采用读写分离的方式。</p><h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>MySQL主从同步 解决的基本问题是：<strong>让一台服务器的数据与其他服务器保持同步</strong>。</p><p>一台主库的数据可以同步到多台备库上，备库本身也可以配置成为另一台的服务器的主库。</p><p>MySQL支持两种复制方式：基于行的复制、基于语句的复制。</p><p>通过复制同步方式，可以将读操作指向备库来获得更好的读扩展。</p><pre><code>注意：在同一时间点备库上的数据可能与主库存在不一致，并且无法保证主备之间的延迟。</code></pre><h1 id="mysql主从环境搭建"><a href="#mysql主从环境搭建" class="headerlink" title="mysql主从环境搭建"></a>mysql主从环境搭建</h1><p>在搭建主从环境之前，需要在各个节点安装好单机的MySQL，然后再通过主从配置，达到主从同步的目的。</p><p>注意：各节点MySQL版本、安装路径 等信息，建议都保持一致。</p><p>单机、主从安装可以参考这篇( <a href="https://juejin.im/post/5cbb074a518825327955bcd8" target="_blank" rel="noopener">linux 安装mysql8.0.x</a> )，这里就不赘述</p><h1 id="主从角色配置"><a href="#主从角色配置" class="headerlink" title="主从角色配置"></a>主从角色配置</h1><table><thead><tr><th>IP</th><th>角色</th><th>主从配置</th></tr></thead><tbody><tr><td>172.*.*.130</td><td>master</td><td># 节点唯一id值<br>server-id=1<br># 开启二进制日志<br>log-bin=mysql-bin<br># 指定日志格式 有mixed、row、statement 推荐mixed <br> binlog-format=mixed</td></tr><tr><td>172.*.*.131</td><td>slave</td><td># 节点唯一id值<br>server-id=2<br># 开启二进制日志<br>log-bin=mysql-bin</td></tr><tr><td>172.*.*.132</td><td>slave</td><td># 节点唯一id值<br>server-id=3<br># 开启二进制日志<br>log-bin=mysql-bin</td></tr></tbody></table><h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><p>查看Master的状态</p><pre><code>show master status;</code></pre><p>启动Slave(在slave节点执行)</p><pre><code>start slave;</code></pre><p>查看 slave 的状态(slave节点执行)</p><pre><code>show slave status\G</code></pre><p>验证</p><pre><code>当下面两个状态都为yes，说明主从同步正常    Slave_IO_Running: Yes    Slave_SQL_Running: Yes也可以在130的mysql数据库中，创建一张表，写入一些数据，然后看131、132 从数据库有没有复制同步</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p>《高性能MySQL》</p></li><li><p><a href="https://juejin.im/post/5cbb074a518825327955bcd8" target="_blank" rel="noopener">linux 安装mysql8.0.x</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring 事务使用</title>
       <link href="/2020/02/22/spring/spring%20%E4%BA%8B%E5%8A%A1/Spring-%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8/"/>
       <url>/2020/02/22/spring/spring%20%E4%BA%8B%E5%8A%A1/Spring-%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8/</url>
