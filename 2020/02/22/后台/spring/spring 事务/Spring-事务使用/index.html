@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Spring 事务使用 | Simba</title>
+  <meta name="keywords" content=" spring ">
+  <meta name="description" content="Spring 事务使用 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-26T10:13:46.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子； 目前就职于 南京本土某大型”互联网”企业  其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng GitHub：https://github.com/Simba-cheng  网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(53)</small></div></li>
+    
+        
+            
+            <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="markdown">markdown<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(28)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="es_相关">es_相关<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_query">es_query<small>(8)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_update">es_update<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es_index">es_index<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="flink_集群">flink_集群<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(14)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="53">
+<input type="hidden" id="yelog_site_word_count" value="58.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">other</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">问题-思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_update</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">flink</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="es "
+           href="/2019/10/08/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/02/26/业务/广告/广告-人群溢价(转载)/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="广告-人群溢价(转载)">广告-人群溢价(转载)</span>
+            <span class="post-date" title="2020-02-26 15:05:23">2020/02/26</span>
+        </a>
+        
+        <a  class="mysql "
+           href="/2020/02/23/mysql/mysql主从环境搭建/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql主从环境搭建">mysql主从环境搭建</span>
+            <span class="post-date" title="2020-02-23 20:59:34">2020/02/23</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/02/22/后台/spring/spring 事务/Spring-事务使用/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring 事务使用">Spring 事务使用</span>
+            <span class="post-date" title="2020-02-22 15:34:27">2020/02/22</span>
+        </a>
+        
+        <a  class="es es_分词 "
+           href="/2020/02/18/elasticsearch/09-es-分词/es-analysis-ik分词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-analysis_ik分词">es-analysis_ik分词</span>
+            <span class="post-date" title="2020-02-18 17:26:35">2020/02/18</span>
+        </a>
+        
+        <a  class="es es_update "
+           href="/2020/02/16/elasticsearch/05-es-update/es-update-mapping/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_mapping">es-update_mapping</span>
+            <span class="post-date" title="2020-02-16 22:37:41">2020/02/16</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2020/02/16/elasticsearch/02-es-query/es-query-搜索选项/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-搜索选项">es-query-搜索选项</span>
+            <span class="post-date" title="2020-02-16 13:18:22">2020/02/16</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2020/02/09/问题-思考/Flink预研/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="Flink预研">Flink预研</span>
+            <span class="post-date" title="2020-02-09 13:17:18">2020/02/09</span>
+        </a>
+        
+        <a  class="flink flink_集群 "
+           href="/2020/02/09/flink/集群/flink集群搭建/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="flink集群搭建">flink集群搭建</span>
+            <span class="post-date" title="2020-02-09 12:03:09">2020/02/09</span>
+        </a>
+        
+        <a  class="es es_update "
+           href="/2020/02/06/elasticsearch/05-es-update/es-update_by_query/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_by_query">es-update_by_query</span>
+            <span class="post-date" title="2020-02-06 15:52:24">2020/02/06</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2020/02/06/elasticsearch/01-es-concept/11-elasticsearch-别名/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="11-elasticsearch-别名">11-elasticsearch-别名</span>
+            <span class="post-date" title="2020-02-06 11:41:46">2020/02/06</span>
+        </a>
+        
+        <a  class="es es_client "
+           href="/2020/01/30/elasticsearch/07-es-client/es-java-client/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-client">es-java-client</span>
+            <span class="post-date" title="2020-01-30 13:30:08">2020/01/30</span>
+        </a>
+        
+        <a  class="es es_问题 "
+           href="/2020/01/29/elasticsearch/es-问题/es存储不足，索引只读/"
+           data-tag="es问题"
+           data-author="" >
+            <span class="post-title" title="es存储不足，索引只读">es存储不足，索引只读</span>
+            <span class="post-date" title="2020-01-29 19:35:43">2020/01/29</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/12/后台/其他/hash/"
+           data-tag="hash"
+           data-author="" >
+            <span class="post-title" title="hash">hash</span>
+            <span class="post-date" title="2020-01-12 23:15:22">2020/01/12</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/08/后台/其他/布隆过滤器/"
+           data-tag="布隆过滤器"
+           data-author="" >
+            <span class="post-title" title="布隆过滤器">布隆过滤器</span>
+            <span class="post-date" title="2020-01-08 22:41:59">2020/01/08</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/05/后台/其他/BitMap/"
+           data-tag="bitmap"
+           data-author="" >
+            <span class="post-title" title="BitMap">BitMap</span>
+            <span class="post-date" title="2020-01-05 22:21:39">2020/01/05</span>
+        </a>
+        
+        <a  class="mysql "
+           href="/2019/12/28/mysql/mysql数据重复引发的问题/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql数据重复引发的问题">mysql数据重复引发的问题</span>
+            <span class="post-date" title="2019-12-28 19:16:55">2019/12/28</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/22/后台/Java8/使用流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="使用流">使用流</span>
+            <span class="post-date" title="2019-12-22 19:30:38">2019/12/22</span>
+        </a>
+        
+        <a  class="mysql "
+           href="/2019/12/18/mysql/mysql隔离级别/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql隔离级别">mysql隔离级别</span>
+            <span class="post-date" title="2019-12-18 11:33:05">2019/12/18</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/01/后台/Java8/流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Stream 流">Stream 流</span>
+            <span class="post-date" title="2019-12-01 17:34:59">2019/12/01</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2019/11/30/问题-思考/大促宕机的思考/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="大促宕机的思考">大促宕机的思考</span>
+            <span class="post-date" title="2019-11-30 20:36:49">2019/11/30</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2019/11/30/问题-思考/FastJson踩坑/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="FastJson踩坑">FastJson踩坑</span>
+            <span class="post-date" title="2019-11-30 20:18:47">2019/11/30</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/Lambda表达式/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Lambda表达式">Lambda表达式</span>
+            <span class="post-date" title="2019-11-24 22:07:44">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/方法引用/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="方法引用">方法引用</span>
+            <span class="post-date" title="2019-11-24 19:49:31">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/23/后台/Java8/行为参数化传递代码/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="行为参数化传递代码">行为参数化传递代码</span>
+            <span class="post-date" title="2019-11-23 23:16:19">2019/11/23</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/22/后台/Java8/Java8初体验/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Java8初体验">Java8初体验</span>
+            <span class="post-date" title="2019-11-22 23:19:03">2019/11/22</span>
+        </a>
+        
+        <a  class="es es_index "
+           href="/2019/11/12/elasticsearch/08-es-index/01-elasticsearch-index-operate/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-elasticsearch-index-operate">01-elasticsearch-index-operate</span>
+            <span class="post-date" title="2019-11-12 20:09:15">2019/11/12</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/11/01/elasticsearch/01-es-concept/10-IDEA编译elasticsearch6-5-0源码/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="10-IDEA编译elasticsearch6.5.0源码">10-IDEA编译elasticsearch6.5.0源码</span>
+            <span class="post-date" title="2019-11-01 23:46:24">2019/11/01</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="es es_client "
+           href="/2019/10/26/elasticsearch/07-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="es es_batch "
+           href="/2019/10/12/elasticsearch/03-es-batch/01-es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="01-es-batch-bulk-批处理">01-es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/07-es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="07-es-query-match_phrase短语查询">07-es-query-match_phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/27/elasticsearch/02-es-query/06-es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="06-es-query-filtered_bool组合过滤查询">06-es-query-filtered_bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/05-es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="05-es-query-multi_get批处理">05-es-query-multi_get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/04-es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="04-es-query-multi_match多匹配查询">04-es-query-multi_match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/03-es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="03-es-query_match_匹配查询">03-es-query_match_匹配查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/02-es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="02-es-query_term_精确查询">02-es-query_term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_query "
+           href="/2019/09/26/elasticsearch/02-es-query/01-es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="01-es-query-简单查询">01-es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/26/elasticsearch/01-es-concept/09-elasticsearch-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-elasticsearch-测试数据">09-elasticsearch-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/26/elasticsearch/01-es-concept/08-elasticsearch-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-elasticsearch-上手Demo">08-elasticsearch-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/25/elasticsearch/01-es-concept/07-elasticsearch-索引-动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-elasticsearch-索引_动词">07-elasticsearch-索引_动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/25/elasticsearch/01-es-concept/06-elasticsearch-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-elasticsearch-文档_document">06-elasticsearch-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/25/elasticsearch/01-es-concept/05-elasticsearch-映射-Mapping/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-elasticsearch-映射_Mapping">05-elasticsearch-映射_Mapping</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/25/elasticsearch/01-es-concept/04-elasticsearch-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-elasticsearch-索引_名词">04-elasticsearch-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/25/elasticsearch/01-es-concept/03-elasticsearch-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-elasticsearch-查询语言">03-elasticsearch-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/22/elasticsearch/01-es-concept/02-elasticsearch-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-elasticsearch-基本概念">02-elasticsearch-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="es es_相关 "
+           href="/2019/09/22/elasticsearch/01-es-concept/01-elasticsearch6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-elasticsearch-6.5.0集群搭建">01-elasticsearch-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="other markdown "
+           href="/2019/09/22/other/Markdown技巧/"
+           data-tag="other"
+           data-author="" >
+            <span class="post-title" title="Markdown技巧">Markdown技巧</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-后台/spring/spring 事务/Spring-事务使用" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Spring 事务使用</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="后台">后台</a>/
+            
+                <a href="javascript:" data-rel="spring">spring</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color2">spring</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-26 16:26:20'>2020-02-22 15:34</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring的事务管理器"><span class="toc-text">Spring的事务管理器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Spring-编程式事务管理"><span class="toc-text">1.Spring 编程式事务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Spring-XML-声明式事务管理"><span class="toc-text">2.Spring XML 声明式事务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常回滚-提交规则"><span class="toc-text">异常回滚/提交规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传播行为"><span class="toc-text">传播行为</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Spring-注解-声明式事务管理"><span class="toc-text">3.Spring 注解 声明式事务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-2"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-AspectJ-切面事务管理"><span class="toc-text">4.AspectJ 切面事务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-3"><span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="//simba-cheng.github.io/2020/02/22/后台/spring/spring 事务/Spring-事务使用/spring-%E4%BA%8B%E5%8A%A1-%E5%AF%BC%E5%9B%BE.png" alt="spring-事务-导图" title="spring-事务-导图"></p>
+<p>Spring 支持两种类型的事务管理：</p>
+<p>1.编程式事务管理</p>
+<p>2.声明式事务管理</p>
+<h1 id="Spring的事务管理器"><a href="#Spring的事务管理器" class="headerlink" title="Spring的事务管理器"></a>Spring的事务管理器</h1><p>Spring 将 事务管理 委托给 底层具体的持久化实现框架完成。</p>
+<p>因此，Spring为不同的持久化框架提供了 PlatformTransactionManager 接口的实现类，如下</p>
+<table>
+<thead>
+<tr>
+<th>事务</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>org.springframework.orm.jpa.JpaTransactionManager</td>
+<td>使用JPA进行持久化时，使用该事务管理器</td>
+</tr>
+<tr>
+<td>org.springframework.orm.hibernate4.HibernateTransactionManager</td>
+<td>使用 Hibernate3.0 版本进行持久化，使用该事务管理器</td>
+</tr>
+<tr>
+<td>org.springframework.jdbc.datasource.DataSourceTransactionManager</td>
+<td>使用 Spring JDBC、iBatis 等基于DataSource数据源的持久化技术时，使用该事务管理器。</td>
+</tr>
+<tr>
+<td>org.springframework.transaction.jta.JtaTransactionManager</td>
+<td>具有多个数据源的全局事务，使用该事务管理器（不管采用何种持久化技术）</td>
+</tr>
+</tbody></table>
+<p>这些事务管理器 都是对 特定事务实现框架 的代理。</p>
+<p>这样，我们就可以通过 Spring 所提交的高级抽象 对不同种类的事务 实现使用相同的方式进行管理</p>
+<p>要实现事务管理，首先要在 Spring中配置好相应的事务管理器，为事务管理器指定数据资源以及一些其他事务管理控制属性。</p>
+<p>例如：</p>
+<p>使用JDBC，基于数据源的Connection访问数据库，所以使用 DataSourceTransactionManager 事务管理器。</p>
+<p>c3p0DataSource即一个数据源，将数据源配置到 transactionManager 事务管理器中。</p>
+<p>在幕后，DataSourceTransactionManager 使用DataSource的Connection的commit()、rollback()等方法管理事务。</p>
+<pre><code>&lt;!-- 配置c3p0连接池 --&gt;
+&lt;bean id=&quot;c3p0DataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+    &lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckout}&quot;/&gt;
+    &lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckin}&quot;/&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;${jdbc.c3p0.idleConnectionTestPeriod}&quot;/&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.c3p0.initialPoolSize}&quot;/&gt;
+    &lt;property name=&quot;minPoolSize&quot; value=&quot;${jdbc.c3p0.minPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.c3p0.maxPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxIdleTime&quot; value=&quot;${jdbc.c3p0.maxIdleTime}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;</code></pre><h1 id="1-Spring-编程式事务管理"><a href="#1-Spring-编程式事务管理" class="headerlink" title="1.Spring 编程式事务管理"></a>1.Spring 编程式事务管理</h1><p>编程式事务管理，允许 在对源代码编程 的帮助下 管理事务。</p>
+<p>灵活性比较好，但是很难维护(业务量大功能复杂时，编程式事务会很痛苦)，一般很少使用。</p>
+<p>Spring 提供了 org.springframework.transaction.support.TransactionTemplate 模板类，以满足一些特殊场合的需要。</p>
+<p>TransactionTemplate 是线程安全的。所以可以在多个业务类中共享 TransactionTemplate 实例进行事务管理。</p>
+<p>TransactionTemplate 有两个主要的方法：</p>
+<p>1.设置事务管理器</p>
+<pre><code>void setTransactionManager(PlatformTransactionManager transactionManager)</code></pre><p>2.在回调接口中定义 需要以事务方式组织的 数据访问逻辑</p>
+<pre><code>&lt;T&gt; T execute(TransactionCallback&lt;T&gt; action)
+
+TransactionCallback执行完成会返回结果信息。
+
+如果操作不需要返回结果，可以使用 TransactionCallback 子接口:TransactionCallbackWithoutResult</code></pre><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>applicationContext.xml 中定义 数据源、事务管理器 和 事务模版</p>
+<pre><code>&lt;!-- 配置c3p0连接池 --&gt;
+&lt;bean id=&quot;c3p0DataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+    &lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckout}&quot;/&gt;
+    &lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckin}&quot;/&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;${jdbc.c3p0.idleConnectionTestPeriod}&quot;/&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.c3p0.initialPoolSize}&quot;/&gt;
+    &lt;property name=&quot;minPoolSize&quot; value=&quot;${jdbc.c3p0.minPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.c3p0.maxPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxIdleTime&quot; value=&quot;${jdbc.c3p0.maxIdleTime}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring 事务模版--&gt;
+&lt;bean id=&quot;transactionTemplate&quot; class=&quot;org.springframework.transaction.support.TransactionTemplate&quot;&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;
+&lt;/bean&gt;</code></pre><p>Dao层</p>
+<pre><code>@Component(&quot;accountDaoImpl&quot;)
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountDaoImpl.class);
+
+    @Autowired
+    private javax.sql.DataSource c3p0DataSource;
+
+    @PostConstruct
+    private void initializeDataSource() {
+        setDataSource(c3p0DataSource);
+    }
+
+    @Override
+    public void outMoney(String out, Double money) {
+        String sql = &quot;update account set money = money - ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, out);
+    }
+
+    @Override
+    public void inMoney(String in, Double money) {
+        String sql = &quot;update account set money = money + ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, in);
+    }
+}</code></pre><p>Service层</p>
+<pre><code>@Service(&quot;accountServiceImpl&quot;)
+public class AccountServiceImpl implements AccountService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
+
+    @Resource
+    private AccountDao accountDaoImpl;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    //编程式事务管理
+    @Override
+    public void transfer(String out, String in, Double money) {
+
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                //出账
+                accountDaoImpl.outMoney(out, money);
+
+                //制造异常信息
+                //int i = 1 / 0;
+
+                //入账
+                accountDaoImpl.inMoney(in, money);
+            }
+        });
+    }
+}</code></pre><p>main()测试</p>
+<pre><code>@Component
+public class Test1TransactionApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test1TransactionApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    @Resource
+    private AccountService accountServiceImpl;
+
+    public static void main(String[] args) {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+
+        Test1TransactionApp transactionApp = applicationContext.getBean(Test1TransactionApp.class);
+
+        transactionApp.testOne();
+    }
+
+    public void testOne() {
+
+        //&apos;aaa&apos;账户-出账200、&apos;bbb&apos;账户-入账200
+        accountServiceImpl.transfer(&quot;aaa&quot;, &quot;bbb&quot;, 200D);
+    }
+
+}</code></pre><h1 id="2-Spring-XML-声明式事务管理"><a href="#2-Spring-XML-声明式事务管理" class="headerlink" title="2.Spring XML 声明式事务管理"></a>2.Spring XML 声明式事务管理</h1><p>使用声明式事务管理，这种方式对代码的侵入性最小，可以让事务管理代码完全从业务代码中移除，符合 非侵入式轻量级容器的理念。</p>
+<p>Spring的声明式事务管理是通过Spring AOP实现的，通过事务的声明性信息，Spring负责将 事务管理增强逻辑 动态编织 到 业务方法相应的连接点中。</p>
+<p>这些逻辑包含 获取线程绑定资源、开始事务、提交/回滚事务、进行异常转换和处理 等工作。</p>
+<p>Spring提供 TransactionProxyFactoryBean 代理类，对需要事务管理的业务类进行代理，以便实施事务功能的增强。</p>
+<p>例如：</p>
+<p>1.配置 dataSource，将其引入到DataSourceTransactionManager 事务管理器中。</p>
+<p>2.然后配置 TransactionProxyFactoryBean 代理工厂类，将 事务管理器 和 需要事务增强的servicebean引入其中。</p>
+<p>3.最后在注入service时，使用增强类即可</p>
+<pre><code>&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--配置增强处理类--&gt;
+&lt;bean id=&quot;accountServiceProxy&quot; class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;
+    &lt;!-- 配置目标对象 --&gt;
+    &lt;property name=&quot;target&quot; ref=&quot;accountServiceImpl&quot;/&gt;
+    &lt;!-- 注入事务管理器 --&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;
+    &lt;!-- 注入事务的属性 --&gt;
+    &lt;property name=&quot;transactionAttributes&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><p>applicationContext.xml</p>
+<pre><code>&lt;!-- 配置c3p0连接池 --&gt;
+&lt;bean id=&quot;c3p0DataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+    &lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckout}&quot;/&gt;
+    &lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckin}&quot;/&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;${jdbc.c3p0.idleConnectionTestPeriod}&quot;/&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.c3p0.initialPoolSize}&quot;/&gt;
+    &lt;property name=&quot;minPoolSize&quot; value=&quot;${jdbc.c3p0.minPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.c3p0.maxPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxIdleTime&quot; value=&quot;${jdbc.c3p0.maxIdleTime}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--配置增强处理类--&gt;
+&lt;bean id=&quot;accountServiceProxy&quot; class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;
+    &lt;!-- 配置目标对象 --&gt;
+    &lt;property name=&quot;target&quot; ref=&quot;accountServiceImpl&quot;/&gt;
+    &lt;!-- 注入事务管理器 --&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;
+    &lt;!-- 注入事务的属性 --&gt;
+    &lt;property name=&quot;transactionAttributes&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><p>Dao</p>
+<pre><code>@Component(&quot;accountDaoImpl&quot;)
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountDaoImpl.class);
+
+    @Autowired
+    private javax.sql.DataSource c3p0DataSource;
+
+    @PostConstruct
+    private void initializeDataSource() {
+        setDataSource(c3p0DataSource);
+    }
+
+    @Override
+    public void outMoney(String out, Double money) {
+        String sql = &quot;update account set money = money - ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, out);
+    }
+
+    @Override
+    public void inMoney(String in, Double money) {
+        String sql = &quot;update account set money = money + ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, in);
+    }
+}</code></pre><p>Service</p>
+<pre><code>@Service(&quot;accountServiceImpl&quot;)
+public class AccountServiceImpl implements AccountService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
+
+    @Resource
+    private AccountDao accountDaoImpl;
+
+    //声明式事务管理
+    @Override
+    public void transfer(String out, String in, Double money) {
+        //出账
+        accountDaoImpl.outMoney(out, money);
+
+        int i = 1 / 0;
+
+        //入账
+        accountDaoImpl.inMoney(in, money);
+    }
+}</code></pre><p>main()测试</p>
+<pre><code>@Component
+public class Test2TransactionApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test2TransactionApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    /**
+     * 声明式事务，使用增强类
+     */
+    @Resource(name = &quot;accountServiceProxy&quot;)
+    private AccountService accountServiceImpl;
+
+    public static void main(String[] args) {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+
+        Test2TransactionApp transactionApp = applicationContext.getBean(Test2TransactionApp.class);
+
+        transactionApp.testOne();
+    }
+
+    public void testOne() {
+
+        //&apos;aaa&apos;账户-出账200、&apos;bbb&apos;账户-入账200
+        accountServiceImpl.transfer(&quot;aaa&quot;, &quot;bbb&quot;, 200D);
+    }
+
+}</code></pre><p>通过 TransactionProxyFactoryBean 对业务类进行代理，织入事务增强功能。</p>
+<p>通过’target’属性指定需要代理的目标bean。</p>
+<p>通过键值对配置业务方法的事务属性信息，key可以使用通配符，例如’get<em>‘代表类中的所有以’get’为前缀的方法(如果key=’</em>‘，则匹配类中所有的方法)。</p>
+<p>注意：</p>
+<pre><code>如果 TransactionProxyFactoryBean 的optimize属性为true。
+
+即&lt;property name=&quot;optimize&quot; value=&quot;true&quot;/&gt;
+
+Spring会自动通过CGLib动态代理为 需要代理的目标bean 生成的子类进行代理。
+
+这时，key=&quot;*&quot; 不但匹配所有目标bean接口的方法，也匹配 目标Bean子类中的方法。</code></pre><h2 id="异常回滚-提交规则"><a href="#异常回滚-提交规则" class="headerlink" title="异常回滚/提交规则"></a>异常回滚/提交规则</h2><p><prop>节点中的值为事务属性信息，格式如下</prop></p>
+<table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>隔离级别(可选)</th>
+<th>是否为只读事务(可选)</th>
+<th>发生这些异常时回滚事务(可选)</th>
+<th>发生这些异常时照样提交事务(可选)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROPAGATION_REQUIRED</td>
+<td>IOSLATION</td>
+<td>readOnly</td>
+<td>_Exceptions</td>
+<td>+Exceptions</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<pre><code>&lt;prop key=“select*”&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;
+
+&lt;prop key=&quot;save*&quot;&gt;PROPAGATION_REQUIRED,-ApplicationException,+BusinessException&lt;/prop&gt; </code></pre><p>传播行为是唯一必须提供的配置项，不过<prop>的值为空时，也不会发生配置异常，但对应的匹配方法不会应用事务。</prop></p>
+<h2 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h2><p>当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。</p>
+<table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROPAGATION_REQUIRED</td>
+<td>当前方法必须运行在事务中。<br>如果当前事务存在，方法将会在该事务中运行。<br>否则，会启动一个新的事务</td>
+</tr>
+<tr>
+<td>PROPAGATION_SUPPORTS</td>
+<td>当前方法不需要事务上下文，<br>但是如果存在当前事务的话，<br>那么该方法会在这个事务中运行</td>
+</tr>
+<tr>
+<td>PROPAGATION_MANDATORY</td>
+<td>该方法必须在事务中运行，如果当前事务不存在，则会抛出一个异常</td>
+</tr>
+<tr>
+<td>PROPAGATION_REQUIRED_NEW</td>
+<td>当前方法必须运行在它自己的事务中。一个新的事务将被启动。<br>如果存在当前事务，在该方法执行期间，当前事务会被挂起。<br>如果使用JTATransactionManager的话，则需要访问TransactionManager</td>
+</tr>
+<tr>
+<td>PROPAGATION_NOT_SUPPORTED</td>
+<td>该方法不应该运行在事务中。<br>如果存在当前事务，在该方法运行期间，当前事务将被挂起。<br>如果使用JTATransactionManager的话，则需要访问TransactionManager</td>
+</tr>
+<tr>
+<td>PROPAGATION_NEVER</td>
+<td>当前方法不应该运行在事务上下文中。<br>如果当前正有一个事务在运行，则会抛出异常</td>
+</tr>
+<tr>
+<td>PROPAGATION_NESTED</td>
+<td>如果当前已经存在一个事务，那么该方法将会在嵌套事务中运行。<br>嵌套的事务可以独立于当前事务进行单独地提交或回滚。<br>如果当前事务不存在，那么其行为与PROPAGATION_REQUIRED一样。<br>注意各厂商对这种传播行为的支持是有所差异的。<br>可以参考资源管理器的文档来确认它们是否支持嵌套事务</td>
+</tr>
+</tbody></table>
+<h1 id="3-Spring-注解-声明式事务管理"><a href="#3-Spring-注解-声明式事务管理" class="headerlink" title="3.Spring 注解 声明式事务管理"></a>3.Spring 注解 声明式事务管理</h1><p>声明式事务，除了XML的事务配置之外，Sping还提供了基于注解的事务配置。</p>
+<p>通过 @Transactional 对需要事务增强的Bean接口、实现类、方法进行标记。</p>
+<p>在容器中配置基于注解的事务增强驱动，即可启动 注解声明式事务。</p>
+<pre><code>&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--开启注解事务--&gt;
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;</code></pre><br>
+
+<p>@Transactional 注解的配置和基于xml的配置方式一样，它有一套默认的事务属性。一般情况下，使用默认属性即可</p>
+<pre><code>事务传播行为：PROPAGATION_REQUIRED
+事务隔离级别：ISOLATION_DEFAULT
+读写事务属性：读/写事务
+超时时间：依赖底层事务系统的默认值
+回滚设置：任何运行期异常引发回滚，检查型异常不会引发回滚</code></pre><p>当然，如果默认的设置不适合，可以进行手工配置。</p>
+<br>
+
+<p>@Transactional 注解可以被应用于接口、接口方法、类、类public方法上。</p>
+<p>但Spring建议，在业务实现类上使用 @Transactional 注解。</p>
+<p>当然也可以在业务接口上使用 @Transactional注解，不过当业务复杂，可能会有隐患。</p>
+<p>因为注解不能被继承，所以业务接口上标注的@Transactional注解不会被实现的业务类继承。</p>
+<p>通过如下配置，可以启动子类代理：</p>
+<pre><code>&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; proxy-target-class=&quot;true&quot;/&gt;</code></pre><h2 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h2><p>applicationContext.xml</p>
+<pre><code>&lt;!-- 配置c3p0连接池 --&gt;
+&lt;bean id=&quot;c3p0DataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+    &lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckout}&quot;/&gt;
+    &lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckin}&quot;/&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;${jdbc.c3p0.idleConnectionTestPeriod}&quot;/&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.c3p0.initialPoolSize}&quot;/&gt;
+    &lt;property name=&quot;minPoolSize&quot; value=&quot;${jdbc.c3p0.minPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.c3p0.maxPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxIdleTime&quot; value=&quot;${jdbc.c3p0.maxIdleTime}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--开启注解事务--&gt;
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;</code></pre><p>Dao层</p>
+<pre><code>@Component(&quot;accountDaoImpl&quot;)
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountDaoImpl.class);
+
+    @Autowired
+    private javax.sql.DataSource c3p0DataSource;
+
+    @PostConstruct
+    private void initializeDataSource() {
+        setDataSource(c3p0DataSource);
+    }
+
+    @Override
+    public void outMoney(String out, Double money) {
+        String sql = &quot;update account set money = money - ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, out);
+    }
+
+    @Override
+    public void inMoney(String in, Double money) {
+        String sql = &quot;update account set money = money + ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, in);
+    }
+}</code></pre><p>service层</p>
+<pre><code>@Transactional
+@Service(&quot;accountServiceImpl&quot;)
+public class AccountServiceImpl implements AccountService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
+
+    @Resource
+    private AccountDao accountDaoImpl;
+
+    @Override
+    public void transfer(String out, String in, Double money) {
+        //出账
+        accountDaoImpl.outMoney(out, money);
+
+        int i = 1 / 0;
+
+        //入账
+        accountDaoImpl.inMoney(in, money);
+    }
+}</code></pre><p>main()测试</p>
+<pre><code>@Component
+public class Test3TransactionApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test3TransactionApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    @Resource
+    private AccountService accountServiceImpl;
+
+    public static void main(String[] args) {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+
+        Test3TransactionApp transactionApp = applicationContext.getBean(Test3TransactionApp.class);
+
+        transactionApp.testOne();
+    }
+
+    public void testOne() {
+
+        //&apos;aaa&apos;账户-出账200、&apos;bbb&apos;账户-入账200
+        accountServiceImpl.transfer(&quot;aaa&quot;, &quot;bbb&quot;, 200D);
+    }
+
+}</code></pre><h1 id="4-AspectJ-切面事务管理"><a href="#4-AspectJ-切面事务管理" class="headerlink" title="4.AspectJ 切面事务管理"></a>4.AspectJ 切面事务管理</h1><p>Spring还提供了AspectJ切面的支持。</p>
+<p>为 @Transactional 注解的业务类提供事务增强。</p>
+<h2 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h2><p>applicationContext.xml</p>
+<pre><code>&lt;!-- 配置c3p0连接池 --&gt;
+&lt;bean id=&quot;c3p0DataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+    &lt;property name=&quot;testConnectionOnCheckout&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckout}&quot;/&gt;
+    &lt;property name=&quot;testConnectionOnCheckin&quot; value=&quot;${jdbc.c3p0.testConnectionOnCheckin}&quot;/&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot; value=&quot;${jdbc.c3p0.idleConnectionTestPeriod}&quot;/&gt;
+    &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.c3p0.initialPoolSize}&quot;/&gt;
+    &lt;property name=&quot;minPoolSize&quot; value=&quot;${jdbc.c3p0.minPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.c3p0.maxPoolSize}&quot;/&gt;
+    &lt;property name=&quot;maxIdleTime&quot; value=&quot;${jdbc.c3p0.maxIdleTime}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--Spring Jdbc 事务管理器--&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;c3p0DataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置事务的增强 --&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+    &lt;tx:attributes&gt;
+        &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot;/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+
+&lt;!-- 配置切面 --&gt;
+&lt;aop:config&gt;
+    &lt;!-- 配置切点 --&gt;
+    &lt;aop:pointcut expression=&quot;execution(* com.transaction.service.AccountServiceFour*.*(..))&quot; id=&quot;pointcut1&quot;/&gt;
+    &lt;!-- 配置切面 --&gt;
+    &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pointcut1&quot;/&gt;
+&lt;/aop:config&gt;</code></pre><p>Dao层</p>
+<pre><code>@Component(&quot;accountDaoImpl&quot;)
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountDaoImpl.class);
+
+    @Autowired
+    private javax.sql.DataSource c3p0DataSource;
+
+    @PostConstruct
+    private void initializeDataSource() {
+        setDataSource(c3p0DataSource);
+    }
+
+    @Override
+    public void outMoney(String out, Double money) {
+        String sql = &quot;update account set money = money - ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, out);
+    }
+
+    @Override
+    public void inMoney(String in, Double money) {
+        String sql = &quot;update account set money = money + ? where name = ?&quot;;
+        this.getJdbcTemplate().update(sql, money, in);
+    }
+}</code></pre><p>Service层</p>
+<pre><code>@Transactional
+@Service(&quot;accountServiceImpl&quot;)
+public class AccountServiceFourImpl implements AccountServiceFour {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceFourImpl.class);
+
+    @Resource
+    private AccountDao accountDaoImpl;
+
+    @Override
+    public void transfer(String out, String in, Double money) {
+        //出账
+        accountDaoImpl.outMoney(out, money);
+
+        int i = 1 / 0;
+
+        //入账
+        accountDaoImpl.inMoney(in, money);
+    }
+}</code></pre><p>main()测试</p>
+<pre><code>@Component
+public class Test4TransactionApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test4TransactionApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    @Resource
+    private AccountServiceFour accountServiceImpl;
+
+    public static void main(String[] args) {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+
+        Test4TransactionApp transactionApp = applicationContext.getBean(Test4TransactionApp.class);
+
+        transactionApp.testOne();
+    }
+
+    public void testOne() {
+
+        //&apos;aaa&apos;账户-出账200、&apos;bbb&apos;账户-入账200
+        accountServiceImpl.transfer(&quot;aaa&quot;, &quot;bbb&quot;, 200D);
+    }
+
+}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><p>《Spring 3.x 企业应用开发实战》</p>
+</li>
+<li><p><a href="https://blog.csdn.net/Trigl/article/details/50968079" target="_blank" rel="noopener">Spring事务管理（详解+实例）</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/peterkang202/p/6045832.html" target="_blank" rel="noopener">Spring 声明事务中transactionAttributes属性 + - Exception 实现逻辑</a></p>
+</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>Spring 事务使用</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">4.4k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2020-02-22, 15:34:27</p>
+        <p><span class="copy-title">最后更新:</span>2020-02-26, 16:26:20</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/22/后台/spring/spring 事务/Spring-事务使用/" title="Spring 事务使用">https://simba-cheng.github.io/2020/02/22/后台/spring/spring 事务/Spring-事务使用/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#mysql','#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#spring',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 507px;
+        }
+        .nav.fullscreen {
+            margin-left: -507px;
+        }
+        .nav-left {
+            width: 115px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 507px;
+            margin-left: -507px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 507px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
