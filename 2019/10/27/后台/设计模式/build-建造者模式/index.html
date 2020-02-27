@@ -159,11 +159,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_update">es_update<small>(2)</small></div>
+                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_batch">es_batch<small>(1)</small></div>
+                        <li><div data-rel="es_update">es_update<small>(2)</small></div>
                             
                         </li>
                             
@@ -215,10 +215,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -230,6 +226,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -382,11 +382,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -394,11 +394,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es问题</a>
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
+        <a href="javascript:" class="color5">es问题</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -422,15 +422,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -800,7 +800,7 @@
         </a>
         
         <a  class="es es_相关 "
-           href="/2019/09/25/elasticsearch/01-es-base/05-es-映射-Mapping/"
+           href="/2019/09/25/elasticsearch/01-es-base/05-es-Mapping_数据类型/"
            data-tag="es"
            data-author="" >
             <span class="post-title" title="05-es-映射_Mapping">05-es-映射_Mapping</span>
@@ -1405,7 +1405,7 @@ public final class ReactorCache {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#mysql','#other','#资料','#问题-思考','#es','#es_query','#es_update','#es_batch','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring',],
+            'data': ['#mysql','#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#flink','#es问题','#广告业务','#Java8','#索引','#hash','#bitmap','#布隆过滤器','#后台_其他','#设计模式','#spring',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
