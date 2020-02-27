@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/01-es-base/08-es-%E4%B8%8A%E6%89%8BDemo/</loc>
+    
+    <lastmod>2020-02-27T07:14:45.742Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-base/07-es-%E7%B4%A2%E5%BC%95-%E5%8A%A8%E8%AF%8D/</loc>
     
     <lastmod>2020-02-27T07:04:49.598Z</lastmod>
@@ -296,14 +303,7 @@
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/01-es-base/08-elasticsearch-%E4%B8%8A%E6%89%8BDemo/</loc>
-    
-    <lastmod>2019-11-12T12:08:28.517Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/01-es-base/09-elasticsearch-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/01-es-base/09-es-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/</loc>
     
     <lastmod>2019-11-12T12:08:28.496Z</lastmod>
     
