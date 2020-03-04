@@ -103,7 +103,7 @@
     
         
             
-            <li><div data-rel="mysql">mysql<small>(3)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -127,9 +127,13 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="mysql">mysql<small>(3)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -138,10 +142,6 @@
             <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
                 
             </li>
-            
-        
-    
-        
             
         
     
@@ -324,7 +324,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="54">
-<input type="hidden" id="yelog_site_word_count" value="58.9k">
+<input type="hidden" id="yelog_site_word_count" value="58.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -358,7 +358,7 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -366,7 +366,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -917,12 +917,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-29 10:54:24'>2019-09-25 23:17</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-04 20:50:00'>2019-09-25 23:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.3k</span>
+        <span>字数:2.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -969,65 +969,9 @@
 <li>等….</li>
 </ol>
 <h1 id="查看索引映射"><a href="#查看索引映射" class="headerlink" title="查看索引映射"></a>查看索引映射</h1><p>查看已有索引的映射，使用如下命令：</p>
-<pre><code>get /books/_mapping/book</code></pre><p>响应报文</p>
-<pre><code>{
-  &quot;books&quot;: {
-    &quot;mappings&quot;: {
-      &quot;book&quot;: {
-        &quot;properties&quot;: {
-          &quot;author&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
-              }
-            }
-          },
-          &quot;info&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
-              }
-            }
-          },
-          &quot;name&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
-              }
-            }
-          },
-          &quot;price&quot;: {
-            &quot;type&quot;: &quot;long&quot;
-          },
-          &quot;publish&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
-              }
-            }
-          },
-          &quot;type&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre><h1 id="索引映射配置"><a href="#索引映射配置" class="headerlink" title="索引映射配置"></a>索引映射配置</h1><p>映射可以分为 <strong>动态映射</strong> 和 <strong>静态映射</strong></p>
+<pre><code>get /books/_mapping/book
+
+get /index_name/_mapping/type</code></pre><h1 id="索引映射配置"><a href="#索引映射配置" class="headerlink" title="索引映射配置"></a>索引映射配置</h1><p>映射可以分为 <strong>动态映射</strong> 和 <strong>静态映射</strong></p>
 <h2 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h2><p>在关系型数据库中，需要先创建数据库，然后在该数据库实例下创建数据表，然后才能在该表中插入数据。</p>
 <p><strong>在Elasticsearch中不需要事先定义映射(Mapping)，文档写入Elasticsearch时，会根据文档字段自动识别类型，这种机制称之为动态映射</strong></p>
 <h3 id="动态映射规则"><a href="#动态映射规则" class="headerlink" title="动态映射规则"></a>动态映射规则</h3><p>动态映射可以帮助我们在创建索引后直接将文档数据写入ElasticSearch，让我们尽快享受到ElasticSearch检索功能。</p>
@@ -1385,10 +1329,10 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>05-es-Mapping_数据类型</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">2.3k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-25, 23:17:15</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-29, 10:54:24</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-04, 20:50:00</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/25/elasticsearch/01-es-base/05-es-Mapping_数据类型/" title="05-es-Mapping_数据类型">https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-base/05-es-Mapping_数据类型/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1450,7 +1394,7 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#mysql','#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring',],
+            'data': ['#资料','#other','#mysql','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
