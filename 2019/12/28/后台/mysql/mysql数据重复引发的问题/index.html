@@ -247,11 +247,11 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
@@ -402,11 +402,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -426,11 +426,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -917,7 +917,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-05 20:45:52'>2019-12-28 19:16</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-05 20:52:05'>2019-12-28 19:16</time>
         
     </div>
     <div class="article-meta">
@@ -941,7 +941,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#表重复数据问题"><span class="toc-text">表重复数据问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自增主键消失问题"><span class="toc-text">自增主键消失问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#insert-into"><span class="toc-text">insert into</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ignore-关键字"><span class="toc-text">ignore 关键字</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#replace-into"><span class="toc-text">replace into</span></a>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#表重复数据问题"><span class="toc-text">表重复数据问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自增主键消失问题"><span class="toc-text">自增主键消失问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#insert-into"><span class="toc-text">insert into</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ignore-关键字"><span class="toc-text">ignore 关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#replace-into"><span class="toc-text">replace into</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -959,7 +959,7 @@
         <p>背景：</p>
 <p>后台系统，底层切换数据库，从DB2切到MySQL</p>
 <p>为了保持统一，所有的建表语句、索引都是从DB2导出，然后进行mysql改造的。</p>
-<h2 id="表重复数据问题"><a href="#表重复数据问题" class="headerlink" title="表重复数据问题"></a>表重复数据问题</h2><p>在生产灰度期间，发现了一个问题，A表中出现了不少重复数据(除了自增主键以外，其他字段值一模一样)</p>
+<h1 id="表重复数据问题"><a href="#表重复数据问题" class="headerlink" title="表重复数据问题"></a>表重复数据问题</h1><p>在生产灰度期间，发现了一个问题，A表中出现了不少重复数据(除了自增主键以外，其他字段值一模一样)</p>
 <p>然后瞅了一眼 mysql-A表的索引，除开常规索引，就是自增主键了；然后又看了下DB2-A表的，一模一样啊…</p>
 <p>好吧，我承认，MySQL没有加唯一索引…想当然觉得从DB2迁移过来就行了，疏忽了…</p>
 <p>测试在测试环境，模拟数据时，业务数据量太小，也没有测出来…</p>
@@ -979,7 +979,7 @@
 </ul>
 <p>为什么用 replace into 代替 insert into？</p>
 <p>因为 replace into 在插入时，如果存在重复，会将上一条删除，然后插入一条新的。<br>(当时想的太简单了，把自己坑死了…)</p>
-<h2 id="自增主键消失问题"><a href="#自增主键消失问题" class="headerlink" title="自增主键消失问题"></a>自增主键消失问题</h2><p>新建 UNIQUE 唯一索引和使用 replace into 之后，表中的重复数据解决了</p>
+<h1 id="自增主键消失问题"><a href="#自增主键消失问题" class="headerlink" title="自增主键消失问题"></a>自增主键消失问题</h1><p>新建 UNIQUE 唯一索引和使用 replace into 之后，表中的重复数据解决了</p>
 <p>叮嘱测试，在测试环境重新造数据，模拟生产环境大批量数据，又发现了一个新的问题。</p>
 <p>A表中的主键自增字段会作为一个标识，存到B表中，测试在校对数据的发现，B表中有几条数据，字段和A表中的字段值对不上。</p>
 <p>然后加日志，各种定位排查…甚至想到，是不是并发、数据库幻读？</p>
@@ -1081,7 +1081,7 @@ VALUES
 </tr>
 </tbody></table>
 <p>当然，如果你希望在用 insert into 插入重复数据这个动作时，不抛出唯一索引异常，可以配合 ignore 关键字服用。</p>
-<h2 id="ignore-关键字"><a href="#ignore-关键字" class="headerlink" title="ignore 关键字"></a>ignore 关键字</h2><p>在 insert into 语句中加入 ignore 关键字，mysql在执行插入动作，发现唯一索引冲突，就不会去执行这条语句，当然也不会抛出异常。</p>
+<h1 id="ignore-关键字"><a href="#ignore-关键字" class="headerlink" title="ignore 关键字"></a>ignore 关键字</h1><p>在 insert into 语句中加入 ignore 关键字，mysql在执行插入动作，发现唯一索引冲突，就不会去执行这条语句，当然也不会抛出异常。</p>
 <p>遇到唯一索引冲突直接就跳过了。</p>
 <pre><code>-- INSERT_IGNORE 模拟唯一索引冲突
 INSERT IGNORE INTO GOODS_INFO 
@@ -1176,7 +1176,7 @@ VALUES
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-12-28, 19:16:55</p>
-        <p><span class="copy-title">最后更新:</span>2020-03-05, 20:45:52</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-05, 20:52:05</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/28/后台/mysql/mysql数据重复引发的问题/" title="mysql数据重复引发的问题">https://simba-cheng.github.io/2019/12/28/后台/mysql/mysql数据重复引发的问题/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1238,7 +1238,7 @@ VALUES
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#索引','#Java8','#mysql','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring',],
+            'data': ['#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#mysql','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#spring',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
