@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>mysql主从环境搭建 | Simba</title>
+  <title>mysql隔离级别 | Simba</title>
   <meta name="keywords" content=" mysql ">
-  <meta name="description" content="mysql主从环境搭建 | Simba">
+  <meta name="description" content="mysql隔离级别 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 <meta property="og:type" content="website">
@@ -100,14 +100,6 @@
 
 <ul>
     <li><div class="all active">全部文章<small>(54)</small></div></li>
-    
-        
-            
-            <li><div data-rel="mysql">mysql<small>(3)</small></div>
-                
-            </li>
-            
-        
     
         
             
@@ -251,15 +243,19 @@
     
         
             
-            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(14)</small></div>
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(17)</small></div>
                 
                     <ul class="sub hide">
                         
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -278,6 +274,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -358,10 +358,6 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">other</a>
     </li>
     
@@ -406,11 +402,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -426,11 +426,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -471,8 +471,8 @@
             <span class="post-date" title="2020-02-26 15:05:23">2020/02/26</span>
         </a>
         
-        <a  class="mysql "
-           href="/2020/02/23/mysql/mysql主从环境搭建/"
+        <a  class="后台 mysql "
+           href="/2020/02/23/后台/mysql/mysql主从环境搭建/"
            data-tag="mysql"
            data-author="" >
             <span class="post-title" title="mysql主从环境搭建">mysql主从环境搭建</span>
@@ -583,8 +583,8 @@
             <span class="post-date" title="2020-01-05 22:21:39">2020/01/05</span>
         </a>
         
-        <a  class="mysql "
-           href="/2019/12/28/mysql/mysql数据重复引发的问题/"
+        <a  class="后台 mysql "
+           href="/2019/12/28/后台/mysql/mysql数据重复引发的问题/"
            data-tag="mysql"
            data-author="" >
             <span class="post-title" title="mysql数据重复引发的问题">mysql数据重复引发的问题</span>
@@ -599,8 +599,8 @@
             <span class="post-date" title="2019-12-22 19:30:38">2019/12/22</span>
         </a>
         
-        <a  class="mysql "
-           href="/2019/12/18/mysql/mysql隔离级别/"
+        <a  class="后台 mysql "
+           href="/2019/12/18/后台/mysql/mysql隔离级别/"
            data-tag="mysql"
            data-author="" >
             <span class="post-title" title="mysql隔离级别">mysql隔离级别</span>
@@ -891,15 +891,17 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-mysql/mysql主从环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-后台/mysql/mysql隔离级别" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">mysql主从环境搭建</h1>
+        <h1 class="article-title">mysql隔离级别</h1>
     
     <div class="article-meta">
         
         
         
         <span class="book">
+            
+                <a href="javascript:" data-rel="后台">后台</a>/
             
                 <a href="javascript:" data-rel="mysql">mysql</a>
             
@@ -915,12 +917,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-26 16:29:10'>2020-02-23 20:59</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-05 20:45:52'>2019-12-18 11:33</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:552</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -939,7 +941,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#业务背景"><span class="toc-text">业务背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#技术背景"><span class="toc-text">技术背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql主从环境搭建"><span class="toc-text">mysql主从环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主从角色配置"><span class="toc-text">主从角色配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关命令"><span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ACID"><span class="toc-text">ACID</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#隔离级别"><span class="toc-text">隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#未提交读（read-uncommitted）"><span class="toc-text">未提交读（read-uncommitted）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提交读（read-committed）"><span class="toc-text">提交读（read-committed）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可重复读（repeatable-read）"><span class="toc-text">可重复读（repeatable-read）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可串行化（serializable）"><span class="toc-text">可串行化（serializable）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脏读-问题"><span class="toc-text">脏读 - 问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不可重复读-问题"><span class="toc-text">不可重复读 - 问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#幻读-问题"><span class="toc-text">幻读 - 问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不可重复读-和-幻读-的区别"><span class="toc-text">不可重复读 和 幻读 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -954,54 +956,105 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h1><p>部门业务需求扩张，承接海量商品商品数据，需自己组建一个商品库。</p>
-<p>在方案设计时，选定用MySQL在存储商品数据。</p>
-<p>技术细节中，设定MySQL采用主从同步的方式，系统A写主库，系统B读从库(备库)，采用读写分离的方式。</p>
-<h1 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h1><p>MySQL主从同步 解决的基本问题是：<strong>让一台服务器的数据与其他服务器保持同步</strong>。</p>
-<p>一台主库的数据可以同步到多台备库上，备库本身也可以配置成为另一台的服务器的主库。</p>
-<p>MySQL支持两种复制方式：基于行的复制、基于语句的复制。</p>
-<p>通过复制同步方式，可以将读操作指向备库来获得更好的读扩展。</p>
-<pre><code>注意：在同一时间点备库上的数据可能与主库存在不一致，并且无法保证主备之间的延迟。</code></pre><h1 id="mysql主从环境搭建"><a href="#mysql主从环境搭建" class="headerlink" title="mysql主从环境搭建"></a>mysql主从环境搭建</h1><p>在搭建主从环境之前，需要在各个节点安装好单机的MySQL，然后再通过主从配置，达到主从同步的目的。</p>
-<p>注意：各节点MySQL版本、安装路径 等信息，建议都保持一致。</p>
-<p>单机、主从安装可以参考这篇( <a href="https://juejin.im/post/5cbb074a518825327955bcd8" target="_blank" rel="noopener">linux 安装mysql8.0.x</a> )，这里就不赘述</p>
-<h1 id="主从角色配置"><a href="#主从角色配置" class="headerlink" title="主从角色配置"></a>主从角色配置</h1><table>
-<thead>
-<tr>
-<th>IP</th>
-<th>角色</th>
-<th>主从配置</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>172.*.*.130</td>
-<td>master</td>
-<td># 节点唯一id值<br>server-id=1<br># 开启二进制日志<br>log-bin=mysql-bin<br># 指定日志格式 有mixed、row、statement 推荐mixed <br> binlog-format=mixed</td>
-</tr>
-<tr>
-<td>172.*.*.131</td>
-<td>slave</td>
-<td># 节点唯一id值<br>server-id=2<br># 开启二进制日志<br>log-bin=mysql-bin</td>
-</tr>
-<tr>
-<td>172.*.*.132</td>
-<td>slave</td>
-<td># 节点唯一id值<br>server-id=3<br># 开启二进制日志<br>log-bin=mysql-bin</td>
-</tr>
-</tbody></table>
-<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><p>查看Master的状态</p>
-<pre><code>show master status;</code></pre><p>启动Slave(在slave节点执行)</p>
-<pre><code>start slave;</code></pre><p>查看 slave 的状态(slave节点执行)</p>
-<pre><code>show slave status\G</code></pre><p>验证</p>
-<pre><code>当下面两个状态都为yes，说明主从同步正常
+        <p>事务就是一组原子性的SQL查询</p>
+<p>事务内的语句，要么全部执行成功，要么全部执行失败</p>
+<h1 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h1><p>ACID是数据库事务中的一组属性，即在发生错误/灾难的情况下，也能保证数据的有效性。</p>
+<p>在数据库环境中，满足ACID属性的数据库操作(逻辑操作)称为事务。</p>
+<ul>
+<li><p>原子性(Atomicity)</p>
+<pre><code>一个事务 必须视为不可分割的最小工作单元，整个事务要么全部成功，要么全部失败；不可能只执行其中的一部分。</code></pre></li>
+<li><p>一致性(Consistency)</p>
+<pre><code>数据库从一个一致性的状态转换到另一个一致性的状态
 
-    Slave_IO_Running: Yes
-    Slave_SQL_Running: Yes
+事务执行前后，数据处于一种合法的状态。
 
-也可以在130的mysql数据库中，创建一张表，写入一些数据，然后看131、132 从数据库有没有复制同步</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><p>《高性能MySQL》</p>
-</li>
-<li><p><a href="https://juejin.im/post/5cbb074a518825327955bcd8" target="_blank" rel="noopener">linux 安装mysql8.0.x</a></p>
-</li>
+在事务过程中，即便出现异常，因为事务没有最终提交，所以之前做的修改也不会保存到数据库中</code></pre></li>
+<li><p>隔离性(Isolation)</p>
+<pre><code>一个事务中的操作/修改，在最终提交以前，对其他的事务是不可见的。
+
+并发执行的多个事务，不能相互干扰。</code></pre></li>
+<li><p>持久性(Durability)</p>
+<pre><code>事务一旦提交，其所做的修改就会永久保存到数据库中。</code></pre></li>
+</ul>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><p>一个事务中的操作/修改，在最终提交以前，对其他的事务是不可见的。</p>
+<p>在SQL标准中定义了四种隔离级别</p>
+<pre><code>级别越低的隔离性可以带来更高的并发，系统开销也越低
+
+注意：每种存储引擎实现的隔离级别都不一样，MySQL-InnoDB 默认是 可重复读（repeatable-read）</code></pre><h2 id="未提交读（read-uncommitted）"><a href="#未提交读（read-uncommitted）" class="headerlink" title="未提交读（read-uncommitted）"></a>未提交读（read-uncommitted）</h2><pre><code>事务中的修改，即使没有提交，对其他事务也是可见的。
+
+也被称为：脏读（Dirty Read）。</code></pre><h2 id="提交读（read-committed）"><a href="#提交读（read-committed）" class="headerlink" title="提交读（read-committed）"></a>提交读（read-committed）</h2><pre><code>一个事务，从开始执行到提交之前，所做的任何修改对其他事务都是不可见的。
+
+一个事务执行过程中，另外一个事务提交了新数据，因此本事务先后两次读到的数据结果会不一致。
+
+也被称为：不可重复读（因为两次执行同样的查询，可能得到不同的结果）</code></pre><h2 id="可重复读（repeatable-read）"><a href="#可重复读（repeatable-read）" class="headerlink" title="可重复读（repeatable-read）"></a>可重复读（repeatable-read）</h2><pre><code>在同一个事务内的查询都是事务开始时刻一致的。
+
+在同一事务中发起多个普通（非锁定）SELECT 语句，其查询结果是相互一致的。
+
+存在幻读问题。</code></pre><h2 id="可串行化（serializable）"><a href="#可串行化（serializable）" class="headerlink" title="可串行化（serializable）"></a>可串行化（serializable）</h2><pre><code>最高级别的隔离级别
+
+通过强制事务串行执行，避免出现幻读。
+
+并发性不好，只有在非常需要确保数据一致和没有并发的情况下，才考虑。</code></pre><p>采用上面四种不同的隔离级别，会带来不同的问题：</p>
+<h2 id="脏读-问题"><a href="#脏读-问题" class="headerlink" title="脏读 - 问题"></a>脏读 - 问题</h2><p><strong>采用’未提交读’隔离级别，会出现脏读的情况</strong></p>
+<p>一个事务读取到另一个事务未提交的更新数据。</p>
+<p>举个例子：</p>
+<pre><code>A事务正在访问number字段，并对number字段进行了修改，而这个修改还未提交到数据库中（可能会回滚）;
+
+这时B事务也访问了number字段，拿到了A事务还未提交的值。
+
+如果A事务发生了回滚，那B事务中获取number字段的值就是错误的。</code></pre><h2 id="不可重复读-问题"><a href="#不可重复读-问题" class="headerlink" title="不可重复读 - 问题"></a>不可重复读 - 问题</h2><p><strong>采用’提交读’隔离级别，会出现’不可重复读’的问题</strong></p>
+<p>不可重复读是指：</p>
+<p>在一个事务内，多次读取同一数据，但这个事务还没有结束时；<br>如果另一个事务恰好修改了这个数据(并且commit)，那么在第一个事务中，多次读取的数据就可能不一致</p>
+<p>举个例子：</p>
+<pre><code>A事务中，需要查询多次查询a数据
+
+在A事务执行到第一次查询后，B事务更新来a数据(commit)
+
+那么A事务后面两次读取到a的数据和第一次就是不一致的。</code></pre><h2 id="幻读-问题"><a href="#幻读-问题" class="headerlink" title="幻读 - 问题"></a>幻读 - 问题</h2><p><strong>采用’可重复读’隔离级别，会出现幻读。</strong></p>
+<p>注意：可重复读级别中，重复读只针对同一事务。</p>
+<p>参考《mysql 幻读的详解、实例及解决办法》和《Repeatable Read》中的解释：</p>
+<p>在一个事务中，第一次查询某条记录，发现没有，但是，当试图更新这条不存在的记录时，竟然能成功，并且，再次读取同一条记录，它就神奇地出现了。</p>
+<p>更白话一些：</p>
+<p>幻读 侧重的方面是：</p>
+<pre><code>某一个select操作得到的结果所表现的状态，无法支撑后续业务操作。</code></pre><p>更具体的描述：</p>
+<pre><code>select某条记录是否存在，不存在就插入；但是执行insert的时候，发现这条记录已经存在，无法插入，此时就发生了幻读。</code></pre><p>《mysql 幻读的详解、实例及解决办法》中的栗子：</p>
+<pre><code>step1 T1: SELECT * FROM `users` WHERE `id` = 1;
+
+step2 T2: INSERT INTO `users` VALUES (1, &apos;big cat&apos;); //并且commit提交事务
+
+step3 T1: INSERT INTO `users` VALUES (1, &apos;big cat&apos;);
+
+step4 T1: SELECT * FROM `users` WHERE `id` = 1;
+
+T1 ：主事务，检测表中是否有 id 为 1 的记录，没有则插入，这是我们期望的正常业务逻辑。
+T2 ：干扰事务，目的在于扰乱 T1 的正常的事务执行。
+
+在 RR 隔离级别下，step1、step2 是会正常执行的，step3 则会报错主键冲突，对于 T1 的业务来说是执行失败的，这里 T1 就是发生了幻读；
+
+因为 T1 在 step1 中读取的数据状态并不能支撑后续的业务操作，T1：&quot;见鬼了，我刚才读到的结果应该可以支持我这样操作才对啊，为什么现在不可以&quot;。
+T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样的（RR下的 MMVC机制）。
+
+此时，幻读无疑已经发生，T1 无论读取多少次，都查不到 id = 1 的记录，但它的确无法插入这条他通过读取来认定不存在的记录（此数据已被T2插入），对于T1来说，它幻读了。</code></pre><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><img src="//simba-cheng.github.io/2019/12/18/后台/mysql/mysql隔离级别/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.jpg" alt="mysql隔离级别" title="mysql隔离级别"></p>
+<h1 id="不可重复读-和-幻读-的区别"><a href="#不可重复读-和-幻读-的区别" class="headerlink" title="不可重复读 和 幻读 的区别"></a>不可重复读 和 幻读 的区别</h1><p>不可重复读 和 幻读 有时候会搞混，因为两者有些相似。</p>
+<p>不可重复读重点在于：update 和 delete</p>
+<p>幻读的重点在于：insert</p>
+<p>用锁机制来解释的话：</p>
+<pre><code>可重复读中，A事务sql第一次执行读取到数据后，将该数据加锁，其他事务无法修改这些数据，以此实现可重复读。
+
+但这种方法无法锁住 insert 的数据。
+
+所以当事务A先读取来数据，或者修改来全部数据；事务B还是可以 insert 提交数据，
+
+这时候事务A就会莫名其妙的多了一条前面没有的数据
+
+这就是幻读；
+
+它不能通过&quot;行级锁&quot;来避免。</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>《高性能MySQL（第三版）》</li>
+<li><a href="https://tech.meituan.com/2014/08/20/innodb-lock.html" target="_blank" rel="noopener">Innodb中的事务隔离级别和锁的关系</a></li>
+<li><a href="https://segmentfault.com/a/1190000016566788" target="_blank" rel="noopener">mysql 幻读的详解、实例及解决办法</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1245268672511968" target="_blank" rel="noopener">Repeatable Read</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1245266514539200" target="_blank" rel="noopener">Read Committed</a></li>
 </ul>
 
       
@@ -1016,12 +1069,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>mysql主从环境搭建</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">552</span></p>
+        <p><span class="copy-title">文章标题:</span>mysql隔离级别</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-02-23, 20:59:34</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-26, 16:29:10</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/23/mysql/mysql主从环境搭建/" title="mysql主从环境搭建">https://simba-cheng.github.io/2020/02/23/mysql/mysql主从环境搭建/</a>
+        <p><span class="copy-title">发布时间:</span>2019-12-18, 11:33:05</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-05, 20:45:52</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/18/后台/mysql/mysql隔离级别/" title="mysql隔离级别">https://simba-cheng.github.io/2019/12/18/后台/mysql/mysql隔离级别/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
@@ -1082,7 +1135,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#mysql','#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#spring',],
+            'data': ['#other','#资料','#问题-思考','#es','#es_query','#es_batch','#es_update','#es_client','#es问题','#flink','#广告业务','#索引','#Java8','#mysql','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#spring',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
