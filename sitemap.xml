@@ -2,91 +2,91 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/11/12/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/11-es-index-operate/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E5%A2%9E/es-put-%E7%B4%A2%E5%BC%95_%E5%8A%A8%E8%AF%8D/</loc>
     
-    <lastmod>2020-03-05T14:18:11.646Z</lastmod>
+    <lastmod>2020-03-05T16:08:31.211Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/10/12/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%89%B9%E5%A4%84%E7%90%86/es-batch-bulk-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
+    <loc>https://simba-cheng.github.io/2020/02/06/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/11-es-index-operate/</loc>
+    
+    <lastmod>2020-03-05T14:24:39.229Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://simba-cheng.github.io/2019/10/12/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%89%B9%E5%A4%84%E7%90%86/es-batch-bulk-%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     
     <lastmod>2020-03-05T13:58:57.575Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2020/02/06/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9B%B4%E6%96%B0/es-update_by_query/</loc>
+    <loc>https://simba-cheng.github.io/2020/02/06/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9B%B4%E6%96%B0/es-update_by_query/</loc>
     
     <lastmod>2020-03-05T13:55:38.992Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2020/02/16/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9B%B4%E6%96%B0/es-update-mapping/</loc>
+    <loc>https://simba-cheng.github.io/2020/02/16/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9B%B4%E6%96%B0/es-update-mapping/</loc>
     
     <lastmod>2020-03-05T13:55:38.989Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/27/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-match-phrase%E7%9F%AD%E8%AF%AD%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/27/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-match-phrase%E7%9F%AD%E8%AF%AD%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:52:53.554Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/27/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-filtered-bool%E7%BB%84%E5%90%88%E8%BF%87%E6%BB%A4%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/27/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-filtered-bool%E7%BB%84%E5%90%88%E8%BF%87%E6%BB%A4%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:52:32.746Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-multi-match%E5%A4%9A%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-multi-match%E5%A4%9A%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:52:12.903Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-multi-get%E6%89%B9%E5%A4%84%E7%90%86/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-multi-get%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     
     <lastmod>2020-03-05T13:52:12.901Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-match_%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-match_%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:52:12.898Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-term_%E7%B2%BE%E7%A1%AE%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-term_%E7%B2%BE%E7%A1%AE%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:51:09.265Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2/</loc>
+    <loc>https://simba-cheng.github.io/2019/09/26/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-03-05T13:50:42.059Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E5%A2%9E/es-put-%E7%B4%A2%E5%BC%95_%E5%8A%A8%E8%AF%8D/</loc>
-    
-    <lastmod>2020-03-05T13:49:20.463Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/02/16/elasticsearch/02-es-%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/%E6%9F%A5/es-query-%E6%90%9C%E7%B4%A2%E9%80%89%E9%A1%B9/</loc>
+    <loc>https://simba-cheng.github.io/2020/02/16/elasticsearch/02-es-%E6%96%87%E6%A1%A3/%E6%9F%A5/es-query-%E6%90%9C%E7%B4%A2%E9%80%89%E9%A1%B9/</loc>
     
     <lastmod>2020-03-05T13:44:18.529Z</lastmod>
     
