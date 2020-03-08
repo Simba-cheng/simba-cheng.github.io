@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>ClassPathXmlApplicationContext-01-脉络梳理</title>
+      <link href="/2020/03/08/%E5%90%8E%E5%8F%B0/spring/ClassPathXmlApplicationContext-01-%E8%84%89%E7%BB%9C%E6%A2%B3%E7%90%86/"/>
+      <url>/2020/03/08/%E5%90%8E%E5%8F%B0/spring/ClassPathXmlApplicationContext-01-%E8%84%89%E7%BB%9C%E6%A2%B3%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<p>顺着 ClassPathXmlApplicationContext 类，瞅瞅Spring源码，不抠细节，先看其脉络</p><p>注意：Spring版本为3.0</p><p>先看下 ClassPathXmlApplicationContext 的UML图</p><p>顺着这个UML图，先了解各个接口、抽象类、实现类的作用是啥（只看核心）。</p><p><img src="//simba-cheng.github.io/2020/03/08/后台/spring/ClassPathXmlApplicationContext-01-脉络梳理/ClassPathXmlApplicationContext-UML.png" alt="ClassPathXmlApplicationContext_UML" title="ClassPathXmlApplicationContext_UML"></p><br><p><strong>ApplicationContext 接口</strong></p><p>ApplicationContext 接口承载了Spring其中的两大体系：BeanFactory、ResourceLoader</p><pre><code>BeanFactory：用来管理Bean(Java对象)ResourceLoader：资源载入，访问底层资源文件</code></pre><p>ApplicationContext 接口是核心接口，它对BeanFactory、ResourceLoader两大体系进行整合。</p><br><p><strong>ConfigurableApplicationContext 接口</strong></p><p>ConfigurableApplicationContext 接口在 ApplicationContext 接口基础上，增加了对上下文、容器、监听器的细粒度方法。</p><p>如 refresh() 和 close() 方法，让 ApplicationContext 具有启动、刷新和关闭应用上下文的能力。</p><br><p><strong>AbstractApplicationContext 抽象类</strong></p><p>AbstractApplicationContext 它实现了 ApplicationContext/ConfigurableApplicationContext 接口大部分功能。</p><p>AbstractApplicationContext 采用了模版方法设计模式，将一部分实现推迟到子类，子类根据需求自己实现方法。</p><p>AbstractApplicationContext 中核心方法是 refresh()方法，这方法的作用是：创建、加载 Spring IOC 容器相关配置，是IOC的入口。</p><pre><code>在创建IOC容器前，如果已经有容器存在，则关闭、销毁，以保证在 refresh 之后是新建立的IOC容器。refresh()的作用类似对IOC容器进行刷新/重启，在建立好的容器中对容器进行初始化，并对Bean资源进行载入。</code></pre><br><p><strong>AbstractRefreshableApplicationContext 抽象类</strong></p><p>refreshBeanFactory()方法 实现了父类 AbstractApplicationContext 的抽象方法</p><p>其实现的是： 关闭、销毁现有容器，创建一个新的容器，并对容器进行初始化。</p><p>其实现的父类抽象方法还有：</p><pre><code>cancelRefresh()：取消刷新容器closeBeanFactory()：销毁容器/Bean工厂getBeanFactory()：获取容器/Bean工厂</code></pre><br><p><strong>AbstractRefreshableConfigApplicationContext 抽象类</strong></p><p>其主要实现 对指定配置文件路径的公共处理，可以将其看作基于XML的应用上下文的基类。</p><br><p><strong>AbstractXmlApplicationContext 抽象类</strong></p><p>主要作用是：解析 applicationContext.xml 文件的解析。</p><p>核心方法 loadBeanDefinitions(DefaultListableBeanFactory beanFactory)、loadBeanDefinitions(XmlBeanDefinitionReader reader)</p><br><p><strong>ClassPathXmlApplicationContext 实现类</strong></p><p>终于到了最外层。</p><p>ClassPathXmlApplicationContext 是 Spring 读取XML最常用的类。</p><p>其本身并没有多少解析处理，解析的操作都在父类 refresh方法 中实现。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://blog.csdn.net/gloomy_114/article/details/70208732" target="_blank" rel="noopener">源码解读（二）: spring容器初始化的refresh操作</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>es-思维导图</title>
       <link href="/2020/02/27/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
       <url>/2020/02/27/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</url>
