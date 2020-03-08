@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/05-es-Mapping_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    
+    <lastmod>2020-03-08T04:48:04.253Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/04-es-%E7%B4%A2%E5%BC%95-%E5%90%8D%E8%AF%8D/</loc>
+    
+    <lastmod>2020-03-08T04:46:46.532Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/03/08/%E5%90%8E%E5%8F%B0/spring/ClassPathXmlApplicationContext-02/</loc>
     
     <lastmod>2020-03-08T03:37:52.001Z</lastmod>
@@ -142,23 +156,9 @@
   </url>
   
   <url>
-    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/05-es-Mapping_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
-    
-    <lastmod>2020-03-05T13:05:20.883Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/03-es-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/</loc>
     
     <lastmod>2020-03-05T13:05:20.863Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/25/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/04-es-%E7%B4%A2%E5%BC%95-%E5%90%8D%E8%AF%8D/</loc>
-    
-    <lastmod>2020-03-05T13:05:20.855Z</lastmod>
     
   </url>
   
