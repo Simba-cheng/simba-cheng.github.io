@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>es-java-client | Simba</title>
-  <meta name="keywords" content=" es_client ">
-  <meta name="description" content="es-java-client | Simba">
+  <title>ClassPathXmlApplicationContext-02 | Simba</title>
+  <meta name="keywords" content=" spring ">
+  <meta name="description" content="ClassPathXmlApplicationContext-02 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 <meta property="og:type" content="website">
@@ -883,9 +883,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-elasticsearch/07-es-client/es-java-client" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-后台/spring/ClassPathXmlApplicationContext-02" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">es-java-client</h1>
+        <h1 class="article-title">ClassPathXmlApplicationContext-02</h1>
     
     <div class="article-meta">
         
@@ -893,28 +893,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="es">es</a>/
+                <a href="javascript:" data-rel="后台">后台</a>/
             
-                <a href="javascript:" data-rel="es_client">es_client</a>
+                <a href="javascript:" data-rel="spring">spring</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">es_client</a>
+            <a href="javascript:" class="color2">spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-07 10:27:17'>2020-01-30 13:30</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-08 11:37:52'>2020-03-08 11:23</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:492</span>
+        <span>字数:422</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -933,7 +933,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-Java-Client"><span class="toc-text">Elasticsearch Java Client</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-Low-Level-Rest-Client（Java-低级客户端）"><span class="toc-text">Java Low Level Rest Client（Java 低级客户端）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-High-Level-Rest-Client-（Java-高级客户端）"><span class="toc-text">Java High Level Rest Client （Java 高级客户端）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例Demo"><span class="toc-text">实例Demo</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-入口"><span class="toc-text">1.入口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置父上下文"><span class="toc-text">设置父上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析配置文件路径"><span class="toc-text">解析配置文件路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载-刷新上下文"><span class="toc-text">加载/刷新上下文</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -948,46 +948,73 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Elasticsearch-Java-Client"><a href="#Elasticsearch-Java-Client" class="headerlink" title="Elasticsearch Java Client"></a>Elasticsearch Java Client</h1><p>elasticsearch java client 分为两种：</p>
-<ul>
-<li><p>Java Low Level Rest Client（Java 低级客户端）</p>
-</li>
-<li><p>Java High Level Rest Client （Java 高级客户端）</p>
-</li>
-</ul>
-<h2 id="Java-Low-Level-Rest-Client（Java-低级客户端）"><a href="#Java-Low-Level-Rest-Client（Java-低级客户端）" class="headerlink" title="Java Low Level Rest Client（Java 低级客户端）"></a>Java Low Level Rest Client（Java 低级客户端）</h2><p>通过Http协议与Elasticsearch服务进行通信；请求编码和响应解码保留给用户实现；低级客户端与所有Elasticsearch版本兼容。</p>
-<p>Java Low Level Rest Client（Java 低级客户端）内部使用 Apache Http Async Client 发送 http 请求。</p>
-<p>Apache Http Async Client默认启动一个调度线程，连接管理器使用多个worker线程，线程的数量和CPU核数量相同，线程数可以修改。</p>
-<p>低级客户端包含以下功能：</p>
-<pre><code>最小依赖
-负载均衡
-故障转移
-故障连续策略（是否重新连接故障节点取决于连续失败多少次；失败次数越多，在再次尝试同一个节点之前，客户端等待的时间越长）
-持久化连接
-跟踪记录请求和响应
-自动发现集群节点</code></pre><h2 id="Java-High-Level-Rest-Client-（Java-高级客户端）"><a href="#Java-High-Level-Rest-Client-（Java-高级客户端）" class="headerlink" title="Java High Level Rest Client （Java 高级客户端）"></a>Java High Level Rest Client （Java 高级客户端）</h2><p>高级客户端 基于 低级客户端，提供特定的方法的API；</p>
-<p>其主要目标是公开特定方法的API，接受请求对象作为参数并返回响应对象，以便客户端自己处理请求编组和响应解组。</p>
-<p>每个API可以同步或异步地调用。</p>
-<p>同步方法返回一个响应对象，而名称以 async 后缀结尾的异步方法需要收到响应或错误后才会通知（在低级别客户端管理的线程池上）的侦听器参数。</p>
-<h2 id="实例Demo"><a href="#实例Demo" class="headerlink" title="实例Demo"></a>实例Demo</h2><pre><code>public RestHighClient() {
-    try {
-        RestClientBuilder clientBuilder = RestClient.builder(HTTP_HOSTS);
+        <p>开始之前，先贴下UML类图，有时看迷糊了，看看类图</p>
+<p><img src="//simba-cheng.github.io/2020/03/08/后台/spring/ClassPathXmlApplicationContext-02/ClassPathXmlApplicationContext-UML.png" alt="ClassPathXmlApplicationContext_UML" title="ClassPathXmlApplicationContext_UML"></p>
+<br>
 
-        //设置在多次重试同一请求时要遵守的最大超时（以毫秒为单位）,默认30s
-        clientBuilder.setMaxRetryTimeoutMillis(5000);
-        restHighLevelClient = new RestHighLevelClient(clientBuilder);
-    } catch (Exception e) {
-        LOGGER.error(e.getMessage(), e);
+<p>在 <a href="https://simba-cheng.cn/2020/03/08/%E5%90%8E%E5%8F%B0/spring/ClassPathXmlApplicationContext-01-%E8%84%89%E7%BB%9C%E6%A2%B3%E7%90%86/" target="_blank" rel="noopener">《ClassPathXmlApplicationContext-01-脉络梳理》</a> 中，大致了解 ClassPathXmlApplicationContext 其脉络。</p>
+<p>下面一步步将其分解，看看其细节方面的实现。</p>
+<h1 id="1-入口"><a href="#1-入口" class="headerlink" title="1.入口"></a>1.入口</h1><p>Test示例代码(作为入口)</p>
+<pre><code>public class ClassPathXmlApplicationContextTest {
+
+    private static final String PATH = &quot;/org/springframework/context/support/&quot;;
+    private static final String FQ_SIMPLE_CONTEXT = PATH + &quot;simpleContext.xml&quot;;
+
+    @Test
+    public void testSingleConfigLocation() {
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(FQ_SIMPLE_CONTEXT);
+        assertTrue(ctx.containsBean(&quot;someMessageSource&quot;));
+        ctx.close();
     }
-}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client/6.5.0/org/elasticsearch/client/package-summary.html" target="_blank" rel="noopener">elasticsearch rest client 6.5.0 java doc</a></li>
-<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-timeouts.md" target="_blank" rel="noopener">超时</a></li>
-<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-number-of-threads.md" target="_blank" rel="noopener">线程数</a></li>
-<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-basic-authentication.md" target="_blank" rel="noopener">基本认证</a></li>
-<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-common-configuration-encrypted-communication.md" target="_blank" rel="noopener">加密传输</a></li>
-<li><a href="https://www.bookstack.cn/read/elasticsearch-java-rest/java-low-level-rest-client-sniffer.md" target="_blank" rel="noopener">嗅探器</a></li>
-<li><a href="https://artifacts.elastic.co/javadoc/org/elasticsearch/client/elasticsearch-rest-client-sniffer/6.5.0/org/elasticsearch/client/sniff/package-summary.html" target="_blank" rel="noopener">嗅探器 java doc</a></li>
-</ul>
+}</code></pre><p>首先进入 ClassPathXmlApplicationContext 的构造方法</p>
+<pre><code>public ClassPathXmlApplicationContext(String configLocation) throws BeansException {
+    this(new String[] {configLocation}, true, null);
+}</code></pre><p>这里 ClassPathXmlApplicationContext 做了构造函数重载，帮我们定义了 refresh、parent 两个参数，然后跳转到下面这个构造方法。</p>
+<pre><code>public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent)
+        throws BeansException {
+
+    //设置父上下文
+    super(parent);
+
+    //解析配置文件路径
+    setConfigLocations(configLocations);
+
+    //加载/刷新上下文
+    if (refresh) {
+        refresh();
+    }
+}</code></pre><p>这里三个主要方法，分别是：设置父上下文、解析配置文件路径、加载/刷新上下文</p>
+<br>
+
+<h2 id="设置父上下文"><a href="#设置父上下文" class="headerlink" title="设置父上下文"></a>设置父上下文</h2><p>这行代码没啥讲的，跟着其一路向上，在 AbstractApplicationContext 抽象类中设置’父上下文’参数</p>
+<pre><code>super(parent); </code></pre><br>
+
+<h2 id="解析配置文件路径"><a href="#解析配置文件路径" class="headerlink" title="解析配置文件路径"></a>解析配置文件路径</h2><p>这方法调用了父类的实现，跳转到了 AbstractRefreshableConfigApplicationContext#setConfigLocations</p>
+<pre><code>setConfigLocations(configLocations);</code></pre><p>仔细瞅瞅，其作用是，解析 applicationContext.xml 配置文件的路径，然后存储在 configLocations 变量中</p>
+<pre><code>public void setConfigLocations(String[] locations) {
+    if (locations != null) {
+        Assert.noNullElements(locations, &quot;Config locations must not be null&quot;);
+        this.configLocations = new String[locations.length];
+        for (int i = 0; i &lt; locations.length; i++) {
+            this.configLocations[i] = resolvePath(locations[i]).trim();
+        }
+    }
+    else {
+        this.configLocations = null;
+    }
+}
+
+protected String resolvePath(String path) {
+    return SystemPropertyUtils.resolvePlaceholders(path);
+}</code></pre><p>代码调用链</p>
+<p><img src="//simba-cheng.github.io/2020/03/08/后台/spring/ClassPathXmlApplicationContext-02/1-%E8%A7%A3%E6%9E%90%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84.png" alt="解析配置文件路径" title="解析配置文件路径"></p>
+<br>
+
+<p>UML 类图</p>
+<p><img src="//simba-cheng.github.io/2020/03/08/后台/spring/ClassPathXmlApplicationContext-02/%E8%A7%A3%E6%9E%90%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84-UML%E7%B1%BB%E5%9B%BE.png" alt="解析文件路径-UML类图" title="解析文件路径-UML类图"></p>
+<br>
+
+<h2 id="加载-刷新上下文"><a href="#加载-刷新上下文" class="headerlink" title="加载/刷新上下文"></a>加载/刷新上下文</h2><p>refresh 方法，是AbstractApplicationContext核心方法， 这个是一个很重要的方法，后面专门写。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -1001,12 +1028,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>es-java-client</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">492</span></p>
+        <p><span class="copy-title">文章标题:</span>ClassPathXmlApplicationContext-02</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">422</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-01-30, 13:30:08</p>
-        <p><span class="copy-title">最后更新:</span>2020-02-07, 10:27:17</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/30/elasticsearch/07-es-client/es-java-client/" title="es-java-client">https://simba-cheng.github.io/2020/01/30/elasticsearch/07-es-client/es-java-client/</a>
+        <p><span class="copy-title">发布时间:</span>2020-03-08, 11:23:50</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-08, 11:37:52</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/08/后台/spring/ClassPathXmlApplicationContext-02/" title="ClassPathXmlApplicationContext-02">https://simba-cheng.github.io/2020/03/08/后台/spring/ClassPathXmlApplicationContext-02/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
