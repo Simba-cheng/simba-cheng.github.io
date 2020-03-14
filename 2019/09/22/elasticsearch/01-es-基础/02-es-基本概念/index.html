@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -147,11 +147,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                        <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                        <li><div data-rel="es_client">es_client<small>(2)</small></div>
                             
                         </li>
                             
@@ -239,15 +239,15 @@
                             
                         </li>
                             
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="spring">spring<small>(3)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="其他">其他<small>(4)</small></div>
                             
                         </li>
                             
@@ -342,11 +342,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -374,11 +374,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -386,11 +386,19 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">spring</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -402,11 +410,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -415,10 +419,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <div class="clearfix"></div>
@@ -925,7 +925,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-12 23:44:37'>2019-09-22 19:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-14 17:09:35'>2019-09-22 19:49</time>
         
     </div>
     <div class="article-meta">
@@ -1119,8 +1119,8 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
 <h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><p>当索引(动词/存储)一个文档时，它被存储在某个主分片中。</p>
 <p>Elasticsearch 是如何划分的？怎么决定A文档写到shard-A分片中，而不是shard-B分片中去呢？</p>
 <p>Elasticsearch中有一个算法：将数据均匀的分配到各个分片的算法。</p>
-<pre><code>shard = hash(routing) % number_of_primary_shard</code></pre><p>routing:一个任意字符串，默认是文档_id，也可以自定义。</p>
-<p>routing值hash后，除以主分片数量，得到一个余数。<br>(这个余数值范围永远是0～number_of_primary_shard -1)</p>
+<pre><code>shard = hash(routing) % number_of_primary_shard</code></pre><p>上面表达式中的routing是一个变量，如果不设置，默认是文档id，也可以是自定义的值。</p>
+<p>routing值hash后，除以主分片数量，得到一个余数(这个余数值范围永远是 0 ～ number_of_primary_shard-1)。</p>
 <p>最后得到的值，即是 文档所在的分片。</p>
 <p>这里也解释了 为什么主分片数量在创建索引后就不允许修改了。</p>
 <p>如果主分片数量修改了，那之前的路由值也就失效了，文档再也检索不到了。</p>
@@ -1163,7 +1163,7 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
         <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-22, 19:49:02</p>
-        <p><span class="copy-title">最后更新:</span>2020-03-12, 23:44:37</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-14, 17:09:35</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/elasticsearch/01-es-基础/02-es-基本概念/" title="02-es-基本概念">https://simba-cheng.github.io/2019/09/22/elasticsearch/01-es-基础/02-es-基本概念/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1225,7 +1225,7 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#es','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#布隆过滤器','#后台_其他','#设计模式','#es_query','#es_batch','#es_update',],
+            'data': ['#资料','#other','#问题-思考','#es','#es_client','#es问题','#flink','#广告业务','#索引','#hash','#mysql','#Java8','#spring','#设计模式','#后台_其他','#bitmap','#布隆过滤器','#es_update','#es_query','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
