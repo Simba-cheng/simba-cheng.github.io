@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Flink-DataStream</title>
+      <link href="/2020/03/22/flink/%E5%9F%BA%E7%A1%80/Flink-DataStream/"/>
+      <url>/2020/03/22/flink/%E5%9F%BA%E7%A1%80/Flink-DataStream/</url>
+      
+        <content type="html"><![CDATA[<h1 id="流处理基本概念"><a href="#流处理基本概念" class="headerlink" title="流处理基本概念"></a>流处理基本概念</h1><p>注：这里直接搬运 <a href="https://ververica.cn/developers/apache-flink-basic-zero-iii-datastream-api-programming/" target="_blank" rel="noopener">Apache Flink 零基础入门（四）：DataStream API 编程</a>部分内容</p><br><p>由于需要支持无限数据集的处理，流处理系统 一般 采用 <strong>数据驱动的处理方式</strong>。</p><p>它会提前设置一些<strong>算子</strong>，然后等到数据到达后对数据进行处理。</p><p>为了表达复杂的计算逻辑，包括 Flink 在内的分布式流处理引擎一般采用 DAG 图来表示整个计算逻辑。</p><p>其中 DAG 图中的<strong>每一个点就代表一个基本的逻辑单元，也就是前面说的算子</strong>。</p><p>由于计算逻辑被组织成有向图，数据会从左边的方向，从一些特殊的 Source 节点流入系统；<br>然后通过网络传输、本地传输等不同的数据传输方式在算子之间进行发送和处理；<br>最后会通过另外一些特殊的 Sink 节点将计算结果发送到某个外部系统或数据库中。</p><p><img src="//simba-cheng.github.io/2020/03/22/flink/基础/Flink-DataStream/%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B.png" alt="分布式流处理的基本模型" title="分布式流处理的基本模型"></p><p>在实际运行时，分布式流处理引擎的物理模型要更复杂，因为每个算子都可以有多个实例(如上右图)。</p><br><p>Flink API 的定义更加面向数据本身的处理逻辑，它把数据流抽象成一个’无限集合’，然后定义了一些集合上的操作。</p><h1 id="DataStream-API-概览"><a href="#DataStream-API-概览" class="headerlink" title="DataStream API 概览"></a>DataStream API 概览</h1><p>DataStream API 的核心，是代表数据流的DataStream对象。</p><p>DataStream的操作可以分为四类：</p><br><p><strong>第一类</strong></p><p>对单条数据的操作。</p><p>比如 筛选/过滤 掉不合格的数据记录(Fliter)、数据转换处理(Map)</p><br><p><strong>第二类</strong></p><p>对多条数据的操作。</p><p>比如 统计一小时内的订单总成交量，需要将一个小时内的所有订单记录的成交量加到一起(Window)，需要通过Window将相关数据关联到一起处理。</p><br><p><strong>第三类</strong></p><p>对多个流进行操作，并转换为单个流。</p><p>比如 多个流可以通过 Union、Join 或 Connect 等操作合到一起。</p><p>这些操作合并的逻辑不同，但是它们最终都会产生了一个新的统一的流，从而可以进行一些跨流的操作</p><br><p><strong>第四类</strong></p><p>拆分流。</p><p>把一个流按照一定规则，拆分为多个流(Split)。</p><p>拆分后的每个流，都是之前流的一个子集，这样可以对不同的流做不同的处理。</p><br><p>为了支持不同流的操作，Flink引入了一组不同的流类型，用来表示某些 中间流 的数据集类型(下图)。</p><p><img src="//simba-cheng.github.io/2020/03/22/flink/基础/Flink-DataStream/dataStream%E5%9F%BA%E6%9C%AC%E8%BD%AC%E6%8D%A2.png" alt="dataStream基本转换" title="dataStream基本转换"></p><br><p>单条数据的处理，如 fliter、map 操作的结果仍然是基本的 DataStream 类型。</p><p>split 拆分流处理，首先会产生一个 SplitStream，基于 SplitStream 可以使用 Select方法 筛选出符合要求的数据，然后再得到一个基本流。</p><p>count 合并流处理，会得到一个 ConnectedStream；ConnectedStream 支持的操作与普通流有所区别；<br>因为它代表两个不同流混合的结果，因此它允许对两个流中不同的数据 指定不同的业务逻辑；<br>然后他们的处理结果再形成新的 DataStream</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p><a href="https://ververica.cn/developers/apache-flink-basic-zero-iii-datastream-api-programming/" target="_blank" rel="noopener">Apache Flink 零基础入门（四）：DataStream API 编程</a></p></li><li><p><a href="https://www.bilibili.com/video/av47970985" target="_blank" rel="noopener">bilibili - Apache Flink 入门教程 4.DataStream API 编程</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> flink </category>
+          
+          <category> flink_基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> flink </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Flink-基本概念</title>
       <link href="/2020/03/22/flink/%E5%9F%BA%E7%A1%80/Flink-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"/>
       <url>/2020/03/22/flink/%E5%9F%BA%E7%A1%80/Flink-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
