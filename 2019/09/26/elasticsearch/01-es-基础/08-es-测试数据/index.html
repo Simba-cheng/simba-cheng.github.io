@@ -103,14 +103,6 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -120,6 +112,14 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -151,11 +151,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                        <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                        <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                             
                         </li>
                             
@@ -199,11 +199,11 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="flink_集群">flink_集群<small>(1)</small></div>
+                        <li><div data-rel="flink_基础">flink_基础<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="flink_基础">flink_基础<small>(1)</small></div>
+                        <li><div data-rel="flink_集群">flink_集群<small>(1)</small></div>
                             
                         </li>
                             
@@ -239,11 +239,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -350,11 +350,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -386,11 +386,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -949,12 +949,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-14 17:12:02'>2019-09-26 16:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-22 21:53:33'>2019-09-26 16:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:230</span>
+        <span>字数:246</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1003,7 +1003,11 @@ cat newsData_All.json | wc -l
 split es_recommend_index.json -l 50000 -d -a 2 url_&amp;&amp;ls|grep kws_|xargs -n1 -i{} mv {} {}.json
 
 修改后缀名
-ls|grep url_|xargs -n1 -i{} mv {} {}.json</code></pre><p>json文件导入命令</p>
+ls|grep url_|xargs -n1 -i{} mv {} {}.json
+
+----------------------
+
+split -l 1000000 es_recommend_index.json recommend_index_&amp;&amp;ls|grep kws_|xargs -n1 -i{} mv {} {}.json</code></pre><p>json文件导入命令</p>
 <pre><code>curl -H &apos;Content-Type: application/x-ndjson&apos; -XPOST &apos;192.168.137.100:9200/news/new/_bulk?pretty&apos; --data-binary @newsData_1.json</code></pre><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>分享两万条数据，供学习使用。</p>
 <p><a href="/download/es测试数据/readme.txt">字段说明 点击下载</a></p>
 <p><a href="/download/es测试数据/newsData_1.txt">newsData_1 点击下载</a></p>
@@ -1023,10 +1027,10 @@ ls|grep url_|xargs -n1 -i{} mv {} {}.json</code></pre><p>json文件导入命令<
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>08-es-测试数据</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">230</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">246</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-26, 16:34:23</p>
-        <p><span class="copy-title">最后更新:</span>2020-03-14, 17:12:02</p>
+        <p><span class="copy-title">最后更新:</span>2020-03-22, 21:53:33</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/elasticsearch/01-es-基础/08-es-测试数据/" title="08-es-测试数据">https://simba-cheng.github.io/2019/09/26/elasticsearch/01-es-基础/08-es-测试数据/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1088,7 +1092,7 @@ ls|grep url_|xargs -n1 -i{} mv {} {}.json</code></pre><p>json文件导入命令<
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#other','#问题-思考','#es','#es_client','#es问题','#flink','#广告业务','#Java8','#mysql','#索引','#spring','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_batch','#es_update','#es_query',],
+            'data': ['#other','#资料','#问题-思考','#es','#es_client','#es问题','#flink','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
