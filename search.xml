@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Flink-Window</title>
+      <link href="/2020/03/25/flink/%E5%9F%BA%E7%A1%80/Flink-Window/"/>
+      <url>/2020/03/25/flink/%E5%9F%BA%E7%A1%80/Flink-Window/</url>
+      
+        <content type="html"><![CDATA[<p>Flink Windows</p><h1 id="什么是window"><a href="#什么是window" class="headerlink" title="什么是window"></a>什么是window</h1><p>在流处理中，数据是连续不断的，因此不可能等到所有数据都到达了才开始处理。</p><p>当然我们可以每收到一条消息就处理一次，但是有时需要做一些聚合类的处理，例如：在过去的1分钟内有多少用户点击了我们的网页。</p><p>在这种情况下，我们必须定义一个窗口，用来收集最近一分钟内的数据，并对这个窗口内的数据进行计算。</p><br><p>Window操作在流式数据处理中是非常核心的一种抽象，<strong>它把一个无限流数据集分割成一个个有界的Window（或称为Bucket），然后就可以非常方便地定义作用于Window之上的各种计算操作</strong>。</p><br><p>Window(窗口) 可以是 <strong>时间驱动(Time Window，每30秒)</strong> 或 <strong>数据驱动(Count Window，每50个元素)</strong>。 </p><p><img src="//simba-cheng.github.io/2020/03/25/flink/基础/Flink-Window/Flink-window.png" alt="Flink-window" title="Flink-window"></p><h1 id="Time-Window"><a href="#Time-Window" class="headerlink" title="Time Window"></a>Time Window</h1><p>在此之前，我们需要先知道 Flink 提出了三种时间的概念，分别是 event time（事件时间：事件发生时的时间）、ingestion time（摄取时间：事件进入流处理系统的时间）、processing time（处理时间：消息被计算处理的时间）。</p><br><p>Time Window 是根据时间对数据流进行分组的。</p><p>Flink 提供 Time Window 常用窗口：滚动窗口(tumbling windows)、滑动窗口(sliding windows)、会话窗口(session windows)。</p><h1 id="Tumbling-Windows-滚动窗口-无重叠"><a href="#Tumbling-Windows-滚动窗口-无重叠" class="headerlink" title="Tumbling Windows(滚动窗口 无重叠)"></a>Tumbling Windows(滚动窗口 无重叠)</h1><p>Tumbling windows 根据指定的窗口大小将数据分割到窗口当中。</p><p>前一个窗口结束时，下一个窗口才会被创建。因此窗口与窗口之间没有重叠部分。</p><p>滚动窗口将数据流切分成不重叠的窗口，每一个事件只能属于一个窗口。</p><p>示例：</p><pre><code>/** * 滚动窗口 */public void test_TumblingWindows() throws Exception {    StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();    environment.setParallelism(1);    //先合并两个数据源    DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; aaa =            environment.addSource(new TumblingWindowsDataSource(&quot;aaa&quot;));    DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; bbb =            environment.addSource(new TumblingWindowsDataSource(&quot;bbb&quot;));    DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; unionDataStream = aaa.union(bbb);    //输出入参    unionDataStream.print(&quot;input&quot;);    SingleOutputStreamOperator&lt;Tuple2&lt;String, Integer&gt;&gt; windowStream = unionDataStream.flatMap(new FlatMapFunction&lt;Tuple2&lt;String, Integer&gt;, Tuple2&lt;String, Integer&gt;&gt;() {        @Override        public void flatMap(Tuple2&lt;String, Integer&gt; value, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out) throws Exception {            out.collect(Tuple2.of(value.f0, 1));        }    })            .keyBy(0)            .timeWindow(Time.seconds(5))            .sum(1);    windowStream.print(&quot;out&quot;);    environment.execute(&quot;test_TumblingWindows&quot;);}-----------------------------------------------------------------public class TumblingWindowsDataSource extends RichParallelSourceFunction&lt;Tuple2&lt;String, Integer&gt;&gt; {private static final Logger LOGGER = LoggerFactory.getLogger(TumblingWindowsDataSource.class);private volatile boolean running = true;private volatile String name;public TumblingWindowsDataSource(String name) {    this.name = name;}@Overridepublic void run(SourceContext&lt;Tuple2&lt;String, Integer&gt;&gt; ctx) throws Exception {    Random random = new Random();    int bound = 100;    final long numElements = 600;    int i = 0;    while (running &amp;&amp; i &lt; numElements) {        Thread.sleep(1500);        Tuple2 data = new Tuple2&lt;&gt;(name, random.nextInt(bound));        ctx.collect(data);        LOGGER.info(Thread.currentThread().getId() + &quot;-&quot; + this.name + &quot;-sand data:&quot; + data);        i++;    }}@Overridepublic void cancel() {    running = false;}</code></pre><p>}</p><h1 id="Sliding-Windows-滑动窗口-有重叠"><a href="#Sliding-Windows-滑动窗口-有重叠" class="headerlink" title="Sliding Windows(滑动窗口 有重叠)"></a>Sliding Windows(滑动窗口 有重叠)</h1><p>和tumbling windows类似，sliding windows也是根据指定的窗口大小截取数据。</p><p>但sliding windows创建得相对频繁一些，在前一个窗口还没结束时，下一个窗口已被创建，因此窗口之间存在着重叠部分，一条数据可能会被分到多个窗口。</p><h1 id="Session-Windows-会话窗口-活动间隙"><a href="#Session-Windows-会话窗口-活动间隙" class="headerlink" title="Session Windows(会话窗口 活动间隙)"></a>Session Windows(会话窗口 活动间隙)</h1><p>session windows通过会话来分割数据。</p><p>窗口之间没有重叠的部分，也不像tumbling windows和sliding windows那样有固定的窗口大小。</p><p>如果在一段时间内窗口没有接受到数据，session windows将会被关掉。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="http://wuchong.me/blog/2016/05/25/flink-internals-window-mechanism/" target="_blank" rel="noopener">Flink 原理与实现：Window 机制</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> flink </category>
+          
+          <category> flink_基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> flink </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Flink-transformations</title>
       <link href="/2020/03/25/flink/%E5%9F%BA%E7%A1%80/Flink-transformations/"/>
       <url>/2020/03/25/flink/%E5%9F%BA%E7%A1%80/Flink-transformations/</url>
