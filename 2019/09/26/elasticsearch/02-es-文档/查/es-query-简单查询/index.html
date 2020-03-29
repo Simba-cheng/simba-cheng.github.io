@@ -123,14 +123,6 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -140,6 +132,14 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -366,11 +366,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -422,11 +422,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1310,7 +1310,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#flink','#资料','#other','#思考','#es','#es_client','#es问题','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_batch','#es_update','#es_query',],
+            'data': ['#flink','#other','#资料','#思考','#es','#es_client','#es问题','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#后台_其他','#设计模式','#布隆过滤器','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
