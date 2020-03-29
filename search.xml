@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Flink-导图</title>
+      <link href="/2020/03/29/flink/Flink-%E5%AF%BC%E5%9B%BE/"/>
+      <url>/2020/03/29/flink/Flink-%E5%AF%BC%E5%9B%BE/</url>
+      
+        <content type="html"><![CDATA[<p><img src="//simba-cheng.github.io/2020/03/29/flink/Flink-导图/Flink-%E5%AF%BC%E5%9B%BE.png" alt="Flink-导图" title="Flink-导图"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> flink </category>
+          
+          <category> flink_集群 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> flink </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Flink-State</title>
       <link href="/2020/03/28/flink/%E5%9F%BA%E7%A1%80/Flink-State/"/>
       <url>/2020/03/28/flink/%E5%9F%BA%E7%A1%80/Flink-State/</url>
@@ -454,9 +481,9 @@
       
         <tags>
             
-            <tag> 思考 </tag>
-            
             <tag> flink </tag>
+            
+            <tag> 思考 </tag>
             
         </tags>
       
