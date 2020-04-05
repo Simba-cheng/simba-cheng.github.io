@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/03/28/flink/%E5%9F%BA%E7%A1%80/Flink-State/</loc>
+    
+    <lastmod>2020-04-05T14:04:55.073Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/04/05/flink/%E5%9F%BA%E7%A1%80/Flink-WaterMark/</loc>
     
     <lastmod>2020-04-05T01:54:06.446Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://simba-cheng.github.io/2020/02/09/%E6%80%9D%E8%80%83/Flink%E9%A2%84%E7%A0%94/</loc>
     
     <lastmod>2020-04-04T10:24:05.032Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/03/28/flink/%E5%9F%BA%E7%A1%80/Flink-State/</loc>
-    
-    <lastmod>2020-03-29T15:09:39.546Z</lastmod>
     
   </url>
   
