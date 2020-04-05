@@ -123,14 +123,6 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -140,6 +132,14 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -354,11 +354,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -997,7 +997,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-05 22:04:55'>2020-03-28 15:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-05 23:07:30'>2020-03-28 15:48</time>
         
     </div>
     <div class="article-meta">
@@ -1488,7 +1488,8 @@ StateTtlConfig ttlConfig = StateTtlConfig
 <p>1.压缩时调用 TTL 过滤器会降低速度。TTL 过滤器需要解析上次访问的时间戳，并对每个将参与压缩的状态进行是否过期检查。<br>对于集合型状态类型（比如 list 和 map），会对集合中每个元素进行检查。</p>
 <p>2.对于元素序列化后长度不固定的列表状态，TTL 过滤器需要在每次 JNI 调用过程中，额外调用 Flink 的 java 序列化器， 从而确定下一个未过期数据的位置。</p>
 <p>3.对已有的作业，这个清理方式可以在任何时候通过 StateTtlConfig 启用或禁用该特性，比如从 savepoint 重启后。</p>
-<h1 id="Managed-Operator-State"><a href="#Managed-Operator-State" class="headerlink" title="Managed Operator State"></a>Managed Operator State</h1><h1 id="Managed-Operator-State-使用示例"><a href="#Managed-Operator-State-使用示例" class="headerlink" title="Managed Operator State 使用示例"></a>Managed Operator State 使用示例</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<h1 id="Managed-Operator-State"><a href="#Managed-Operator-State" class="headerlink" title="Managed Operator State"></a>Managed Operator State</h1><p>用户可以通过实现 CheckpointedFunction 或 ListCheckpointed<t extends serializable> 接口来使用 managed operator state。</t></p>
+<h1 id="Managed-Operator-State-使用示例"><a href="#Managed-Operator-State-使用示例" class="headerlink" title="Managed Operator State 使用示例"></a>Managed Operator State 使用示例</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li><p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.10/zh/dev/stream/state/state.html#top" target="_blank" rel="noopener">Working with State</a></p>
 </li>
 <li><p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.10/zh/dev/api_concepts.html#rich-functions" target="_blank" rel="noopener">基础 API 概念</a></p>
@@ -1517,7 +1518,7 @@ StateTtlConfig ttlConfig = StateTtlConfig
         <p><span class="copy-title">文章字数:</span><span class="post-count">4.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-03-28, 15:48:34</p>
-        <p><span class="copy-title">最后更新:</span>2020-04-05, 22:04:55</p>
+        <p><span class="copy-title">最后更新:</span>2020-04-05, 23:07:30</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/28/flink/基础/Flink-State/" title="Flink-State">https://simba-cheng.github.io/2020/03/28/flink/基础/Flink-State/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1579,7 +1580,7 @@ StateTtlConfig ttlConfig = StateTtlConfig
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#flink','#资料','#other','#思考','#es','#es_client','#es问题','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_batch','#es_update','#es_query',],
+            'data': ['#flink','#other','#资料','#思考','#es','#es_client','#es问题','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
