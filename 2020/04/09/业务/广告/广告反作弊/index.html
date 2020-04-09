@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Flink集群搭建 | Simba</title>
-  <meta name="keywords" content=" flink ">
-  <meta name="description" content="Flink集群搭建 | Simba">
+  <title>广告反作弊 | Simba</title>
+  <meta name="keywords" content=" 广告业务 ">
+  <meta name="description" content="广告反作弊 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="先熟悉 互联网广告 中的各个角色、结算模式。 互联网广告角色广告主 将自己产品的广告触达到用户，通过广告在受众群体或目标用户中产生一定的品牌影响力，进一步使得用户成为其服务或产品的消费者。 用户 在互联网上浏览信息或使用服务的人，也是广告主的潜在的广告客户。 媒体 媒体一般为互联网网站或互联网信息与服务的提供商。互联网广告投放的媒体通过用户在其网站浏览信息或者使用服务的过程中完成广告信息的传播。">
 <meta name="keywords" content="广告业务">
@@ -980,9 +980,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-flink/集群/Flink集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-业务/广告/广告反作弊" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Flink集群搭建</h1>
+        <h1 class="article-title">广告反作弊</h1>
     
     <div class="article-meta">
         
@@ -990,28 +990,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="flink">flink</a>/
+                <a href="javascript:" data-rel="业务">业务</a>/
             
-                <a href="javascript:" data-rel="flink_集群">flink_集群</a>
+                <a href="javascript:" data-rel="广告业务">广告业务</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color1">flink</a>
+            <a href="javascript:" class="color5">广告业务</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-21 20:54:00'>2020-02-09 12:03</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-09 22:58:59'>2020-04-09 16:07</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:506</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1030,7 +1030,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flink-Standalone-Cluster-简单集群部署"><span class="toc-text">Flink Standalone Cluster 简单集群部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#masters-配置文件"><span class="toc-text">masters 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slaves-配置文件"><span class="toc-text">slaves 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flink-conf-yaml-配置文件"><span class="toc-text">flink-conf.yaml 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动集群"><span class="toc-text">启动集群</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flink-Standalone-Cluster-高可用集群部署"><span class="toc-text">Flink Standalone Cluster 高可用集群部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#互联网广告角色"><span class="toc-text">互联网广告角色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#互联网广告结算方式"><span class="toc-text">互联网广告结算方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#现状"><span class="toc-text">现状</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作弊动机"><span class="toc-text">作弊动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作弊的定义"><span class="toc-text">作弊的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作弊手法"><span class="toc-text">作弊手法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1045,66 +1045,62 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Flink部署模式有三种：Local本地部署，Standalone Cluster集群部署，Flink ON YARN</p>
-<p>这里有现成的三台虚拟机，也不需要Hadoop，所以只看 Standalone Cluster集群部署。</p>
-<pre><code>SSH，机器之间免密配置，JDK什么的，就不赘述了</code></pre><p>Flink版本我选择的是1.8.3</p>
-<p>Flink下载：<a href="http://mirror.bit.edu.cn/apache/flink/flink-1.8.3/flink-1.8.3-bin-scala_2.11.tgz" target="_blank" rel="noopener">flink-1.8.3-bin-scala_2.11.tgz</a></p>
-<h1 id="Flink-Standalone-Cluster-简单集群部署"><a href="#Flink-Standalone-Cluster-简单集群部署" class="headerlink" title="Flink Standalone Cluster 简单集群部署"></a>Flink Standalone Cluster 简单集群部署</h1><p>集群信息：</p>
-<table>
-<thead>
-<tr>
-<th>节点</th>
-<th>节点角色</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>172.*.*.130</td>
-<td>master</td>
-</tr>
-<tr>
-<td>172.*.*.131</td>
-<td>slave</td>
-</tr>
-<tr>
-<td>172.*.*.132</td>
-<td>slave</td>
-</tr>
-</tbody></table>
-<p>统一安装路径：/home/tool/flink/flink-1.8.3</p>
-<p>tgz解压以后修改配置文件</p>
-<h2 id="masters-配置文件"><a href="#masters-配置文件" class="headerlink" title="masters 配置文件"></a>masters 配置文件</h2><p>配置集群中master主节点ip或hostname，并指定端口</p>
-<pre><code>172.*.*.130:8081</code></pre><h2 id="slaves-配置文件"><a href="#slaves-配置文件" class="headerlink" title="slaves 配置文件"></a>slaves 配置文件</h2><p>配置集群中slave节点的ip或hostname，不用指定端口</p>
-<pre><code>172.*.*.131
-172.*.*.132</code></pre><h2 id="flink-conf-yaml-配置文件"><a href="#flink-conf-yaml-配置文件" class="headerlink" title="flink-conf.yaml 配置文件"></a>flink-conf.yaml 配置文件</h2><p>flink-conf 配置文件中有很多配置，目前不做太多了解，先上手运行再说</p>
-<p>修改 jobmanager.rpc.address 配置，这里配置master节点的ip</p>
-<pre><code>jobmanager.rpc.address: 172.*.*.130</code></pre><p>其他配置可以不动。</p>
-<p>以上在master节点配置完毕后，scp发送到另外两台slave机器的指定目录。</p>
-<h2 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h2><p>启动命令：<br>    ./bin/start-cluster.sh</p>
-<p>停止命令：<br>    ./bin/stop-cluster.sh</p>
-<p><img src="//simba-cheng.github.io/2020/02/09/flink/集群/Flink集群搭建/flink%E9%9B%86%E7%BE%A4-%E5%90%AF%E5%8A%A8.png" alt="flink集群-启动" title="flink集群-启动"></p>
-<p>通过jps命令查看进程</p>
-<p><img src="//simba-cheng.github.io/2020/02/09/flink/集群/Flink集群搭建/flink-jps.png" alt="flink-jps" title="flink-jps"></p>
-<p>查看Flink控制台界面</p>
-<pre><code>http://172.*.*.130:8081/</code></pre><br>
-
-<p>总的来说，Flink集群的基本搭建配置还是很简单的。</p>
-<h1 id="Flink-Standalone-Cluster-高可用集群部署"><a href="#Flink-Standalone-Cluster-高可用集群部署" class="headerlink" title="Flink Standalone Cluster 高可用集群部署"></a>Flink Standalone Cluster 高可用集群部署</h1><p>上面采用了 Standalone Cluster 集群部署方式，这种方式并不是高可用的，其只配置了一个jobmanager，生产环境挂掉那就凉凉。</p>
-<p>那就搞高可用呗，Flink 高可用 需要依赖 zookeeper， zookeeper 集群安装 这里不再赘述</p>
-<p>当然也可以是用 Flink 自带的Zookeeper.</p>
-<p>整个配置挺简单。</p>
-<p>具体可以参考这篇： <a href="https://www.cnblogs.com/freeweb/p/12092487.html" target="_blank" rel="noopener">Flink Standalone集群jobmanagers高可用配置</a></p>
+        <p>先熟悉 互联网广告 中的各个角色、结算模式。</p>
+<h1 id="互联网广告角色"><a href="#互联网广告角色" class="headerlink" title="互联网广告角色"></a>互联网广告角色</h1><p><strong>广告主</strong></p>
+<p>将自己产品的广告触达到用户，通过广告在受众群体或目标用户中产生一定的品牌影响力，进一步使得用户成为其服务或产品的消费者。</p>
+<p><strong>用户</strong></p>
+<p>在互联网上浏览信息或使用服务的人，也是广告主的潜在的广告客户。</p>
+<p><strong>媒体</strong></p>
+<p>媒体一般为互联网网站或互联网信息与服务的提供商。互联网广告投放的媒体通过用户在其网站浏览信息或者使用服务的过程中完成广告信息的传播。</p>
+<p><strong>需求方平台</strong></p>
+<p>为广告主提供跨媒体流量采购的系统，帮助广告主完成用户触达。</p>
+<p><strong>供应方平台</strong></p>
+<p>媒体的广告投放进行全方位的分析和管理的平台，与需求方平台相对应，属于媒体优化自身收益的工具。</p>
+<p><strong>在线广告联盟</strong></p>
+<p>广告联盟是一个连接互联网媒体和广告主的广告系统平台，广告联盟不仅会给广告主提供广告营销工具和广告投放服务，而且会借助互联网媒体实现广告的商业价值。</p>
+<p><strong>广告联盟交换平台</strong></p>
+<p>广告交易平台的作用在于在不同的广告联盟之间实现广告与流量的交换和交易。通过把不同模式的广告市场互联互通从而将整个广告市场整合起来，使得需求方平台和供应方平台都达到综合利益的最大化。</p>
+<h1 id="互联网广告结算方式"><a href="#互联网广告结算方式" class="headerlink" title="互联网广告结算方式"></a>互联网广告结算方式</h1><p><strong>CPD/CPT</strong></p>
+<p>按天(时间)包段，按时间结算收费。</p>
+<p><strong>CPC</strong></p>
+<p>按照广告的点击次数进行结算</p>
+<p><strong>CPM</strong></p>
+<p>按照1000次曝光为单位进行结算</p>
+<p><strong>CPA</strong></p>
+<p>根据 每个访问者 对广告 所采取的 行为 收费模式(即 形成一次交易、注册一个用户、对广告一次点击)。</p>
+<p><strong>CPS</strong></p>
+<p>按实际销售产品的提成来换算广告金额。</p>
+<p><strong>DCPM</strong></p>
+<p>每次出价均依据广告主广告投放的效果来实时计算，以得出对广告主最有利的价格，从而保证了广告主的利益。</p>
+<p><strong>OCPC</strong></p>
+<p>经过“优化”后的CPC</p>
+<p>如果发现某个用户对广告的转化概率高，广告平台可以适当提高出价，使得广告主更有机会抢到该用户的曝光机会；</p>
+<p>如果转化概率低，则需要调低出价。可以理解为算是智能广告</p>
+<h1 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h1><p>了解上面一些基本广告角色、计费模式后，看下我目前业务中的实际场景。</p>
+<p>因为做的是站内广告，代理商 和 媒体，对于我而言，就是 公司主站。</p>
+<p>广告主 在 公司主站上投放广告，通过用户点击/曝光后产生，点击/曝光 流水，需要过滤掉作弊流量（点击、曝光），尽可能提高广告主预算的转化率。</p>
+<h2 id="作弊动机"><a href="#作弊动机" class="headerlink" title="作弊动机"></a>作弊动机</h2><p>从作弊动机上说，广告主、代理商 和 媒体 都有可能。</p>
+<p><strong>广告主、代理商</strong></p>
+<p>广告主是最初的金主，但也存在强烈作弊动机。</p>
+<p>比如在竞价环境下，希望尽快消耗对手的广告，从而使自己的广告得到曝光、点击。或者对自己作弊，从而提升自己的点击率。</p>
+<p><strong>媒体</strong></p>
+<p>为了完成对广告主承诺的指标，是作弊的一个动机。</p>
+<p>为了从别的渠道引流，媒体与渠道之间以流量、用户来结算。而这些用户完全不会有任何转化。</p>
+<h2 id="作弊的定义"><a href="#作弊的定义" class="headerlink" title="作弊的定义"></a>作弊的定义</h2><p>到底什么样的流量是作弊流量呢？</p>
+<p><strong>设备维度</strong></p>
+<p>从设备维度看</p>
+<p>来自模拟器或者虽然真实但被篡改了设备信息的流量，被认定是作弊流量问题不大。</p>
+<p>来自真设备，但是是群控软件控制的流量，认定为作弊流量问题也不大。</p>
+<p><strong>广告业务维度</strong></p>
+<p>从广告业务角度看</p>
+<p>恶意刷点击、曝光，导致广告主的预算快速消耗(竞对打击)，而又没有产生实际的转化，也是作弊。</p>
+<h2 id="作弊手法"><a href="#作弊手法" class="headerlink" title="作弊手法"></a>作弊手法</h2><p>模拟器，比如安卓模拟器。</p>
+<p>人工，例如像派单的形式，人工手工操作。</p>
+<p>集控肉鸡，买200台真手机，通过软件统一控制。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><p><a href="https://www.cnblogs.com/frankdeng/p/9400627.html" target="_blank" rel="noopener">Flink（二）CentOS7.5搭建Flink1.6.1分布式集群</a></p>
+<li><p><a href="https://zhuanlan.zhihu.com/p/102162595" target="_blank" rel="noopener">广告反作弊与各种安全——从入门到精（劝）通（退）</a></p>
 </li>
-<li><p><a href="http://wuchong.me/blog/2016/02/26/flink-docs-setup-cluster/" target="_blank" rel="noopener">Flink官方文档翻译：安装部署（集群模式）</a></p>
-</li>
-<li><p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.10/zh/ops/deployment/cluster_setup.html" target="_blank" rel="noopener">独立集群</a></p>
-</li>
-<li><p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/zh/ops/jobmanager_high_availability.html" target="_blank" rel="noopener">JobManager 高可用 (HA)</a></p>
-</li>
-<li><p><a href="https://www.cnblogs.com/freeweb/p/12092487.html" target="_blank" rel="noopener">Flink Standalone集群jobmanagers高可用配置</a></p>
-</li>
-<li><p><a href="https://www.jianshu.com/p/757842c62e28" target="_blank" rel="noopener">Linux安装zookeeper3.5.5集群</a></p>
+<li><p><a href="https://mp.weixin.qq.com/s/Z8-mLGsiQZCJzXZu5XY8JQ" target="_blank" rel="noopener">1秒定生死：与「黑产羊毛党」的攻防暗战</a></p>
 </li>
 </ul>
 
@@ -1120,12 +1116,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>Flink集群搭建</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">506</span></p>
+        <p><span class="copy-title">文章标题:</span>广告反作弊</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-02-09, 12:03:09</p>
-        <p><span class="copy-title">最后更新:</span>2020-03-21, 20:54:00</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/09/flink/集群/Flink集群搭建/" title="Flink集群搭建">https://simba-cheng.github.io/2020/02/09/flink/集群/Flink集群搭建/</a>
+        <p><span class="copy-title">发布时间:</span>2020-04-09, 16:07:17</p>
+        <p><span class="copy-title">最后更新:</span>2020-04-09, 22:58:59</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/09/业务/广告/广告反作弊/" title="广告反作弊">https://simba-cheng.github.io/2020/04/09/业务/广告/广告反作弊/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
