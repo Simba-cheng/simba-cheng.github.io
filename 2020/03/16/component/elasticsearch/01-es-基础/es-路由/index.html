@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>es-路由 | Simba</title>
+  <meta name="keywords" content=" es ">
+  <meta name="description" content="es-路由 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-01T02:22:23.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(69)</small></div></li>
+    
+        
+            
+            <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="markdown">markdown<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="思考">思考<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(42)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="flink_集群">flink_集群<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="flink_基础">flink_基础<small>(7)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="kafka">kafka<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(31)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="es_基础">es_基础<small>(12)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(20)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="69">
+<input type="hidden" id="yelog_site_word_count" value="81.5k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">other</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">flink</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_update</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="组件 es "
+           href="/2019/10/08/component/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/24/component/kafka/kafka/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka.md">kafka.md</span>
+            <span class="post-date" title="2020-04-24 16:36:33">2020/04/24</span>
+        </a>
+        
+        <a  class="后台 缓存 "
+           href="/2020/04/19/后台/缓存/站内广告中的缓存/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="站内广告中的缓存">站内广告中的缓存</span>
+            <span class="post-date" title="2020-04-19 11:38:58">2020/04/19</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/14/component/flink/基础/Flink-序列化导致异常/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-序列化导致异常">Flink-序列化导致异常</span>
+            <span class="post-date" title="2020-04-14 22:25:46">2020/04/14</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/04/09/业务/广告/站内广告反作弊/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="站内广告反作弊">站内广告反作弊</span>
+            <span class="post-date" title="2020-04-09 16:07:17">2020/04/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/05/component/flink/基础/Flink-WaterMark/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-WaterMark">Flink-WaterMark</span>
+            <span class="post-date" title="2020-04-05 08:46:40">2020/04/05</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/03/29/component/flink/Flink-导图/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-导图">Flink-导图</span>
+            <span class="post-date" title="2020-03-29 20:42:59">2020/03/29</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/28/component/flink/基础/Flink-State/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-State">Flink-State</span>
+            <span class="post-date" title="2020-03-28 15:48:34">2020/03/28</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-Window/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-Window">Flink-Window</span>
+            <span class="post-date" title="2020-03-25 23:43:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-transformations/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-transformations">Flink-transformations</span>
+            <span class="post-date" title="2020-03-25 22:41:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-DataStream/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-DataStream">Flink-DataStream</span>
+            <span class="post-date" title="2020-03-22 23:28:08">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-基本概念/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-基本概念">Flink-基本概念</span>
+            <span class="post-date" title="2020-03-22 16:05:38">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/03/16/component/elasticsearch/01-es-基础/es-路由/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-路由">es-路由</span>
+            <span class="post-date" title="2020-03-16 22:58:42">2020/03/16</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2020/03/08/component/elasticsearch/06-es-源码/02-es-启动流程/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-启动流程">02-es-启动流程</span>
+            <span class="post-date" title="2020-03-08 21:00:45">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-02/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-02">容器创建-02</span>
+            <span class="post-date" title="2020-03-08 11:23:50">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-01-脉络梳理/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-01-脉络梳理">容器创建-01-脉络梳理</span>
+            <span class="post-date" title="2020-03-08 10:02:44">2020/03/08</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/27/component/elasticsearch/01-es-基础/es-思维导图/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-思维导图">es-思维导图</span>
+            <span class="post-date" title="2020-02-27 15:20:44">2020/02/27</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/02/26/业务/广告/广告-人群溢价(转载)/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="广告-人群溢价(转载)">广告-人群溢价(转载)</span>
+            <span class="post-date" title="2020-02-26 15:05:23">2020/02/26</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2020/02/23/后台/mysql/mysql主从环境搭建/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql主从环境搭建">mysql主从环境搭建</span>
+            <span class="post-date" title="2020-02-23 20:59:34">2020/02/23</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/02/22/后台/spring/spring 事务/Spring-事务使用/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring 事务使用">Spring 事务使用</span>
+            <span class="post-date" title="2020-02-22 15:34:27">2020/02/22</span>
+        </a>
+        
+        <a  class="组件 es es_分词 "
+           href="/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-analysis_ik分词">es-analysis_ik分词</span>
+            <span class="post-date" title="2020-02-18 17:26:35">2020/02/18</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/更新/es-update-mapping/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_mapping">es-update_mapping</span>
+            <span class="post-date" title="2020-02-16 22:37:41">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/查/es-query-搜索选项/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-搜索选项">es-query-搜索选项</span>
+            <span class="post-date" title="2020-02-16 13:18:22">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 flink "
+           href="/2020/02/09/component/flink/基础/Flink-预研/"
+           data-tag="思考,flink"
+           data-author="" >
+            <span class="post-title" title="Flink-思考-预研">Flink-思考-预研</span>
+            <span class="post-date" title="2020-02-09 13:17:18">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/02/09/component/flink/基础/Flink-集群搭建/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-集群搭建">Flink-集群搭建</span>
+            <span class="post-date" title="2020-02-09 12:03:09">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/10-es-index-operate/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="10-es-index-operate">10-es-index-operate</span>
+            <span class="post-date" title="2020-02-06 20:09:15">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/06/component/elasticsearch/02-es-文档/更新/es-update_by_query/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_by_query">es-update_by_query</span>
+            <span class="post-date" title="2020-02-06 15:52:24">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/09-es-别名/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-es-别名">09-es-别名</span>
+            <span class="post-date" title="2020-02-06 11:41:46">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2020/01/30/component/elasticsearch/03-es-client/es-java-client/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-client">es-java-client</span>
+            <span class="post-date" title="2020-01-30 13:30:08">2020/01/30</span>
+        </a>
+        
+        <a  class="组件 es es_问题 "
+           href="/2020/01/29/component/elasticsearch/05-es-问题/es存储不足，索引只读/"
+           data-tag="es问题"
+           data-author="" >
+            <span class="post-title" title="es存储不足，索引只读">es存储不足，索引只读</span>
+            <span class="post-date" title="2020-01-29 19:35:43">2020/01/29</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/12/后台/其他/hash/"
+           data-tag="hash"
+           data-author="" >
+            <span class="post-title" title="hash">hash</span>
+            <span class="post-date" title="2020-01-12 23:15:22">2020/01/12</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/08/后台/其他/布隆过滤器/"
+           data-tag="布隆过滤器"
+           data-author="" >
+            <span class="post-title" title="布隆过滤器">布隆过滤器</span>
+            <span class="post-date" title="2020-01-08 22:41:59">2020/01/08</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/05/后台/其他/BitMap/"
+           data-tag="bitmap"
+           data-author="" >
+            <span class="post-title" title="BitMap">BitMap</span>
+            <span class="post-date" title="2020-01-05 22:21:39">2020/01/05</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/28/后台/mysql/mysql数据重复引发的问题/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql数据重复引发的问题">mysql数据重复引发的问题</span>
+            <span class="post-date" title="2019-12-28 19:16:55">2019/12/28</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/22/后台/Java8/使用流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="使用流">使用流</span>
+            <span class="post-date" title="2019-12-22 19:30:38">2019/12/22</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/18/后台/mysql/mysql隔离级别/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql隔离级别">mysql隔离级别</span>
+            <span class="post-date" title="2019-12-18 11:33:05">2019/12/18</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/01/后台/Java8/流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Stream 流">Stream 流</span>
+            <span class="post-date" title="2019-12-01 17:34:59">2019/12/01</span>
+        </a>
+        
+        <a  class="思考 "
+           href="/2019/11/30/思考/大促宕机的思考/"
+           data-tag="思考"
+           data-author="" >
+            <span class="post-title" title="大促宕机的思考">大促宕机的思考</span>
+            <span class="post-date" title="2019-11-30 20:36:49">2019/11/30</span>
+        </a>
+        
+        <a  class="思考 "
+           href="/2019/11/30/思考/FastJson踩坑/"
+           data-tag="思考"
+           data-author="" >
+            <span class="post-title" title="FastJson踩坑">FastJson踩坑</span>
+            <span class="post-date" title="2019-11-30 20:18:47">2019/11/30</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/Lambda表达式/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Lambda表达式">Lambda表达式</span>
+            <span class="post-date" title="2019-11-24 22:07:44">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/方法引用/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="方法引用">方法引用</span>
+            <span class="post-date" title="2019-11-24 19:49:31">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/23/后台/Java8/行为参数化传递代码/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="行为参数化传递代码">行为参数化传递代码</span>
+            <span class="post-date" title="2019-11-23 23:16:19">2019/11/23</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/22/后台/Java8/Java8初体验/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Java8初体验">Java8初体验</span>
+            <span class="post-date" title="2019-11-22 23:19:03">2019/11/22</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2019/11/01/component/elasticsearch/06-es-源码/01-IDEA编译es_6-5-0源码/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-IDEA编译es_6.5.0源码">01-IDEA编译es_6.5.0源码</span>
+            <span class="post-date" title="2019-11-01 23:46:24">2019/11/01</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2019/10/26/component/elasticsearch/03-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/10/12/component/elasticsearch/02-es-文档/批处理/es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="es-batch-bulk-批处理">es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match-phrase短语查询">es-query-match-phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-filtered-bool组合过滤查询">es-query-filtered-bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-get批处理">es-query-multi-get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-match多匹配查询">es-query-multi-match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match_匹配查询">es-query-match_匹配查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-term_精确查询">es-query-term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-简单查询">es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/08-es-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-es-测试数据">08-es-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/07-es-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-es-上手Demo">07-es-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/25/component/elasticsearch/02-es-文档/增/es-put-索引_动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-put-索引-动词">es-put-索引-动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/06-es-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-es-文档_document">06-es-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/05-es-Mapping_数据类型/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-es-Mapping_数据类型">05-es-Mapping_数据类型</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/04-es-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-es-索引_名词">04-es-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/03-es-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-es-查询语言">03-es-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/02-es-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-基本概念">02-es-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/01-es6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-es-6.5.0集群搭建">01-es-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="other markdown "
+           href="/2019/09/22/other/Markdown技巧/"
+           data-tag="other"
+           data-author="" >
+            <span class="post-title" title="Markdown技巧">Markdown技巧</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-component/elasticsearch/01-es-基础/es-路由" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">es-路由</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="组件">组件</a>/
+            
+                <a href="javascript:" data-rel="es">es</a>/
+            
+                <a href="javascript:" data-rel="es_基础">es_基础</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">es</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-04-24 16:18:36'>2020-03-16 22:58</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#es-路由"><span class="toc-text">es 路由</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要自定义-routing-值？"><span class="toc-text">为什么要自定义 routing 值？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#路由-数据倾斜"><span class="toc-text">路由-数据倾斜</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#忘记设置routing"><span class="toc-text">忘记设置routing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="es-路由"><a href="#es-路由" class="headerlink" title="es 路由"></a>es 路由</h1><p>在 <a href="https://simba-cheng.cn/2019/09/22/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/02-es-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener">02-es-基本概念</a>中，了解了路由功能。</p>
+<p>可以看出 es路由机制 与其分片机制有着直接关系。</p>
+<p>es通过hash算法，将具有相同hash值的文档分配到同一分片中。这个hash算法和负载均衡有点类似。</p>
+<p>默认情况，es使用 文档id作为hash值，然后对其hash、分配。这种做法的好处是，不会有数据热点(数据倾斜)</p>
+<p>下面这个表达式就是那个hash算法，routing默认是文档id，也可以是自定义的值。</p>
+<pre><code>shard = hash(routing) % number_of_primary_shard
+
+routing(文档id)值，通过hash后，除以主分片数量，得到一个余数，这个余数，就是存储文档所在的分片。</code></pre><p>如果你没有设置路由值，使用 doc_id 作为hash值，使用下面这个命令查看文档在哪个分片</p>
+<pre><code>http://localhost:9600/es_index/_search_shards?routing=routing_value(doc_id)
+
+GET /es_index/_search_shards?routing=routing_value(doc_id)</code></pre><br>
+
+<h1 id="为什么要自定义-routing-值？"><a href="#为什么要自定义-routing-值？" class="headerlink" title="为什么要自定义 routing 值？"></a>为什么要自定义 routing 值？</h1><p>在数据量、主分片数不大的情况下，常规用doc_id作为routing值，已经能满足’平均的分布数据’的需求。</p>
+<p>但如果数据量非常庞大，设置了很多主分片数(分片数)。这时，一个查询请求在集群上执行会有哪些步骤？</p>
+<p>1.查询请求发送到某个节点<br>2.该节点收到请求，广播到正这个索引的每个分片上(主分片或副本分片)<br>3.每个分片执行该请求，并返回结果。<br>4.节点接收各个分片的结果，合并、排序、返回用户</p>
+<p>默认情况下，因为使用 doc_id 进行hash，elasticsearch 也不知道文档的位置，所以必须将查询请求广播到各个分片上。</p>
+<p>如果自定义了routing值，使查询更有目的性。不必去广播请求，取而代之的是：文档数据在某个分片上，es直接去这个分片上找。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>如果要自定义一个路由值，那肯定得根据 存储数据的某些业务属性、时间、地域等 有业务意义的进行定义。。</p>
+<p>比如在我现有实际业务场景中，存储的数据是商品，而且只有当天的数据才有效(历史数据是无用的)。</p>
+<p>商品纬度 像：地域、商家类型、店铺类型、活动类型，用这些去定义routing值，会造成数据倾斜，即一个分片数据很多、另一个分片数据很少。</p>
+<br>
+
+<p>下面暂时不考虑这些，按照店铺类型做routing值。</p>
+<pre><code>自营商家：myselfShop
+
+C店商家：cShop</code></pre><p>elasticsearch 中所有文档API(get、index、delete、bulk、update、mget)都可以设置routing值，通过此参数可以自定义文档到分片的映射。</p>
+<p>这里贴下部分代码片段：</p>
+<pre><code>List&lt;String&gt; readLines = IOUtils.readLines(new FileInputStream(new File(filePath)), &quot;UTF-8&quot;);
+String routeVal;
+for (String data : readLines) {
+    Map parse = JSONObject.parseObject(data, Map.class);
+    String supplierType = String.valueOf(parse.get(&quot;supplierType&quot;));
+    if (&quot;C&quot;.equals(supplierType) || &quot;LP&quot;.equals(supplierType)) {
+        routeVal = &quot;cShop&quot;;
+    } else {
+        routeVal = &quot;myselfShop&quot;;
+    }
+    //为了方便单条插入，建议批量插入
+    IndexResponse indexResponse = esDocAddOperate.addDocument(&quot;goods_index&quot;, &quot;myType&quot;, parse, routeVal);
+    LOGGER.info(&quot;response:{}&quot;, indexResponse.getResult());
+}
+
+---------------------------------------------
+
+public IndexResponse addDocument(String index, String type, Map&lt;String, Object&gt; paramMap, String routeValue) {
+
+    IndexRequest indexRequest = RequestUtils.createIndexRequest(index, type);
+    indexRequest.source(paramMap);
+    indexRequest.routing(routeValue);
+
+    return addDocument(indexRequest);
+}
+
+private IndexResponse addDocument(IndexRequest indexRequest) {
+    return elasticsearchActionImpl.execute((RestHighLevelClient highClient) -&gt;
+            highClient.index(indexRequest, RequestOptions.DEFAULT));
+}</code></pre><p>根据店铺类型来定义routing，数据跑完以后，确认下</p>
+<p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/count.png" alt="count" title="count"></p>
+<br>
+
+<p>routing值为’myselfShop’的文档，存储在哪些分片</p>
+<pre><code>GET /goods_index/_search_shards?routing=myselfShop</code></pre><p>response</p>
+<pre><code>{
+  &quot;nodes&quot; : {
+    &quot;-Y-NnQ5dRlGH914tt1iM4Q&quot; : {
+      &quot;name&quot; : &quot;es-0&quot;,
+      &quot;ephemeral_id&quot; : &quot;wR5ItcWnSFCoXN1hCrVk9A&quot;,
+      &quot;transport_address&quot; : &quot;172.*.*.130:9300&quot;,
+      &quot;attributes&quot; : {
+        &quot;ml.machine_memory&quot; : &quot;1019629568&quot;,
+        &quot;xpack.installed&quot; : &quot;true&quot;,
+        &quot;ml.max_open_jobs&quot; : &quot;20&quot;,
+        &quot;ml.enabled&quot; : &quot;true&quot;
+      }
+    },
+    &quot;cEAn-K4jQj6sngKGolSbww&quot; : {
+      &quot;name&quot; : &quot;es-1&quot;,
+      &quot;ephemeral_id&quot; : &quot;NaGKvxNWSkWA6kPc1l_svw&quot;,
+      &quot;transport_address&quot; : &quot;172.*.*.131:9300&quot;,
+      &quot;attributes&quot; : {
+        &quot;ml.machine_memory&quot; : &quot;1019797504&quot;,
+        &quot;ml.max_open_jobs&quot; : &quot;20&quot;,
+        &quot;xpack.installed&quot; : &quot;true&quot;,
+        &quot;ml.enabled&quot; : &quot;true&quot;
+      }
+    }
+  },
+  &quot;indices&quot; : {
+    &quot;goods_index&quot; : { }
+  },
+  &quot;shards&quot; : [
+    [
+      {
+        &quot;state&quot; : &quot;STARTED&quot;,
+        &quot;primary&quot; : false,
+        &quot;node&quot; : &quot;cEAn-K4jQj6sngKGolSbww&quot;,
+        &quot;relocating_node&quot; : null,
+        &quot;shard&quot; : 1,
+        &quot;index&quot; : &quot;goods_index&quot;,
+        &quot;allocation_id&quot; : {
+          &quot;id&quot; : &quot;y8NYGWe_Tu2Zz-2aKor9-g&quot;
+        }
+      },
+      {
+        &quot;state&quot; : &quot;STARTED&quot;,
+        &quot;primary&quot; : true,
+        &quot;node&quot; : &quot;-Y-NnQ5dRlGH914tt1iM4Q&quot;,
+        &quot;relocating_node&quot; : null,
+        &quot;shard&quot; : 1,
+        &quot;index&quot; : &quot;goods_index&quot;,
+        &quot;allocation_id&quot; : {
+          &quot;id&quot; : &quot;4VBEqGv-QPyyQOiq7duwWw&quot;
+        }
+      }
+    ]
+  ]
+}</code></pre><p>routing:myselfShop，在130、131节点上(transport_address)，分片编码为1(shard)</p>
+<br>
+
+<p>routing值为’cShop’的文档，存储在哪些分片</p>
+<pre><code>GET /goods_index/_search_shards?routing=cShop</code></pre><p>response</p>
+<pre><code>{
+  &quot;nodes&quot; : {
+    &quot;QeQtzEUXSkGU_gws20WFBQ&quot; : {
+      &quot;name&quot; : &quot;es-2&quot;,
+      &quot;ephemeral_id&quot; : &quot;7StvGMizTC6nhpI2zHXMuA&quot;,
+      &quot;transport_address&quot; : &quot;172.*.*.132:9300&quot;,
+      &quot;attributes&quot; : {
+        &quot;ml.machine_memory&quot; : &quot;1019797504&quot;,
+        &quot;ml.max_open_jobs&quot; : &quot;20&quot;,
+        &quot;xpack.installed&quot; : &quot;true&quot;,
+        &quot;ml.enabled&quot; : &quot;true&quot;
+      }
+    },
+    &quot;cEAn-K4jQj6sngKGolSbww&quot; : {
+      &quot;name&quot; : &quot;es-1&quot;,
+      &quot;ephemeral_id&quot; : &quot;NaGKvxNWSkWA6kPc1l_svw&quot;,
+      &quot;transport_address&quot; : &quot;172.*.*.131:9300&quot;,
+      &quot;attributes&quot; : {
+        &quot;ml.machine_memory&quot; : &quot;1019797504&quot;,
+        &quot;ml.max_open_jobs&quot; : &quot;20&quot;,
+        &quot;xpack.installed&quot; : &quot;true&quot;,
+        &quot;ml.enabled&quot; : &quot;true&quot;
+      }
+    }
+  },
+  &quot;indices&quot; : {
+    &quot;goods_index&quot; : { }
+  },
+  &quot;shards&quot; : [
+    [
+      {
+        &quot;state&quot; : &quot;STARTED&quot;,
+        &quot;primary&quot; : true,
+        &quot;node&quot; : &quot;cEAn-K4jQj6sngKGolSbww&quot;,
+        &quot;relocating_node&quot; : null,
+        &quot;shard&quot; : 2,
+        &quot;index&quot; : &quot;goods_index&quot;,
+        &quot;allocation_id&quot; : {
+          &quot;id&quot; : &quot;KGmDGQz8SM6vIXoKkIy-Cw&quot;
+        }
+      },
+      {
+        &quot;state&quot; : &quot;STARTED&quot;,
+        &quot;primary&quot; : false,
+        &quot;node&quot; : &quot;QeQtzEUXSkGU_gws20WFBQ&quot;,
+        &quot;relocating_node&quot; : null,
+        &quot;shard&quot; : 2,
+        &quot;index&quot; : &quot;goods_index&quot;,
+        &quot;allocation_id&quot; : {
+          &quot;id&quot; : &quot;ZuS6Ju0CT2a-yJ5xIyXjyg&quot;
+        }
+      }
+    ]
+  ]
+}</code></pre><p>routing:cShop，在132、131节点上(transport_address)，分片编码为2(shard)</p>
+<br>
+
+<p>但其实，我在 goods_index 索引创建时，设置了3个主分片，目前情况来看，只用两个分片，还有一个分片没用。</p>
+<p>这种情况，就造成了数据倾斜，每个分片的数据量不均匀。</p>
+<p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/%E5%88%86%E7%89%87.png" alt="分片" title="分片"></p>
+<p>通过 cat 命令看下</p>
+<pre><code>GET _cat/shards/goods_index?v</code></pre><p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/shard-count.png" alt="shard-count" title="shard-count"></p>
+<p>0分片上一个文档都没有。</p>
+<h1 id="路由-数据倾斜"><a href="#路由-数据倾斜" class="headerlink" title="路由-数据倾斜"></a>路由-数据倾斜</h1><p>像上面这样子，三个主分片，走路由以后，才用了两个主分片，还有一个主分片没用，白白的资源浪费….</p>
+<p>elasticsearch 给我们提供了一个功能，在创建索引、设置mapping时配置 index.routing_partition_size 参数</p>
+<p>mapping样例</p>
+<pre><code>PUT /goods_index2
+{
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 3,
+    &quot;index.routing_partition_size&quot;: 2
+  },
+  &quot;mappings&quot;: {
+    &quot;myType&quot;: {
+      &quot;_routing&quot;: {
+        &quot;required&quot;: true
+      },
+      &quot;properties&quot;: {
+        &quot;activityEndTime&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        }
+      }
+    }
+  }
+}</code></pre><p>对比一下，之前的计算公式，增加 routing_partition_size 参数后，可以通过 routing 和 id 两个参数来决定存储分片位置。</p>
+<p>这样做的目的就是 让数据尽可能的均匀，减少数据倾斜。</p>
+<pre><code>配置前：shard = hash(routing) % number_of_primary_shard
+
+配置后：shard_num = (hash(_routing) + hash(_id) % routing_partition_size) % num_primary_shards</code></pre><p>简单的说，hash(routing)得到的值，用于圈定索引内的一组分片，然后用 hash(id) 来决定到底存储哪个分片</p>
+<p>这里需要注意：设置 routing_partition_size 的数量，要比主分片数量小</p>
+<br>
+
+<p>根据上面的配置，将之前创建的 goods_index 索引删除，重新创建。</p>
+<p>在设置mapping时，带上 routing_partition_size 配置，然后重新插入一批数据</p>
+<p>增加 routing_partition_size 配置以后，三个分片的数据都相对均匀，起码不像之前那样，一个分片空着没数据。</p>
+<p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/shard-count2.png" alt="shard-count2" title="shard-count2"></p>
+<h1 id="忘记设置routing"><a href="#忘记设置routing" class="headerlink" title="忘记设置routing"></a>忘记设置routing</h1><p>如果在写数据时，忘记写/配置 routing 值，那文档就写到其他分片上去了。</p>
+<p>这样子，查询时再用 routing 值就查不到对应数据了。</p>
+<p>elasticsearch 提供了另一个功能，在配置mapping时，加入检查 routing 的配置。</p>
+<p>即，文档CURD的时候 强制检查，有没有加 routing 参数，如果没有加，就会报错。</p>
+<p>仔细看下上面”路由-数据倾斜”那一段中，设置mapping的代码，那里其实已经加上了，直接测试</p>
+<pre><code>&quot;_routing&quot;: {
+    &quot;required&quot;: true
+  }</code></pre><br>
+
+<p>文档插入，报错</p>
+<p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/routing-%E6%A0%A1%E9%AA%8C.png" alt="routing-校验" title="routing-校验"></p>
+<br>
+
+<p>文档查询，报错</p>
+<p><img src="//simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/routing-%E8%B7%AF%E7%94%B1-%E6%9F%A5%E8%AF%A2%E6%A0%A1%E9%AA%8C.png" alt="routing-路由-查询校验" title="routing-路由-查询校验"></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-routing-field.html" target="_blank" rel="noopener">_routing field</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/Neeo/articles/10869556.html" target="_blank" rel="noopener">elasticsearch之Routing</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/wwd0501/article/details/78109617" target="_blank" rel="noopener">Elasticsearch的路由（Routing）特性</a></p>
+</li>
+<li><p><a href="https://elasticsearch.cn/question/3969" target="_blank" rel="noopener">index.routing_partition_size作用</a></p>
+</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>es-路由</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2020-03-16, 22:58:42</p>
+        <p><span class="copy-title">最后更新:</span>2020-04-24, 16:18:36</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/component/elasticsearch/01-es-基础/es-路由/" title="es-路由">https://simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#other','#资料','#思考','#flink','#广告业务','#kafka','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_update','#es_batch','#es_query',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 507px;
+        }
+        .nav.fullscreen {
+            margin-left: -507px;
+        }
+        .nav-left {
+            width: 115px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 507px;
+            margin-left: -507px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 507px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
