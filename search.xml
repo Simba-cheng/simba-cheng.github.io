@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>kafka-部分配置</title>
+      <link href="/2020/04/24/component/kafka/kafka-%E9%83%A8%E5%88%86%E9%85%8D%E7%BD%AE/"/>
+      <url>/2020/04/24/component/kafka/kafka-%E9%83%A8%E5%88%86%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Kafka-部分配置"><a href="#Kafka-部分配置" class="headerlink" title="Kafka 部分配置"></a>Kafka 部分配置</h1><p>注意：如果同时设置了Topic级别 和 全局Broker参数，Topic级别参数会覆盖Broker参数。</p><p><strong>log.dirs</strong></p><p>Kafka 把所有的消息都保存到磁盘上，存放这些日志片段的目录是通过 log.dirs 来指定的，它是用一组逗号来分割的本地系统路径，log.dirs 是没有默认值的，你必须手动指定他的默认值。</p><p>其实还有一个参数是 log.dir，如你所知，这个配置是没有 s 的，默认情况下只用配置 log.dirs 就好了，比如你可以通过 /home/kafka1,/home/kafka2,/home/kafka3 这样来配置这个参数的值。</p><br><p><strong>zookeeper.connect</strong></p><p>zookeeper地址，broker 元数据保存在zookeeper上。</p><p>多个参数值格式：zk1:2181,zk2:2181,zk3:2181</p><p>该配置可以指定zookeeper的path路径，不过要在最后：zk1:2181,zk2:2181,zk3:2181/kafka2</p><p>一般情况不用配置path路径，默认使用根路径。</p><br><p><strong>auto.create.topics.enable</strong></p><p>是否允许自动创建Topic。</p><p>该参数建议，最好改成false，即不允许自动创建topic。</p><p>默认情况下，kafka 会使用三种方式来自动创建主题，下面是三种情况：</p><pre><code>当一个生产者开始往主题写入消息时当一个消费者开始从主题读取消息时当任意一个客户端向主题发送元数据请求时</code></pre><br><p><strong>unclean.leader.election.enable</strong></p><p>是否允许 Unclean Leader 选举。</p><p>在kafka 每个 Partition(分区) 有多个副本来提供高可用，这些副本中只有一个 Leader Replica(主副本) 能对外提供服务。</p><p>并不是所有副本都有资格参与竞争Leader的，只有保存数据较多的那些副本分区才有资格竞选，那些数据较少的副本没有资格做这些事。</p><p>设置成false，坚决不让那些落后太多的副本竞选Leader，这样做那些数据少的副本就不可用了，因为没有Leader。</p><p>设置成true，那么Kafka允许从那些数据量少的副本中选一个出来当Leader，后果是数据可能会丢失，因为当选Leader的副本分区，数据本来就不全。</p><p>建议配置成false。</p><br><p><strong>auto.leader.rebalance.enable</strong></p><p>是否允许定期进行Leader选举。</p><p>设置为true，表示允许Kafka定期对一些Topic分区进行Leader重选举（这个重选举不是无脑触发的，要满足一定条件）。</p><p>这个配置最主要的不是 选举Leader，而是 更换Leader。</p><p>比如 Leader A 一直表现的很好，但如果这个配置被触发了，那么一段时间之后 Leader A 就要被强行卸任被换成Leader B。</p><p>更换一次Leader代价很高，原本向Leader A发送请求的客户端，要全部转向Leader B，而这种Leader切换，本质上没有任何性能收益。</p><p>建议设置成false。</p><br><p><strong>log.retention.{hour|minutes|ms}</strong></p><p>控制一条数据被保存多久时间。</p><p>优先级：ms(最高) -&gt; minutes(其次) -&gt; hour(最低)</p><p>默认使用 log.retention.hours，默认是168小时(一周)。</p><br><p><strong>log.retention.bytes</strong></p><p>指定 Broker 为消息保存的总磁盘容量大小，作用在每一个分区上。</p><p>如果有一个包含 8 个分区的主题，并且 log.retention.bytes 被设置为 1GB，那么这个主题最多可以保留 8GB 数据。</p><p>所以，当主题的分区个数增加时，整个主题可以保留的数据也随之增加。</p><p>默认值为-1。</p><p>表明你想在这台 Broker 上保存多少数据都可以，至少在容量方面 Broker 绝对为你开绿灯，不会做任何阻拦。</p><br><p><strong>message.max.bytes</strong></p><p>设置broker限制单个消息的大小。</p><p>默认是 1000 000， 也就是 1MB，如果生产者尝试发送的消息超过这个大小，不仅消息不会被接收，还会收到 broker 返回的错误消息。</p><p>该参数指的是压缩后的消息大小，也就是说，只要压缩后的消息小于 mesage.max.bytes，那么消息的实际大小可以大于这个值。</p><p>这个值对性能有显著的影响。值越大，那么负责处理网络连接和请求的线程就需要花越多的时间来处理这些请求。</p><p>它还会增加磁盘写入块的大小，从而影响 IO 吞吐量。</p><br><p><strong>auto.offset.reset</strong></p><p>当 consumer(消费者) 启动后它会从Kafka读取它上次消费的位移。</p><p>latest：在偏移量无效的情况下，消费者将从最新的记录开始读取数据（默认）。</p><p>earliest：在偏移量无效的情况下，消费者将从起始位置处开始读取分区的记录。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://juejin.im/post/5ddf5659518825782d599641" target="_blank" rel="noopener">真的，Kafka 入门一篇文章就够了</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> kafka </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kafka </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kafka</title>
       <link href="/2020/04/24/component/kafka/kafka/"/>
       <url>/2020/04/24/component/kafka/kafka/</url>
