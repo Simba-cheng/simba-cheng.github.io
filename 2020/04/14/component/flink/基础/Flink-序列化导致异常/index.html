@@ -143,10 +143,6 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="kafka">kafka<small>(2)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -158,6 +154,10 @@
                                     </li>
                                     
                                 </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="kafka">kafka<small>(2)</small></div>
                             
                         </li>
                             
@@ -382,11 +382,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1196,7 +1196,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#kafka','#flink','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
