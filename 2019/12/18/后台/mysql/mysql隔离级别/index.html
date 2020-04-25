@@ -103,14 +103,6 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -120,6 +112,14 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -143,10 +143,6 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="kafka">kafka<small>(2)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -158,6 +154,10 @@
                                     </li>
                                     
                                 </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="kafka">kafka<small>(2)</small></div>
                             
                         </li>
                             
@@ -174,10 +174,10 @@
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
@@ -219,7 +219,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="spring">spring<small>(3)</small></div>
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
                             
                         </li>
                             
@@ -227,11 +227,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
@@ -239,7 +239,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
                             
                         </li>
                             
@@ -370,11 +370,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -382,11 +382,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -398,11 +398,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1283,7 +1283,7 @@ T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#other','#思考','#kafka','#flink','#广告业务','#Java8','#mysql','#索引','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
