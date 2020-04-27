@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>kakfa-producer</title>
+      <link href="/2020/04/27/component/kafka/kakfa-producer/"/>
+      <url>/2020/04/27/component/kafka/kakfa-producer/</url>
+      
+        <content type="html"><![CDATA[<p>kakfa producer 生产者</p><h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h1><pre><code>public class ProducerMainApp {    public static void main(String[] args) {        ProducerMainApp bean = new ProducerMainApp();        bean.testSendKafkaMessage();    }    private void testSendKafkaMessage() {        KafkaProducer kafkaProducer = new KafkaProducer(getProducerConf());        try {            for (int i = 0; i &lt; 6; i++) {                String message = &quot;test-&quot; + i;                Future&lt;RecordMetadata&gt; testTopicFuture = kafkaProducer.send(new ProducerRecord(&quot;testTopic&quot;, Integer.toString(i), message));                RecordMetadata recordMetadata = testTopicFuture.get();                System.out.println(&quot;send message:&quot; + message + &quot;,offset:&quot; + recordMetadata.offset());            }        } catch (Exception e) {            e.printStackTrace();        }finally {            kafkaProducer.close();        }    }    private Properties getProducerConf() {        Properties properties = new Properties();        //指定broker地址        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;127.0.0.1:9092,127.0.0.2:9092&quot;);        //broker消息的key和value序列化        properties.setProperty(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);        properties.setProperty(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);        //acks 参数指定了 必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的 。(0、1、all)        properties.put(&quot;acks&quot;, &quot;all&quot;);        return properties;    }}</code></pre><h1 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h1><p>分区功能很重要，在我实际业务场景中 就运用了这个功能。</p><p>上游系统通过kafka推送广告物料数据给我们系统，上游分8个partition，下游有八台机器分别消耗这8个partition。</p><p>广告物料数据根据 广告计划ID 进行分区，同一个 广告计划ID 的数据都在同一个partition里面，也就是说，同一个 广告计划ID 的物料数据，只会被同一台机器消费，不会被多台机器消费（除非不可抗拒因素：宕机）。</p><p>为什么一定需要分区？</p><p>如果不分区，物料数据会被随机发送到多个partition(不受控)；如果下游某个机器消费速度快，会导致广告物料数据错乱。</p><p>本来应该先下线、更新、开启，由于partition不同，消费不一致，最后变成了 更新、开启、下线。</p><br><p>ProducerRecord(String topic, K key, V value)</p><p>通过设置key，可以指定消息写到主题的哪个分区。拥有相同key的消息，被写到同一个分区。</p><p>换句话说，相同key的消息被写到同一个分区，如果一个进程只从一个主题的分区读取数据，那么具有相同key的数据，都会被该进程读取。</p><br><h2 id="key-默认分区器"><a href="#key-默认分区器" class="headerlink" title="key-默认分区器"></a>key-默认分区器</h2><p>如果key设置为null，则使用 <strong>默认分区器</strong>；即数据会被随机的发送到主题内各个可用的分区上。</p><p>分区器使用轮询算法将数据均衡的分布到各个分区上。</p><br><p>如果key不为空，并且使用 <strong>默认分区器</strong>,kafka会对key值进行hash(kakfa自带的hash算法)，根据散列值将数据映射到特定分区中。</p><p>kafka在映射分区时，会使用主题所有的分区，而不仅仅是可用分区。</p><br><p>只有在不改变主题分区数量的情况下，键与分区之间的映射才能保持不变。</p><p>举个栗子：</p><pre><code>在分区数量保持不变的情况下，可以保证用户 045189 的记录总是被写到分区A中。在从分区读取数据肘，可以进行各种优化。一旦主题增加了新的分区，这些就无陆保证了；旧数据仍然留在分区34，但新的数据可能被写到其他分区上 。</code></pre><p>了解elasticsearch的童鞋可以发现，和 elasticsearch 中路由分片类似。</p><h2 id="key-自定义分区"><a href="#key-自定义分区" class="headerlink" title="key-自定义分区"></a>key-自定义分区</h2><p>自定义分区 需要实现 Partitioner 接口</p><pre><code>public class MyPartitioner implements Partitioner {    public MyPartitioner() {    }    @Override    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {        int result;        int valueIndex = Integer.parseInt(String.valueOf(key));        if (valueIndex % 2 == 0) {            result = 0;        } else {            result = 1;        }        System.out.println(&quot;key:&quot; + key + &quot;,result:&quot; + result);        return result;    }    @Override    public void close() {    }    @Override    public void configure(Map&lt;String, ?&gt; configs) {        System.out.println(&quot;configs:&quot; + configs);    }}</code></pre><!-- ------------------------------------------------------------------ --><pre><code>public class ProducerMainApp {    public static void main(String[] args) {        ProducerMainApp bean = new ProducerMainApp();        bean.testSendKafkaMessage();    }    private void testSendKafkaMessage() {        KafkaProducer kafkaProducer = new KafkaProducer(getProducerConf());        try {            for (int i = 0; i &lt; 6; i++) {                String message = &quot;test-&quot; + i;                Future&lt;RecordMetadata&gt; testTopicFuture = kafkaProducer.send(new ProducerRecord(&quot;testTopic&quot;, Integer.toString(i), message));                RecordMetadata recordMetadata = testTopicFuture.get();                System.out.println(&quot;send message:&quot; + message + &quot;,offset:&quot; + recordMetadata.offset());            }        } catch (Exception e) {            e.printStackTrace();        }finally {            kafkaProducer.close();        }    }    private Properties getProducerConf() {        Properties properties = new Properties();        //指定broker地址        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;127.0.0.1:9092,127.0.0.2:9092&quot;);        //broker消息的key和value序列化        properties.setProperty(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);        properties.setProperty(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);        //acks 参数指定了 必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的 。(0、1、all)        properties.put(&quot;acks&quot;, &quot;all&quot;);        //自定义分区        properties.put(&quot;partitioner.class&quot;,&quot;org.kafka.producer.partitioner.MyPartitioner&quot;);        return properties;    }}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p>《Kafka权威指南》</p></li><li><p><a href="https://www.liangzl.com/get-article-detail-156331.html" target="_blank" rel="noopener">初识 Kafka Producer 生产者</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> kafka </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kafka </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kafka-部分配置</title>
       <link href="/2020/04/24/component/kafka/kafka-%E9%83%A8%E5%88%86%E9%85%8D%E7%BD%AE/"/>
       <url>/2020/04/24/component/kafka/kafka-%E9%83%A8%E5%88%86%E9%85%8D%E7%BD%AE/</url>
