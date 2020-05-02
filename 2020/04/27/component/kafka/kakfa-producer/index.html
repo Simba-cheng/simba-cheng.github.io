@@ -211,19 +211,23 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(20)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
                             
                         </li>
                             
@@ -235,14 +239,6 @@
                             
                         </li>
                             
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(3)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
                             
                         </li>
@@ -250,6 +246,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -336,7 +336,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="72">
-<input type="hidden" id="yelog_site_word_count" value="87.1k">
+<input type="hidden" id="yelog_site_word_count" value="87.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -446,15 +446,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_query</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1081,12 +1081,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-27 21:48:45'>2020-04-27 21:29</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-02 22:36:44'>2020-04-27 21:29</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1105,7 +1105,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简单示例"><span class="toc-text">简单示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分区"><span class="toc-text">分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#key-默认分区器"><span class="toc-text">key-默认分区器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key-自定义分区"><span class="toc-text">key-自定义分区</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#示例代码"><span class="toc-text">示例代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步方式"><span class="toc-text">同步方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步方式"><span class="toc-text">异步方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参数配置"><span class="toc-text">参数配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分区"><span class="toc-text">分区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#key-默认分区器"><span class="toc-text">key-默认分区器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key-自定义分区"><span class="toc-text">key-自定义分区</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1121,42 +1121,151 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>kakfa producer 生产者</p>
-<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h1><pre><code>public class ProducerMainApp {
+<p>KafkaProducer 内部包含一个缓冲池，池中维护着还没有被推送的数据；专门有个后台I/O线程负责推送。</p>
+<p>其推送数据至服务端分两种：同步、异步。</p>
+<p>使用 KafkaProducer.send() 方法是异步的。</p>
+<p>send()方法返回一个 Future 对象。如果想同步调用，接着调用get()方法即可。</p>
+<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><h2 id="同步方式"><a href="#同步方式" class="headerlink" title="同步方式"></a>同步方式</h2><pre><code>public class ProducerMainApp {
+
+    static final Logger LOGGER = LoggerFactory.getLogger(ProducerMainApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    private KafkaProducer kafkaProducer;
 
     public static void main(String[] args) {
-        ProducerMainApp bean = new ProducerMainApp();
-        bean.testSendKafkaMessage();
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+        ProducerMainApp bean = applicationContext.getBean(ProducerMainApp.class);
+        bean.processSynchronizationSendMsg();
     }
 
-    private void testSendKafkaMessage() {
-        KafkaProducer kafkaProducer = new KafkaProducer(getProducerConf());
+    //同步方式
+    private void processSynchronizationSendMsg() {
+        kafkaProducer = new KafkaProducer(getProducerConf());
         try {
             for (int i = 0; i &lt; 6; i++) {
-                String message = &quot;test-&quot; + i;
-                Future&lt;RecordMetadata&gt; testTopicFuture = kafkaProducer.send(new ProducerRecord(&quot;testTopic&quot;, Integer.toString(i), message));
+                String message = &quot;--- test message - &quot; + i;
+                Future&lt;RecordMetadata&gt; testTopicFuture = kafkaProducer.send(new ProducerRecord(&quot;test&quot;, Integer.toString(i), message));
                 RecordMetadata recordMetadata = testTopicFuture.get();
-                System.out.println(&quot;send message:&quot; + message + &quot;,offset:&quot; + recordMetadata.offset());
+                LOGGER.info(&quot;synchronization send message :{},offset:{}&quot;, message, recordMetadata.offset());
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
+            LOGGER.error(e.getMessage(), e);
+        } finally {
             kafkaProducer.close();
         }
     }
 
     private Properties getProducerConf() {
         Properties properties = new Properties();
-        //指定broker地址
-        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;127.0.0.1:9092,127.0.0.2:9092&quot;);
-        //broker消息的key和value序列化
+        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092&quot;);
         properties.setProperty(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
         properties.setProperty(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
-        //acks 参数指定了 必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的 。(0、1、all)
-        properties.put(&quot;acks&quot;, &quot;all&quot;);
+        //acks参数指定 必须有多少分区副本收到消息，生产者才会认为消息写入是成功的(0、1、all)
+        properties.setProperty(&quot;acks&quot;, &quot;all&quot;);
         return properties;
     }
+}</code></pre><h2 id="异步方式"><a href="#异步方式" class="headerlink" title="异步方式"></a>异步方式</h2><pre><code>public class ProducerMainApp {
 
-}</code></pre><h1 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h1><p>分区功能很重要，在我实际业务场景中 就运用了这个功能。</p>
+    static final Logger LOGGER = LoggerFactory.getLogger(ProducerMainApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    private KafkaProducer kafkaProducer;
+
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+        ProducerMainApp bean = applicationContext.getBean(ProducerMainApp.class);
+        bean.processAsynchronousSendMsg();
+    }
+
+    //异步方式
+    private void processAsynchronousSendMsg() {
+        kafkaProducer = new KafkaProducer(getProducerConf());
+        try {
+            for (int i = 0; i &lt; 6; i++) {
+                String message = &quot;--- test message - &quot; + i;
+                kafkaProducer.send(new ProducerRecord(&quot;test&quot;, Integer.toString(i), message), new Callback() {
+                    @Override
+                    public void onCompletion(RecordMetadata metadata, Exception exception) {
+                        LOGGER.info(&quot;asynchronous send message :{},offset:{}&quot;, message, metadata.offset());
+                        if (null != exception) {
+                            LOGGER.error(exception.getMessage(), exception);
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        } finally {
+            kafkaProducer.close();
+        }
+    }
+
+    private Properties getProducerConf() {
+        Properties properties = new Properties();
+        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092&quot;);
+        properties.setProperty(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
+        properties.setProperty(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
+        //acks参数指定 必须有多少分区副本收到消息，生产者才会认为消息写入是成功的(0、1、all)
+        properties.setProperty(&quot;acks&quot;, &quot;all&quot;);
+
+        return properties;
+    }
+}</code></pre><h1 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h1><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bootstrap.servers</td>
+<td>broker地址配置<br>格式：127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092</td>
+</tr>
+<tr>
+<td>key.serializer</td>
+<td>key-序列化类型</td>
+</tr>
+<tr>
+<td>value.serializer</td>
+<td>value-序列化类型</td>
+</tr>
+<tr>
+<td>acks</td>
+<td>该参数指定了,必须要有多少个分区副本收到消息,生产者才会认为消息写入是成功的。<br>0:不等待成功返回。<br>1:等Leader写成功返回。<br>all:等Leader和所有ISR中的Follower写成功返回(也可以用-1代替)</td>
+</tr>
+<tr>
+<td>buffer.memory</td>
+<td>producer总体内存大小<br>不要超过物理内存</td>
+</tr>
+<tr>
+<td>compression.type</td>
+<td>压缩类型</td>
+</tr>
+<tr>
+<td>retries</td>
+<td>发送失败尝试重发次数</td>
+</tr>
+<tr>
+<td>batch.size</td>
+<td>每个partition的未发送消息大小</td>
+</tr>
+<tr>
+<td>client.id</td>
+<td>附着在每个请求的后面，用于标识请求是从什么地方发送过来的</td>
+</tr>
+<tr>
+<td>linger.ms</td>
+<td>数据在缓冲区中保留的时长,0表示立即发送。<br>为了减少网络耗时，需要设置这个值。<br>太大可能容易导致缓冲区满，阻塞消费者；太小容易频繁请求服务端</td>
+</tr>
+<tr>
+<td>connections.max</td>
+<td>连接空闲时间超过过久自动关闭（单位毫秒）</td>
+</tr>
+</tbody></table>
+<p>更多配置，请查阅Kafka官方文档。</p>
+<h1 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h1><p>分区功能很重要，在我实际业务场景中 就运用了这个功能。</p>
 <p>上游系统通过kafka推送广告物料数据给我们系统，上游分8个partition，下游有八台机器分别消耗这8个partition。</p>
 <p>广告物料数据根据 广告计划ID 进行分区，同一个 广告计划ID 的数据都在同一个partition里面，也就是说，同一个 广告计划ID 的物料数据，只会被同一台机器消费，不会被多台机器消费（除非不可抗拒因素：宕机）。</p>
 <p>为什么一定需要分区？</p>
@@ -1264,10 +1373,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>kakfa-producer</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-04-27, 21:29:41</p>
-        <p><span class="copy-title">最后更新:</span>2020-04-27, 21:48:45</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-02, 22:36:44</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/27/component/kafka/kakfa-producer/" title="kakfa-producer">https://simba-cheng.github.io/2020/04/27/component/kafka/kakfa-producer/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1329,7 +1438,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_update','#es_query','#es_batch',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
