@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>kafka-consumer</title>
+      <link href="/2020/05/03/component/kafka/kafka-consumer/"/>
+      <url>/2020/05/03/component/kafka/kafka-consumer/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Consumber-Group"><a href="#Consumber-Group" class="headerlink" title="Consumber Group"></a>Consumber Group</h1><p>kafka Consumer 消费者从属于 <strong>消费者群组(Consumer Group)</strong>。</p><p>一个群组里的消费者订阅的是同一个主题，每个消费者接收主题一部分分区的消息。</p><p>官网解释：</p><p>Consumers label themselves with a consumer group name, and each record published to a topic is delivered to one consumer instance within each subscribing consumer group.</p><p>消费者使用一个消费者组名(groupId)来标记自己，topic的每条消息都只会被发送到每个订阅它的消费者组的一个消费实例上。</p><p><img src="//simba-cheng.github.io/2020/05/03/component/kafka/kafka-consumer/%E5%88%86%E5%8C%BA_%E6%B6%88%E8%B4%B9%E8%80%85%E7%BE%A4%E7%BB%84.jpg" alt="分区_消费者群组"></p><p>增加群组中的消费者是横向伸缩消费能力的主要方式。</p><p>kafka消费者经常会有一些高延迟的业务操作，例如：写数据库、HDFS、业务处理 等 耗时较多，消费者无法跟上数据生成速度，所以可以增加更多消费者，分担负载。</p><p>注意：消费者数量不应该大于topic分区数，多余的消费者只会被闲置。</p><h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><pre><code>public class ConsumerMainApp {    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerMainApp.class);    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;    public static void main(String[] args) {        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);        ConsumerMainApp bean = applicationContext.getBean(ConsumerMainApp.class);        bean.processReceiverMsg();    }    private void processReceiverMsg() {        KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(getConsumerConf());        consumer.subscribe(Collections.singletonList(&quot;test&quot;));        while (true) {            ConsumerRecords&lt;String, String&gt; consumerRecords = consumer.poll(Duration.ofMillis(100L));            for (ConsumerRecord&lt;String, String&gt; record : consumerRecords) {                LOGGER.info(&quot;receive message offset:{},key:{},value:{}&quot;, record.offset(), record.key(), record.value());            }        }    }    private Properties getConsumerConf() {        Properties properties = new Properties();        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, &quot;172.16.25.130:9092,172.16.25.131:9092,172.16.25.132:9092&quot;);        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, &quot;testGroupId&quot;);        properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, &quot;true&quot;);        properties.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, &quot;1000&quot;);        return properties;    }}</code></pre><h1 id="offset-位移"><a href="#offset-位移" class="headerlink" title="offset 位移"></a>offset 位移</h1><p>每个 consumer(消费者) 都会为它消费的 Partition(分区) 维护属于自己的位置信息来记录当前消费了多少条数据。</p><p>kafka 中术语叫 offset(位移)。</p><p>consumer消费者会定期向Kafka集群提交自己消费数据的进度，这个操作称为：offset commit(位移提交)。</p><p>位移提交不仅表示consumer消费者的消费速度，同时也决定了consumer消费语义保证。</p><p>注意：</p><pre><code>旧版本consumer会定期将位移信息提交到zookeeper下的固定觉点。新版本consumer把位移提交到Kafka的一个内部topic(\_consumer_offsets)中。</code></pre><h1 id="再均衡"><a href="#再均衡" class="headerlink" title="再均衡"></a>再均衡</h1><p>当一个消费者 被关闭 或 宕机 离开群组，原本由它读取的分区将由群组里的其他消费者读取；当主题发生变化，比如 添加了新的分区，会发生分区重新分配。</p><p>分区的所有权从一个消费者转移到另一个消费者，这种行为被称为 <strong>再均衡</strong>。</p><p><strong>再均衡</strong> 为消费者群组提供了高可用和伸缩性。</p><p>不过正常情况下，并不希望发生这种情况；再均衡期间，消费者无法消费数据，造成整个群组一段时间的不可用。</p><p>而且，当分区重新分配给另一个消费者时，消费者当前的读取状态会丢失，需要去刷新缓存，在重新恢复状态之前会拖慢系统。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p>《Kafka权威指南》</p></li><li><p><a href="http://kafka.apachecn.org/documentation.html#consumerapi" target="_blank" rel="noopener">Kafka 1.0 文档</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> kafka </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kafka </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kafka-pageCache和zeroCopy</title>
       <link href="/2020/05/01/component/kafka/kafka-pageCache%E5%92%8CzeroCopy/"/>
       <url>/2020/05/01/component/kafka/kafka-pageCache%E5%92%8CzeroCopy/</url>
