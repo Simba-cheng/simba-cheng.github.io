@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -171,13 +171,13 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
@@ -190,22 +190,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
             
         
     
@@ -227,11 +211,19 @@
     
         
             
+        
+    
+        
+            
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(20)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
                             
                         </li>
                             
@@ -243,15 +235,15 @@
                             
                         </li>
                             
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="缓存">缓存<small>(1)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(3)</small></div>
                             
                         </li>
                             
@@ -262,6 +254,14 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
+            
+        
+    
+        
             
         
     
@@ -370,11 +370,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -386,15 +386,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -402,7 +398,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -410,7 +406,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -422,15 +418,19 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">bitmap</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1400,7 +1400,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#kafka','#flink','#es','#广告业务','#索引','#mysql','#Java8','#hash','#缓存','#spring','#bitmap','#布隆过滤器','#后台_其他','#设计模式','#es_client','#es问题','#es_update','#es_query','#es_batch',],
+            'data': ['#资料','#other','#思考','#kafka','#广告业务','#flink','#索引','#hash','#Java8','#mysql','#缓存','#spring','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_update','#es_query','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
