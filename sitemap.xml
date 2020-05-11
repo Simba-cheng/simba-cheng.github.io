@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/04/19/%E5%90%8E%E5%8F%B0/%E7%BC%93%E5%AD%98/%E7%AB%99%E5%86%85%E5%B9%BF%E5%91%8A%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98/</loc>
+    
+    <lastmod>2020-05-11T15:11:52.998Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/05/01/component/kafka/kafka-pageCache%E5%92%8CzeroCopy/</loc>
     
     <lastmod>2020-05-07T15:25:40.229Z</lastmod>
@@ -327,13 +334,6 @@
     <loc>https://simba-cheng.github.io/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/01-es6-5-0%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2020-04-24T08:17:51.459Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/04/19/%E5%90%8E%E5%8F%B0/%E7%BC%93%E5%AD%98/%E7%AB%99%E5%86%85%E5%B9%BF%E5%91%8A%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98/</loc>
-    
-    <lastmod>2020-04-19T07:58:18.219Z</lastmod>
     
   </url>
   
