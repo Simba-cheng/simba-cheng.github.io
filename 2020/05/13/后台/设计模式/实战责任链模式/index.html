@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>实战责任链模式 | Simba</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="实战责任链模式 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-01T02:22:23.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(74)</small></div></li>
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="知识点">知识点<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="思考">思考<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(46)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="flink_集群">flink_集群<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="flink_基础">flink_基础<small>(7)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="kafka">kafka<small>(5)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(31)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="es_基础">es_基础<small>(12)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(21)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="其他">其他<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="74">
+<input type="hidden" id="yelog_site_word_count" value="92.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">other</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">flink</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_update</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="组件 es "
+           href="/2019/10/08/component/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2020/05/13/后台/设计模式/实战责任链模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="实战责任链模式">实战责任链模式</span>
+            <span class="post-date" title="2020-05-13 23:33:38">2020/05/13</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/03/component/kafka/kafka-consumer/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-consumer">kafka-consumer</span>
+            <span class="post-date" title="2020-05-03 14:31:52">2020/05/03</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/01/component/kafka/kafka-pageCache和zeroCopy/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-pageCache和zeroCopy">kafka-pageCache和zeroCopy</span>
+            <span class="post-date" title="2020-05-01 11:20:11">2020/05/01</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/27/component/kafka/kakfa-producer/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kakfa-producer">kakfa-producer</span>
+            <span class="post-date" title="2020-04-27 21:29:41">2020/04/27</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/24/component/kafka/kafka-部分配置/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-部分配置">kafka-部分配置</span>
+            <span class="post-date" title="2020-04-24 23:05:18">2020/04/24</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/24/component/kafka/kafka/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka">kafka</span>
+            <span class="post-date" title="2020-04-24 16:36:33">2020/04/24</span>
+        </a>
+        
+        <a  class="后台 缓存 "
+           href="/2020/04/19/后台/缓存/站内广告中的缓存/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="站内广告中的缓存">站内广告中的缓存</span>
+            <span class="post-date" title="2020-04-19 11:38:58">2020/04/19</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/14/component/flink/基础/Flink-序列化导致异常/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-序列化导致异常">Flink-序列化导致异常</span>
+            <span class="post-date" title="2020-04-14 22:25:46">2020/04/14</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/04/09/业务/广告/站内广告反作弊/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="站内广告反作弊">站内广告反作弊</span>
+            <span class="post-date" title="2020-04-09 16:07:17">2020/04/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/05/component/flink/基础/Flink-WaterMark/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-WaterMark">Flink-WaterMark</span>
+            <span class="post-date" title="2020-04-05 08:46:40">2020/04/05</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/03/29/component/flink/Flink-导图/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-导图">Flink-导图</span>
+            <span class="post-date" title="2020-03-29 20:42:59">2020/03/29</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/28/component/flink/基础/Flink-State/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-State">Flink-State</span>
+            <span class="post-date" title="2020-03-28 15:48:34">2020/03/28</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-Window/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-Window">Flink-Window</span>
+            <span class="post-date" title="2020-03-25 23:43:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-transformations/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-transformations">Flink-transformations</span>
+            <span class="post-date" title="2020-03-25 22:41:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-DataStream/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-DataStream">Flink-DataStream</span>
+            <span class="post-date" title="2020-03-22 23:28:08">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-基本概念/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-基本概念">Flink-基本概念</span>
+            <span class="post-date" title="2020-03-22 16:05:38">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/03/16/component/elasticsearch/01-es-基础/es-路由/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-路由">es-路由</span>
+            <span class="post-date" title="2020-03-16 22:58:42">2020/03/16</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2020/03/08/component/elasticsearch/06-es-源码/02-es-启动流程/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-启动流程">02-es-启动流程</span>
+            <span class="post-date" title="2020-03-08 21:00:45">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-02/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-02">容器创建-02</span>
+            <span class="post-date" title="2020-03-08 11:23:50">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-01-脉络梳理/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-01-脉络梳理">容器创建-01-脉络梳理</span>
+            <span class="post-date" title="2020-03-08 10:02:44">2020/03/08</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/27/component/elasticsearch/01-es-基础/es-思维导图/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-思维导图">es-思维导图</span>
+            <span class="post-date" title="2020-02-27 15:20:44">2020/02/27</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/02/26/业务/广告/广告-人群溢价(转载)/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="广告-人群溢价(转载)">广告-人群溢价(转载)</span>
+            <span class="post-date" title="2020-02-26 15:05:23">2020/02/26</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2020/02/23/后台/mysql/mysql主从环境搭建/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql主从环境搭建">mysql主从环境搭建</span>
+            <span class="post-date" title="2020-02-23 20:59:34">2020/02/23</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/02/22/后台/spring/spring 事务/Spring-事务使用/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring 事务使用">Spring 事务使用</span>
+            <span class="post-date" title="2020-02-22 15:34:27">2020/02/22</span>
+        </a>
+        
+        <a  class="组件 es es_分词 "
+           href="/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-analysis_ik分词">es-analysis_ik分词</span>
+            <span class="post-date" title="2020-02-18 17:26:35">2020/02/18</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/更新/es-update-mapping/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_mapping">es-update_mapping</span>
+            <span class="post-date" title="2020-02-16 22:37:41">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/查/es-query-搜索选项/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-搜索选项">es-query-搜索选项</span>
+            <span class="post-date" title="2020-02-16 13:18:22">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 flink "
+           href="/2020/02/09/component/flink/基础/Flink-预研/"
+           data-tag="思考,flink"
+           data-author="" >
+            <span class="post-title" title="Flink-思考-预研">Flink-思考-预研</span>
+            <span class="post-date" title="2020-02-09 13:17:18">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/02/09/component/flink/基础/Flink-集群搭建/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-集群搭建">Flink-集群搭建</span>
+            <span class="post-date" title="2020-02-09 12:03:09">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/10-es-index-operate/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="10-es-index-operate">10-es-index-operate</span>
+            <span class="post-date" title="2020-02-06 20:09:15">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/06/component/elasticsearch/02-es-文档/更新/es-update_by_query/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_by_query">es-update_by_query</span>
+            <span class="post-date" title="2020-02-06 15:52:24">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/09-es-别名/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-es-别名">09-es-别名</span>
+            <span class="post-date" title="2020-02-06 11:41:46">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2020/01/30/component/elasticsearch/03-es-client/es-java-client/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-client">es-java-client</span>
+            <span class="post-date" title="2020-01-30 13:30:08">2020/01/30</span>
+        </a>
+        
+        <a  class="组件 es es_问题 "
+           href="/2020/01/29/component/elasticsearch/05-es-问题/es存储不足，索引只读/"
+           data-tag="es问题"
+           data-author="" >
+            <span class="post-title" title="es存储不足，索引只读">es存储不足，索引只读</span>
+            <span class="post-date" title="2020-01-29 19:35:43">2020/01/29</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/12/后台/其他/hash/"
+           data-tag="hash"
+           data-author="" >
+            <span class="post-title" title="hash">hash</span>
+            <span class="post-date" title="2020-01-12 23:15:22">2020/01/12</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/08/后台/其他/布隆过滤器/"
+           data-tag="布隆过滤器"
+           data-author="" >
+            <span class="post-title" title="布隆过滤器">布隆过滤器</span>
+            <span class="post-date" title="2020-01-08 22:41:59">2020/01/08</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/05/后台/其他/BitMap/"
+           data-tag="bitmap"
+           data-author="" >
+            <span class="post-title" title="BitMap">BitMap</span>
+            <span class="post-date" title="2020-01-05 22:21:39">2020/01/05</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/28/后台/mysql/mysql数据重复引发的问题/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql数据重复引发的问题">mysql数据重复引发的问题</span>
+            <span class="post-date" title="2019-12-28 19:16:55">2019/12/28</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/22/后台/Java8/使用流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="使用流">使用流</span>
+            <span class="post-date" title="2019-12-22 19:30:38">2019/12/22</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/18/后台/mysql/mysql隔离级别/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql隔离级别">mysql隔离级别</span>
+            <span class="post-date" title="2019-12-18 11:33:05">2019/12/18</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/01/后台/Java8/流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Stream 流">Stream 流</span>
+            <span class="post-date" title="2019-12-01 17:34:59">2019/12/01</span>
+        </a>
+        
+        <a  class="思考 "
+           href="/2019/11/30/思考/大促宕机的思考/"
+           data-tag="思考"
+           data-author="" >
+            <span class="post-title" title="大促宕机的思考">大促宕机的思考</span>
+            <span class="post-date" title="2019-11-30 20:36:49">2019/11/30</span>
+        </a>
+        
+        <a  class="思考 "
+           href="/2019/11/30/思考/FastJson踩坑/"
+           data-tag="思考"
+           data-author="" >
+            <span class="post-title" title="FastJson踩坑">FastJson踩坑</span>
+            <span class="post-date" title="2019-11-30 20:18:47">2019/11/30</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/Lambda表达式/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Lambda表达式">Lambda表达式</span>
+            <span class="post-date" title="2019-11-24 22:07:44">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/方法引用/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="方法引用">方法引用</span>
+            <span class="post-date" title="2019-11-24 19:49:31">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/23/后台/Java8/行为参数化传递代码/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="行为参数化传递代码">行为参数化传递代码</span>
+            <span class="post-date" title="2019-11-23 23:16:19">2019/11/23</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/22/后台/Java8/Java8初体验/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Java8初体验">Java8初体验</span>
+            <span class="post-date" title="2019-11-22 23:19:03">2019/11/22</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2019/11/01/component/elasticsearch/06-es-源码/01-IDEA编译es_6-5-0源码/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-IDEA编译es_6.5.0源码">01-IDEA编译es_6.5.0源码</span>
+            <span class="post-date" title="2019-11-01 23:46:24">2019/11/01</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2019/10/26/component/elasticsearch/03-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/10/12/component/elasticsearch/02-es-文档/批处理/es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="es-batch-bulk-批处理">es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match-phrase短语查询">es-query-match-phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-filtered-bool组合过滤查询">es-query-filtered-bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-get批处理">es-query-multi-get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-match多匹配查询">es-query-multi-match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match_匹配查询">es-query-match_匹配查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-term_精确查询">es-query-term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-简单查询">es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/08-es-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-es-测试数据">08-es-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/07-es-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-es-上手Demo">07-es-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/25/component/elasticsearch/02-es-文档/增/es-put-索引_动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-put-索引-动词">es-put-索引-动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/06-es-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-es-文档_document">06-es-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/05-es-Mapping_数据类型/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-es-Mapping_数据类型">05-es-Mapping_数据类型</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/04-es-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-es-索引_名词">04-es-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/03-es-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-es-查询语言">03-es-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/02-es-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-基本概念">02-es-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/01-es6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-es-6.5.0集群搭建">01-es-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="other 知识点 "
+           href="/2019/09/22/other/奇怪的知识点/"
+           data-tag="other"
+           data-author="" >
+            <span class="post-title" title="奇怪的知识点">奇怪的知识点</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-后台/设计模式/实战责任链模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">实战责任链模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="后台">后台</a>/
+            
+                <a href="javascript:" data-rel="设计模式">设计模式</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">设计模式</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-05-13 23:34:18'>2020-05-13 23:33</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#责任链模式"><span class="toc-text">责任链模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#纯的责任链"><span class="toc-text">纯的责任链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不纯的责任链"><span class="toc-text">不纯的责任链</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实战"><span class="toc-text">实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#责任链模式-1"><span class="toc-text">责任链模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化一"><span class="toc-text">优化一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化二"><span class="toc-text">优化二</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>设计模式，在实践中、结合某些业务场景 会觉得更有意思。</p>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p><strong>办公流程</strong></p>
+<p>个人事由需要请假一个月，需要由 直接领导、部门经理、二级中心总监、一级中心总监、集团人事 挨个审批。</p>
+<p>在这个流程中，需要上级全部同意，一人不同意，就直接打回，不用再往后传递请求了。</p>
+<br>
+
+<p><strong>采购流程</strong></p>
+<p>IT部采购10台Mac电脑，需要20万资金，采购部总监直接审批。</p>
+<p>技术部采购一台五轴联动加工中心，需要800万资金，数额巨大，要直接找厂长审批</p>
+<p>不同的采购金额，由不同的人审批。</p>
+<br>
+
+<p><strong>纸牌流程</strong></p>
+<p>打牌，地主出牌以后，下家B 看手里有没有能出的牌，要不起就把出牌请求转发给 下家C，再要不起就转发给 下家。</p>
+<p>整个过程中，牌作为一个请求沿着一条链路在传递，每一位玩家都可以处理请求；上一位处理后，下一位接着处理。</p>
+<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><p>它允许你将请求沿着处理者链进行发送。收到请求后，每个处理者均可对请求进行处理，或将其传递给链上的下个处理者。</p>
+<p>维基百科中这样描述</p>
+<pre><code>责任链模式在面向对象程式设计里是一种软件设计模式，它包含了一些命令对象和一系列的处理对象。
+
+每一个处理对象决定它能处理哪些命令对象，它也知道如何将它不能处理的命令对象传递给该链中的下一个处理对象。
+
+该模式还描述了往该处理链的末尾添加新的处理对象的方法。</code></pre><h2 id="纯的责任链"><a href="#纯的责任链" class="headerlink" title="纯的责任链"></a>纯的责任链</h2><p>一个纯的职责链模式要求一个具体处理者对象只能在两个行为中选择一个；</p>
+<p>要么承担全部责任，要么将责任推给下家，不允许出现某一个具体处理者对象在承担了一部分或全部责任后又将责任向下传递的情况。</p>
+<p>而且在纯的职责链模式中，要求一个请求必须被某一个处理者对象所接收，不能出现某个请求未被任何一个处理者对象处理的情况。</p>
+<h2 id="不纯的责任链"><a href="#不纯的责任链" class="headerlink" title="不纯的责任链"></a>不纯的责任链</h2><p>在一个不纯的职责链模式中允许某个请求被一个具体处理者部分处理后再向下传递，或者一个具体处理者处理完某请求后其后继处理者可以继续处理该请求，而且一个请求可以最终不被任何处理者对象所接收。</p>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><p>站内广告业务中，根据不同的业务划分了很多场景；不同的业务场景有不同的参数校验规则。</p>
+<p>通过编排校验参数，形成一个校验链路。</p>
+<p>比如：</p>
+<ul>
+<li><p>check-a：request、城市编码、会员编码、商品编码、cookie、业务参数</p>
+</li>
+<li><p>check-b：request、城市编码、会员编码 业务参数</p>
+</li>
+<li><p>check-c：request、城市编码、业务参数</p>
+</li>
+</ul>
+<p>最简单，是写三个check方法，每个方法里面对参数进行校验，如果规则比较少也是可行；</p>
+<p>而之前采用的是，抽象类-子类继承模式，父类与子类通过 super.check() 进行request数据传递，形成一条校验链路。</p>
+<p>例如这样子：</p>
+<pre><code>public abstract class Check&lt;T extends BaseRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Check.class);
+
+    /**
+     * check request is null
+     *
+     * @param request
+     * @param context
+     * @return null/failure-false success-true
+     \*/
+    public boolean check(T request, PrivateContext context) {
+        if (null == request) {
+            LOGGER.error(&quot;request is null&quot;);
+            return false;
+        }
+        return true;
+    }
+}
+
+
+public class CityIdCheck extends Check&lt;Request&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityIdCheck.class);
+
+    @Override
+    public boolean check(Request request, PrivateContext context) {
+        boolean result = super.check(request, context);
+        if (!result) {
+            return result;
+        }
+
+        if (StringUtils.isEmpty(request.getCityCode())) {
+            result = false;
+            LOGGER.error(&quot;custNo:{},sceneId:{},cityCode is empty&quot;, new Object[]{request.getCustNumber(), request.getCityCode()});
+        }
+        return result;
+    }
+}
+
+
+public class TerminalCheck extends CityIdCheck {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TerminalCheck.class);
+
+    @Override
+    public boolean check(Request request, PrivateContext context) {
+
+        boolean result = super.check(request, context);
+
+        if (!result) {
+            return result;
+        }
+
+        if (StringUtils.isEmpty(request.getTerminal()) || TerminalEnum.getValByKey(request.getTerminal()) == 0) {
+            result = false;
+            LOGGER.error(&quot;termina is empty&quot;);
+        }
+
+        return result;
+    }
+}</code></pre><p>以上代码，通过父子继承，实现一条校验链路。</p>
+<br>
+
+<p>随着时间推移，业务需求的扩张，校验的规则越来越多。总是通过父子继承去实现一条校验链路，显的非常呆板。</p>
+<p>虽然校验规则在变，但业务参数就那么多个，虽然有时候会新增。</p>
+<p>于是准备对其进行优化，目标：第一是模块化，第二是可编排。</p>
+<p>采用 <strong>不纯的责任链模式</strong> 来实现。</p>
+<br>
+
+<h2 id="责任链模式-1"><a href="#责任链模式-1" class="headerlink" title="责任链模式"></a>责任链模式</h2><p>首先定义一个抽象类，其中成员变量有 后继处理handler。</p>
+<pre><code>public abstract class AbstractCheckHandler&lt;T extends BaseRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCheckHandler.class);
+
+    /**
+     * 定义后继处理对象
+     \*/
+    protected AbstractCheckHandler nextHandler;
+
+    /**
+     * 没有后继对象,则处于责任链末端
+     *
+     * @return true-有后继对象，false-没有后继对象
+     \*/
+    public boolean hasNext() {
+        return Objects.nonNull(this.nextHandler);
+    }
+
+    /**
+     * 设置后继者
+     *
+     * @param nextHandler
+     \*/
+    public void setNextHandler(AbstractCheckHandler nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    /**
+     * 抽象请求处理方法
+     *
+     * @param request request
+     \*/
+    public abstract boolean checkRequest(T request);
+
+}</code></pre><p>然后是继承该抽象类，子类实现自己的校验逻辑。</p>
+<p>校验request</p>
+<pre><code>@Component
+public class RequestCheck&lt;T extends CpcBaseRequest&gt; extends AbstractCheckHandler&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestCheck.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check request&quot;);
+
+        //process
+        boolean result = null != request;
+
+        if (hasNext() &amp;&amp; result) {
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>校验cityCode</p>
+<pre><code>@Component
+public class CityCheck&lt;T extends CpcBaseRequest&gt; extends RequestCheck&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityCheck.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check cityCode&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getCityId());
+
+        if (this.hasNext() &amp;&amp; result) {
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>校验商品编码</p>
+<pre><code>@Component
+public class GoodsInfoCheck extends RequestCheck&lt;RecommendRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsInfoCheck.class);
+
+    @Override
+    public boolean checkRequest(RecommendRequest request) {
+
+        LOGGER.info(&quot;check goodsInfo&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getGoodsId());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>校验会员编码</p>
+<pre><code>@Component
+public class CustNumCheck&lt;T extends CpcBaseRequest&gt; extends RequestCheck&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustNumCheck.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check custNum&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getCustno());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>校验code</p>
+<pre><code>@Component
+public class ConferenceCodeCheck extends RequestCheck&lt;RecommendRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConferenceCodeCheck.class);
+
+    @Override
+    public boolean checkRequest(RecommendRequest request) {
+
+        LOGGER.info(&quot;check ConferenceCode&quot;);
+
+        //process
+        boolean result = StringUtils.isNotBlank(request.getConferenceCode());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>实现完具体的校验处理以后，就需要对其进行编排。</p>
+<p>链路1：request - 城市编码 - 商品编码 - 榜单编码</p>
+<p>链路2：request - 城市编码 - 会员编码 - 商品编码</p>
+<pre><code>@Component
+public class CheckComponent {
+
+    /**
+     * 普通通用检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 商品编码 - 榜单编码
+     \*/
+    public void processGenericCheckLink(RecommendRequest request) {
+        AbstractCheckHandler genericCheckLink = getGenericCheckLink();
+        System.out.println(genericCheckLink.checkRequest(request));
+    }
+
+    protected AbstractCheckHandler getGenericCheckLink() {
+        AbstractCheckHandler cityCheck = new CityCheck();
+        AbstractCheckHandler goodsInfoCheck = new GoodsInfoCheck();
+        AbstractCheckHandler conferenceCodeCheck = new ConferenceCodeCheck();
+        AbstractCheckHandler requestCheckHandler = new RequestCheck();
+
+        requestCheckHandler.setNextHandler(cityCheck);
+        cityCheck.setNextHandler(goodsInfoCheck);
+        goodsInfoCheck.setNextHandler(conferenceCodeCheck);
+
+        return requestCheckHandler;
+    }
+
+    /**
+     * 推荐业务检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 会员编码 - 商品编码
+     \*/
+    public void processRecommendCheckLink(RecommendRequest request) {
+        AbstractCheckHandler recommendCheckLink = getRecommendCheckLink();
+        System.out.println(recommendCheckLink.checkRequest(request));
+    }
+
+    protected AbstractCheckHandler getRecommendCheckLink() {
+        AbstractCheckHandler cityCheck = new CityCheck();
+        AbstractCheckHandler custNumCheck = new CustNumCheck();
+        AbstractCheckHandler goodsInfoCheck = new GoodsInfoCheck();
+        AbstractCheckHandler requestCheckHandler = new RequestCheck();
+
+        requestCheckHandler.setNextHandler(cityCheck);
+        cityCheck.setNextHandler(custNumCheck);
+        custNumCheck.setNextHandler(goodsInfoCheck);
+
+        return requestCheckHandler;
+    }
+}</code></pre><p>main()方法进行测试</p>
+<pre><code>@Component
+public class CheckMainApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CheckMainApp.class);
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    @Resource
+    private CheckComponent checkComponent;
+
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+        CheckMainApp bean = applicationContext.getBean(CheckMainApp.class);
+        bean.process();
+    }
+
+    private void process() {
+        checkComponent.processGenericCheckLink(getRecommendRequest());
+
+        System.out.println();
+
+        checkComponent.processRecommendCheckLink(getRecommendRequest());
+    }
+
+    private RecommendRequest getRecommendRequest() {
+        RecommendRequest recommendRequest = new RecommendRequest();
+        recommendRequest.setGoodsId(&quot;123123&quot;);
+        recommendRequest.setConferenceCode(&quot;234234&quot;);
+        recommendRequest.setCityId(&quot;123&quot;);
+        recommendRequest.setCustno(&quot;&quot;);
+        return recommendRequest;
+    }
+}</code></pre><p>运行后看结果，和预期的一致。</p>
+<pre><code>[main] INFO  o.p.crp.plana.check.RequestCheck - 20 - check request
+[main] INFO  o.pattern.crp.plana.check.CityCheck - 21 - check cityCode
+[main] INFO  o.p.crp.plana.check.GoodsInfoCheck - 21 - check goodsInfo
+[main] INFO  o.p.c.p.check.ConferenceCodeCheck - 21 - check ConferenceCode
+true
+
+[main] INFO  o.p.crp.plana.check.RequestCheck - 20 - check request
+[main] INFO  o.pattern.crp.plana.check.CityCheck - 21 - check cityCode
+[main] INFO  o.p.crp.plana.check.CustNumCheck - 21 - check custNum
+false</code></pre><p>如此一来，如果要新增一个校验链路，只要在 CheckComponent 类中进行编排即可。</p>
+<p>距离 模块化、可编排 还差一点。</p>
+<h2 id="优化一"><a href="#优化一" class="headerlink" title="优化一"></a>优化一</h2><p>可以看到，在校验规则编排的那里，有一大坨的代码，看的很不舒服，将其剥离、独立 出来。</p>
+<p>创建一个 校验链路工厂类：</p>
+<pre><code>public class CheckLinkFactory {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CheckLinkFactory.class);
+
+    public static AbstractCheckHandler getGenericCheckLink() {
+        AbstractCheckHandler cityCheck = new CityCheck();
+        AbstractCheckHandler goodsInfoCheck = new GoodsInfoCheck();
+        AbstractCheckHandler conferenceCodeCheck = new ConferenceCodeCheck();
+        AbstractCheckHandler requestCheckHandler = new RequestCheck();
+        requestCheckHandler.setNextHandler(cityCheck);
+        cityCheck.setNextHandler(goodsInfoCheck);
+        goodsInfoCheck.setNextHandler(conferenceCodeCheck);
+        return requestCheckHandler;
+    }
+
+    public static AbstractCheckHandler getRecommendCheckLink() {
+        AbstractCheckHandler cityCheck = new CityCheck();
+        AbstractCheckHandler custNumCheck = new CustNumCheck();
+        AbstractCheckHandler goodsInfoCheck = new GoodsInfoCheck();
+        AbstractCheckHandler requestCheckHandler = new RequestCheck();
+        requestCheckHandler.setNextHandler(cityCheck);
+        cityCheck.setNextHandler(custNumCheck);
+        custNumCheck.setNextHandler(goodsInfoCheck);
+        return requestCheckHandler;
+    }
+}</code></pre><p>如此一来，校验编排的代码就简洁多了：</p>
+<pre><code>@Component
+public class CheckComponent {
+
+    /**
+     * 普通通用检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 商品编码 - 榜单编码
+     \*/
+    public void processGenericCheckLink(RecommendRequest request) {
+        AbstractCheckHandler genericCheckLink = CheckLinkFactory.getGenericCheckLink();
+        System.out.println(genericCheckLink.checkRequest(request));
+    }
+
+    /**
+     * 推荐业务检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 会员编码 - 商品编码
+     \*/
+    public void processRecommendCheckLink(RecommendRequest request) {
+        AbstractCheckHandler recommendCheckLink = CheckLinkFactory.getRecommendCheckLink();
+        System.out.println(recommendCheckLink.checkRequest(request));
+    }
+}</code></pre><h2 id="优化二"><a href="#优化二" class="headerlink" title="优化二"></a>优化二</h2><p>再进行优化，实在不想看到那么一大坨，校验编排的代码。</p>
+<p>而且这种编排方式太硬了、还是太死，应该做成配置的那种。</p>
+<p>结合 自定义注解、Spring BeanPostProcessor，实现可配置的链路。</p>
+<br>
+
+<p>自定义注解</p>
+<pre><code>@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface CheckHandlerAnn {
+
+}</code></pre><p>继承 spring BeanPostProcessor 接口，在bean初始化之后，获取标记了 CheckHandlerAnn 注解的 check handler。</p>
+<pre><code>@Component
+public class MappingBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MappingBeanPostProcessor.class);
+
+    private ApplicationContext applicationContext;
+
+    /**
+     * checkHandler Class Name : checkHandler Class
+     \*/
+    private Map&lt;String, Class&lt;?&gt;&gt; checkHandler = new HashMap&lt;&gt;(32);
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return null;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        processCheckAnn(bean.getClass());
+        return bean;
+    }
+
+    /**
+     * 获取标注 {@link CheckHandlerAnn} 注解的类
+     *
+     * @param aClass
+     \*/
+    private void processCheckAnn(Class&lt;?&gt; aClass) {
+        CheckHandlerAnn annotation = AnnotationUtils.findAnnotation(aClass, CheckHandlerAnn.class);
+        if (null != annotation) {
+            checkHandler.put(aClass.getName(), aClass);
+            LOGGER.info(&quot;put class:{}&quot;, aClass.getName());
+        }
+    }
+
+    public Map&lt;String, Class&lt;?&gt;&gt; getCheckHandler() {
+        return checkHandler;
+    }
+}</code></pre><p>和之前一样的抽象类</p>
+<pre><code>public abstract class AbstractCheckHandlerTwo&lt;T extends CpcBaseRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCheckHandlerTwo.class);
+
+    /**
+     * 定义后继处理对象
+     \*/
+    protected AbstractCheckHandlerTwo nextHandler;
+
+    /**
+     * 没有后继对象,则处于责任链末端
+     *
+     * @return true-有后继对象，false-没有后继对象
+     \*/
+    public boolean hasNext() {
+        return Objects.nonNull(this.nextHandler);
+    }
+
+    /**
+     * 设置后继者
+     *
+     * @param nextHandler
+     \*/
+    public void setNextHandler(AbstractCheckHandlerTwo nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    /**
+     * 抽象请求处理方法
+     *
+     * @param request request
+     * @return true -&gt; success , false -&gt; fail
+     \*/
+    public abstract boolean checkRequest(T request);
+
+}</code></pre><p>继承的子类，在类上标记 CheckHandlerAnn 注解。</p>
+<pre><code>@CheckHandlerAnn
+@Component
+public class CityCheckTwo&lt;T extends CpcBaseRequest&gt; extends RequestCheckTwo&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityCheckTwo.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check cityCode&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getCityId());
+
+        if (this.hasNext() &amp;&amp; result) {
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}
+
+@CheckHandlerAnn
+@Component
+public class ConferenceCodeCheckTwo extends RequestCheckTwo&lt;RecommendRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConferenceCodeCheckTwo.class);
+
+    @Override
+    public boolean checkRequest(RecommendRequest request) {
+
+        LOGGER.info(&quot;check ConferenceCode&quot;);
+
+        //process
+        boolean result = StringUtils.isNotBlank(request.getConferenceCode());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}
+
+@CheckHandlerAnn
+@Component
+public class CustNumCheckTwo&lt;T extends CpcBaseRequest&gt; extends RequestCheckTwo&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustNumCheckTwo.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check custNum&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getCustno());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}
+
+@CheckHandlerAnn
+@Component
+public class GoodsInfoCheckTwo extends RequestCheckTwo&lt;RecommendRequest&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsInfoCheckTwo.class);
+
+    @Override
+    public boolean checkRequest(RecommendRequest request) {
+
+        LOGGER.info(&quot;check goodsInfo&quot;);
+
+        boolean result = StringUtils.isNotBlank(request.getGoodsId());
+
+        if (hasNext() &amp;&amp; result) {
+            //转发请求
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}
+
+@CheckHandlerAnn
+@Component
+public class RequestCheckTwo&lt;T extends CpcBaseRequest&gt; extends AbstractCheckHandlerTwo&lt;T&gt; {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestCheckTwo.class);
+
+    @Override
+    public boolean checkRequest(T request) {
+
+        LOGGER.info(&quot;check request&quot;);
+
+        //process
+        boolean result = null != request;
+
+        if (hasNext() &amp;&amp; result) {
+            return this.nextHandler.checkRequest(request);
+        }
+        return result;
+    }
+}</code></pre><p>通过枚举，编排校验链路</p>
+<pre><code>public enum CheckLinkEnums {
+
+    /**
+     * 普通通用检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 商品编码 - 榜单编码
+     \*/
+    GENERIC_CHECK_LINK(Arrays.asList(
+            RequestCheckTwo.class.getName(),
+            CityCheckTwo.class.getName(),
+            GoodsInfoCheckTwo.class.getName(),
+            ConferenceCodeCheckTwo.class.getName())),
+
+    /**
+     * 推荐业务检查链路
+     * &lt;p&gt;
+     * request - 城市编码 - 会员编码 - 商品编码
+     \*/
+    GET_RECOMMEND_CHECK_LINK(Arrays.asList(
+            RequestCheckTwo.class.getName(),
+            CityCheckTwo.class.getName(),
+            CustNumCheckTwo.class.getName(),
+            GoodsInfoCheckTwo.class.getName()));
+
+    private List&lt;String&gt; checkLink;
+
+    public List&lt;String&gt; getCheckLink() {
+        return checkLink;
+    }
+
+    CheckLinkEnums(List&lt;String&gt; checkLink) {
+        this.checkLink = checkLink;
+    }
+}</code></pre><p>校验编排的具体实现，在程序启动后就执行。</p>
+<pre><code>@Component
+public class CheckComponentTwo {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CheckComponentTwo.class);
+
+    private Map&lt;String, AbstractCheckHandlerTwo&gt; checkHandlerList = new HashMap&lt;&gt;(32);
+
+    @Resource
+    private MappingBeanPostProcessor mappingBeanPostProcessor;
+
+    /**
+     * 处理 {@link CheckLinkEnums} 中编排的配置
+     \*/
+    public void choreographyCheckHandler() throws InstantiationException, IllegalAccessException {
+
+        CheckLinkEnums[] values = CheckLinkEnums.values();
+
+        if (ArrayUtils.isEmpty(values)) {
+            LOGGER.warn(&quot;check link enums is empty!&quot;);
+            return;
+        }
+
+        LOGGER.info(&quot;CheckLinkEnums#value:{}&quot;, Arrays.toString(values));
+
+        for (CheckLinkEnums enums : values) {
+            List&lt;String&gt; checkLink = enums.getCheckLink();
+            analysisHandler(enums.name(), checkLink);
+        }
+    }
+
+    /**
+     * 实例化 check责任链
+     *
+     * @param name         check链-key
+     * @param handerlClass check链-handler
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     \*/
+    private void analysisHandler(String name, List&lt;String&gt; handerlClass) throws IllegalAccessException, InstantiationException {
+
+        List&lt;AbstractCheckHandlerTwo&gt; checkHandlers = new ArrayList&lt;&gt;();
+
+        for (int i = 0; i &lt; handerlClass.size(); i++) {
+            String handlClazz = handerlClass.get(i);
+
+            //获取 check handler object
+            if (!mappingBeanPostProcessor.getCheckHandler().containsKey(handlClazz)) {
+                return;
+            }
+
+            Class&lt;?&gt; checkHandlerClass = mappingBeanPostProcessor.getCheckHandler().get(handlClazz);
+
+            AbstractCheckHandlerTwo abstractCheckHandler = (AbstractCheckHandlerTwo) checkHandlerClass.newInstance();
+
+            checkHandlers.add(abstractCheckHandler);
+
+            if (i != 0) {
+                checkHandlers.get(i - 1).setNextHandler(abstractCheckHandler);
+            }
+        }
+        checkHandlerList.put(name, checkHandlers.get(0));
+    }
+
+    public Map&lt;String, AbstractCheckHandlerTwo&gt; getCheckHandlerList() {
+        return checkHandlerList;
+    }
+}</code></pre><p>main()方法测试</p>
+<pre><code>@Component
+public class CheckTwoMainApp {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CheckTwoMainApp.class);
+
+    private static final String APPLICATION_CONTEXT_FILE = &quot;/spring/applicationContext.xml&quot;;
+
+    @Resource
+    private CheckComponentTwo checkComponentTwo;
+
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_FILE);
+        CheckTwoMainApp bean = applicationContext.getBean(CheckTwoMainApp.class);
+        bean.processCheckHandler();
+    }
+
+    private void processCheckHandler() throws IllegalAccessException, InstantiationException {
+
+        //编排
+        checkComponentTwo.choreographyCheckHandler();
+
+        AbstractCheckHandlerTwo genericCheckLink = checkComponentTwo.getCheckHandlerList().get(&quot;GENERIC_CHECK_LINK&quot;);
+        LOGGER.info(&quot;result:{}&quot;, genericCheckLink.checkRequest(getRecommendRequest()));
+
+        System.out.println();
+
+        AbstractCheckHandlerTwo getRecommendCheckLink = checkComponentTwo.getCheckHandlerList().get(&quot;GET_RECOMMEND_CHECK_LINK&quot;);
+        LOGGER.info(&quot;result:{}&quot;, getRecommendCheckLink.checkRequest(getRecommendRequest()));
+
+    }
+
+    private RecommendRequest getRecommendRequest() {
+        RecommendRequest recommendRequest = new RecommendRequest();
+        recommendRequest.setGoodsId(&quot;123123&quot;);
+        recommendRequest.setConferenceCode(&quot;234234&quot;);
+        recommendRequest.setCityId(&quot;123&quot;);
+        recommendRequest.setCustno(&quot;&quot;);
+        return recommendRequest;
+    }
+}</code></pre><p>输出结果：</p>
+<pre><code>[main] INFO  o.p.c.planb.MappingBeanPostProcessor - 57 - put class:org.pattern.crp.planb.check.CityCheckTwo
+[main] INFO  o.p.c.planb.MappingBeanPostProcessor - 57 - put class:org.pattern.crp.planb.check.ConferenceCodeCheckTwo
+[main] INFO  o.p.c.planb.MappingBeanPostProcessor - 57 - put class:org.pattern.crp.planb.check.CustNumCheckTwo
+[main] INFO  o.p.c.planb.MappingBeanPostProcessor - 57 - put class:org.pattern.crp.planb.check.GoodsInfoCheckTwo
+[main] INFO  o.p.c.planb.MappingBeanPostProcessor - 57 - put class:org.pattern.crp.planb.check.RequestCheckTwo
+
+[main] INFO  o.p.crp.planb.CheckComponentTwo - 39 - CheckLinkEnums#value:[GENERIC_CHECK_LINK, GET_RECOMMEND_CHECK_LINK]
+
+[main] INFO  o.p.crp.planb.check.RequestCheckTwo - 22 - check request
+[main] INFO  o.p.crp.planb.check.CityCheckTwo - 23 - check cityCode
+[main] INFO  o.p.c.planb.check.GoodsInfoCheckTwo - 23 - check goodsInfo
+[main] INFO  o.p.c.p.check.ConferenceCodeCheckTwo - 23 - check ConferenceCode
+[main] INFO  o.pattern.crp.planb.CheckTwoMainApp - 40 - result:true
+
+[main] INFO  o.p.crp.planb.check.RequestCheckTwo - 22 - check request
+[main] INFO  o.p.crp.planb.check.CityCheckTwo - 23 - check cityCode
+[main] INFO  o.p.crp.planb.check.CustNumCheckTwo - 23 - check custNum
+[main] INFO  o.pattern.crp.planb.CheckTwoMainApp - 45 - result:false</code></pre><p>简单说下逻辑。</p>
+<ol>
+<li><p>首先实现各个细化的check类(CityCheckTwo、CustNumCheckTwo、GoodsInfoCheckTwo 等)，并且添加 CheckHandlerAnn 类注解</p>
+</li>
+<li><p>在枚举中编排校验链路</p>
+</li>
+<li><p>程序启动，通过 Spring BeanPostProcessor 接口，在Bean实例化之后，获取所有标记 CheckHandlerAnn 注解的类，存到Map中。</p>
+</li>
+<li><p>调用 初始化编排的方法，按照 枚举中的配置链路配置，顺序的去Map中挨个找出，并实例化实现编排。</p>
+</li>
+<li><p>编排完成后，即可使用。</p>
+</li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>实战责任链模式</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">3.6k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2020-05-13, 23:33:38</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-13, 23:34:18</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/13/后台/设计模式/实战责任链模式/" title="实战责任链模式">https://simba-cheng.github.io/2020/05/13/后台/设计模式/实战责任链模式/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 507px;
+        }
+        .nav.fullscreen {
+            margin-left: -507px;
+        }
+        .nav-left {
+            width: 115px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 507px;
+            margin-left: -507px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 507px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
