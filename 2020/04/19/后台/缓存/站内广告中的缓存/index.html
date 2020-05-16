@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -223,7 +223,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
                             
                         </li>
                             
@@ -231,15 +231,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(3)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(3)</small></div>
                             
                         </li>
                             
@@ -370,11 +370,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -394,19 +394,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">spring</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -446,11 +446,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1097,12 +1097,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-16 16:04:47'>2020-04-19 11:38</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-16 16:09:37'>2020-04-19 11:38</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.6k</span>
+        <span>字数:1.5k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1168,14 +1168,80 @@
 <p>expireAfterAccess()方法保证只让一个线程去加载数据，其他线程等待这个线程的返回结果，可以避免请求穿透缓存。</p>
 <p>但这样做带来系统性能、吞吐量的问题。</p>
 <p>测试案例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class MainTest &#123;</span><br><span class="line"></span><br><span class="line">    // 1s无访问则缓存过期, 每次加载一个key需要耗时2s</span><br><span class="line">    private static LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder()</span><br><span class="line">            .expireAfterAccess(1, TimeUnit.SECONDS)</span><br><span class="line">            .build(new CacheLoader&lt;String, String&gt;() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public String load(String key) throws Exception &#123;</span><br><span class="line">                    System.out.println(&quot;begin to query redis...&quot;);</span><br><span class="line">                    Thread.sleep(2000);</span><br><span class="line">                    System.out.println(&quot;success to query redis...&quot;);</span><br><span class="line">                    return UUID.randomUUID().toString();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        cache.put(&quot;name&quot;, &quot;ccccc&quot;);</span><br><span class="line">        Thread.sleep(1500);</span><br><span class="line">        for (int i = 0; i &lt; 8; i++) &#123;</span><br><span class="line">            startThread(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void startThread(int id) &#123;</span><br><span class="line">        Thread t = new Thread(() -&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + &quot;...begin&quot;);</span><br><span class="line">                System.out.println(&quot;value...&quot; + cache.get(&quot;name&quot;).toString());</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t.setName(&quot;Thread-&quot; + id);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class MainTest {
 
-<h2 id="refreshAfterWrite"><a href="#refreshAfterWrite" class="headerlink" title="refreshAfterWrite"></a>refreshAfterWrite</h2><p>同上面的方法不一样，refreshAfterWrite()方法会让其中一个线程去加载新数据，而其他9个线程，则马上返回旧数据。</p>
+    // 1s无访问则缓存过期, 每次加载一个key需要耗时2s
+    private static LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder()
+            .expireAfterAccess(1, TimeUnit.SECONDS)
+            .build(new CacheLoader&lt;String, String&gt;() {
+                @Override
+                public String load(String key) throws Exception {
+                    System.out.println(&quot;begin to query redis...&quot;);
+                    Thread.sleep(2000);
+                    System.out.println(&quot;success to query redis...&quot;);
+                    return UUID.randomUUID().toString();
+                }
+            });
+
+    public static void main(String[] args) throws Exception {
+        cache.put(&quot;name&quot;, &quot;ccccc&quot;);
+        Thread.sleep(1500);
+        for (int i = 0; i &lt; 8; i++) {
+            startThread(i);
+        }
+    }
+
+    private static void startThread(int id) {
+        Thread t = new Thread(() -&gt; {
+            try {
+                System.out.println(Thread.currentThread().getName() + &quot;...begin&quot;);
+                System.out.println(&quot;value...&quot; + cache.get(&quot;name&quot;).toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        t.setName(&quot;Thread-&quot; + id);
+        t.start();
+    }
+}</code></pre><h2 id="refreshAfterWrite"><a href="#refreshAfterWrite" class="headerlink" title="refreshAfterWrite"></a>refreshAfterWrite</h2><p>同上面的方法不一样，refreshAfterWrite()方法会让其中一个线程去加载新数据，而其他9个线程，则马上返回旧数据。</p>
 <p>提高系统性能、吞吐量。</p>
 <p>测试案例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class MainTest &#123;</span><br><span class="line"></span><br><span class="line">    // 1s无访问则缓存过期, 每次加载一个key需要耗时2s</span><br><span class="line">    private static LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder()</span><br><span class="line">            .refreshAfterWrite(1, TimeUnit.SECONDS)</span><br><span class="line">            .build(new CacheLoader&lt;String, String&gt;() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public String load(String key) throws Exception &#123;</span><br><span class="line">                    System.out.println(&quot;begin to query redis...&quot;);</span><br><span class="line">                    Thread.sleep(2000);</span><br><span class="line">                    System.out.println(&quot;success to query redis...&quot;);</span><br><span class="line">                    return UUID.randomUUID().toString();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        cache.put(&quot;name&quot;, &quot;cccc&quot;);</span><br><span class="line">        Thread.sleep(1500);</span><br><span class="line">        for (int i = 0; i &lt; 8; i++) &#123;</span><br><span class="line">            startThread(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void startThread(int id) &#123;</span><br><span class="line">        Thread t = new Thread(() -&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + &quot;...begin&quot;);</span><br><span class="line">                System.out.println(&quot;value...&quot; + cache.get(&quot;name&quot;).toString());</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t.setName(&quot;Thread-&quot; + id);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class MainTest {
 
-<p>注意点：</p>
+    // 1s无访问则缓存过期, 每次加载一个key需要耗时2s
+    private static LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder()
+            .refreshAfterWrite(1, TimeUnit.SECONDS)
+            .build(new CacheLoader&lt;String, String&gt;() {
+                @Override
+                public String load(String key) throws Exception {
+                    System.out.println(&quot;begin to query redis...&quot;);
+                    Thread.sleep(2000);
+                    System.out.println(&quot;success to query redis...&quot;);
+                    return UUID.randomUUID().toString();
+                }
+            });
+
+    public static void main(String[] args) throws Exception {
+        cache.put(&quot;name&quot;, &quot;cccc&quot;);
+        Thread.sleep(1500);
+        for (int i = 0; i &lt; 8; i++) {
+            startThread(i);
+        }
+    }
+
+    private static void startThread(int id) {
+        Thread t = new Thread(() -&gt; {
+            try {
+                System.out.println(Thread.currentThread().getName() + &quot;...begin&quot;);
+                System.out.println(&quot;value...&quot; + cache.get(&quot;name&quot;).toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        t.setName(&quot;Thread-&quot; + id);
+        t.start();
+    }
+}</code></pre><p>注意点：</p>
 <p>如果系统系统刚启动，缓存中没有数据，refreshAfterWrite()方法 也会导致一个线程去加载数据，剩余线程等待的情况(因为没有旧值返回)。</p>
 <p>如果要避免，则需要系统启动时，就向缓存中写入数据；如果业务场景允许的话，则无所谓。</p>
 <br>
@@ -1223,10 +1289,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>站内广告中的缓存</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-04-19, 11:38:58</p>
-        <p><span class="copy-title">最后更新:</span>2020-05-16, 16:04:47</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-16, 16:09:37</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/19/后台/缓存/站内广告中的缓存/" title="站内广告中的缓存">https://simba-cheng.github.io/2020/04/19/后台/缓存/站内广告中的缓存/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1288,7 +1354,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#索引','#Java8','#spring','#mysql','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#mysql','#spring','#hash','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#设计模式','#es_client','#es问题','#es_update','#es_batch','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
