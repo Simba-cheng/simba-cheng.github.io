@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>spring-ApplicationContext</title>
+      <link href="/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-ApplicationContext/"/>
+      <url>/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-ApplicationContext/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h1><p><img src="//simba-cheng.github.io/2020/05/17/后台/spring/spring-ApplicationContext/applicationcontext.png" alt="applicationcontext"></p><p><strong>① AbstractApplicationContext</strong></p><p>AbstractApplicationContext 实现了 ApplicationContext/ConfigurableApplicationContext 接口大部分功能。</p><p>AbstractApplicationContext 采用了模版方法设计模式，将一部分实现推迟到子类，子类根据需求自己实现方法。</p><p>AbstractApplicationContext 核心方法是 refresh()方法，这方法的作用是：创建、加载 Spring IOC 容器相关配置，是IOC的入口。</p><pre><code>在创建IOC容器前，如果已经有容器存在，则关闭、销毁，以保证在 refresh 之后是新建立的IOC容器。refresh()的作用类似对IOC容器进行刷新/重启，在建立好的容器中对容器进行初始化，并对Bean资源进行载入。</code></pre><br><p><strong>② AbstractRefreshableApplicationContext</strong></p><p>AbstractRefreshableApplicationContext 主要实现父类中的 refreshBeanFactory() 抽象方法。</p><p>还有实现了这些抽象方法：</p><pre><code>cancelRefresh()：取消刷新容器closeBeanFactory()：销毁容器/Bean工厂getBeanFactory()：获取容器/Bean工厂</code></pre><br><p><strong>③ AbstractRefreshableConfigApplicationContext</strong></p><p>AbstractRefreshableConfigApplicationContext 抽象类，其主要是 对指定配置文件路径的公共处理；</p><p>可以将其看作基于XML(applicationContext.xml)的应用上下文的基类。</p><br><p><strong>④ AbstractXmlApplicationContext</strong></p><p>AbstractXmlApplicationContext 抽象类，主要作用是 解析 applicationContext.xml 配置文件。</p><br><p><strong>⑤ ClassPathXmlApplicationContext</strong></p><p>ClassPathXmlApplicationContext 是 Spring 读取XML最常用的类。</p><p>其本身并没有多少解析处理，解析的操作都在父类 AbstractApplicationContext#refresh()方法 中实现。</p><br><p>可以很清楚的看出每个 抽象、实现类 都有自己的职责。</p><ul><li><p>AbstractApplicationContext：规划 核心IOC容器、Bean 创建流程，并对某些业务做了实现。</p></li><li><p>AbstractRefreshableApplicationContext：创建IOC容器</p></li><li><p>AbstractRefreshableConfigApplicationContext：处理、保存xml配置文件路径(applicationContext.xml)</p></li><li><p>AbstractXmlApplicationContext：解析xml配置文件(applicaitonContext.xml)</p></li><li><p>ClassPathXmlApplicationContext：最外层 applicationContext 入口。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>代理模式</title>
       <link href="/2020/05/17/%E5%90%8E%E5%8F%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
       <url>/2020/05/17/%E5%90%8E%E5%8F%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</url>
