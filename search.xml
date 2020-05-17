@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>spring-BeanPostProcessor</title>
+      <link href="/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-BeanPostProcessor/"/>
+      <url>/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-BeanPostProcessor/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spring-BeanPostProcessor"><a href="#Spring-BeanPostProcessor" class="headerlink" title="Spring - BeanPostProcessor"></a>Spring - BeanPostProcessor</h1><p>Spring IOC 提供的一个扩展工具，BeanPostProcessor 接口定义了两个回调方法，可以实现这些方法来提供你的自己的实例化逻辑（覆盖容器的默认）、依赖解析逻辑等。</p><p>IOC 容器创建容器中所有对象 之前会调用 postProcessBeforeInitialization() 方法 、之后会调用 postProcessAfterInitialization() 方法 这两个方法。</p><p>大致流程：</p><pre><code>Spring IOC容器实例化Bean    ↓↓↓↓↓↓↓调用BeanPostProcessor的postProcessBeforeInitialization方法    ↓↓↓↓↓↓↓调用bean实例的初始化方法    ↓↓↓↓↓↓↓调用BeanPostProcessor的postProcessAfterInitialization方法</code></pre><h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>在项目中，运用到了自定义注解，通过实现 BeanPostProcessor 接口，在bean实例化之后，扫描添加了自定义注解的类，进行自定义业务处理。</p><pre><code>@Overridepublic Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {    analysisCheckAnn(bean.getClass());    return bean;}private void analysisCheckAnn(Class&lt;?&gt; aClass) {    CheckHandlerAnn annotation = AnnotationUtils.findAnnotation(aClass, CheckHandlerAnn.class);    if (null != annotation) {        checkHandler.put(aClass.getName(), aClass);        LOGGER.info(&quot;put class:{}&quot;, aClass.getName());    }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>spring-ApplicationContext</title>
       <link href="/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-ApplicationContext/"/>
       <url>/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-ApplicationContext/</url>

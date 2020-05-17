@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-BeanPostProcessor/</loc>
+    
+    <lastmod>2020-05-17T13:01:50.594Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-ApplicationContext/</loc>
     
     <lastmod>2020-05-17T12:57:05.393Z</lastmod>
