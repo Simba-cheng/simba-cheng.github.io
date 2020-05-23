@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>linux-unix部分知识点</title>
+      <link href="/2020/05/23/%E5%90%8E%E5%8F%B0/linux/linux-unix%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+      <url>/2020/05/23/%E5%90%8E%E5%8F%B0/linux/linux-unix%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h1><p><img src="//simba-cheng.github.io/2020/05/23/后台/linux/linux-unix部分知识点/%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81.png" alt="用户态和内核态(图片来自网络)"></p><p>Linux、unix 操作系统的核心是内核系统。</p><p>系统的其他部分，比如 用户态/应用程序 必须依靠内核提供服务，才能获取底层硬件设备的权限(CPU资源、存储资源、I/O资源等)。</p><p><strong>现代处理器架构一般允许CPU至少在两种不同状态下运行</strong>，即：<strong>内核态</strong> 和 <strong>用户态</strong>。指令可使CPU在两种状态间来回切换。</p><p>内核独立于普通应用程序，处于系统态，这种系统态和被保护起来的内存空间，统称为 <strong>内核空间</strong></p><p>应用程序在 <strong>用户空间</strong> 执行。它们只能看到允许它们使用的部分系统资源，并且只能使用某些特定的系统功能，不能直接访问硬件，也不能访问内核划分给别人的内存空间。</p><p>在用户态下运行时，CPU只能访问被标记为用户空间的内存，无法访问内核空间内存。</p><p>当运行于内核态时，CPU既能访问用户空间内存，也能访问内核空间内存。</p><p><img src="//simba-cheng.github.io/2020/05/23/后台/linux/linux-unix部分知识点/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F-%E5%86%85%E6%A0%B8-%E7%A1%AC%E4%BB%B6%E5%85%B3%E7%B3%BB.png" alt="应用程序-内核-硬件关系"></p><p>只有当CPU在内核态运行时，才能执行某些特定操作，比如：关闭系统、访问内存管理硬件、I/O操作等。</p><h2 id="系统调用-和-库函数"><a href="#系统调用-和-库函数" class="headerlink" title="系统调用 和 库函数"></a>系统调用 和 库函数</h2><p>为了保证内核的安全，现在的操作系统一般都强制用户进程不能直接操作内核。为了使上层应用能够访问到这些资源，内核为上层应用提供访问的接口，即系统调用。</p><p>用户态的应用程序可以通过三种方式来访问内核态的资源：</p><ol><li>系统调用</li><li>库函数</li><li>shell 脚本</li></ol><p><strong>系统调用</strong> 是内核的入口，借助这一机制，用户程序可以调用内核，以自己的名义去执行某些动作。</p><p>Linux/UNIX 为 每个 <strong>系统调用</strong> 在标准C库中设置了一个具有同样名字的函数。</p><p>用户进程 使用 标准C调用序列 来调用这些函数。然后，函数又调用相应的内核服务。</p><p>从应用角度，可以将 系统调用视作C函数。</p><p>应用程序可以调用 <strong>系统调用</strong> 或 <strong>库函数</strong>，而很多库函数则会调用 <strong>系统调用</strong>。</p><p><img src="//simba-cheng.github.io/2020/05/23/后台/linux/linux-unix部分知识点/C%E5%BA%93%E5%87%BD%E6%95%B0%E5%92%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E5%B7%AE%E5%88%AB.png" alt="C库函数和系统调用之间的差别"></p><h2 id="内核态、用户态-切换"><a href="#内核态、用户态-切换" class="headerlink" title="内核态、用户态 切换"></a>内核态、用户态 切换</h2><p>真令人头秃，先挖个坑….后面再填….</p><p><a href="https://v2ex.com/t/504408" target="_blank" rel="noopener">https://v2ex.com/t/504408</a></p><p><a href="https://segmentfault.com/q/1010000000522752" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000522752</a></p><p><a href="https://www.v2ex.com/t/527409" target="_blank" rel="noopener">https://www.v2ex.com/t/527409</a></p><h1 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h1><h2 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h2><p>从进程的角度看，CPU是共享资源，由所有的进程按特定的策略轮番使用。</p><p>一个进程离开CPU、另一个进程占据CPU的过程，称为 进程切换/上下文切换。</p><p>进程切换/上下文切换是在内核中通过调用schedule()完成的。每当一个新的进程被选中，准备投入运行时，schedule()函数就会调用该函数。</p><p>context_switch() 函数完成两项基本工作：</p><ol><li><p>把虚拟内存从上一个进程映射 切换到 新进程中。</p></li><li><p>把上一个进程的处理器状态 切换到 新进程的处理器状态中（包括：保存、恢复栈信息 和 寄存器信息）。</p></li></ol><br><p>发生进程切换的场景主要有以下三种：</p><p><strong>1.因为要等待I/O完成，或等待某个资源、某个事件</strong>，典型内核代码如下：</p><pre><code>//把进程放进等待队列，把进程状态置为TASK_UNINTERRUPTIBLEprepare_to_wait(waitq, wait, TASK_UNINTERRUPTIBLE);//切换进程schedule();</code></pre><p><strong>2.进程还在运行，但内核不让它继续使用CPU</strong></p><p>比如进程的时间片用完了，或者优先级更高的进程来了，所以该进程必须把CPU的使用权交出来；</p><p><strong>3.进程还可以运行，但自己的算法决定主动交出CPU给别的进程</strong></p><p>用户程序可以通过系统调用sched_yield()来交出CPU，内核则可以通过函数cond_resched()或者yield()来做到。</p><br><p>以上场景1属于自愿切换，场景2和3属于强制切换。</p><p>如何分辨自愿切换和强制切换呢？</p><ul><li><p>自愿切换发生的时候，进程不再处于运行状态</p></li><li><p>强制切换发生的时候，进程仍然处于运行状态(TASK_RUNNING)，通常是由于被优先级更高的进程抢占(preempt)，或者进程的时间片用完了。</p></li></ul><h2 id="抢占"><a href="#抢占" class="headerlink" title="抢占"></a>抢占</h2><p>进程切换有自愿(Voluntary)和强制(Involuntary)之分。</p><p>抢占(Preemption)是指内核强行切换正在CPU上运行的进程，在抢占的过程中并不需要得到进程的配合，在随后的某个时刻被抢占的进程还可以恢复运行。</p><p>发生抢占的原因主要有：进程的时间片用完了，或者优先级更高的进程来争夺CPU了。</p><p>抢占如果发生在进程处于用户态的时候，称为 <strong>User Preemption（用户态抢占）</strong> ；如果发生在进程处于内核态的时候，则称为 <strong>Kernel Preemption（内核态抢占）</strong>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>spring-BeanPostProcessor</title>
       <link href="/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-BeanPostProcessor/"/>
       <url>/2020/05/17/%E5%90%8E%E5%8F%B0/spring/spring-BeanPostProcessor/</url>
