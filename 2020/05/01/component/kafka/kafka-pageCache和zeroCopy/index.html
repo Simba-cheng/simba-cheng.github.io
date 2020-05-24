@@ -6,18 +6,17 @@
   <meta name="keywords" content=" kafka ">
   <meta name="description" content="kafka-pageCache和zeroCopy | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
-<meta name="keywords" content="kafka">
-<meta property="og:type" content="article">
-<meta property="og:title" content="kafka-副本">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/05/24/component/kafka/kafka-副本/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-24T12:36:51.261Z">
+<meta property="og:updated_time" content="2020-03-01T02:22:23.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka-副本">
-<meta name="twitter:description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -353,7 +352,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="80">
-<input type="hidden" id="yelog_site_word_count" value="98.7k">
+<input type="hidden" id="yelog_site_word_count" value="98.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -1166,12 +1165,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-07 23:25:40'>2020-05-01 11:20</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-24 20:40:24'>2020-05-01 11:20</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:3.1k</span>
+        <span>字数:3.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1208,6 +1207,10 @@
         <p>pageCache 和 zeroCopy，这两个知识点需要不少Linux知识背景；</p>
 <p>我把相关背景知识整理出来，如果有疑问，可以在查阅”参考资料”下详细链接，或与我联系一起讨论。。</p>
 <h1 id="Kafka-为什么这么快？"><a href="#Kafka-为什么这么快？" class="headerlink" title="Kafka 为什么这么快？"></a>Kafka 为什么这么快？</h1><p>Kafka在底层摒弃了Java堆缓存机制，采用了操作系统级别的 <strong>页缓存（Page Cache）</strong>，同时将随机写操作改为 <strong>顺序写</strong>，再结合 <strong>Zero-Copy</strong> 的特性极大地改善了IO性能。</p>
+<p>每次写入操作都只是把数据写入到操作系统的页缓存（page cache）中，然后由操作系统自行决定什么时候把页缓存的数据写回到磁盘中。</p>
+<p>Kafka写入操作采用追加写入(append)方式，避免了磁盘随机写操作。</p>
+<br>
+
 <p>同时Kafka还使用了 <strong>分区(partition)</strong>，通过将topic的消息打散到多个分区并分布保存在不同的broker上实现了消息处理(不管是producer还是consumer)的高吞吐量。</p>
 <p>(和 elasticsearch 分片差不多的思路)</p>
 <p>Kafka快除了上面提到的四点外，还在其他地方做了优化，有兴趣的可以阅读一下这篇博文：<a href="https://medium.com/swlh/why-kafka-is-so-fast-bde0d987cd03" target="_blank" rel="noopener">《Why Kafka Is so Fast》</a></p>
@@ -1370,10 +1373,10 @@ page cache的大小为一页，通常为4K。
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>kafka-pageCache和zeroCopy</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">3.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-05-01, 11:20:11</p>
-        <p><span class="copy-title">最后更新:</span>2020-05-07, 23:25:40</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-24, 20:40:24</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/01/component/kafka/kafka-pageCache和zeroCopy/" title="kafka-pageCache和zeroCopy">https://simba-cheng.github.io/2020/05/01/component/kafka/kafka-pageCache和zeroCopy/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
