@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -171,10 +171,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
@@ -219,7 +219,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="spring">spring<small>(5)</small></div>
                             
                         </li>
                             
@@ -227,7 +227,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="spring">spring<small>(5)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -386,11 +386,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1165,7 +1165,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-24 20:36:51'>2020-05-24 20:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-24 21:33:30'>2020-05-24 20:05</time>
         
     </div>
     <div class="article-meta">
@@ -1189,7 +1189,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka-副本机制"><span class="toc-text">Kafka - 副本机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AR、ISR、OSR"><span class="toc-text">AR、ISR、OSR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AR"><span class="toc-text">AR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISR"><span class="toc-text">ISR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSR"><span class="toc-text">OSR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISR-伸缩性"><span class="toc-text">ISR 伸缩性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka-副本机制"><span class="toc-text">Kafka - 副本机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AR、ISR、OSR"><span class="toc-text">AR、ISR、OSR</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AR"><span class="toc-text">AR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISR"><span class="toc-text">ISR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OSR"><span class="toc-text">OSR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISR-伸缩性"><span class="toc-text">ISR 伸缩性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1206,10 +1206,10 @@
       
         <h1 id="Kafka-副本机制"><a href="#Kafka-副本机制" class="headerlink" title="Kafka - 副本机制"></a>Kafka - 副本机制</h1><p>先挖坑，后面再填….</p>
 <h1 id="AR、ISR、OSR"><a href="#AR、ISR、OSR" class="headerlink" title="AR、ISR、OSR"></a>AR、ISR、OSR</h1><p>AR、ISR、OSR 都在 partition 层面。</p>
-<h3 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h3><p>assigned replicas：分区中所有的副本。</p>
+<h2 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h2><p>assigned replicas：分区中所有的副本。</p>
 <p>每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。</p>
 <p>需要注意：AR列表不会动态变化，除非增加分区。</p>
-<h3 id="ISR"><a href="#ISR" class="headerlink" title="ISR"></a>ISR</h3><p>in-sync replica(同步副本组合)：<strong>同 leader replica(主分区) 保持同步的 follower replica(副本分区) 集合。</strong></p>
+<h2 id="ISR"><a href="#ISR" class="headerlink" title="ISR"></a>ISR</h2><p>in-sync replica(同步副本组合)：<strong>同 leader replica(主分区) 保持同步的 follower replica(副本分区) 集合。</strong></p>
 <p>每个 partition 都有自己的ISR集合。ISR 中动态维护一个 follower replica(副本) 集合。该集合中所有 follower replica(副本) 保存的消息 与 leader replica(主分区)保持同步状态。</p>
 <p><strong>只有 ISR 集合中的 follower replica 才能被选举为 leader replica。</strong></p>
 <p><strong>注意，leader replica 总是包含在 ISR 中。</strong></p>
@@ -1226,10 +1226,10 @@
 
 <p>ISR集合 是 AR集合 的一个子集。</p>
 <p>最初时候，ISR 和 AR 列表是一致的；但由于某些原因导致某 follower replica 同步速度落后 leader replica 太多，Kafka 会将这些 follower replica 踢出 ISR；这时候，ISR 和 AR 列表就不一致了。</p>
-<h3 id="OSR"><a href="#OSR" class="headerlink" title="OSR"></a>OSR</h3><p>Out-of-Sync Replied</p>
+<h2 id="OSR"><a href="#OSR" class="headerlink" title="OSR"></a>OSR</h2><p>Out-of-Sync Replied</p>
 <p>上面ISR中提到，follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR。</p>
 <p>被踢出的 follower replica 组成 OSR。</p>
-<h3 id="ISR-伸缩性"><a href="#ISR-伸缩性" class="headerlink" title="ISR 伸缩性"></a>ISR 伸缩性</h3><p>follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR，被踢出的 follower replica 组成 OSR。</p>
+<h2 id="ISR-伸缩性"><a href="#ISR-伸缩性" class="headerlink" title="ISR 伸缩性"></a>ISR 伸缩性</h2><p>follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR，被踢出的 follower replica 组成 OSR。</p>
 <p>如果 OSR 集合中的 follower replica 追上 leader replica 的话，kafka 会将其重新加入到 ISR 集合。</p>
 <br>
 
@@ -1257,7 +1257,7 @@
         <p><span class="copy-title">文章字数:</span><span class="post-count">633</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-05-24, 20:05:08</p>
-        <p><span class="copy-title">最后更新:</span>2020-05-24, 20:36:51</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-24, 21:33:30</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/24/component/kafka/kafka-副本/" title="kafka-副本">https://simba-cheng.github.io/2020/05/24/component/kafka/kafka-副本/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1319,7 +1319,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
