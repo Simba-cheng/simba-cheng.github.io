@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/04/27/component/kafka/kakfa-producer/</loc>
+    
+    <lastmod>2020-05-24T04:48:53.983Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/05/24/%E5%90%8E%E5%8F%B0/linux/TCP-IO%E6%A8%A1%E5%9E%8B/</loc>
     
     <lastmod>2020-05-24T04:24:36.479Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://simba-cheng.github.io/2020/05/03/component/kafka/kafka-consumer/</loc>
     
     <lastmod>2020-05-20T14:35:29.748Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/04/27/component/kafka/kakfa-producer/</loc>
-    
-    <lastmod>2020-05-20T14:31:21.013Z</lastmod>
     
   </url>
   
