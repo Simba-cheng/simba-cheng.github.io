@@ -6,17 +6,18 @@
   <meta name="keywords" content=" 资料 ">
   <meta name="description" content="技术文章_资料合集 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka-副本">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/05/24/component/kafka/kafka-副本/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-01T02:22:23.889Z">
+<meta property="og:updated_time" content="2020-05-24T12:36:51.261Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta name="twitter:title" content="kafka-副本">
+<meta name="twitter:description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -99,15 +100,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(79)</small></div></li>
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
+    <li><div class="all active">全部文章<small>(80)</small></div></li>
     
         
             
@@ -127,6 +120,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="思考">思考<small>(2)</small></div>
                 
             </li>
@@ -139,7 +140,7 @@
     
         
             
-            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(46)</small></div>
+            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(47)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -157,7 +158,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="kafka">kafka<small>(5)</small></div>
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
                             
                         </li>
                             
@@ -211,23 +212,19 @@
     
         
             
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(26)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -244,6 +241,14 @@
                         </li>
                             
                         <li><div data-rel="hash">hash<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -337,10 +342,6 @@
             
         
     
-        
-            
-        
-    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -351,8 +352,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="79">
-<input type="hidden" id="yelog_site_word_count" value="98.1k">
+<input type="hidden" id="yelog_site_posts_number" value="80">
+<input type="hidden" id="yelog_site_word_count" value="98.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -386,11 +387,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -493,6 +494,14 @@
            data-author="" >
             <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
             <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/24/component/kafka/kafka-副本/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-副本">kafka-副本</span>
+            <span class="post-date" title="2020-05-24 20:05:08">2020/05/24</span>
         </a>
         
         <a  class="后台 linux "
@@ -1403,7 +1412,7 @@ https://cloud.tencent.com/developer/article/1172583</code></pre><h1 id="Spring">
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/05/24/component/kafka/kafka-%E5%89%AF%E6%9C%AC/</loc>
+    
+    <lastmod>2020-05-24T12:36:51.261Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/05/03/component/kafka/kafka-consumer/</loc>
     
     <lastmod>2020-05-24T06:05:07.649Z</lastmod>

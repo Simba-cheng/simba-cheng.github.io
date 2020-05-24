@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>kafka-副本</title>
+      <link href="/2020/05/24/component/kafka/kafka-%E5%89%AF%E6%9C%AC/"/>
+      <url>/2020/05/24/component/kafka/kafka-%E5%89%AF%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Kafka-副本机制"><a href="#Kafka-副本机制" class="headerlink" title="Kafka - 副本机制"></a>Kafka - 副本机制</h1><p>先挖坑，后面再填….</p><h1 id="AR、ISR、OSR"><a href="#AR、ISR、OSR" class="headerlink" title="AR、ISR、OSR"></a>AR、ISR、OSR</h1><p>AR、ISR、OSR 都在 partition 层面。</p><h3 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h3><p>assigned replicas：分区中所有的副本。</p><p>每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。</p><p>需要注意：AR列表不会动态变化，除非增加分区。</p><h3 id="ISR"><a href="#ISR" class="headerlink" title="ISR"></a>ISR</h3><p>in-sync replica(同步副本组合)：<strong>同 leader replica(主分区) 保持同步的 follower replica(副本分区) 集合。</strong></p><p>每个 partition 都有自己的ISR集合。ISR 中动态维护一个 follower replica(副本) 集合。该集合中所有 follower replica(副本) 保存的消息 与 leader replica(主分区)保持同步状态。</p><p><strong>只有 ISR 集合中的 follower replica 才能被选举为 leader replica。</strong></p><p><strong>注意，leader replica 总是包含在 ISR 中。</strong></p><p>只有该集合中所有 replica 都接受到了同一条消息，Kafka才会将该消息置为”已提交”装填(认为这条消息发送成功，对于producer而言)。</p><p>Kafka的消息交付承诺：<strong>Kafka对于没有提交成功的消息不作任何交付保证，它只保证ISR存活的情况下”已提交”的消息不会丢失。</strong></p><br><p>正常情况下，Partition(分区)中所有的 follower replica 都应该与 leader replica 的数据保持一致(数据同步)，即所有 follower replica 都在 ISR 中。</p><p>但由于各种原因，一部分 follower replica 会落后于 leader replica 的速度。</p><p>当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR。</p><p>相反的，当这些 follower replica 追上 leader replica 进度时，Kafka会把它们加回ISR中。</p><p>这些都是Kafka自动维护的。</p><br><p>ISR集合 是 AR集合 的一个子集。</p><p>最初时候，ISR 和 AR 列表是一致的；但由于某些原因导致某 follower replica 同步速度落后 leader replica 太多，Kafka 会将这些 follower replica 踢出 ISR；这时候，ISR 和 AR 列表就不一致了。</p><h3 id="OSR"><a href="#OSR" class="headerlink" title="OSR"></a>OSR</h3><p>Out-of-Sync Replied</p><p>上面ISR中提到，follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR。</p><p>被踢出的 follower replica 组成 OSR。</p><h3 id="ISR-伸缩性"><a href="#ISR-伸缩性" class="headerlink" title="ISR 伸缩性"></a>ISR 伸缩性</h3><p>follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR，被踢出的 follower replica 组成 OSR。</p><p>如果 OSR 集合中的 follower replica 追上 leader replica 的话，kafka 会将其重新加入到 ISR 集合。</p><br><p>AR = ISR + OSR</p><p>理想状态下，所有的 follower replica 应该与 leader replica 保持一定程度的同步。</p><p>即 AR = ISR，OSR集合为空。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li>《Apache kafka实战》</li><li>《Kafka权威指南》</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> kafka </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kafka </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>TCP-IO模型</title>
       <link href="/2020/05/24/%E5%90%8E%E5%8F%B0/linux/TCP-IO%E6%A8%A1%E5%9E%8B/"/>
       <url>/2020/05/24/%E5%90%8E%E5%8F%B0/linux/TCP-IO%E6%A8%A1%E5%9E%8B/</url>

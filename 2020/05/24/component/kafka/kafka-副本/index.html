@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>书籍 | Simba</title>
-  <meta name="keywords" content=" 资料 ">
-  <meta name="description" content="书籍 | Simba">
+  <title>kafka-副本 | Simba</title>
+  <meta name="keywords" content=" kafka ">
+  <meta name="description" content="kafka-副本 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Kafka - 副本机制先挖坑，后面再填…. AR、ISR、OSRAR、ISR、OSR 都在 partition 层面。 ARassigned replicas：分区中所有的副本。 每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。 需要注意：AR列表不会动态变化，除非增加分区。 ISRin-sync replica(同步副本">
 <meta name="keywords" content="kafka">
@@ -1140,9 +1140,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-relatedData/书籍" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-component/kafka/kafka-副本" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">书籍</h1>
+        <h1 class="article-title">kafka-副本</h1>
     
     <div class="article-meta">
         
@@ -1150,26 +1150,28 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="资料">资料</a>
+                <a href="javascript:" data-rel="组件">组件</a>/
+            
+                <a href="javascript:" data-rel="kafka">kafka</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">资料</a>
+            <a href="javascript:" class="color1">kafka</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-06 22:00:38'>2019-09-22 17:38</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-24 20:36:51'>2020-05-24 20:05</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:40</span>
+        <span>字数:633</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1188,7 +1190,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch相关"><span class="toc-text">Elasticsearch相关</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka-副本机制"><span class="toc-text">Kafka - 副本机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AR、ISR、OSR"><span class="toc-text">AR、ISR、OSR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AR"><span class="toc-text">AR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISR"><span class="toc-text">ISR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSR"><span class="toc-text">OSR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISR-伸缩性"><span class="toc-text">ISR 伸缩性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1203,11 +1205,42 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>以下文件、资料均来自互联网</p>
-<h1 id="Elasticsearch相关"><a href="#Elasticsearch相关" class="headerlink" title="Elasticsearch相关"></a>Elasticsearch相关</h1><p><a href="/download/书籍/elasticsearch/elasticsearch-java-rest.pdf">elasticsearch-java-rest</a></p>
-<p><a href="/download/书籍/elasticsearch/Elasticsearch权威指南（中文版）.pdf">Elasticsearch权威指南（中文版）</a></p>
-<p><a href="/download/书籍/elasticsearch/elasticsearch-JAVA使用手册.pdf">elasticsearch-JAVA使用手册</a></p>
-<p><a href="/download/书籍/elasticsearch/Elasticsearch服务器开发（第2版）.pdf">Elasticsearch服务器开发（第2版）</a></p>
+        <h1 id="Kafka-副本机制"><a href="#Kafka-副本机制" class="headerlink" title="Kafka - 副本机制"></a>Kafka - 副本机制</h1><p>先挖坑，后面再填….</p>
+<h1 id="AR、ISR、OSR"><a href="#AR、ISR、OSR" class="headerlink" title="AR、ISR、OSR"></a>AR、ISR、OSR</h1><p>AR、ISR、OSR 都在 partition 层面。</p>
+<h3 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h3><p>assigned replicas：分区中所有的副本。</p>
+<p>每个 partition 都有自己的AR列表，里面存储着这个 partition 最初分配的所有 replica（分区）。</p>
+<p>需要注意：AR列表不会动态变化，除非增加分区。</p>
+<h3 id="ISR"><a href="#ISR" class="headerlink" title="ISR"></a>ISR</h3><p>in-sync replica(同步副本组合)：<strong>同 leader replica(主分区) 保持同步的 follower replica(副本分区) 集合。</strong></p>
+<p>每个 partition 都有自己的ISR集合。ISR 中动态维护一个 follower replica(副本) 集合。该集合中所有 follower replica(副本) 保存的消息 与 leader replica(主分区)保持同步状态。</p>
+<p><strong>只有 ISR 集合中的 follower replica 才能被选举为 leader replica。</strong></p>
+<p><strong>注意，leader replica 总是包含在 ISR 中。</strong></p>
+<p>只有该集合中所有 replica 都接受到了同一条消息，Kafka才会将该消息置为”已提交”装填(认为这条消息发送成功，对于producer而言)。</p>
+<p>Kafka的消息交付承诺：<strong>Kafka对于没有提交成功的消息不作任何交付保证，它只保证ISR存活的情况下”已提交”的消息不会丢失。</strong></p>
+<br>
+
+<p>正常情况下，Partition(分区)中所有的 follower replica 都应该与 leader replica 的数据保持一致(数据同步)，即所有 follower replica 都在 ISR 中。</p>
+<p>但由于各种原因，一部分 follower replica 会落后于 leader replica 的速度。</p>
+<p>当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR。</p>
+<p>相反的，当这些 follower replica 追上 leader replica 进度时，Kafka会把它们加回ISR中。</p>
+<p>这些都是Kafka自动维护的。</p>
+<br>
+
+<p>ISR集合 是 AR集合 的一个子集。</p>
+<p>最初时候，ISR 和 AR 列表是一致的；但由于某些原因导致某 follower replica 同步速度落后 leader replica 太多，Kafka 会将这些 follower replica 踢出 ISR；这时候，ISR 和 AR 列表就不一致了。</p>
+<h3 id="OSR"><a href="#OSR" class="headerlink" title="OSR"></a>OSR</h3><p>Out-of-Sync Replied</p>
+<p>上面ISR中提到，follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR。</p>
+<p>被踢出的 follower replica 组成 OSR。</p>
+<h3 id="ISR-伸缩性"><a href="#ISR-伸缩性" class="headerlink" title="ISR 伸缩性"></a>ISR 伸缩性</h3><p>follower replica 落后于 leader replica 的速度，当滞后到一定程度时，Kafka 会将这些 follower replica 踢出 ISR，被踢出的 follower replica 组成 OSR。</p>
+<p>如果 OSR 集合中的 follower replica 追上 leader replica 的话，kafka 会将其重新加入到 ISR 集合。</p>
+<br>
+
+<p>AR = ISR + OSR</p>
+<p>理想状态下，所有的 follower replica 应该与 leader replica 保持一定程度的同步。</p>
+<p>即 AR = ISR，OSR集合为空。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>《Apache kafka实战》</li>
+<li>《Kafka权威指南》</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -1221,12 +1254,12 @@
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>书籍</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">40</span></p>
+        <p><span class="copy-title">文章标题:</span>kafka-副本</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">633</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2019-09-22, 17:38:13</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-06, 22:00:38</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/relatedData/书籍/" title="书籍">https://simba-cheng.github.io/2019/09/22/relatedData/书籍/</a>
+        <p><span class="copy-title">发布时间:</span>2020-05-24, 20:05:08</p>
+        <p><span class="copy-title">最后更新:</span>2020-05-24, 20:36:51</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/24/component/kafka/kafka-副本/" title="kafka-副本">https://simba-cheng.github.io/2020/05/24/component/kafka/kafka-副本/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
