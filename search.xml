@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>TCP-IO模型</title>
+      <link href="/2020/05/24/%E5%90%8E%E5%8F%B0/linux/TCP-IO%E6%A8%A1%E5%9E%8B/"/>
+      <url>/2020/05/24/%E5%90%8E%E5%8F%B0/linux/TCP-IO%E6%A8%A1%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="TCP-IO模型"><a href="#TCP-IO模型" class="headerlink" title="TCP IO模型"></a>TCP IO模型</h1><p>通过 <a href="[https://simba-cheng.cn/2020/05/23/%E5%90%8E%E5%8F%B0/linux/linux-unix%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9/](https://simba-cheng.cn/2020/05/23/后台/linux/linux-unix部分知识点/)">linux-unix部分知识点</a> 了解，linux分为用户态、内核态，用户态程序，通过’系统调用’调用内核系统。</p><h2 id="阻塞式I-O模型（Blocking-IO）"><a href="#阻塞式I-O模型（Blocking-IO）" class="headerlink" title="阻塞式I/O模型（Blocking IO）"></a>阻塞式I/O模型（Blocking IO）</h2><p><img src="//simba-cheng.github.io/2020/05/24/后台/linux/TCP-IO模型/%E9%98%BB%E5%A1%9E%E5%BC%8FIO%E6%A8%A1%E5%9E%8B.png" alt="阻塞式IO模型"></p><p><img src="//simba-cheng.github.io/2020/05/24/后台/linux/TCP-IO模型/%E9%98%BB%E5%A1%9E%E5%BC%8FIO%E6%A8%A1%E5%9E%8B%E6%B5%81%E7%A8%8B.png" alt="阻塞式IO流程"></p><p>应用程序进程调用 recvfrom(系统调用) 然后调用内核，等待内核读取磁盘中数据，直到 数据从内核空间复制到用户空间 或 发生错误 才返回。</p><p>从调用 recvfrom(系统调用) 一直到接收返回数据，这段时间都是被阻塞的。</p><p>其中阻塞分为两个部分：<strong>①内核从磁盘读取数据(等待/准备数据)</strong>、<strong>②数据从内核空间copy到用户空间</strong>。</p><h2 id="非阻塞I-O模型（NonBlocking-IO）"><a href="#非阻塞I-O模型（NonBlocking-IO）" class="headerlink" title="非阻塞I/O模型（NonBlocking IO）"></a>非阻塞I/O模型（NonBlocking IO）</h2><p><img src="//simba-cheng.github.io/2020/05/24/后台/linux/TCP-IO模型/%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BC%8FIO%E6%A8%A1%E5%9E%8B.png" alt="非阻塞式IO模型"></p><p>当请求一个非阻塞socket时，应用程序调用 recvfrom(系统调用)，如果内核中数据还没有准备好会立即返回 EWOULDBLOCK错误。</p><p>如上图，前三次调用 recvfrom(系统调用) ，内核都返回 EWOULDBLOCK错误，直到第四次调用，内核数据已准备好，然后数据就从 内核空间 复制到了 用户空间。</p><p>非阻塞IO，在 没有数据时会立即返回，需要用户进程循环调用 recvfrom(系统调用)，主动询问内核是否准备好。</p><p>主动询问 这个过程称为：轮询。应用程序轮询内核，这么做往往会耗费大量CPU时间。</p><p>非阻塞IO 在第一阶段(等待数据阶段)不会阻塞，在第二阶段（数据从内核空间copy到用户空间）会阻塞。</p><h2 id="I-O复用模型（IO-multiplexing）"><a href="#I-O复用模型（IO-multiplexing）" class="headerlink" title="I/O复用模型（IO multiplexing）"></a>I/O复用模型（IO multiplexing）</h2><p><img src="//simba-cheng.github.io/2020/05/24/后台/linux/TCP-IO模型/IO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%9E%8B.png" alt="IO复用模型"></p><p>也称作：IO多路复用、事件驱动IO。</p><p>通过select 或 poll函数，能够同时监控多个 套接字、文件描述符的可读可写情况，当其中一个变为可读可写的时候，select函数会返回通知相应IO进行读取。</p><p><strong>①进程阻塞在 select 调用上，等待有套接字变为可读；</strong></p><p><strong>②当有套接字可读后，调用 recvfrom(系统调用) 将数据从 内核空间 copy到用户空间。</strong></p><p>如上图，用户进程一直都被阻塞，但IO多路复用优势在于可以等待多个IO事件。</p><p>IO 多路复用在 Linux 下包括了三种，select、poll、epoll。</p><h2 id="信号驱动式I-O模型"><a href="#信号驱动式I-O模型" class="headerlink" title="信号驱动式I/O模型"></a>信号驱动式I/O模型</h2><p>先挖坑，后面再填。。。。。</p><h2 id="异步I-O模型（asynchronous-IO）"><a href="#异步I-O模型（asynchronous-IO）" class="headerlink" title="异步I/O模型（asynchronous IO）"></a>异步I/O模型（asynchronous IO）</h2><p><img src="//simba-cheng.github.io/2020/05/24/后台/linux/TCP-IO模型/%E5%BC%82%E6%AD%A5IO%E6%A8%A1%E5%9E%8B.png" alt="异步IO模型"></p><p><strong>①</strong> 应用程序调用 aio_read函数，内核会立即返回，表明读操作成功启动；</p><p><strong>②</strong> 当数据准备好以后，内核会将数据从内核态copy至用户态。</p><p><strong>③</strong> 内核通知应用程序取数据</p><p>如上图，等待/准备数据 和 将数据从内核空间copy到用户空间，都是 内核操作的；期间用户进程干预、阻塞。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p>《UNIX网络编程卷1：套接字联网API（第3版）》</p></li><li><p><a href="https://songlee24.github.io/2016/07/19/explanation-of-5-IO-models/" target="_blank" rel="noopener">IO模型：同步、异步、阻塞、非阻塞</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux-unix部分知识点</title>
       <link href="/2020/05/23/%E5%90%8E%E5%8F%B0/linux/linux-unix%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
       <url>/2020/05/23/%E5%90%8E%E5%8F%B0/linux/linux-unix%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
