@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>依赖注入</title>
+      <link href="/2020/06/04/%E5%90%8E%E5%8F%B0/spring/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
+      <url>/2020/06/04/%E5%90%8E%E5%8F%B0/spring/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是依赖注入"><a href="#什么是依赖注入" class="headerlink" title="什么是依赖注入"></a>什么是依赖注入</h1><p>Class类中经常需要引用到其他类。</p><p>如下 OperateEs 类，需要引入 EsDocumentOperate 类 进行业务操作。</p><p>这种 被需要的关系 被称作<strong>依赖关系</strong>。</p><br><p>在下面的例子中，OperateEs 类 需要依赖 EsDocumentOperate 类的实例才能运行、业务处理。</p><p>OperateEs 会自己创建 EsDocumentOperate 实例，因此 它并不是 依赖注入的例子</p><pre><code>public class MainApp {    public static void main(String[] args) {        OperateEs operateEs = new OperateEs();        operateEs.documentOperate();    }}public class OperateEs {    private EsDocumentOperate documentOperate = new EsDocumentOperate();    public void documentOperate() {        //elasticsearch 文档操作        System.out.println(documentOperate.addDocument(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;));    }}</code></pre><p>依赖关系注入后的例子如下：</p><p>OperateEs 类构造函数中，接收 EsDocumentOperate 作为参数；而不是在初始化时，自己创建。</p><pre><code>public class MainApp {    public static void main(String[] args) {        OperateEs operateEs = new OperateEs(new EsDocumentOperate ());        operateEs.documentOperate();    }}public class OperateEs {    private EsDocumentOperate  documentOperate;    public OperateEs(EsDocumentOperate  documentOperate) {        this.documentOperate = documentOperate;    }    public void documentOperate() {        //elasticsearch 文档操作        System.out.println(documentOperate.addDocument(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;));    }}</code></pre><p>这种基于依赖关系注入方式的好处是：</p><p><strong>①：重用</strong> </p><p>OperateEs 类可重用。可以将 EsDocumentOperate 不同实现传入到 OperateEs 类中。</p><p>比如，定义EsDocumentOperate 的子类 RecommendEsDocumentOperate ，还是让 OperateEs 类使用，依旧可以通过 依赖注入，而 OperateEs 不用修改代码就能调用。</p><p><strong>②：解耦</strong></p><p>被依赖对象 EsDocumentOperate  不再以硬编码形式耦合在 OperateEs 类中；无需理会被调用者的具体实现。</p><h2 id="Spring-DI"><a href="#Spring-DI" class="headerlink" title="Spring DI"></a>Spring DI</h2><p>Spring DI 依赖注入 通过，类构造函数、对象实例的属性（setter）来定义它们的依赖关系。</p><p>再通过Spring容器，在创建类时，注入这些依赖关系。</p><br><p>回头看来，从最开始，需要自己手动创建 依赖对象，到由依赖关系注入方式传递对象，从根本上说，主动权、控制权反转了，即 Spring IOC（<strong>Inversion of Control</strong>） 控制反转</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://developer.android.google.cn/training/dependency-injection#java" target="_blank" rel="noopener">Dependency injection</a></li><li><a href="https://docs.huihoo.com/spring/2.5.x/en-us/beans.html#beans-dependencies" target="_blank" rel="noopener">beans-dependencies</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台 </category>
+          
+          <category> spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kafka-副本</title>
       <link href="/2020/05/24/component/kafka/kafka-%E5%89%AF%E6%9C%AC/"/>
       <url>/2020/05/24/component/kafka/kafka-%E5%89%AF%E6%9C%AC/</url>
