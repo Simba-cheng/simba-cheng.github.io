@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -219,7 +219,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -247,7 +247,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -394,11 +394,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -430,11 +430,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color1">linux</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">linux</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -466,15 +466,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">agent</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_client</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">agent</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1411,7 +1411,7 @@ T1 不敢相信的又执行了 step4，发现和 setp1 读取的结果是一样�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#mysql','#linux','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#agent','#es_client','#es问题','#es_batch','#es_update','#es_query',],
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
