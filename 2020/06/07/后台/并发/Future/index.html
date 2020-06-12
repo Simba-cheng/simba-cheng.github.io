@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Simba">
 <meta property="og:description" content="Future普通线程的创建方式有两种，①继承Thread类，②实现Runnable接口。 这两种方式创建的线程，在运行结束后，都无法直接获取结果。 Java 5.0 引入 Callable 和 Future，通过它们创建的线程，在运行结束后可以通过 get()方法 获取结果。 Future例子下面这个例子，通过 Callable 创建线程，提交到线程池中运行。 获得 Future  对象，通过 F">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-06-12T14:19:50.509Z">
+<meta property="og:updated_time" content="2020-06-12T14:20:58.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Future">
 <meta name="twitter:description" content="Future普通线程的创建方式有两种，①继承Thread类，②实现Runnable接口。 这两种方式创建的线程，在运行结束后，都无法直接获取结果。 Java 5.0 引入 Callable 和 Future，通过它们创建的线程，在运行结束后可以通过 get()方法 获取结果。 Future例子下面这个例子，通过 Callable 创建线程，提交到线程池中运行。 获得 Future  对象，通过 F">
@@ -172,13 +172,13 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    </li>
+                                    
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
-                                    </li>
-                                    
-                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
@@ -369,7 +369,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="83">
-<input type="hidden" id="yelog_site_word_count" value="106.6k">
+<input type="hidden" id="yelog_site_word_count" value="108.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -487,10 +487,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_batch</a>
     </li>
     
@@ -500,6 +496,10 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1214,12 +1214,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-12 22:19:50'>2020-06-07 12:17</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-12 22:20:58'>2020-06-07 12:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:4.1k</span>
+        <span>字数:6.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1238,7 +1238,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Future"><span class="toc-text">Future</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Future例子"><span class="toc-text">Future例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-timeout-timeUnit"><span class="toc-text">get(timeout, timeUnit)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#局限性"><span class="toc-text">局限性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CompletableFuture"><span class="toc-text">CompletableFuture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#runAsync、supplyAsync"><span class="toc-text">runAsync、supplyAsync</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#runAsync"><span class="toc-text">runAsync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#supplyAsync"><span class="toc-text">supplyAsync</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#whenComplete、exceptionally"><span class="toc-text">whenComplete、exceptionally</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#whenComplete"><span class="toc-text">whenComplete</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#whenCompleteAsync"><span class="toc-text">whenCompleteAsync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exceptionally"><span class="toc-text">exceptionally</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenApply、handle"><span class="toc-text">thenApply、handle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenApply"><span class="toc-text">thenApply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#handle"><span class="toc-text">handle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenAccept、thenRun"><span class="toc-text">thenAccept、thenRun</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenAccept"><span class="toc-text">thenAccept</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thenRun"><span class="toc-text">thenRun</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenCombine、thenAcceptBoth"><span class="toc-text">thenCombine、thenAcceptBoth</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenCombine"><span class="toc-text">thenCombine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thenAcceptBoth"><span class="toc-text">thenAcceptBoth</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Future"><span class="toc-text">Future</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Future例子"><span class="toc-text">Future例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-text">get()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-timeout-timeUnit"><span class="toc-text">get(timeout, timeUnit)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#局限性"><span class="toc-text">局限性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CompletableFuture"><span class="toc-text">CompletableFuture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#runAsync、supplyAsync"><span class="toc-text">runAsync、supplyAsync</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#runAsync"><span class="toc-text">runAsync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#supplyAsync"><span class="toc-text">supplyAsync</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#whenComplete、exceptionally"><span class="toc-text">whenComplete、exceptionally</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#whenComplete"><span class="toc-text">whenComplete</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#whenCompleteAsync"><span class="toc-text">whenCompleteAsync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exceptionally"><span class="toc-text">exceptionally</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenApply、handle"><span class="toc-text">thenApply、handle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenApply"><span class="toc-text">thenApply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#handle"><span class="toc-text">handle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenAccept、thenRun"><span class="toc-text">thenAccept、thenRun</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenAccept"><span class="toc-text">thenAccept</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thenRun"><span class="toc-text">thenRun</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenCombine、thenAcceptBoth"><span class="toc-text">thenCombine、thenAcceptBoth</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thenCombine"><span class="toc-text">thenCombine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thenAcceptBoth"><span class="toc-text">thenAcceptBoth</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#applyToEither-、acceptEither"><span class="toc-text">applyToEither 、acceptEither</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#applyToEither"><span class="toc-text">applyToEither</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#acceptEither"><span class="toc-text">acceptEither</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#runAfterEither-、runAfterBoth"><span class="toc-text">runAfterEither 、runAfterBoth</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#runAfterEither"><span class="toc-text">runAfterEither</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#runAfterBoth"><span class="toc-text">runAfterBoth</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thenCompose"><span class="toc-text">thenCompose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#allOf、anyOf"><span class="toc-text">allOf、anyOf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#allOf"><span class="toc-text">allOf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#anyOf"><span class="toc-text">anyOf</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2035,7 +2035,458 @@ default [main] INFO  org.future.two.CFutureMainApp02 - 167 - end result:error</c
     }, threadPoolExecutor);
 
     thenAcceptBoth.get();
-}</code></pre>
+}</code></pre><h2 id="applyToEither-、acceptEither"><a href="#applyToEither-、acceptEither" class="headerlink" title="applyToEither 、acceptEither"></a>applyToEither 、acceptEither</h2><p>当任意一个 CompletableFuture 完成的时候，fn会被执行，它的返回值会当作新的 CompletableFuture 的计算结果。</p>
+<p>两个 CompletableFuture ，任意一个 CompletableFuture 执行完（返回结果快），就取哪个 CompletableFuture  的结果，调用 applyToEither 处理。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>入参</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>applyToEither</td>
+<td>applyToEither(CompletionStage&lt;? extends T&gt; other, Function&lt;? super T, U&gt; fn)</td>
+<td>有返回值</td>
+</tr>
+<tr>
+<td>applyToEitherAsync</td>
+<td>applyToEitherAsync(CompletionStage&lt;? extends T&gt; other, Function&lt;? super T, U&gt; fn)<br><br>applyToEitherAsync(CompletionStage&lt;? extends T&gt; other, Function&lt;? super T, U&gt; fn,Executor executor)</td>
+<td>有返回值，使用 ForkJoinPool 线程池<br><br>有返回值，使用 Executor 自定义线程池</td>
+</tr>
+<tr>
+<td>acceptEither</td>
+<td>acceptEither(CompletionStage&lt;? extends T&gt; other, Consumer&lt;? super T&gt; action)</td>
+<td>无返回值</td>
+</tr>
+<tr>
+<td>acceptEitherAsync</td>
+<td>acceptEitherAsync(CompletionStage&lt;? extends T&gt; other, Consumer&lt;? super T&gt; action)<br><br>acceptEitherAsync(CompletionStage&lt;? extends T&gt; other, Consumer&lt;? super T&gt; action,Executor executor)</td>
+<td>无返回值，使用 ForkJoinPool 线程池<br><br>无返回值，使用 Executor 自定义线程池</td>
+</tr>
+</tbody></table>
+<h3 id="applyToEither"><a href="#applyToEither" class="headerlink" title="applyToEither"></a>applyToEither</h3><pre><code>private void testApplyToEither() throws ExecutionException, InterruptedException {
+
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;14-key&quot;, &quot;14-value&quot;);
+            result += &quot;555&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;15-key&quot;, &quot;15-value&quot;);
+            result += &quot;666&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    //applyToEither
+    //CompletableFuture&lt;String&gt; applyToEither = supplyAsync1.applyToEither(supplyAsync2, new Function&lt;String, String&gt;() {
+    //    @Override
+    //    public String apply(String s) {
+    //        LOGGER.info(&quot;first result:{}&quot;, s);
+    //        return s;
+    //    }
+    //});
+
+    //applyToEitherAsync ForkJoinPool
+    //CompletableFuture&lt;String&gt; applyToEither = supplyAsync1.applyToEitherAsync(supplyAsync2, new Function&lt;String, String&gt;() {
+    //    @Override
+    //    public String apply(String s) {
+    //        LOGGER.info(&quot;first result:{}&quot;, s);
+    //        return s;
+    //    }
+    //});
+
+    //applyToEitherAsync Executor
+    CompletableFuture&lt;String&gt; applyToEither = supplyAsync1.applyToEitherAsync(supplyAsync2, new Function&lt;String, String&gt;() {
+        @Override
+        public String apply(String s) {
+            LOGGER.info(&quot;first result:{}&quot;, s);
+            return s;
+        }
+    }, threadPoolExecutor);
+
+    String result = applyToEither.get();
+    LOGGER.info(&quot;end result:{}&quot;, result);
+}</code></pre><h3 id="acceptEither"><a href="#acceptEither" class="headerlink" title="acceptEither"></a>acceptEither</h3><pre><code>private void testAcceptEither() throws ExecutionException, InterruptedException {
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;16-key&quot;, &quot;16-value&quot;);
+            result += &quot;111&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;17-key&quot;, &quot;17-value&quot;);
+            result += &quot;333&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    //acceptEither
+    //CompletableFuture&lt;Void&gt; acceptEither = supplyAsync1.acceptEither(supplyAsync2, new Consumer&lt;String&gt;() {
+    //    @Override
+    //    public void accept(String s) {
+    //        LOGGER.info(&quot;receive msg:{}&quot;, s);
+    //    }
+    //});
+
+    //acceptEitherAsync ForkJoinPool
+    //CompletableFuture&lt;Void&gt; acceptEither = supplyAsync1.acceptEitherAsync(supplyAsync2, new Consumer&lt;String&gt;() {
+    //    @Override
+    //    public void accept(String s) {
+    //        LOGGER.info(&quot;receive msg:{}&quot;, s);
+    //    }
+    //});
+
+    //acceptEitherAsync Executor
+    CompletableFuture&lt;Void&gt; acceptEither = supplyAsync1.acceptEitherAsync(supplyAsync2, new Consumer&lt;String&gt;() {
+        @Override
+        public void accept(String s) {
+            LOGGER.info(&quot;receive msg:{}&quot;, s);
+        }
+    }, threadPoolExecutor);
+
+    acceptEither.get();
+}</code></pre><h2 id="runAfterEither-、runAfterBoth"><a href="#runAfterEither-、runAfterBoth" class="headerlink" title="runAfterEither 、runAfterBoth"></a>runAfterEither 、runAfterBoth</h2><p>runAfterEither：两个互不相干的任务A和B，只要任何一个完成就触发执行线程Runnable</p>
+<p>两个 CompletionStage，都完成了计算才会执行下一步的操作（Runnable），无返回值。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>入参</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>runAfterEither</td>
+<td>runAfterEither(CompletionStage&lt;?&gt; other,Runnable action)</td>
+<td>Runnable线程</td>
+</tr>
+<tr>
+<td>runAfterEitherAsync</td>
+<td>runAfterEitherAsync(CompletionStage&lt;/?&gt; other,Runnable action)<br><br>runAfterEitherAsync(CompletionStage&lt;/?&gt; other,Runnable action,Executor executor)</td>
+<td>使用 ForkJoinPool 线程池<br><br>使用 Executor 自定义线程池</td>
+</tr>
+<tr>
+<td>runAfterBoth</td>
+<td>runAfterBoth(CompletionStage&lt;?&gt; other,Runnable action)</td>
+<td></td>
+</tr>
+<tr>
+<td>runAfterBothAsync</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="runAfterEither"><a href="#runAfterEither" class="headerlink" title="runAfterEither"></a>runAfterEither</h3><pre><code>private void testRunAfterEither() throws ExecutionException, InterruptedException {
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;18-key&quot;, &quot;18-value&quot;);
+            result += &quot;000&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;19-key&quot;, &quot;19-value&quot;);
+            result += &quot;222&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    //test runAfterEither
+    //CompletableFuture&lt;Void&gt; runAfterEither = supplyAsync1.runAfterEither(supplyAsync2, new Runnable() {
+    //    @Override
+    //    public void run() {
+    //        LOGGER.info(&quot;触发某些业务.....&quot;);
+    //    }
+    //});
+
+    //runAfterEitherAsync ForkJoinPool
+    //CompletableFuture&lt;Void&gt; runAfterEither = supplyAsync1.runAfterEitherAsync(supplyAsync2, new Runnable() {
+    //    @Override
+    //    public void run() {
+    //        LOGGER.info(&quot;触发某些业务.....&quot;);
+    //    }
+    //});
+
+    CompletableFuture&lt;Void&gt; runAfterEither = supplyAsync1.runAfterEitherAsync(supplyAsync2, new Runnable() {
+        @Override
+        public void run() {
+            LOGGER.info(&quot;触发某些业务.....&quot;);
+        }
+    }, threadPoolExecutor);
+
+    runAfterEither.get();
+}</code></pre><h3 id="runAfterBoth"><a href="#runAfterBoth" class="headerlink" title="runAfterBoth"></a>runAfterBoth</h3><pre><code>private void testRunAfterBoth() throws ExecutionException, InterruptedException {
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;20-key&quot;, &quot;20-value&quot;);
+            result += &quot;777&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;21-key&quot;, &quot;21-value&quot;);
+            result += &quot;888&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    //CompletableFuture&lt;Void&gt; runAfterBoth = supplyAsync1.runAfterBoth(supplyAsync2, new Runnable() {
+    //    @Override
+    //    public void run() {
+    //        LOGGER.info(&quot;触发某些业务.....&quot;);
+    //    }
+    //});
+
+    //runAfterBothAsync ForkJoinPool
+    //CompletableFuture&lt;Void&gt; runAfterBoth = supplyAsync1.runAfterBothAsync(supplyAsync2, new Runnable() {
+    //    @Override
+    //    public void run() {
+    //        LOGGER.info(&quot;触发某些业务.....&quot;);
+    //    }
+    //});
+
+    //runAfterBothAsync Executor
+    CompletableFuture&lt;Void&gt; runAfterBoth = supplyAsync1.runAfterBothAsync(supplyAsync2, new Runnable() {
+        @Override
+        public void run() {
+            LOGGER.info(&quot;触发某些业务.....&quot;);
+        }
+    }, threadPoolExecutor);
+    runAfterBoth.get();
+}</code></pre><h2 id="thenCompose"><a href="#thenCompose" class="headerlink" title="thenCompose"></a>thenCompose</h2><p>组合多个CompletableFuture，将前一个结果作为下一个计算的参数，它们之间存在着先后顺序。</p>
+<pre><code>private void testThenCompose() throws ExecutionException, InterruptedException {
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;22-key&quot;, &quot;22-value&quot;);
+            result += &quot;999&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    //thenCompose
+    //CompletableFuture&lt;String&gt; thenCompose = supplyAsync1.thenCompose(new Function&lt;String, CompletionStage&lt;String&gt;&gt;() {
+    //    @Override
+    //    public CompletionStage&lt;String&gt; apply(String s) {
+    //        LOGGER.info(&quot;receive msg:{}&quot;, s);
+    //        return CompletableFuture.supplyAsync(new Supplier&lt;String&gt;() {
+    //            @Override
+    //            public String get() {
+    //                String result = StringUtils.EMPTY;
+    //                try {
+    //                    TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+    //                    result = shardedJedisOperate.set(&quot;23-key&quot;, &quot;23-value&quot;);
+    //                    result += &quot;9852631--&quot;;
+    //                    result += s;
+    //                    LOGGER.info(&quot;result-2:{}&quot;, result);
+    //                } catch (Exception e) {
+    //                    LOGGER.error(e.getMessage(), e);
+    //                }
+    //                LOGGER.info(&quot;....end-2....&quot;);
+    //                return result;
+    //            }
+    //        });
+    //    }
+    //});
+
+    CompletableFuture&lt;String&gt; thenCompose = supplyAsync1.thenComposeAsync(new Function&lt;String, CompletionStage&lt;String&gt;&gt;() {
+        @Override
+        public CompletionStage&lt;String&gt; apply(String s) {
+            LOGGER.info(&quot;receive msg:{}&quot;, s);
+            return CompletableFuture.supplyAsync(new Supplier&lt;String&gt;() {
+                @Override
+                public String get() {
+                    String result = StringUtils.EMPTY;
+                    try {
+                        TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+                        result = shardedJedisOperate.set(&quot;23-key&quot;, &quot;23-value&quot;);
+                        result += &quot;9852631--&quot;;
+                        result += s;
+                        LOGGER.info(&quot;result-2:{}&quot;, result);
+                    } catch (Exception e) {
+                        LOGGER.error(e.getMessage(), e);
+                    }
+                    LOGGER.info(&quot;....end-2....&quot;);
+                    return result;
+                }
+            });
+        }
+    });
+
+    //CompletableFuture&lt;String&gt; thenCompose = supplyAsync1.thenComposeAsync(new Function&lt;String, CompletionStage&lt;String&gt;&gt;() {
+    //    @Override
+    //    public CompletionStage&lt;String&gt; apply(String s) {
+    //        LOGGER.info(&quot;receive msg:{}&quot;, s);
+    //        return CompletableFuture.supplyAsync(new Supplier&lt;String&gt;() {
+    //            @Override
+    //            public String get() {
+    //                String result = StringUtils.EMPTY;
+    //                try {
+    //                    TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+    //                    result = shardedJedisOperate.set(&quot;23-key&quot;, &quot;23-value&quot;);
+    //                    result += &quot;9852631--&quot;;
+    //                    result += s;
+    //                    LOGGER.info(&quot;result-2:{}&quot;, result);
+    //                } catch (Exception e) {
+    //                    LOGGER.error(e.getMessage(), e);
+    //                }
+    //                LOGGER.info(&quot;....end-2....&quot;);
+    //                return result;
+    //            }
+    //        });
+    //    }
+    //}, threadPoolExecutor);
+
+    String result = thenCompose.get();
+    LOGGER.info(&quot;end result:{}&quot;, result);
+}</code></pre><h2 id="allOf、anyOf"><a href="#allOf、anyOf" class="headerlink" title="allOf、anyOf"></a>allOf、anyOf</h2><p>allOf：所有的CompletableFuture都执行完后执行计算</p>
+<p>anyOf：任意一个CompletableFuture执行完后就会执行计算</p>
+<h3 id="allOf"><a href="#allOf" class="headerlink" title="allOf"></a>allOf</h3><pre><code>private void testAllOf() throws ExecutionException, InterruptedException {
+
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1500));
+            result = shardedJedisOperate.set(&quot;22-key&quot;, &quot;22-value&quot;);
+            result += &quot;000&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;23-key&quot;, &quot;23-value&quot;);
+            result += &quot;222&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    List&lt;CompletableFuture&lt;String&gt;&gt; futureList = new ArrayList&lt;&gt;(Arrays.asList(supplyAsync1, supplyAsync2));
+    CompletableFuture&lt;List&lt;String&gt;&gt; completableFuture = allOf(futureList);
+    List&lt;String&gt; result = completableFuture.get();
+    LOGGER.info(&quot;end - result:{}&quot;, result);
+}
+
+public &lt;T&gt; CompletableFuture&lt;List&lt;T&gt;&gt; allOf(List&lt;CompletableFuture&lt;T&gt;&gt; futuresList) {
+    CompletableFuture&lt;Void&gt; allFuturesResult = CompletableFuture
+            .allOf(futuresList.toArray(new CompletableFuture[futuresList.size()]));
+    return allFuturesResult.thenApply(v -&gt;
+            futuresList.stream().map(CompletableFuture::join).collect(Collectors.&lt;T&gt;toList())
+    );
+}</code></pre><h3 id="anyOf"><a href="#anyOf" class="headerlink" title="anyOf"></a>anyOf</h3><p>任意一个CompletableFuture执行完后就会执行计算</p>
+<pre><code>private void testAnyOf() throws ExecutionException, InterruptedException {
+    CompletableFuture&lt;String&gt; supplyAsync1 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 3500));
+            result = shardedJedisOperate.set(&quot;24-key&quot;, &quot;24-value&quot;);
+            result += &quot;000&quot;;
+            LOGGER.info(&quot;result-1:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-1....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;String&gt; supplyAsync2 = CompletableFuture.supplyAsync(() -&gt; {
+        String result = StringUtils.EMPTY;
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 1000));
+            result = shardedJedisOperate.set(&quot;25-key&quot;, &quot;25-value&quot;);
+            result += &quot;222&quot;;
+            LOGGER.info(&quot;result-2:{}&quot;, result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        LOGGER.info(&quot;....end-2....&quot;);
+        return result;
+    }, threadPoolExecutor);
+
+    CompletableFuture&lt;Object&gt; anyOfResult = CompletableFuture.anyOf(supplyAsync1, supplyAsync2);
+    Object result = anyOfResult.get();
+    LOGGER.info(&quot;end result:{}&quot;, result);
+}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/jmcui/p/11335445.html" target="_blank" rel="noopener">Java8 CompletableFuture 编程</a></li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -2049,10 +2500,10 @@ default [main] INFO  org.future.two.CFutureMainApp02 - 167 - end result:error</c
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>Future</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">4.1k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">6.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-06-07, 12:17:04</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-12, 22:19:50</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-12, 22:20:58</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/06/07/后台/并发/Future/" title="Future">https://simba-cheng.github.io/2020/06/07/后台/并发/Future/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -2114,7 +2565,7 @@ default [main] INFO  org.future.two.CFutureMainApp02 - 167 - end result:error</c
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#并发','#es_batch','#es_update','#es_query',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
