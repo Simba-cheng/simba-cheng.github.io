@@ -6,25 +6,18 @@
   <meta name="keywords" content>
   <meta name="description" content="Simba | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java Agentjava.lang.instrument.Instrumentation(Java Agent API) 它允许JVM在加载某个class文件之前对应用程序字节码进行修改，同时也支持对已加载的class(类字节码)进行重新加载(Retransform)。   它可以做什么？ 加载class文件前拦截、修改字节码，运行期已加载类的字节码变更，监控JVM上运行的应用程序，jar热部">
-<meta name="keywords" content="agent">
+<meta name="description" content="Future普通线程的创建方式有两种，①继承Thread类，②实现Runnable接口。 这两种方式创建的线程，在运行结束后，都无法直接获取结果。 Java 5.0 引入 Callable 和 Future，通过它们创建的线程，在运行结束后可以通过 get()方法 获取结果。 Future例子下面这个例子，通过 Callable 创建线程，提交到线程池中运行。 获得 Future  对象，通过 F">
+<meta name="keywords" content="并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Agent">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/index.html">
+<meta property="og:title" content="Future">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/06/07/后台/并发/Future/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Java Agentjava.lang.instrument.Instrumentation(Java Agent API) 它允许JVM在加载某个class文件之前对应用程序字节码进行修改，同时也支持对已加载的class(类字节码)进行重新加载(Retransform)。   它可以做什么？ 加载class文件前拦截、修改字节码，运行期已加载类的字节码变更，监控JVM上运行的应用程序，jar热部">
+<meta property="og:description" content="Future普通线程的创建方式有两种，①继承Thread类，②实现Runnable接口。 这两种方式创建的线程，在运行结束后，都无法直接获取结果。 Java 5.0 引入 Callable 和 Future，通过它们创建的线程，在运行结束后可以通过 get()方法 获取结果。 Future例子下面这个例子，通过 Callable 创建线程，提交到线程池中运行。 获得 Future  对象，通过 F">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent-%E5%AE%9E%E4%BE%8B-jar-1.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent-%E5%AE%9E%E4%BE%8B-jar-2.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent-%E5%AE%9E%E4%BE%8B-IDEA.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent-%E5%AE%9E%E4%BE%8B-IDEA-vm.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent-%E5%AE%9E%E4%BE%8B-IDEA-result.png">
-<meta property="og:updated_time" content="2020-06-06T15:12:27.083Z">
+<meta property="og:updated_time" content="2020-06-12T14:19:50.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Agent">
-<meta name="twitter:description" content="Java Agentjava.lang.instrument.Instrumentation(Java Agent API) 它允许JVM在加载某个class文件之前对应用程序字节码进行修改，同时也支持对已加载的class(类字节码)进行重新加载(Retransform)。   它可以做什么？ 加载class文件前拦截、修改字节码，运行期已加载类的字节码变更，监控JVM上运行的应用程序，jar热部">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/06/06/后台/agent/Java-Agent/javaAgent.png">
+<meta name="twitter:title" content="Future">
+<meta name="twitter:description" content="Future普通线程的创建方式有两种，①继承Thread类，②实现Runnable接口。 这两种方式创建的线程，在运行结束后，都无法直接获取结果。 Java 5.0 引入 Callable 和 Future，通过它们创建的线程，在运行结束后可以通过 get()方法 获取结果。 Future例子下面这个例子，通过 Callable 创建线程，提交到线程池中运行。 获得 Future  对象，通过 F">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -127,7 +120,7 @@
     
         
             
-            <li><div data-rel="思考">思考<small>(2)</small></div>
+            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -135,7 +128,7 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
+            <li><div data-rel="思考">思考<small>(2)</small></div>
                 
             </li>
             
@@ -179,13 +172,13 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
-                                    </li>
-                                    
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
@@ -203,23 +196,35 @@
     
         
             
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(29)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -236,6 +241,14 @@
                         </li>
                             
                         <li><div data-rel="hash">hash<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -290,26 +303,6 @@
         
     
         
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
             
         
     
@@ -414,11 +407,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">思考</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color3">思考</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -430,6 +423,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -438,11 +435,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">linux</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color1">linux</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -459,10 +456,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">广告业务</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -502,11 +495,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1334,7 +1327,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#思考','#资料','#flink','#kafka','#Java8','#hash','#linux','#索引','#mysql','#spring','#缓存','#设计模式','#广告业务','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#并发','#es_batch','#es_query','#es_update',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#并发','#es_batch','#es_update','#es_query',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
