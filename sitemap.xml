@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/02/18/component/elasticsearch/04-es-%E5%88%86%E8%AF%8D/es-analysis-ik%E5%88%86%E8%AF%8D/</loc>
+    
+    <lastmod>2020-06-14T15:32:54.198Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/06/14/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E9%99%90%E6%B5%81/</loc>
     
     <lastmod>2020-06-14T15:18:56.612Z</lastmod>
@@ -236,13 +243,6 @@
     <loc>https://simba-cheng.github.io/2020/01/29/component/elasticsearch/05-es-%E9%97%AE%E9%A2%98/es%E5%AD%98%E5%82%A8%E4%B8%8D%E8%B6%B3%EF%BC%8C%E7%B4%A2%E5%BC%95%E5%8F%AA%E8%AF%BB/</loc>
     
     <lastmod>2020-04-24T08:21:08.467Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/02/18/component/elasticsearch/04-es-%E5%88%86%E8%AF%8D/es-analysis-ik%E5%88%86%E8%AF%8D/</loc>
-    
-    <lastmod>2020-04-24T08:21:04.362Z</lastmod>
     
   </url>
   
