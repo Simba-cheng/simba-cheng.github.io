@@ -171,10 +171,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
@@ -195,19 +195,35 @@
     
         
             
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(30)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -228,6 +244,10 @@
                         </li>
                             
                         <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -278,26 +298,6 @@
         
     
         
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
             
         
     
@@ -422,6 +422,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -454,10 +458,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">广告业务</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">es</a>
     </li>
     
@@ -486,11 +486,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1223,7 +1223,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-14 23:32:54'>2020-02-18 17:26</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-14 23:35:57'>2020-02-18 17:26</time>
         
     </div>
     <div class="article-meta">
@@ -1264,7 +1264,7 @@
       
         <h1 id="elasticsearch-分词"><a href="#elasticsearch-分词" class="headerlink" title="elasticsearch 分词"></a>elasticsearch 分词</h1><p>分词在文档索引的建立过程和检索过程中都存在。</p>
 <h2 id="什么是分词？"><a href="#什么是分词？" class="headerlink" title="什么是分词？"></a>什么是分词？</h2><p>先回顾下 全文索引、倒排索引 这两个概念。</p>
-<p>详见： <a href="[https://simba-cheng.cn/2019/09/22/%E5%90%8E%E5%8F%B0/index/02-%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95/](https://simba-cheng.cn/2019/09/22/后台/index/02-全文索引/)">02-全文索引</a></p>
+<p>详见： <a href="https://simba-cheng.cn/2019/09/22/%E5%90%8E%E5%8F%B0/index/02-%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95/" target="_blank" rel="noopener">02-全文索引</a></p>
 <h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>全文检索的基本思路：将 非结构化数据（全文数据）中一部分信息提取出来，重新组织，使其变得有一定结构，然后对此结构数据进行检索，从而达到快速搜索的目的。</p>
 <p><strong>先建立索引，再对索引进行搜索的过程就叫全文检索(Full-text Search)。</strong></p>
 <h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p>非结构化数据中所存储的信息是 每个文件包含的字符串，即 <strong>文件 –&gt; 字符串</strong>，就是从 <strong>文件到字符串</strong> 的映射。</p>
@@ -1823,7 +1823,7 @@ private SearchResponse fullTextSearchProcess(SearchRequest request) {
         <p><span class="copy-title">文章字数:</span><span class="post-count">3.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-02-18, 17:26:35</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:32:54</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:35:57</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/" title="es-analyzer-分词">https://simba-cheng.github.io/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1885,7 +1885,7 @@ private SearchResponse fullTextSearchProcess(SearchRequest request) {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#广告业务','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_update','#es_batch','#es_query','#并发',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

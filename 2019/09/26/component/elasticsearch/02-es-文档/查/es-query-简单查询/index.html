@@ -171,10 +171,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
@@ -195,19 +195,35 @@
     
         
             
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(30)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -228,6 +244,10 @@
                         </li>
                             
                         <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -278,26 +298,6 @@
         
     
         
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
             
         
     
@@ -422,6 +422,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -454,10 +458,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">广告业务</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">es</a>
     </li>
     
@@ -486,11 +486,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1532,7 +1532,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#广告业务','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_update','#es_batch','#es_query','#并发',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
