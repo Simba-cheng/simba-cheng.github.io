@@ -143,10 +143,6 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -161,6 +157,10 @@
                             
                         </li>
                             
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(31)</small></div>
                             
                                 <ul class="sub hide">
@@ -171,10 +171,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
@@ -231,11 +231,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
@@ -414,11 +414,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -450,11 +450,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1221,7 +1221,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-14 23:14:35'>2020-06-14 23:09</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-14 23:18:56'>2020-06-14 23:09</time>
         
     </div>
     <div class="article-meta">
@@ -1261,7 +1261,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>缓存、限流、降级 是面对高并发，保护应用系统的三个有效方案。</p>
-<p><strong>缓存：</strong> 将 接口最终结果集、中间数据结果集，存储一段时间，在 redis cache、local cache 中，提高系统响应速度。</p>
+<p><strong>缓存：</strong> 将接口最终结果集、中间数据结果集，存储一段时间，在 redis cache、local cache 中，提高系统响应速度。</p>
 <p><strong>限流：</strong> 通过前期压测，可以大概预知应用系统的性能极限，当 QPS / 并发数 / 请求量 达到某个上限后，会压垮系统。因此需要保证任何时刻 请求量 不能超过阈值，限流就是为了完成这一目的。</p>
 <p><strong>降级：</strong> 应用系统调用高峰时（大促、活动），某些不重要的接口，不再对外提供服务；当请求到达时，立即返回，不做业务处理。</p>
 <h1 id="限流算法"><a href="#限流算法" class="headerlink" title="限流算法"></a>限流算法</h1><p>限流算法主要有几种：固定窗口计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法。</p>
@@ -1507,7 +1507,7 @@ public class TestController {
         <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-06-14, 23:09:24</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:14:35</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:18:56</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/06/14/后台/其他/限流/" title="限流">https://simba-cheng.github.io/2020/06/14/后台/其他/限流/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1569,7 +1569,7 @@ public class TestController {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#kafka','#flink','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#设计模式','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
