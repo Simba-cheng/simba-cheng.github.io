@@ -219,7 +219,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
                             
@@ -227,7 +227,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="spring">spring<small>(6)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -1223,7 +1223,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-14 23:35:57'>2020-02-18 17:26</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-14 23:40:27'>2020-02-18 17:26</time>
         
     </div>
     <div class="article-meta">
@@ -1340,13 +1340,13 @@
 </ul>
 <h1 id="默认分析器"><a href="#默认分析器" class="headerlink" title="默认分析器"></a>默认分析器</h1><p>analyzer（分析器）在 索引、搜索 时可以从三个层面进行定义：字段、索引、全局默认。</p>
 <p>如果没有在字段层面指定 analyzer（分析器），ElasticSearch 会按照下面顺序依次处理，直到找到能使用的 analyzer（分析器）。</p>
-<h2 id="索引时"><a href="#索引时" class="headerlink" title="索引时"></a>索引时</h2><p>*<em>① *</em> mapping 字段 配置中的 analyzer（分析器）</p>
-<p>*<em>② *</em> 索引中配置的 analyzer（分析器）</p>
-<p>*<em>③ *</em> standard 标准分析器</p>
-<h2 id="搜索时"><a href="#搜索时" class="headerlink" title="搜索时"></a>搜索时</h2><p>*<em>① *</em> 查询搜索时自己定义的 analyzer（分析器）</p>
-<p>*<em>② *</em> 字段 mapping 中定义的 analyzer（分析器）</p>
-<p>*<em>③ *</em> 索引中配置的 analyzer（分析器）</p>
-<p>*<em>④ *</em> standard 标准分析器</p>
+<h2 id="索引时"><a href="#索引时" class="headerlink" title="索引时"></a>索引时</h2><p><strong>①</strong> mapping 字段 配置中的 analyzer（分析器）</p>
+<p><strong>②</strong> 索引中配置的 analyzer（分析器）</p>
+<p><strong>③</strong> standard 标准分析器</p>
+<h2 id="搜索时"><a href="#搜索时" class="headerlink" title="搜索时"></a>搜索时</h2><p><strong>①</strong> 查询搜索时自己定义的 analyzer（分析器）</p>
+<p><strong>②</strong> 字段 mapping 中定义的 analyzer（分析器）</p>
+<p><strong>③</strong> 索引中配置的 analyzer（分析器）</p>
+<p><strong>④</strong> standard 标准分析器</p>
 <br>
 
 <p>为了区分 <strong>索引analyzer（分析器）</strong> 和 <strong>搜索analyzer（分析器）</strong>，ElasticSearch 支持 <strong>search_analyzer</strong> mapping配置。</p>
@@ -1823,7 +1823,7 @@ private SearchResponse fullTextSearchProcess(SearchRequest request) {
         <p><span class="copy-title">文章字数:</span><span class="post-count">3.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-02-18, 17:26:35</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:35:57</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-14, 23:40:27</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/" title="es-analyzer-分词">https://simba-cheng.github.io/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
