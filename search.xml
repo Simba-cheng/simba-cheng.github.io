@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>es-实战及优化</title>
+      <link href="/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/"/>
+      <url>/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h1 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h1><p><a href="/download/es测试数据/es图书数据.txt">es图书数据 点击下载</a></p><h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><h2 id="图书索引"><a href="#图书索引" class="headerlink" title="图书索引"></a>图书索引</h2><pre><code>PUT /bookdatas{    &quot;settings&quot;: {        &quot;number_of_shards&quot;: 5,        &quot;number_of_replicas&quot;: 1    },    &quot;mappings&quot;: {        &quot;bookType&quot;: {            &quot;properties&quot;: {                &quot;name&quot;: {                    &quot;type&quot;: &quot;text&quot;,                    &quot;analyzer&quot;: &quot;ik_max_word&quot;,                    &quot;search_analyzer&quot;: &quot;ik_smart&quot;                },                &quot;publish&quot;: {                    &quot;type&quot;: &quot;text&quot;,                    &quot;analyzer&quot;: &quot;ik_max_word&quot;,                    &quot;search_analyzer&quot;: &quot;ik_smart&quot;                },                &quot;type&quot;: {                    &quot;type&quot;: &quot;text&quot;,                    &quot;analyzer&quot;: &quot;ik_max_word&quot;,                    &quot;search_analyzer&quot;: &quot;ik_smart&quot;                },                &quot;author&quot;: {                    &quot;type&quot;: &quot;text&quot;,                    &quot;analyzer&quot;: &quot;ik_max_word&quot;,                    &quot;search_analyzer&quot;: &quot;ik_smart&quot;                },                &quot;info&quot;: {                    &quot;type&quot;: &quot;text&quot;,                    &quot;analyzer&quot;: &quot;ik_max_word&quot;,                    &quot;search_analyzer&quot;: &quot;ik_smart&quot;                },                &quot;price&quot;: {                    &quot;type&quot;: &quot;integer&quot;                }            }        }    }}</code></pre><h1 id="录入数据"><a href="#录入数据" class="headerlink" title="录入数据"></a>录入数据</h1><p>elasticsearch 虽然支持导入数据，不过我发现，直接导入的数据无法分词。</p><p>最好还是老老实实的写demo，跑进去得了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> es </category>
+          
+          <category> es_实战 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>限流</title>
       <link href="/2020/06/14/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E9%99%90%E6%B5%81/"/>
       <url>/2020/06/14/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E9%99%90%E6%B5%81/</url>

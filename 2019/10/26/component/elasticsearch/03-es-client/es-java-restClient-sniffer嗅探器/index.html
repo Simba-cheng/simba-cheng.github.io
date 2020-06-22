@@ -99,7 +99,15 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(84)</small></div></li>
+    <li><div class="all active">全部文章<small>(85)</small></div></li>
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
     
         
             
@@ -127,19 +135,11 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
         
     
         
             
-        
-    
-        
-            
-            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(47)</small></div>
+            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(48)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -161,7 +161,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(31)</small></div>
+                        <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(32)</small></div>
                             
                                 <ul class="sub hide">
                                     
@@ -171,10 +171,13 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    </li>
+                                    
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
@@ -239,11 +242,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
@@ -357,6 +360,10 @@
             
         
     
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -367,8 +374,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="84">
-<input type="hidden" id="yelog_site_word_count" value="113.5k">
+<input type="hidden" id="yelog_site_posts_number" value="85">
+<input type="hidden" id="yelog_site_word_count" value="113.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -402,15 +409,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">思考</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -430,11 +437,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -490,11 +497,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -517,6 +524,14 @@
            data-author="" >
             <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
             <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="组件 es es_实战 "
+           href="/2020/06/22/component/elasticsearch/实战/es-实战及优化/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-实战及优化">es-实战及优化</span>
+            <span class="post-date" title="2020-06-22 21:10:28">2020/06/22</span>
         </a>
         
         <a  class="后台 其他 "
@@ -1480,7 +1495,7 @@ public RestHighClient(int connectTimeout, int maxRetryTimeoutMillis, int threadC
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#思考','#资料','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_query','#es_update','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
