@@ -143,6 +143,10 @@
                 
                     <ul class="sub hide">
                         
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -154,10 +158,6 @@
                                     </li>
                                     
                                 </ul>
-                            
-                        </li>
-                            
-                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
                             
                         </li>
                             
@@ -375,7 +375,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="86">
-<input type="hidden" id="yelog_site_word_count" value="113.7k">
+<input type="hidden" id="yelog_site_word_count" value="113.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -421,11 +421,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">flink</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
+        <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -493,11 +493,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1246,12 +1246,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-24 16:18:14'>2019-09-22 19:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-28 20:39:49'>2019-09-22 19:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:3.1k</span>
+        <span>字数:3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1325,11 +1325,8 @@
 <pre><code>elasticsearch.yml
     node.master: false
     node.data: false
-    node.ingest: true</code></pre><h2 id="协调节点-coordinating-node"><a href="#协调节点-coordinating-node" class="headerlink" title="协调节点 coordinating node"></a>协调节点 coordinating node</h2><p><del>客户端的请求可以发送到集群中任意节点，每个节点都知道任意文档所处的位置，然后转发这些请求，收集数据并返回给客户端，处理客户端请求的节点称为协调节点。</del></p>
-<p>协调节点将请求转发给保存数据的数据节点。</p>
-<p>每个数据节点在本地执行请求，并将结果返回协调节点。</p>
-<p>协调节点收集完数据，将每个数据节点的结果合并为单个全局结果，对结果收集和排序的过程可能需要很多CPU和内存资源。（存疑？？）</p>
-<p>（类似一个代理节点，转发请求并处理结果）</p>
+    node.ingest: true</code></pre><h2 id="协调节点-coordinating-node"><a href="#协调节点-coordinating-node" class="headerlink" title="协调节点 coordinating node"></a>协调节点 coordinating node</h2><p>协调节点负责查询时的数据收集、合并以及聚合等操作。</p>
+<p>默认的，ElasticSearch集群中所有的节点都是协调节点。</p>
 <p>创建一个仅用于协调的节点：</p>
 <pre><code>elasticsearch.yml
     node.master: false
@@ -1481,10 +1478,10 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>02-es-基本概念</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">3k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-22, 19:49:02</p>
-        <p><span class="copy-title">最后更新:</span>2020-04-24, 16:18:14</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-28, 20:39:49</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/22/component/elasticsearch/01-es-基础/02-es-基本概念/" title="02-es-基本概念">https://simba-cheng.github.io/2019/09/22/component/elasticsearch/01-es-基础/02-es-基本概念/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1546,7 +1543,7 @@ Types will be deprecated in APIs in Elasticsearch 7.0.0, and completely removed 
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_update','#es_batch','#es_query','#并发',],
+            'data': ['#other','#资料','#思考','#kafka','#flink','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
