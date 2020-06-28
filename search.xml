@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>es-脑裂</title>
+      <link href="/2020/06/28/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E8%84%91%E8%A3%82/"/>
+      <url>/2020/06/28/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E8%84%91%E8%A3%82/</url>
+      
+        <content type="html"><![CDATA[<p>假设 集群中有十个节点，其中一个为master节点。</p><p>集群网络发生异常，三个节点（DataNode-1、DataNode-4、DataNode-7）与原集群失联，但三个节点之间还能联络。</p><p>三个节点联络不上master节点，认为对方出现了故障，于是开始选举Master，导致一个集群被分割成了两个独立的集群。</p><p>至此，集群中出现了两个Master节点，Master主宰集群状态维护、分片分配，出现两个Master节点，会导致数据被破坏，这种情况称为<strong>脑裂</strong>。</p><p><img src="//simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-脑裂/%E8%84%91%E8%A3%82-1.png" alt="脑裂-1"></p><p><img src="//simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-脑裂/%E8%84%91%E8%A3%82-2.png" alt="脑裂-2"></p><p><img src="//simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-脑裂/%E8%84%91%E8%A3%82-3.png" alt="脑裂-3"></p><h2 id="如何避免"><a href="#如何避免" class="headerlink" title="如何避免"></a>如何避免</h2><ul><li>集群尽量部署在同一内网环境，各个节点通讯可靠</li><li>master节点与data节点分离，保证master节点响应可靠性。</li><li>检查、配置 discovery.zen.minimum_master_nodes。</li></ul><h2 id="discovery-zen-minimum-master-nodes"><a href="#discovery-zen-minimum-master-nodes" class="headerlink" title="discovery.zen.minimum_master_nodes"></a>discovery.zen.minimum_master_nodes</h2><p>最小master候选节点数</p><p>配置最小master候选节点数，该参数对集群稳定、防止脑裂很重要。</p><p>ElasticSearch 进行选举时，如果没有足够<strong>master候选节点</strong>时，就不要进行master节点选举。等master候选节点数量足够了才进行选举。</p><p>数量计算：（master候选节点数 / 2）+ 1。</p><p>例如：</p><pre><code>集群中有10个节点（10个节点既能保存数据，也能成为master，即10个master候选节点）那最小数量即：（10/2）+1 = 6如果有3个master候选节点，最小数量：（3/2）+1 = 2</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="elasticsearch-yml"><a href="#elasticsearch-yml" class="headerlink" title="elasticsearch.yml"></a>elasticsearch.yml</h3><pre><code>discovery.zen.minimum_master_nodes: 2</code></pre><h3 id="dsl配置"><a href="#dsl配置" class="headerlink" title="dsl配置"></a>dsl配置</h3><p>minimum_master_nodes 配置允许通过API调用，动态修改配置。</p><p>这是一个永久配置，会优先生效；当 添加、删除 master 节点时，也需要修改该配置。</p><pre><code>PUT /_cluster/settings{    &quot;persistent&quot; : {        &quot;discovery.zen.minimum_master_nodes&quot; : 2    }}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><p><a href="https://blog.trifork.com/2013/10/24/how-to-avoid-the-split-brain-problem-in-elasticsearch/" target="_blank" rel="noopener">How to avoid the split-brain problem in elasticsearch</a></p></li><li><p><a href="https://zhouze-java.github.io/2019/04/09/Elasticsearch-105-%E9%92%88%E5%AF%B9%E9%9B%86%E7%BE%A4%E8%84%91%E8%A3%82%E9%97%AE%E9%A2%98%E5%AE%9A%E5%88%B6%E7%9A%84%E9%87%8D%E8%A6%81%E5%8F%82%E6%95%B0/" target="_blank" rel="noopener">Elasticsearch-105-针对集群脑裂问题定制的重要参数</a></p></li><li><p><a href="https://www.nosuchfield.com/2019/05/13/Production-environment-elasticsearch-split-brain/" target="_blank" rel="noopener">记一次生产环境ES脑裂</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> es </category>
+          
+          <category> es_基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>es-实战及优化</title>
       <link href="/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/"/>
       <url>/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</url>
