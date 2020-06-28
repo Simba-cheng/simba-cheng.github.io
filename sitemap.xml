@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2020-06-28T12:35:47.753Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://simba-cheng.github.io/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/01-es6-5-0%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2020-06-28T12:25:29.087Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2019/09/24/relatedData/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0_%E8%B5%84%E6%96%99%E5%90%88%E9%9B%86/</loc>
     
-    <lastmod>2020-06-28T12:22:12.854Z</lastmod>
+    <lastmod>2020-06-28T12:22:55.975Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>https://simba-cheng.github.io/2020/06/28/%E6%80%9D%E8%80%83/2019%E5%B9%B4/</loc>
     
     <lastmod>2020-06-28T12:04:17.460Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2020-06-22T13:44:52.098Z</lastmod>
     
   </url>
   
@@ -439,13 +446,6 @@
     <loc>https://simba-cheng.github.io/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/02-es-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
     
     <lastmod>2020-04-24T08:18:14.205Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/01-es6-5-0%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</loc>
-    
-    <lastmod>2020-04-24T08:17:51.459Z</lastmod>
     
   </url>
   
