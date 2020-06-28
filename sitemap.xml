@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2019/09/26/component/elasticsearch/07-es-query/es-query-match_%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
+    
+    <lastmod>2020-06-28T14:24:59.743Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2019/09/27/component/elasticsearch/07-es-query/es-query-match-phrase%E7%9F%AD%E8%AF%AD%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-06-28T14:10:54.080Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://simba-cheng.github.io/2019/09/26/component/elasticsearch/07-es-query/es-query-multi-match%E5%A4%9A%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
     
     <lastmod>2020-06-28T14:10:46.064Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2019/09/26/component/elasticsearch/07-es-query/es-query-match_%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2/</loc>
-    
-    <lastmod>2020-06-28T14:10:42.545Z</lastmod>
     
   </url>
   
