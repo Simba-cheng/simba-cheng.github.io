@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -171,10 +171,13 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    </li>
+                                    
                                     <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_query">es_query<small>(3)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
@@ -183,7 +186,7 @@
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_文档">es_文档<small>(12)</small></div>
+                                    <li><div data-rel="es_文档">es_文档<small>(9)</small></div>
                                     </li>
                                     
                                 </ul>
@@ -234,11 +237,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -269,6 +272,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -409,11 +416,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -457,11 +464,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -489,6 +496,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">agent</a>
     </li>
     
@@ -498,10 +509,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">es_update</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_query</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1046,8 +1053,8 @@
             <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
         </a>
         
-        <a  class="组件 es es_文档 "
-           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-match-phrase短语查询/"
+        <a  class="组件 es es_query "
+           href="/2019/09/27/component/elasticsearch/07-es-query/es-query-match-phrase短语查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="es-query-match-phrase短语查询">es-query-match-phrase短语查询</span>
@@ -1070,16 +1077,16 @@
             <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
         </a>
         
-        <a  class="组件 es es_文档 "
-           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-match多匹配查询/"
+        <a  class="组件 es es_query "
+           href="/2019/09/26/component/elasticsearch/07-es-query/es-query-multi-match多匹配查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="es-query-multi-match多匹配查询">es-query-multi-match多匹配查询</span>
             <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
         </a>
         
-        <a  class="组件 es es_文档 "
-           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-match_匹配查询/"
+        <a  class="组件 es es_query "
+           href="/2019/09/26/component/elasticsearch/07-es-query/es-query-match_匹配查询/"
            data-tag="es_query"
            data-author="" >
             <span class="post-title" title="es-query-match_匹配查询">es-query-match_匹配查询</span>
@@ -1563,7 +1570,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#agent','#es_batch','#es_update','#es_query','#并发',],
+            'data': ['#资料','#other','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#设计模式','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#agent','#es_batch','#es_update','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
