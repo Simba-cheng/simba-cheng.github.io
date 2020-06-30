@@ -6,27 +6,17 @@
   <meta name="keywords" content=" es_query ">
   <meta name="description" content="es-query-match_查询 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="ElasticSearch 采用 Master - Slave（主从） 模式； 主从模式：使用Master节点管理元信息，数据去中心化。 master 主节点选举，是集群从已知的候选主节点中选举主节点。   关于节点角色可以在 02-es-基本概念 这篇中了解。 生产环境，尽量将 DataNode 和 MasterNode 角色分开。 node.master 配置为true 的节点，才有资格参与M">
-<meta name="keywords" content="es">
-<meta property="og:type" content="article">
-<meta property="og:title" content="es-master选举">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="ElasticSearch 采用 Master - Slave（主从） 模式； 主从模式：使用Master节点管理元信息，数据去中心化。 master 主节点选举，是集群从已知的候选主节点中选举主节点。   关于节点角色可以在 02-es-基本概念 这篇中了解。 生产环境，尽量将 DataNode 和 MasterNode 角色分开。 node.master 配置为true 的节点，才有资格参与M">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully0.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully1.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully2.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully3.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully4.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully5.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully6.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully7.png">
-<meta property="og:updated_time" content="2020-06-28T14:01:02.167Z">
+<meta property="og:updated_time" content="2020-03-01T02:22:23.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="es-master选举">
-<meta name="twitter:description" content="ElasticSearch 采用 Master - Slave（主从） 模式； 主从模式：使用Master节点管理元信息，数据去中心化。 master 主节点选举，是集群从已知的候选主节点中选举主节点。   关于节点角色可以在 02-es-基本概念 这篇中了解。 生产环境，尽量将 DataNode 和 MasterNode 角色分开。 node.master 配置为true 的节点，才有资格参与M">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully0.png">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN的博客地址(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -181,10 +171,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_query">es_query<small>(3)</small></div>
@@ -243,10 +233,6 @@
                             
                         </li>
                             
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
@@ -259,11 +245,15 @@
                             
                         </li>
                             
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
@@ -454,11 +444,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1271,12 +1261,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-30 22:31:55'>2019-09-26 20:30</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-30 22:55:16'>2019-09-26 20:30</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:778</span>
+        <span>字数:784</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1325,16 +1315,17 @@
 }</code></pre><p>Elasticsearch 执行上面这个 match 查询的步骤是：</p>
 <p>1.检查字段类型 2.分析查询字符串 3.查找匹配文档 4.为每个文档评分</p>
 <p>上面这个例子：”机械制图”，分词结果：”机械制图”、机械”、”制图” 这两个词项。</p>
-<p>它在内部实际上先执行三次 term 查询，然后将两次查询的结果合并作为最终结果输出。</p>
+<p>它在内部实际上先执行三次 term 查询，然后将三次查询的结果合并作为最终结果输出。</p>
 <p><strong>任何文档只要 name 字段里包含 指定词项中的至少一个词 就能匹配，被匹配的词项越多，文档就越相关。</strong></p>
-<h2 id="提高查询精度"><a href="#提高查询精度" class="headerlink" title="提高查询精度"></a>提高查询精度</h2><p>多词查询可以发现，多个词之间的关系是 or ，如果想提高查询精度，使用and来找到所有匹配的文档。</p>
-<p>在 books 索引，book类型下，查询name字段中既包含’普通’又包含(and)’教育’的结果</p>
+<h2 id="提高查询精度"><a href="#提高查询精度" class="headerlink" title="提高查询精度"></a>提高查询精度</h2><p>operator 参数，匹配关键词的逻辑符号。</p>
+<p>使用match查询可以发现，多个词之间的关系是 or ，如果想提高查询精度，使用and来找到所有匹配的文档。</p>
+<p>查询name字段中既包含 ‘机械’ 又包含(and) ‘制图’ 的结果</p>
 <pre><code>GET /books/book/_search
 {
   &quot;query&quot;: {
     &quot;match&quot;: {
       &quot;name&quot;: {
-        &quot;query&quot;: &quot;普通 教师&quot;,
+        &quot;query&quot;: &quot;机械制图&quot;,
         &quot;operator&quot;: &quot;and&quot;
       }
     }
@@ -1410,10 +1401,10 @@ GET /books/book/_search
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>es-query-match_查询</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">778</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">784</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-09-26, 20:30:34</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-30, 22:31:55</p>
+        <p><span class="copy-title">最后更新:</span>2020-06-30, 22:55:16</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/26/component/elasticsearch/07-es-query/es-query-match_匹配查询/" title="es-query-match_查询">https://simba-cheng.github.io/2019/09/26/component/elasticsearch/07-es-query/es-query-match_匹配查询/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1475,7 +1466,7 @@ GET /books/book/_search
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#agent','#es_batch','#es_update','#并发',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#agent','#es_batch','#es_update','#并发',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
