@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/07/05/component/elasticsearch/07-es-query/es-query-match-phrase-prefix/</loc>
+    
+    <lastmod>2020-07-05T10:04:59.358Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/06/07/%E5%90%8E%E5%8F%B0/%E5%B9%B6%E5%8F%91/Future/</loc>
     
     <lastmod>2020-07-05T04:26:51.603Z</lastmod>

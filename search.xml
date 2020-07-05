@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>es-query-match_phrase_prefix</title>
+      <link href="/2020/07/05/component/elasticsearch/07-es-query/es-query-match-phrase-prefix/"/>
+      <url>/2020/07/05/component/elasticsearch/07-es-query/es-query-match-phrase-prefix/</url>
+      
+        <content type="html"><![CDATA[<p>match_phrase_prefix query 即时搜索、输入即搜索、搜索推荐。</p><p>具体效果：在Google搜索中输入”elas”，就会提示”elasticsearch”、”elasticsearch 权威指南”等结果。</p><p>match_phrase_prefix 和match_phrase 相似，只是match_phrase_prefix 允许对最后一个词项做前缀匹配。</p><p>例如：”Hello world Ja”</p><pre><code>&quot;Hello world&quot; 走 match_phrase query；&quot;Ja&quot;走前缀匹配查询，扫描整个倒排索引，找出所有&quot;Ja&quot;开的文档。然后整理两边所有doc，既包含&quot;Hello world&quot;，又包含&quot;Ja&quot;前缀的doc。</code></pre><h1 id="dsl"><a href="#dsl" class="headerlink" title="dsl"></a>dsl</h1><pre><code>GET /bookdatas/_search{  &quot;query&quot;: {    &quot;match_phrase_prefix&quot;: {      &quot;info&quot;: {        &quot;query&quot;: &quot;java is&quot;      }    }  },  &quot;_source&quot;: &quot;info&quot;}</code></pre><h2 id="slop"><a href="#slop" class="headerlink" title="slop"></a>slop</h2><p>同match_phrase中 slop 一个意思，可以配合使用。</p><pre><code>GET /bookdatas/_search{  &quot;query&quot;: {    &quot;match_phrase_prefix&quot;: {      &quot;info&quot;: {        &quot;query&quot;: &quot;java spark is&quot;,        &quot;slop&quot;: 10      }    }  },  &quot;_source&quot;: &quot;info&quot;}</code></pre><h2 id="max-expansions"><a href="#max-expansions" class="headerlink" title="max_expansions"></a>max_expansions</h2><p>该查询存在较大性能问题，有扫描整个倒排索引的风险，因此需要限制前缀扫描数量。</p><p>max_expansions 控制着可以与前缀匹配的词的数量。</p><p>我目前使用的是6.5.0版本，该版本中对该参数加了默认值，默认值：50。</p><p><u>It accepts the same parameters as the phrase type. In addition, it also accepts a <code>max_expansions</code> parameter (default <code>50</code>) that can control to how many suffixes the last term will be expanded.</u> </p><pre><code>GET /bookdatas/_search{  &quot;query&quot;: {    &quot;match_phrase_prefix&quot;: {      &quot;info&quot;: {        &quot;query&quot;: &quot;java spark is&quot;,        &quot;slop&quot;: 10,        &quot;max_expansions&quot;: 10      }    }  },  &quot;_source&quot;: &quot;info&quot;}</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/query-dsl-match-query-phrase-prefix.html" target="_blank" rel="noopener">query-dsl-match-query-phrase-prefix</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> es </category>
+          
+          <category> es_query </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es_query </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>悲观锁与乐观锁</title>
       <link href="/2020/07/04/%E5%90%8E%E5%8F%B0/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/"/>
       <url>/2020/07/04/%E5%90%8E%E5%8F%B0/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/</url>
