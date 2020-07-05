@@ -6,17 +6,20 @@
   <meta name="keywords" content=" 布隆过滤器 ">
   <meta name="description" content="布隆过滤器 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="悲观锁、乐观锁 体现了看待线程不同的不同角度，是一种设计思想。 悲观锁悲观思想，认为数据总是可能会被其他人修改； 在数据被处理之前先对数据加锁，并在整个数据处理过程中，使数据处于锁定状态。 这样其他线程想要获取这个资源时就会阻塞，直到悲观锁把资源释放为止。 如果获取锁失败，则说明数据正在被其他线程修改，当前线程则等待或者抛出异常。   Synchronized 和 ReentrantLock 等独">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="悲观锁与乐观锁">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/07/04/后台/并发/悲观锁与乐观锁/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:description" content="悲观锁、乐观锁 体现了看待线程不同的不同角度，是一种设计思想。 悲观锁悲观思想，认为数据总是可能会被其他人修改； 在数据被处理之前先对数据加锁，并在整个数据处理过程中，使数据处于锁定状态。 这样其他线程想要获取这个资源时就会阻塞，直到悲观锁把资源释放为止。 如果获取锁失败，则说明数据正在被其他线程修改，当前线程则等待或者抛出异常。   Synchronized 和 ReentrantLock 等独">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/04/后台/并发/悲观锁与乐观锁/Synchronized%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF.png">
+<meta property="og:updated_time" content="2020-07-04T14:01:10.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta name="twitter:title" content="悲观锁与乐观锁">
+<meta name="twitter:description" content="悲观锁、乐观锁 体现了看待线程不同的不同角度，是一种设计思想。 悲观锁悲观思想，认为数据总是可能会被其他人修改； 在数据被处理之前先对数据加锁，并在整个数据处理过程中，使数据处于锁定状态。 这样其他线程想要获取这个资源时就会阻塞，直到悲观锁把资源释放为止。 如果获取锁失败，则说明数据正在被其他线程修改，当前线程则等待或者抛出异常。   Synchronized 和 ReentrantLock 等独">
+<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/04/后台/并发/悲观锁与乐观锁/Synchronized%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -171,10 +174,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_query">es_query<small>(3)</small></div>
@@ -237,11 +240,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
@@ -382,7 +385,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="88">
-<input type="hidden" id="yelog_site_word_count" value="117.5k">
+<input type="hidden" id="yelog_site_word_count" value="117.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -464,11 +467,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1758,7 +1761,7 @@ public class TestBloomFilterAppDemo {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#思考','#flink','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
