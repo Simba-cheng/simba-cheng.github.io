@@ -6,28 +6,17 @@
   <meta name="keywords" content=" es_query ">
   <meta name="description" content="es-query-term_精确查询 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
-<meta name="keywords" content="lucene">
-<meta property="og:type" content="article">
-<meta property="og:title" content="lucene-LogMergePolicy合并策略">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-1.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-2.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-3.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-1.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-2.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-3.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-4.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-1.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-2.png">
-<meta property="og:updated_time" content="2020-07-14T12:42:30.280Z">
+<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lucene-LogMergePolicy合并策略">
-<meta name="twitter:description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-1.png">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -114,22 +103,6 @@
     
         
             
-            <li><div data-rel="资料">资料<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -139,6 +112,22 @@
                         </li>
                             
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
                 
             </li>
             
@@ -435,15 +424,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">other</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color1">问题-思考</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1502,7 +1491,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#问题-思考','#other','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
