@@ -6,21 +6,17 @@
   <meta name="keywords" content=" 设计模式 ">
   <meta name="description" content="代理模式 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
-<meta name="keywords" content="lucene">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Lucene-相关知识点">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/lucene-segment-1.jpg">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/luceneIndex-segment-1.jpg">
-<meta property="og:updated_time" content="2020-07-12T12:59:26.591Z">
+<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lucene-相关知识点">
-<meta name="twitter:description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/lucene-segment-1.jpg">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -217,19 +213,35 @@
     
         
             
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
             <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(31)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
                             
@@ -254,6 +266,10 @@
                         </li>
                             
                         <li><div data-rel="linux">linux<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -296,26 +312,6 @@
         
     
         
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
             
         
     
@@ -452,6 +448,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -485,10 +485,6 @@
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">广告业务</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1676,7 +1672,7 @@ public class MainAppSellWine {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#广告业务','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
