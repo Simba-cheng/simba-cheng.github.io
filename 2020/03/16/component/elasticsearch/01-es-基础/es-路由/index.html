@@ -6,17 +6,21 @@
   <meta name="keywords" content=" es ">
   <meta name="description" content="es-路由 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
+<meta name="description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
+<meta name="keywords" content="lucene">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lucene-相关知识点">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/lucene-segment-1.jpg">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/luceneIndex-segment-1.jpg">
+<meta property="og:updated_time" content="2020-07-12T12:59:26.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta name="twitter:title" content="Lucene-相关知识点">
+<meta name="twitter:description" content="索引原理Lucene将index（索引）数据分为segment（段）进行存储和管理。 Lucene中，倒排索引一旦被创建就不可以改变，要添加或修改文档，就需要重建整个倒排索引。 因此一个index所能包含的数据量（index可以被更新的频率）造成很大的限制。 为了保证不变性的前提下实现倒排索引的更新，Lucene引入一个新思路： 使用更多的索引，也就是通过新增补充索引来反应最新的修改，而不是直接重">
+<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/12/component/lucene/Lucene-相关知识点/lucene-segment-1.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -103,6 +107,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +124,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -175,10 +179,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_query">es_query<small>(4)</small></div>
@@ -257,11 +261,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
@@ -424,11 +428,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -456,11 +460,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1309,7 +1313,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-22 21:11:29'>2020-03-16 22:58</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-14 19:52:59'>2020-03-16 22:58</time>
         
     </div>
     <div class="article-meta">
@@ -1348,7 +1352,7 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="es-路由"><a href="#es-路由" class="headerlink" title="es 路由"></a>es 路由</h1><p>在 <a href="https://simba-cheng.cn/2019/09/22/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/02-es-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener">02-es-基本概念</a>中，了解了路由功能。</p>
+        <h1 id="es-路由"><a href="#es-路由" class="headerlink" title="es 路由"></a>es 路由</h1><p>在 <a href="https://simba-cheng.cn/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/02-es-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener">02-es-基本概念</a>中，了解了路由功能。</p>
 <p>可以看出 es路由机制 与其分片机制有着直接关系。</p>
 <p>es通过hash算法，将具有相同hash值的文档分配到同一分片中。这个hash算法和负载均衡有点类似。</p>
 <p>默认情况，es使用 文档id作为hash值，然后对其hash、分配。这种做法的好处是，不会有数据热点(数据倾斜)</p>
@@ -1607,7 +1611,7 @@ private IndexResponse addDocument(IndexRequest indexRequest) {
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-03-16, 22:58:42</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-22, 21:11:29</p>
+        <p><span class="copy-title">最后更新:</span>2020-07-14, 19:52:59</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/16/component/elasticsearch/01-es-基础/es-路由/" title="es-路由">https://simba-cheng.github.io/2020/03/16/component/elasticsearch/01-es-基础/es-路由/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1669,7 +1673,7 @@ private IndexResponse addDocument(IndexRequest indexRequest) {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#资料','#other','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
