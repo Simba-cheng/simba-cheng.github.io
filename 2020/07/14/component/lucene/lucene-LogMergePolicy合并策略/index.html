@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>lucene-LogMergePolicy合并策略 | Simba</title>
+  <meta name="keywords" content=" lucene ">
+  <meta name="description" content="lucene-LogMergePolicy合并策略 | Simba">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
+<meta name="keywords" content="lucene">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lucene-LogMergePolicy合并策略">
+<meta property="og:url" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/index.html">
+<meta property="og:site_name" content="Simba">
+<meta property="og:description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-1.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-2.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-3.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-1.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-2.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-3.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-4.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-1.png">
+<meta property="og:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-2.png">
+<meta property="og:updated_time" content="2020-07-14T12:42:30.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lucene-LogMergePolicy合并策略">
+<meta name="twitter:description" content="LogMergePolicyLucene提供两个核心的合并策略，它们都是LogMergePolicy的子类。 注意：这两个策略都不会执行真正的删除操作。    策略 描述    LogByteSizeMergePolicy 测量该段所包含文档的总字节数。   LogDocMergePolicy 测量该段所包含文档数量。   （如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策">
+<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-1.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Simba</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/Simba-cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/Simba_cheng" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:simba_cheng@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(93)</small></div></li>
+    
+        
+            
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="知识点">知识点<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="组件"><i class="fold iconfont icon-right"></i>组件<small>(54)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="lucene">lucene<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="flink_集群">flink_集群<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="flink_基础">flink_基础<small>(7)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(35)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="es_基础">es_基础<small>(14)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_源码">es_源码<small>(2)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_query">es_query<small>(4)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_文档">es_文档<small>(9)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后台"><i class="fold iconfont icon-right"></i>后台<small>(31)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="spring">spring<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="其他">其他<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="agent">agent<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="93">
+<input type="hidden" id="yelog_site_word_count" value="121.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">资料</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">问题-思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">other</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">flink</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">lucene</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hash</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">并发</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">es</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">后台_其他</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">布隆过滤器</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_client</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es问题</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_query</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">思考</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">agent</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">es_batch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">es_update</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="组件 es "
+           href="/2019/10/08/component/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="组件 lucene "
+           href="/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/"
+           data-tag="lucene"
+           data-author="" >
+            <span class="post-title" title="lucene-LogMergePolicy合并策略">lucene-LogMergePolicy合并策略</span>
+            <span class="post-date" title="2020-07-14 20:33:57">2020/07/14</span>
+        </a>
+        
+        <a  class="组件 lucene "
+           href="/2020/07/14/component/lucene/lucene-段合并/"
+           data-tag="lucene"
+           data-author="" >
+            <span class="post-title" title="lucene-段合并">lucene-段合并</span>
+            <span class="post-date" title="2020-07-14 20:19:33">2020/07/14</span>
+        </a>
+        
+        <a  class="组件 lucene "
+           href="/2020/07/12/component/lucene/Lucene-相关知识点/"
+           data-tag="lucene"
+           data-author="" >
+            <span class="post-title" title="Lucene-相关知识点">Lucene-相关知识点</span>
+            <span class="post-date" title="2020-07-12 20:44:33">2020/07/12</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2020/07/11/问题-思考/Timeout-waiting-for-connection-from-pool/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="Timeout waiting for connection from pool">Timeout waiting for connection from pool</span>
+            <span class="post-date" title="2020-07-11 12:03:41">2020/07/11</span>
+        </a>
+        
+        <a  class="组件 es es_query "
+           href="/2020/07/05/component/elasticsearch/07-es-query/es-query-match-phrase-prefix/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match_phrase_prefix">es-query-match_phrase_prefix</span>
+            <span class="post-date" title="2020-07-05 14:08:46">2020/07/05</span>
+        </a>
+        
+        <a  class="后台 并发 "
+           href="/2020/07/04/后台/并发/悲观锁与乐观锁/"
+           data-tag="并发"
+           data-author="" >
+            <span class="post-title" title="悲观锁与乐观锁">悲观锁与乐观锁</span>
+            <span class="post-date" title="2020-07-04 14:35:00">2020/07/04</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-master选举">es-master选举</span>
+            <span class="post-date" title="2020-06-28 21:40:04">2020/06/28</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/06/28/component/elasticsearch/01-es-基础/es-脑裂/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-脑裂">es-脑裂</span>
+            <span class="post-date" title="2020-06-28 21:10:47">2020/06/28</span>
+        </a>
+        
+        <a  class="组件 es es_实战 "
+           href="/2020/06/22/component/elasticsearch/实战/es-实战及优化/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-实战及优化">es-实战及优化</span>
+            <span class="post-date" title="2020-06-22 21:10:28">2020/06/22</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/06/14/后台/其他/限流/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="限流">限流</span>
+            <span class="post-date" title="2020-06-14 23:09:24">2020/06/14</span>
+        </a>
+        
+        <a  class="后台 并发 "
+           href="/2020/06/07/后台/并发/Future/"
+           data-tag="并发"
+           data-author="" >
+            <span class="post-title" title="Future">Future</span>
+            <span class="post-date" title="2020-06-07 12:17:04">2020/06/07</span>
+        </a>
+        
+        <a  class="后台 agent "
+           href="/2020/06/06/后台/agent/Java-Agent/"
+           data-tag="agent"
+           data-author="" >
+            <span class="post-title" title="Java Agent">Java Agent</span>
+            <span class="post-date" title="2020-06-06 11:41:16">2020/06/06</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/06/04/后台/spring/依赖注入/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="依赖注入">依赖注入</span>
+            <span class="post-date" title="2020-06-04 21:46:58">2020/06/04</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/24/component/kafka/kafka-副本/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-副本">kafka-副本</span>
+            <span class="post-date" title="2020-05-24 20:05:08">2020/05/24</span>
+        </a>
+        
+        <a  class="后台 linux "
+           href="/2020/05/24/后台/linux/TCP-IO模型/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="TCP-IO模型">TCP-IO模型</span>
+            <span class="post-date" title="2020-05-24 12:13:58">2020/05/24</span>
+        </a>
+        
+        <a  class="后台 linux "
+           href="/2020/05/23/后台/linux/linux-unix部分知识点/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux-unix部分知识点">linux-unix部分知识点</span>
+            <span class="post-date" title="2020-05-23 19:57:49">2020/05/23</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/05/17/后台/spring/spring-BeanPostProcessor/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="spring-BeanPostProcessor">spring-BeanPostProcessor</span>
+            <span class="post-date" title="2020-05-17 21:01:04">2020/05/17</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/05/17/后台/spring/spring-ApplicationContext/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="spring-ApplicationContext">spring-ApplicationContext</span>
+            <span class="post-date" title="2020-05-17 20:54:46">2020/05/17</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2020/05/17/后台/设计模式/代理模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="代理模式">代理模式</span>
+            <span class="post-date" title="2020-05-17 20:40:55">2020/05/17</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2020/05/13/后台/设计模式/实战责任链模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="实战责任链模式">实战责任链模式</span>
+            <span class="post-date" title="2020-05-13 23:33:38">2020/05/13</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/03/component/kafka/kafka-consumer/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-consumer">kafka-consumer</span>
+            <span class="post-date" title="2020-05-03 14:31:52">2020/05/03</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/05/01/component/kafka/kafka-pageCache和zeroCopy/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-pageCache和zeroCopy">kafka-pageCache和zeroCopy</span>
+            <span class="post-date" title="2020-05-01 11:20:11">2020/05/01</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/27/component/kafka/kakfa-producer/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kakfa-producer">kakfa-producer</span>
+            <span class="post-date" title="2020-04-27 21:29:41">2020/04/27</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/24/component/kafka/kafka-部分配置/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka-部分配置">kafka-部分配置</span>
+            <span class="post-date" title="2020-04-24 23:05:18">2020/04/24</span>
+        </a>
+        
+        <a  class="组件 kafka "
+           href="/2020/04/24/component/kafka/kafka/"
+           data-tag="kafka"
+           data-author="" >
+            <span class="post-title" title="kafka">kafka</span>
+            <span class="post-date" title="2020-04-24 16:36:33">2020/04/24</span>
+        </a>
+        
+        <a  class="后台 缓存 "
+           href="/2020/04/19/后台/缓存/站内广告中的缓存/"
+           data-tag="缓存"
+           data-author="" >
+            <span class="post-title" title="站内广告中的缓存">站内广告中的缓存</span>
+            <span class="post-date" title="2020-04-19 11:38:58">2020/04/19</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/14/component/flink/基础/Flink-序列化导致异常/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-序列化导致异常">Flink-序列化导致异常</span>
+            <span class="post-date" title="2020-04-14 22:25:46">2020/04/14</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/04/09/业务/广告/站内广告反作弊/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="站内广告反作弊">站内广告反作弊</span>
+            <span class="post-date" title="2020-04-09 16:07:17">2020/04/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/04/05/component/flink/基础/Flink-WaterMark/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-WaterMark">Flink-WaterMark</span>
+            <span class="post-date" title="2020-04-05 08:46:40">2020/04/05</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/03/29/component/flink/Flink-导图/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-导图">Flink-导图</span>
+            <span class="post-date" title="2020-03-29 20:42:59">2020/03/29</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/28/component/flink/基础/Flink-State/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-State">Flink-State</span>
+            <span class="post-date" title="2020-03-28 15:48:34">2020/03/28</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-Window/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-Window">Flink-Window</span>
+            <span class="post-date" title="2020-03-25 23:43:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/25/component/flink/基础/Flink-transformations/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-transformations">Flink-transformations</span>
+            <span class="post-date" title="2020-03-25 22:41:14">2020/03/25</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-DataStream/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-DataStream">Flink-DataStream</span>
+            <span class="post-date" title="2020-03-22 23:28:08">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 flink flink_基础 "
+           href="/2020/03/22/component/flink/基础/Flink-基本概念/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-基本概念">Flink-基本概念</span>
+            <span class="post-date" title="2020-03-22 16:05:38">2020/03/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/03/16/component/elasticsearch/01-es-基础/es-路由/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-路由">es-路由</span>
+            <span class="post-date" title="2020-03-16 22:58:42">2020/03/16</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2020/03/08/component/elasticsearch/06-es-源码/02-es-启动流程/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-启动流程">02-es-启动流程</span>
+            <span class="post-date" title="2020-03-08 21:00:45">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-02/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-02">容器创建-02</span>
+            <span class="post-date" title="2020-03-08 11:23:50">2020/03/08</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/03/08/后台/spring/容器创建-01-脉络梳理/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="容器创建-01-脉络梳理">容器创建-01-脉络梳理</span>
+            <span class="post-date" title="2020-03-08 10:02:44">2020/03/08</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/27/component/elasticsearch/01-es-基础/es-思维导图/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-思维导图">es-思维导图</span>
+            <span class="post-date" title="2020-02-27 15:20:44">2020/02/27</span>
+        </a>
+        
+        <a  class="业务 广告业务 "
+           href="/2020/02/26/业务/广告/广告-人群溢价(转载)/"
+           data-tag="广告业务"
+           data-author="" >
+            <span class="post-title" title="广告-人群溢价(转载)">广告-人群溢价(转载)</span>
+            <span class="post-date" title="2020-02-26 15:05:23">2020/02/26</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2020/02/23/后台/mysql/mysql主从环境搭建/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql主从环境搭建">mysql主从环境搭建</span>
+            <span class="post-date" title="2020-02-23 20:59:34">2020/02/23</span>
+        </a>
+        
+        <a  class="后台 spring "
+           href="/2020/02/22/后台/spring/spring 事务/Spring-事务使用/"
+           data-tag="spring"
+           data-author="" >
+            <span class="post-title" title="Spring 事务使用">Spring 事务使用</span>
+            <span class="post-date" title="2020-02-22 15:34:27">2020/02/22</span>
+        </a>
+        
+        <a  class="组件 es es_分词 "
+           href="/2020/02/18/component/elasticsearch/04-es-分词/es-analysis-ik分词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-analyzer-分词">es-analyzer-分词</span>
+            <span class="post-date" title="2020-02-18 17:26:35">2020/02/18</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/更新/es-update-mapping/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_mapping">es-update_mapping</span>
+            <span class="post-date" title="2020-02-16 22:37:41">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/16/component/elasticsearch/02-es-文档/查/es-query-搜索选项/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-搜索选项">es-query-搜索选项</span>
+            <span class="post-date" title="2020-02-16 13:18:22">2020/02/16</span>
+        </a>
+        
+        <a  class="组件 flink "
+           href="/2020/02/09/component/flink/基础/Flink-预研/"
+           data-tag="flink,思考"
+           data-author="" >
+            <span class="post-title" title="Flink-思考-预研">Flink-思考-预研</span>
+            <span class="post-date" title="2020-02-09 13:17:18">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 flink flink_集群 "
+           href="/2020/02/09/component/flink/基础/Flink-集群搭建/"
+           data-tag="flink"
+           data-author="" >
+            <span class="post-title" title="Flink-集群搭建">Flink-集群搭建</span>
+            <span class="post-date" title="2020-02-09 12:03:09">2020/02/09</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/10-es-index-operate/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="10-es-index-operate">10-es-index-operate</span>
+            <span class="post-date" title="2020-02-06 20:09:15">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2020/02/06/component/elasticsearch/02-es-文档/更新/es-update_by_query/"
+           data-tag="es_update"
+           data-author="" >
+            <span class="post-title" title="es-update_by_query">es-update_by_query</span>
+            <span class="post-date" title="2020-02-06 15:52:24">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2020/02/06/component/elasticsearch/01-es-基础/09-es-别名/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="09-es-别名">09-es-别名</span>
+            <span class="post-date" title="2020-02-06 11:41:46">2020/02/06</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2020/01/30/component/elasticsearch/03-es-client/es-java-client/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-client">es-java-client</span>
+            <span class="post-date" title="2020-01-30 13:30:08">2020/01/30</span>
+        </a>
+        
+        <a  class="组件 es es_问题 "
+           href="/2020/01/29/component/elasticsearch/05-es-问题/es存储不足，索引只读/"
+           data-tag="es问题"
+           data-author="" >
+            <span class="post-title" title="es存储不足，索引只读">es存储不足，索引只读</span>
+            <span class="post-date" title="2020-01-29 19:35:43">2020/01/29</span>
+        </a>
+        
+        <a  class="后台 hash "
+           href="/2020/01/12/后台/hash/hash/"
+           data-tag="hash"
+           data-author="" >
+            <span class="post-title" title="hash">hash</span>
+            <span class="post-date" title="2020-01-12 23:15:22">2020/01/12</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2020/01/08/后台/其他/布隆过滤器/"
+           data-tag="布隆过滤器"
+           data-author="" >
+            <span class="post-title" title="布隆过滤器">布隆过滤器</span>
+            <span class="post-date" title="2020-01-08 22:41:59">2020/01/08</span>
+        </a>
+        
+        <a  class="后台 hash "
+           href="/2020/01/05/后台/hash/BitMap/"
+           data-tag="bitmap"
+           data-author="" >
+            <span class="post-title" title="BitMap">BitMap</span>
+            <span class="post-date" title="2020-01-05 22:21:39">2020/01/05</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/28/后台/mysql/mysql数据重复引发的问题/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql数据重复引发的问题">mysql数据重复引发的问题</span>
+            <span class="post-date" title="2019-12-28 19:16:55">2019/12/28</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/22/后台/Java8/使用流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="使用流">使用流</span>
+            <span class="post-date" title="2019-12-22 19:30:38">2019/12/22</span>
+        </a>
+        
+        <a  class="后台 mysql "
+           href="/2019/12/18/后台/mysql/mysql隔离级别/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="mysql隔离级别">mysql隔离级别</span>
+            <span class="post-date" title="2019-12-18 11:33:05">2019/12/18</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/12/01/后台/Java8/流/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Stream 流">Stream 流</span>
+            <span class="post-date" title="2019-12-01 17:34:59">2019/12/01</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2019/11/30/问题-思考/大促宕机的思考/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="大促宕机的思考">大促宕机的思考</span>
+            <span class="post-date" title="2019-11-30 20:36:49">2019/11/30</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2019/11/30/问题-思考/FastJson踩坑/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="FastJson踩坑">FastJson踩坑</span>
+            <span class="post-date" title="2019-11-30 20:18:47">2019/11/30</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/Lambda表达式/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Lambda表达式">Lambda表达式</span>
+            <span class="post-date" title="2019-11-24 22:07:44">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/24/后台/Java8/方法引用/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="方法引用">方法引用</span>
+            <span class="post-date" title="2019-11-24 19:49:31">2019/11/24</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/23/后台/Java8/行为参数化传递代码/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="行为参数化传递代码">行为参数化传递代码</span>
+            <span class="post-date" title="2019-11-23 23:16:19">2019/11/23</span>
+        </a>
+        
+        <a  class="后台 Java8 "
+           href="/2019/11/22/后台/Java8/Java8初体验/"
+           data-tag="Java8"
+           data-author="" >
+            <span class="post-title" title="Java8初体验">Java8初体验</span>
+            <span class="post-date" title="2019-11-22 23:19:03">2019/11/22</span>
+        </a>
+        
+        <a  class="组件 es es_源码 "
+           href="/2019/11/01/component/elasticsearch/06-es-源码/01-IDEA编译es_6-5-0源码/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-IDEA编译es_6.5.0源码">01-IDEA编译es_6.5.0源码</span>
+            <span class="post-date" title="2019-11-01 23:46:24">2019/11/01</span>
+        </a>
+        
+        <a  class="后台 其他 "
+           href="/2019/10/27/后台/其他/内部类/"
+           data-tag="后台_其他"
+           data-author="" >
+            <span class="post-title" title="内部类">内部类</span>
+            <span class="post-date" title="2019-10-27 19:42:55">2019/10/27</span>
+        </a>
+        
+        <a  class="后台 设计模式 "
+           href="/2019/10/27/后台/设计模式/build-建造者模式/"
+           data-tag="设计模式"
+           data-author="" >
+            <span class="post-title" title="build-建造者模式">build-建造者模式</span>
+            <span class="post-date" title="2019-10-27 19:42:05">2019/10/27</span>
+        </a>
+        
+        <a  class="组件 es es_client "
+           href="/2019/10/26/component/elasticsearch/03-es-client/es-java-restClient-sniffer嗅探器/"
+           data-tag="es_client"
+           data-author="" >
+            <span class="post-title" title="es-java-restClient-sniffer嗅探器">es-java-restClient-sniffer嗅探器</span>
+            <span class="post-date" title="2019-10-26 19:52:20">2019/10/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/10/12/component/elasticsearch/02-es-文档/批处理/es-batch-bulk-批处理/"
+           data-tag="es_batch"
+           data-author="" >
+            <span class="post-title" title="es-batch-bulk-批处理">es-batch-bulk-批处理</span>
+            <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
+        </a>
+        
+        <a  class="组件 es es_query "
+           href="/2019/09/27/component/elasticsearch/07-es-query/es-query-match-phrase短语查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match-phrase短语查询">es-query-match-phrase短语查询</span>
+            <span class="post-date" title="2019-09-27 22:51:37">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/27/component/elasticsearch/02-es-文档/查/es-query-filtered-bool组合过滤查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-filtered-bool组合过滤查询">es-query-filtered-bool组合过滤查询</span>
+            <span class="post-date" title="2019-09-27 22:35:51">2019/09/27</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-multi-get批处理/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-get批处理">es-query-multi-get批处理</span>
+            <span class="post-date" title="2019-09-26 21:51:07">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_query "
+           href="/2019/09/26/component/elasticsearch/07-es-query/es-query-multi-match多匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-multi-match多匹配查询">es-query-multi-match多匹配查询</span>
+            <span class="post-date" title="2019-09-26 21:47:22">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_query "
+           href="/2019/09/26/component/elasticsearch/07-es-query/es-query-match_匹配查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-match_查询">es-query-match_查询</span>
+            <span class="post-date" title="2019-09-26 20:30:34">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-term_精确查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-term_精确查询">es-query-term_精确查询</span>
+            <span class="post-date" title="2019-09-26 20:30:30">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/26/component/elasticsearch/02-es-文档/查/es-query-简单查询/"
+           data-tag="es_query"
+           data-author="" >
+            <span class="post-title" title="es-query-简单查询">es-query-简单查询</span>
+            <span class="post-date" title="2019-09-26 17:34:31">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/08-es-测试数据/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="08-es-测试数据">08-es-测试数据</span>
+            <span class="post-date" title="2019-09-26 16:34:23">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/26/component/elasticsearch/01-es-基础/07-es-上手Demo/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="07-es-上手Demo">07-es-上手Demo</span>
+            <span class="post-date" title="2019-09-26 11:17:52">2019/09/26</span>
+        </a>
+        
+        <a  class="组件 es es_文档 "
+           href="/2019/09/25/component/elasticsearch/02-es-文档/增/es-put-索引_动词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-put-索引-动词">es-put-索引-动词</span>
+            <span class="post-date" title="2019-09-25 23:17:19">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/06-es-文档-document/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="06-es-文档_document">06-es-文档_document</span>
+            <span class="post-date" title="2019-09-25 23:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/05-es-Mapping_数据类型/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="05-es-Mapping_数据类型">05-es-Mapping_数据类型</span>
+            <span class="post-date" title="2019-09-25 23:17:15">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/04-es-索引-名词/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="04-es-索引_名词">04-es-索引_名词</span>
+            <span class="post-date" title="2019-09-25 23:17:03">2019/09/25</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/25/component/elasticsearch/01-es-基础/03-es-查询语言/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="03-es-查询语言">03-es-查询语言</span>
+            <span class="post-date" title="2019-09-25 23:16:11">2019/09/25</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/24/relatedData/技术文章_资料合集/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="技术文章_资料合集">技术文章_资料合集</span>
+            <span class="post-date" title="2019-09-24 22:02:16">2019/09/24</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/02-es-基本概念/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="02-es-基本概念">02-es-基本概念</span>
+            <span class="post-date" title="2019-09-22 19:49:02">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/02-全文索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="02-全文索引">02-全文索引</span>
+            <span class="post-date" title="2019-09-22 18:45:18">2019/09/22</span>
+        </a>
+        
+        <a  class="组件 es es_基础 "
+           href="/2019/09/22/component/elasticsearch/01-es-基础/01-es6-5-0集群搭建/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="01-es-6.5.0集群搭建">01-es-6.5.0集群搭建</span>
+            <span class="post-date" title="2019-09-22 18:43:10">2019/09/22</span>
+        </a>
+        
+        <a  class="后台 索引 "
+           href="/2019/09/22/后台/index/01-索引/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="01-索引">01-索引</span>
+            <span class="post-date" title="2019-09-22 18:17:04">2019/09/22</span>
+        </a>
+        
+        <a  class="资料 "
+           href="/2019/09/22/relatedData/书籍/"
+           data-tag="资料"
+           data-author="" >
+            <span class="post-title" title="书籍">书籍</span>
+            <span class="post-date" title="2019-09-22 17:38:13">2019/09/22</span>
+        </a>
+        
+        <a  class="other 知识点 "
+           href="/2019/09/22/other/奇怪的知识点/"
+           data-tag="other"
+           data-author="" >
+            <span class="post-title" title="奇怪的知识点">奇怪的知识点</span>
+            <span class="post-date" title="2019-09-22 17:29:36">2019/09/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-component/lucene/lucene-LogMergePolicy合并策略" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">lucene-LogMergePolicy合并策略</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="组件">组件</a>/
+            
+                <a href="javascript:" data-rel="lucene">lucene</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color2">lucene</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-07-14 20:42:30'>2020-07-14 20:33</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LogMergePolicy"><span class="toc-text">LogMergePolicy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#level"><span class="toc-text">level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何划分层级"><span class="toc-text">如何划分层级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一层"><span class="toc-text">第一层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二层"><span class="toc-text">第二层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三层"><span class="toc-text">第三层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层内mergeFactory处理"><span class="toc-text">层内mergeFactory处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LogMergePolicy"><a href="#LogMergePolicy" class="headerlink" title="LogMergePolicy"></a>LogMergePolicy</h1><p>Lucene提供两个核心的合并策略，它们都是<strong>LogMergePolicy</strong>的子类。</p>
+<p>注意：这两个策略都不会执行真正的删除操作。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LogByteSizeMergePolicy</td>
+<td>测量该段所包含<strong>文档的总字节数</strong>。</td>
+</tr>
+<tr>
+<td>LogDocMergePolicy</td>
+<td>测量该段所包含<strong>文档数量</strong>。</td>
+</tr>
+</tbody></table>
+<p>（如果上面两个核心策略不能满足，可以继承MergePolicy实现自己的策略。）</p>
+<p>LogByteSizeMergePolicy、LogDocMergePolicy 策略，他们都使用相同的逻辑执行段合并。</p>
+<p>一些配置、参数含义：</p>
+<table>
+<thead>
+<tr>
+<th>LogMergePolicy</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mergeFactory</td>
+<td>10</td>
+<td>IndexWriter执行一次段合并操作，最多包含段的数量。<br>即上文单个<font color="#FFA500">oneMerge</font>中段集合的大小。</td>
+</tr>
+<tr>
+<td>maxMergeSize</td>
+<td>Long.MAX_VALUE</td>
+<td>段超过该值，该段永远不会被合并。</td>
+</tr>
+<tr>
+<td>minMergeSize</td>
+<td>1.6MB</td>
+<td>该值用来分层。<br>关键作用是处理数量很多的小段。<br>如果该值设置较大，会导致划分很多层，意味着性能降低。</td>
+</tr>
+<tr>
+<td>maxMergeDocs</td>
+<td>Integer.MAX_VALU</td>
+<td>如果段中文档数超过该值，该段就永远不会被合并。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><font color="#90EE90">level</font></td>
+<td>不可配置</td>
+<td>层级 *<u> 下文介绍</u>*</td>
+</tr>
+<tr>
+<td><font color="#90EE90">segMentSize</font></td>
+<td>不可配置</td>
+<td>段大小；<br>有两种方式来描述一个段的大小：<br><strong>段包含的文档数量</strong>、<strong>段包含文档的容量（byte）</strong></td>
+</tr>
+<tr>
+<td><font color="#90EE90">log</font></td>
+<td>不可配置</td>
+<td>段与段之间的相对大小值<br>log = （SegmentSize / mergeFactory）</td>
+</tr>
+</tbody></table>
+<h2 id="level"><a href="#level" class="headerlink" title="level"></a>level</h2><p>合并过程总，根据策略会将连续的段分为不同的层级（level），遍历每一个层，然后再每一层中继续遍历每一个段；找到mergeFactor个段作为一个<font color="#FFA500">oneMerge</font>。</p>
+<br>
+
+<p>1、根据策略找到第一层（Level-1），然后在第一层中遍历找mergeFactor个段（这里 mergeFactor = 2）。段1 和 段2 作为一个<font color="#FFA500">oneMerge</font>，这里称之为 <font color="#FFC0CB">oneMerge-1</font>。第一层中只有一个段3，无法组成一个<font color="#FFA500">oneMerge</font>。</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-1.png" alt="level-1 图片来源见&#39;参考资料&#39;"></p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-2.png" alt="level-2 图片来源见&#39;参考资料&#39;"></p>
+<p>2、然后根据策略，继续找第二层、第三层。并且生成5个<font color="#FFA500">oneMerge</font>。这些<font color="#FFA500">oneMerge</font>就会交给IndexWriter，IndexWriter会执行5次合并操作。</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/level-3.png" alt="level-3 图片来源见&#39;参考资料&#39;"></p>
+<h2 id="如何划分层级"><a href="#如何划分层级" class="headerlink" title="如何划分层级"></a>如何划分层级</h2><p>相关参数：</p>
+<ul>
+<li>maxLevel：该值即未处理过的段集合中，log最大值。</li>
+<li>LEVEL_LOG_SPAN：默认值 0.75，该值不可配置。</li>
+<li>levelBottom：该值为差值（maxLevel - LEVEL_LOG_SPAN）</li>
+</ul>
+<p>划分步骤：</p>
+<p>1、找出未处理段集中，maxLevel最大值。</p>
+<p>2、从最后一个段集开始往前遍历，找到第一个<strong>大于等于</strong>levelBottom，遍历到maxLevel停止。</p>
+<p>3、未处理的段集中，第一个段到levelBottom所在的段的区间范围内所有段为一个层级。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下例，蓝色段为未处理的段集。</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-1.png" alt="示例-1 图片来源见&#39;参考资料&#39;"></p>
+<h3 id="第一层"><a href="#第一层" class="headerlink" title="第一层"></a>第一层</h3><p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-2.png" alt="示例-2 图片来源见&#39;参考资料&#39;"></p>
+<p>1、找出未处理的段集（段1 ~ 段12）中maxLevel，即段2。</p>
+<p>2、从后往前遍历（段12 → 段1），找到第一个大于等于levelBottom的段，即段2。</p>
+<pre><code>levelBottom = （maxLevel - LEVEL_LOG_SPAN）
+levelBottom = （7.3 - 0.75）
+levelBottom = 6.55</code></pre><p>3、未处理段集中第一个段（段1）到 levelBottom 所在段的区间范围内所有的段集，为第一层级（段1 ~ 段2）。</p>
+<h3 id="第二层"><a href="#第二层" class="headerlink" title="第二层"></a>第二层</h3><p>（上面 段1 ~ 段2 已经被处理过，所以不在未处理段集中了。）</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-3.png" alt="示例-3 图片来源见&#39;参考资料&#39;"></p>
+<p>1、找出未处理段集（段3 ~ 段12）中maxLevel，即段4。</p>
+<p>2、从后往前遍历（段12 → 段3），找到第一个大于等于levelBottom的段，即段6。</p>
+<pre><code>levelBottom = （maxLevel - LEVEL_LOG_SPAN）
+levelBottom = （6.4 - 0.75）
+levelBottom = 5.65</code></pre><p>3、未处理段集中第一个段（段3）到 levelBottom 所在段的区间范围内所有的段集，为第二层级（段3 ~ 段6）。</p>
+<h3 id="第三层"><a href="#第三层" class="headerlink" title="第三层"></a>第三层</h3><p>（上面 段1 ~ 段6 已经被处理过，所以不在未处理段集中了。）</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/%E7%A4%BA%E4%BE%8B-4.png" alt="示例-4 图片来源见&#39;参考资料&#39;"></p>
+<p>1、找出未处理段集（段7 ~ 段12）中maxLevel，即段8。</p>
+<p>2、从后往前遍历（段12 → 段7），找到第一个大于等于levelBottom的段，即段12。</p>
+<pre><code>levelBottom = （maxLevel - LEVEL_LOG_SPAN）
+levelBottom = （5 - 0.75）
+levelBottom = 4.25</code></pre><p>3、未处理段集中第一个段（段7）到 levelBottom 所在段的区间范围内所有的段集，为第三层级（段7 ~ 段12）。</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>段号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一层</td>
+<td>段1 ~ 段2</td>
+</tr>
+<tr>
+<td>第二层</td>
+<td>段3 ~ 段6</td>
+</tr>
+<tr>
+<td>第三层</td>
+<td>段7 ~ 段12</td>
+</tr>
+</tbody></table>
+<p>以上，就是层级划分的步骤。</p>
+<h3 id="层内mergeFactory处理"><a href="#层内mergeFactory处理" class="headerlink" title="层内mergeFactory处理"></a>层内mergeFactory处理</h3><p>mergeFactory 定义了每次合并段的个数：</p>
+<p>1、如果当前层内的段的数量小于mergeFactory，那就不会进行层内遍历。</p>
+<p>2、如果当前层内段的数量大于mergeFactory，那就顺序遍历层内子集；每次取出mergeFactory个段，标记为一个merge，某些层内可以取出多个merge。</p>
+<p>（沿用上面的数据）</p>
+<p>当mergeFactory = 3时，每一层可以取出的merge：</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-1.png" alt="merge-1(图片来源见&#39;参考资料&#39;"></p>
+<p>第一层中，由于层内段的数量小于MergeFactory，无法产生一个merge。</p>
+<p>第二层中可以获得一个merge，即merge1；段6无法组成新的merge。</p>
+<p>第三层可以组成两个merge，即 merge2、merge3。</p>
+<p><img src="//simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/merge-2.png" alt="merge-2(图片来源见&#39;参考资料&#39;"></p>
+<p>这些merge通过校验后，被认为是允许合并的，那么这些merge被标记为<strong><font color="#FFA500">oneMerge</font></strong>。</p>
+<p>每个层级组成了多个<strong><font color="#FFA500">oneMerge</font></strong>添加到一个集合中，IndexWriter开启一个后台线程对集合中的oneMerge执行合并操作。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.amazingkoala.com.cn/Lucene/Index/2019/0513/58.html" target="_blank" rel="noopener">LogMergePolicy</a></li>
+<li><a href="https://www.amazingkoala.com.cn/Lucene/Index/2019/0516/59.html" target="_blank" rel="noopener">TieredMergePolicy</a></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+    <div class="article_copyright">
+        <p><span class="copy-title">文章标题:</span>lucene-LogMergePolicy合并策略</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+        <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
+        <p><span class="copy-title">发布时间:</span>2020-07-14, 20:33:57</p>
+        <p><span class="copy-title">最后更新:</span>2020-07-14, 20:42:30</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/" title="lucene-LogMergePolicy合并策略">https://simba-cheng.github.io/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/</a>
+        <p>
+            <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
+        </p>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019-2020 Simba_cheng</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#资料','#问题-思考','#other','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 507px;
+        }
+        .nav.fullscreen {
+            margin-left: -507px;
+        }
+        .nav-left {
+            width: 115px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 507px;
+            margin-left: -507px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 507px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/img/candle.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
