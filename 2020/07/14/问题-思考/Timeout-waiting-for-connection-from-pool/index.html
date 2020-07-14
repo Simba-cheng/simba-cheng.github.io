@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Timeout waiting for connection from pool | Simba</title>
+  <title>Timeout-waiting-for-connection-from-pool | Simba</title>
   <meta name="keywords" content=" 问题-思考 ">
-  <meta name="description" content="Timeout waiting for connection from pool | Simba">
+  <meta name="description" content="Timeout-waiting-for-connection-from-pool | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:type" content="website">
@@ -549,6 +549,14 @@
             <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
         </a>
         
+        <a  class="问题-思考 "
+           href="/2020/07/14/问题-思考/Timeout-waiting-for-connection-from-pool/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="Timeout-waiting-for-connection-from-pool">Timeout-waiting-for-connection-from-pool</span>
+            <span class="post-date" title="2020-07-14 21:00:45">2020/07/14</span>
+        </a>
+        
         <a  class="组件 lucene "
            href="/2020/07/14/component/lucene/lucene-LogMergePolicy合并策略/"
            data-tag="lucene"
@@ -571,14 +579,6 @@
            data-author="" >
             <span class="post-title" title="Lucene-相关知识点">Lucene-相关知识点</span>
             <span class="post-date" title="2020-07-12 20:44:33">2020/07/12</span>
-        </a>
-        
-        <a  class="问题-思考 "
-           href="/2020/07/11/问题-思考/Timeout-waiting-for-connection-from-pool/"
-           data-tag="问题-思考"
-           data-author="" >
-            <span class="post-title" title="Timeout waiting for connection from pool">Timeout waiting for connection from pool</span>
-            <span class="post-date" title="2020-07-11 12:03:41">2020/07/11</span>
         </a>
         
         <a  class="组件 es es_query "
@@ -1299,7 +1299,7 @@
     <div class="pjax">
         <article id="post-问题-思考/Timeout-waiting-for-connection-from-pool" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Timeout waiting for connection from pool</h1>
+        <h1 class="article-title">Timeout-waiting-for-connection-from-pool</h1>
     
     <div class="article-meta">
         
@@ -1321,7 +1321,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-14 20:53:36'>2020-07-11 12:03</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-14 21:02:39'>2020-07-14 21:00</time>
         
     </div>
     <div class="article-meta">
@@ -1458,7 +1458,7 @@ public static byte[] toByteArray(final HttpEntity entity) throws IOException {
 <p>response.close()方法并不是归还连接到连接池，而是关闭连接。</p>
 <p>使用EntityUtils中的方法：consumeQuietly(HttpEntity)、consume(HttpEntity) 或者自己从response.getEntity().getContent()获取流，读取完毕会自动归还连接，或者不读取主动调用流的close()来归还连接到连接池。</p>
 <p>在<a href="https://hc.apache.org/httpcomponents-client-4.5.x/tutorial/html/fundamentals.html" target="_blank" rel="noopener">HttpClient - Fundamentals 1.1.5</a>中有详细解释：</p>
-<p><img src="Timeout-waiting-for-connection-from-pool/httpclientResponseEntity.png" alt="httpclientResponseEntity"></p>
+<p><img src="./Timeout-waiting-for-connection-from-pool/httpclientResponseEntity.png" alt="httpclientResponseEntity"></p>
 <pre><code>The difference between closing the content stream and closing the response is that the former will attempt to keep the underlying connection alive by consuming the entity content while the latter immediately shuts down and discards the connection.</code></pre><p>关闭内容流和关闭响应的区别在于：<strong>前者会试图通过消耗实体内容来保持底层连接的活力，而后者则会立即关闭并丢弃连接；</strong></p>
 <h1 id="其他优化"><a href="#其他优化" class="headerlink" title="其他优化"></a>其他优化</h1><ul>
 <li>httpclient 是线程安全的，没必要每个线程使用时都创建一个。</li>
@@ -1484,12 +1484,12 @@ public static byte[] toByteArray(final HttpEntity entity) throws IOException {
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>Timeout waiting for connection from pool</p>
+        <p><span class="copy-title">文章标题:</span>Timeout-waiting-for-connection-from-pool</p>
         <p><span class="copy-title">文章字数:</span><span class="post-count">898</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-07-11, 12:03:41</p>
-        <p><span class="copy-title">最后更新:</span>2020-07-14, 20:53:36</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/11/问题-思考/Timeout-waiting-for-connection-from-pool/" title="Timeout waiting for connection from pool">https://simba-cheng.github.io/2020/07/11/问题-思考/Timeout-waiting-for-connection-from-pool/</a>
+        <p><span class="copy-title">发布时间:</span>2020-07-14, 21:00:45</p>
+        <p><span class="copy-title">最后更新:</span>2020-07-14, 21:02:39</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/14/问题-思考/Timeout-waiting-for-connection-from-pool/" title="Timeout-waiting-for-connection-from-pool">https://simba-cheng.github.io/2020/07/14/问题-思考/Timeout-waiting-for-connection-from-pool/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
