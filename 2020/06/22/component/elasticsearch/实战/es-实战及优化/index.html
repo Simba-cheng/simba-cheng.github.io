@@ -147,6 +147,10 @@
                             
                         </li>
                             
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -158,10 +162,6 @@
                                     </li>
                                     
                                 </ul>
-                            
-                        </li>
-                            
-                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
                             
                         </li>
                             
@@ -213,10 +213,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -228,6 +224,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -390,7 +390,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="93">
-<input type="hidden" id="yelog_site_word_count" value="121.8k">
+<input type="hidden" id="yelog_site_word_count" value="121.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -436,15 +436,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">lucene</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1325,12 +1325,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-14 22:13:51'>2020-06-22 21:10</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-14 22:20:11'>2020-06-22 21:10</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:536</span>
+        <span>字数:633</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1411,6 +1411,7 @@
 <h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><p>这里性能优化是指，前期可预见的一些方面，进行优化；更多的时候，需要结合实际情况、业务进行梳理分析。</p>
 <h2 id="mapping"><a href="#mapping" class="headerlink" title="mapping"></a>mapping</h2><h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="1-realtime"><a href="#1-realtime" class="headerlink" title="1. realtime"></a>1. realtime</h3><p>使用 GetRequest 时，将 realtime 设置为false。</p>
 <p>By default, the get API is realtime, and is not affected by the refresh rate of the index (when data will become visible for search). In case where stored fields are requested (see stored_fields parameter) and the document has been updated but is not yet refreshed, the get API will have to parse and analyze the source to extract the stored fields. In order to disable realtime GET, the realtime parameter can be set to false.</p>
+<p>默认情况下，get API是实时的，并且不受索引刷新率的影响（当数据成为搜索可见时）。如果请求的是存储字段（参见sedicated_fields参数），而文档已经更新但尚未刷新，则get API将不得不解析和分析源以提取存储字段。为了禁用实时GET，实时参数可以设置为false。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GetRequest getRequest = new GetRequest(personIndex, id.toString());  </span><br><span class="line">getRequest.realtime(false);</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-timeout"><a href="#2-timeout" class="headerlink" title="2. timeout"></a>2. timeout</h3><p>检索查询设置超时时间</p>
@@ -1439,10 +1440,10 @@ searchSourceBuilder.timeout(TimeValue.timeValueMillis(300L));   </code></pre><h3
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>es-实战及优化</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">536</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">633</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-06-22, 21:10:28</p>
-        <p><span class="copy-title">最后更新:</span>2020-07-14, 22:13:51</p>
+        <p><span class="copy-title">最后更新:</span>2020-07-14, 22:20:11</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/06/22/component/elasticsearch/实战/es-实战及优化/" title="es-实战及优化">https://simba-cheng.github.io/2020/06/22/component/elasticsearch/实战/es-实战及优化/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1504,7 +1505,7 @@ searchSourceBuilder.timeout(TimeValue.timeValueMillis(300L));   </code></pre><h3
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#lucene','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#kafka','#flink','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
