@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>lucene-段合并</title>
+      <link href="/2020/07/14/component/lucene/lucene-%E6%AE%B5%E5%90%88%E5%B9%B6/"/>
+      <url>/2020/07/14/component/lucene/lucene-%E6%AE%B5%E5%90%88%E5%B9%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h1><p>当索引中包含太多的段（segment），IndexWriter会选择其中一些将其合并成一个。</p><p>合并操作有两个好处：</p><p><strong>减少索引中段数量</strong></p><p>合并后所有旧段都会被删除，取而代之的是个新的单一的大段。这能加快搜索速度，因为搜索的段数量减少了。</p><p>这样还能使搜索程序避免达到操作系统限制的文件描述符使用上限。</p><p><strong>减小索引尺寸</strong></p><p>被合并的段中包含那些被挂起的删除操作，合并过程中会释放文档删除所占用的数据位。</p><p>即使没有删除操作，单一的合并段通常都会占用更小的存储空间。</p><br><p>合并策略负责界定哪些段需要合并，具体合并动作由<strong>MergeScheduler</strong>执行。</p><h1 id="段合并策略"><a href="#段合并策略" class="headerlink" title="段合并策略"></a>段合并策略</h1><p>如果要合并，那么合并策略会返回一个<strong><font color="#FFA500">oneMerge</font></strong>的集合。<strong><font color="#FFA500">oneMerge</font></strong>的个数，描述了IndexWriter需要执行合并的次数。</p><p>单个<strong><font color="#FFA500">oneMerge</font></strong>中包含了需要合并为一个新段（new segment）的段集合。</p><p>Lucene4 之前默认段合并策略 <strong>LogMergePolicy</strong></p><p>Lucene4 之后默认段合并策略 <strong>TieredMergePolicy</strong></p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li><a href="https://www.amazingkoala.com.cn/Lucene/Index/2019/0513/58.html" target="_blank" rel="noopener">LogMergePolicy</a></li><li><a href="https://www.amazingkoala.com.cn/Lucene/Index/2019/0516/59.html" target="_blank" rel="noopener">TieredMergePolicy</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> lucene </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> lucene </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Lucene-相关知识点</title>
       <link href="/2020/07/12/component/lucene/Lucene-%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
       <url>/2020/07/12/component/lucene/Lucene-%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
