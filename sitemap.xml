@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.github.io/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2020-07-14T14:13:51.089Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.github.io/2020/07/14/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/Timeout-waiting-for-connection-from-pool/</loc>
     
     <lastmod>2020-07-14T13:14:36.036Z</lastmod>
@@ -124,13 +131,6 @@
     <loc>https://simba-cheng.github.io/2020/06/28/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E8%84%91%E8%A3%82/</loc>
     
     <lastmod>2020-06-28T13:36:34.807Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.github.io/2020/06/22/component/elasticsearch/%E5%AE%9E%E6%88%98/es-%E5%AE%9E%E6%88%98%E5%8F%8A%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2020-06-28T13:06:32.345Z</lastmod>
     
   </url>
   
