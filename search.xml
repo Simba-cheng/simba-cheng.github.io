@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>03-es源码-索引数据</title>
+      <link href="/2020/07/18/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/03-es%E6%BA%90%E7%A0%81-%E7%B4%A2%E5%BC%95%E6%95%B0%E6%8D%AE/"/>
+      <url>/2020/07/18/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/03-es%E6%BA%90%E7%A0%81-%E7%B4%A2%E5%BC%95%E6%95%B0%E6%8D%AE/</url>
+      
+        <content type="html"><![CDATA[<p>（不定时更新，看到哪里写到哪里）</p><p>elasticsearch 索引数据</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> es </category>
+          
+          <category> es_源码 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Timeout-waiting-for-connection-from-pool</title>
       <link href="/2020/07/14/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/Timeout-waiting-for-connection-from-pool/"/>
       <url>/2020/07/14/%E9%97%AE%E9%A2%98-%E6%80%9D%E8%80%83/Timeout-waiting-for-connection-from-pool/</url>
@@ -1001,10 +1030,10 @@
     
     <entry>
       <title>02-es-启动流程</title>
-      <link href="/2020/03/08/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/02-es-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
-      <url>/2020/03/08/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/02-es-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
+      <link href="/2020/03/08/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/02-es%E6%BA%90%E7%A0%81-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+      <url>/2020/03/08/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/02-es%E6%BA%90%E7%A0%81-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<p>好奇es将文档写入磁盘的时机，本来想看下es写文件的流程，看了几眼源码和别人的博客，有点懵懵的。</p><p>觉得需要从启动流程看起，不然有种摸不着头脑的感觉。</p><p>启动类：org.elasticsearch.bootstrap.Elasticsearch</p><h1 id="es启动流程"><a href="#es启动流程" class="headerlink" title="es启动流程"></a>es启动流程</h1><p>先瞅一眼 启动类：org.elasticsearch.bootstrap.Elasticsearch 类图。</p><p><img src="//simba-cheng.github.io/2020/03/08/component/elasticsearch/06-es-源码/02-es-启动流程/elasticsearch-uml.png" alt="elasticsearch-uml" title="elasticsearch-uml"></p><br><p>Elasticsearch类继承了 EnvironmentAwareCommand、Command 两个类。</p><p>这两个类的主要作用就是，解析cli命令(控制台命令)</p><p>Elasticsearch类中的main()方法，最终调用的是父类 Command 中的main()方法。</p><br><p><img src="//simba-cheng.github.io/2020/03/08/component/elasticsearch/06-es-源码/02-es-启动流程/elasticsearch-code-1.png" alt="elasticsearch-code" title="elasticsearch-code"></p><br><p>1.权限检查</p><p>2.错误日志监听器</p><p>3.解析args参数</p><p><del>….有空了再写吧。。。</del></p>]]></content>
+        <content type="html"><![CDATA[<p>好奇es将文档写入磁盘的时机，本来想看下es写文件的流程，看了几眼源码和别人的博客，有点懵懵的。</p><p>觉得需要从启动流程看起，不然有种摸不着头脑的感觉。</p><p>启动类：org.elasticsearch.bootstrap.Elasticsearch</p><h1 id="es启动流程"><a href="#es启动流程" class="headerlink" title="es启动流程"></a>es启动流程</h1><p>先瞅一眼 启动类：org.elasticsearch.bootstrap.Elasticsearch 类图。</p><p><img src="//simba-cheng.github.io/2020/03/08/component/elasticsearch/06-es-源码/02-es源码-启动流程/elasticsearch-uml.png" alt="elasticsearch-uml" title="elasticsearch-uml"></p><br><p>Elasticsearch类继承了 EnvironmentAwareCommand、Command 两个类。</p><p>这两个类的主要作用就是，解析cli命令(控制台命令)</p><p>Elasticsearch类中的main()方法，最终调用的是父类 Command 中的main()方法。</p><br><p><img src="//simba-cheng.github.io/2020/03/08/component/elasticsearch/06-es-源码/02-es源码-启动流程/elasticsearch-code-1.png" alt="elasticsearch-code" title="elasticsearch-code"></p><br><p>1.权限检查</p><p>2.错误日志监听器</p><p>3.解析args参数</p><p><del>挖坑待填</del></p>]]></content>
       
       
       <categories>
