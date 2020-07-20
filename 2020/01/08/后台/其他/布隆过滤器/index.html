@@ -6,25 +6,17 @@
   <meta name="keywords" content=" 布隆过滤器 ">
   <meta name="description" content="布隆过滤器 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
-<meta name="keywords" content="es">
-<meta property="og:type" content="article">
-<meta property="og:title" content="03-es源码-索引数据">
-<meta property="og:url" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.github.io/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/RestIndexActionClassDiagram.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/BaseRestHandlerClassDiagram.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/IndexActionTransportAction.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportIndexAction.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportSingletemBulkWriteAction.png">
-<meta property="og:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportBulkAction-1.png">
-<meta property="og:updated_time" content="2020-07-20T13:25:58.676Z">
+<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="03-es源码-索引数据">
-<meta name="twitter:description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
-<meta name="twitter:image" content="https://simba-cheng.github.io/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/RestIndexActionClassDiagram.png">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -155,10 +147,6 @@
                             
                         </li>
                             
-                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="flink"><i class="fold iconfont icon-right"></i>flink<small>(10)</small></div>
                             
                                 <ul class="sub hide">
@@ -173,26 +161,30 @@
                             
                         </li>
                             
+                        <li><div data-rel="kafka">kafka<small>(6)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="es"><i class="fold iconfont icon-right"></i>es<small>(36)</small></div>
                             
                                 <ul class="sub hide">
                                     
-                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
-                                    </li>
-                                    
                                     <li><div data-rel="es_基础">es_基础<small>(14)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(3)</small></div>
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(3)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_query">es_query<small>(4)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_分词">es_分词<small>(1)</small></div>
@@ -208,14 +200,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
-            
-        
-    
-        
             
         
     
@@ -253,7 +237,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
@@ -261,15 +245,19 @@
                             
                         </li>
                             
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                            
+                        </li>
+                            
                         <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="linux">linux<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="linux">linux<small>(2)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
@@ -278,10 +266,6 @@
                         </li>
                             
                         <li><div data-rel="并发">并发<small>(2)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
@@ -300,6 +284,14 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
+            
+        
+    
+        
             
         
     
@@ -444,19 +436,15 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">flink</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">lucene</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">es</a>
+        <a href="javascript:" class="color2">lucene</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -476,11 +464,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">mysql</a>
+        <a href="javascript:" class="color1">linux</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">linux</a>
+        <a href="javascript:" class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -492,11 +480,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">es</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -532,11 +524,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1830,7 +1822,7 @@ public class TestBloomFilterAppDemo {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#kafka','#flink','#lucene','#es','#广告业务','#Java8','#hash','#索引','#mysql','#linux','#spring','#并发','#设计模式','#缓存','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_update','#es_batch',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
