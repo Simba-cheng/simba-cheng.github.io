@@ -6,25 +6,25 @@
   <meta name="keywords" content=" flink ">
   <meta name="description" content="Flink-集群搭建 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
-<meta name="keywords" content="es">
+<meta name="description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
+<meta name="keywords" content="问题-思考">
 <meta property="og:type" content="article">
-<meta property="og:title" content="03-es源码-索引数据">
-<meta property="og:url" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/index.html">
+<meta property="og:title" content="生产OOM定位">
+<meta property="og:url" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
+<meta property="og:description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/RestIndexActionClassDiagram.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/BaseRestHandlerClassDiagram.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/IndexActionTransportAction.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportIndexAction.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportSingletemBulkWriteAction.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/TransportBulkAction-1.png">
-<meta property="og:updated_time" content="2020-07-23T13:54:52.706Z">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E8%AF%A6%E6%83%85.jpg">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/yangGC%E8%80%97%E6%97%B6.png">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/yangGC%E8%AF%A6%E6%83%85.png">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/MemoryAnalyzer-1.png">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/MemoryAnalyzer-2.png">
+<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81.png">
+<meta property="og:updated_time" content="2020-07-26T13:06:38.943Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="03-es源码-索引数据">
-<meta name="twitter:description" content="（不定时更新，看到哪里写到哪里，文中图片较多，打不开多刷新几次） 写在前面在 org.elasticsearch.action.ActionModule#initRestHandlers 方法中，es会注册很多rest处理器。 每一种处理器，都对应着某一类型的rest请求，例如：  RestSearchAction：处理检索文档相关的rest请求 RestUpdateAction：处理更新文档相关">
-<meta name="twitter:image" content="https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/RestIndexActionClassDiagram.png">
+<meta name="twitter:title" content="生产OOM定位">
+<meta name="twitter:description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
+<meta name="twitter:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E8%AF%A6%E6%83%85.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -107,7 +107,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(94)</small></div></li>
+    <li><div class="all active">全部文章<small>(95)</small></div></li>
     
         
             
@@ -135,7 +135,7 @@
     
         
             
-            <li><div data-rel="问题-思考">问题-思考<small>(3)</small></div>
+            <li><div data-rel="问题-思考">问题-思考<small>(4)</small></div>
                 
             </li>
             
@@ -183,10 +183,10 @@
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_源码">es_源码<small>(3)</small></div>
+                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
+                                    <li><div data-rel="es_源码">es_源码<small>(3)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_query">es_query<small>(4)</small></div>
@@ -221,10 +221,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -236,6 +232,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -397,8 +397,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="94">
-<input type="hidden" id="yelog_site_word_count" value="122.9k">
+<input type="hidden" id="yelog_site_posts_number" value="95">
+<input type="hidden" id="yelog_site_word_count" value="123.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -555,6 +555,14 @@
            data-author="" >
             <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
             <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
+        <a  class="问题-思考 "
+           href="/2020/07/25/问题-思考/生产OOM定位/"
+           data-tag="问题-思考"
+           data-author="" >
+            <span class="post-title" title="生产OOM定位">生产OOM定位</span>
+            <span class="post-date" title="2020-07-25 14:50:51">2020/07/25</span>
         </a>
         
         <a  class="组件 es es_源码 "
