@@ -6,25 +6,17 @@
   <meta name="keywords" content=" es_query ">
   <meta name="description" content="es-query-multi-match多匹配查询 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
-<meta name="keywords" content="问题-思考">
-<meta property="og:type" content="article">
-<meta property="og:title" content="生产OOM定位">
-<meta property="og:url" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.cn/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E8%AF%A6%E6%83%85.jpg">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/yangGC%E8%80%97%E6%97%B6.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/yangGC%E8%AF%A6%E6%83%85.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/MemoryAnalyzer-1.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/MemoryAnalyzer-2.png">
-<meta property="og:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81.png">
-<meta property="og:updated_time" content="2020-07-26T13:06:38.943Z">
+<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生产OOM定位">
-<meta name="twitter:description" content="现象、背景22号晚上十一点多，系统监控告警，集群中一台机器，出现OOM（OutOfMemeoryError）；保护现场后，联系运维紧急重启系统。 查阅日志，OutOfMemeoryError异常信息，是从一个线程中抛出来的。 （当时看到 io.prometheus.client…信息就在怀疑是不是prometheus监控的问题，但要继续分析，需要更多的证据）  YoungGC查看系统监控，发现在O">
-<meta name="twitter:image" content="https://simba-cheng.cn/2020/07/25/问题-思考/生产OOM定位/%E5%BC%82%E5%B8%B8%E8%AF%A6%E6%83%85.jpg">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -221,6 +213,10 @@
     
         
             
+        
+    
+        
+            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -232,10 +228,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
             
         
     
@@ -273,11 +265,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
@@ -484,11 +476,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1519,7 +1511,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
