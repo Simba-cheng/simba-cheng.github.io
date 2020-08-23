@@ -213,22 +213,6 @@
     
         
             
-            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
-            
-        
-    
-        
-            
         
     
         
@@ -245,11 +229,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -308,6 +292,22 @@
         
     
         
+            
+        
+    
+        
+            
+            <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="广告业务">广告业务<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
             
         
     
@@ -448,10 +448,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">广告业务</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">Java8</a>
     </li>
     
@@ -476,15 +472,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">广告业务</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1341,7 +1341,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-23 21:48:56'>2020-07-18 21:11</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-23 21:51:39'>2020-07-18 21:11</time>
         
     </div>
     <div class="article-meta">
@@ -1458,7 +1458,7 @@ public final void handleRequest(RestRequest request, RestChannel channel, NodeCl
 <p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89handler%E5%A4%84%E7%90%86%E5%99%A8.png" alt="遍历所有handler处理器"></p>
 <h2 id="分派请求"><a href="#分派请求" class="headerlink" title="分派请求"></a>分派请求</h2><p>在dispatchRequest方法中，根据RestHandler查找对应RestHandler的实现。进而调用handleRequest方法</p>
 <p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/%E5%88%86%E6%B4%BE%E8%AF%B7%E6%B1%82%E7%BB%99Rest*Action%E5%A4%84%E7%90%86.png" alt="分派请求给Rest*Action处理"></p>
-<h1 id="源码流程图"><a href="#源码流程图" class="headerlink" title="源码流程图"></a>源码流程图</h1><p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/elasticsearch-index-%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="elasticsearch-index-源码流程图"></p>
+<h1 id="源码流程图"><a href="#源码流程图" class="headerlink" title="源码流程图"></a>源码流程图</h1><p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/elasticsearch-%E5%86%99index%E6%BA%90%E7%A0%81%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="elasticsearch-index-源码流程图"></p>
 <h1 id="大体处理过程"><a href="#大体处理过程" class="headerlink" title="大体处理过程"></a>大体处理过程</h1><p>Netty4HttpRequestHandler#channelRead0收到index索引请求。传递给RestController，然后将请求分发给相应的RestHandler处理。</p>
 <p>请求URL的模式符合：”/{index}/{type}/{id}”（上面列出的几种模式），被分配给RestIndexAction处理。</p>
 <p>RestIndexAction会从request中获取参数、数据，然后根据不同的action，映射到具体的TransportAction实例（几乎每一个RestAction都有一个TransportAction），RestIndexAction 映射的是 TransportIndexAction。</p>
@@ -1559,7 +1559,7 @@ public final void handleRequest(RestRequest request, RestChannel channel, NodeCl
         <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-07-18, 21:11:11</p>
-        <p><span class="copy-title">最后更新:</span>2020-08-23, 21:48:56</p>
+        <p><span class="copy-title">最后更新:</span>2020-08-23, 21:51:39</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/" title="03-es源码-索引数据">https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1621,7 +1621,7 @@ public final void handleRequest(RestRequest request, RestChannel channel, NodeCl
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#广告业务','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
