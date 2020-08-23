@@ -169,10 +169,10 @@
                             
                                 <ul class="sub hide">
                                     
-                                    <li><div data-rel="es_基础">es_基础<small>(14)</small></div>
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                                    <li><div data-rel="es_基础">es_基础<small>(14)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
@@ -237,7 +237,11 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
                             
                         </li>
                             
@@ -253,11 +257,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="mysql">mysql<small>(3)</small></div>
+                        <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
                             
@@ -265,11 +269,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(6)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -452,6 +452,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">Java8</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">hash</a>
     </li>
     
@@ -464,19 +468,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">Java8</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">mysql</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -484,7 +476,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">并发</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -524,11 +524,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1341,7 +1341,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-23 18:36:29'>2020-07-18 21:11</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-23 18:58:38'>2020-07-18 21:11</time>
         
     </div>
     <div class="article-meta">
@@ -1504,44 +1504,44 @@ controller.registerHandler(POST, &quot;/{index}/{type}/{id}/_create&quot;, creat
 <p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/3-TransportBulkAction-executeBulk.png" alt="TransportBulkAction#executeBulk"></p>
 <h2 id="7、TransportBulkAction-BulkOperation-doRun"><a href="#7、TransportBulkAction-BulkOperation-doRun" class="headerlink" title="7、TransportBulkAction-BulkOperation#doRun"></a>7、TransportBulkAction-BulkOperation#doRun</h2><p>（方法较长，分两部分）</p>
 <h3 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h3><p>循环所有文档，校验文档，Index写索引业务的特定业务处理，如：routing路由、mapping校验、文档id生成。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/4-TransportBulkAction-BulkOperation#doRun.png" alt="TransportBulkAction-BulkOperation#doRun"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/4-TransportBulkAction-BulkOperation-doRun.png" alt="TransportBulkAction-BulkOperation#doRun"></p>
 <p>在IndexRequest#process方法中，如果没有指定文档id，那在这里会自动生成id。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/5-TransportBulkAction-BulkOperation#doRun#process.png" alt="TransportBulkAction-BulkOperation#doRun#process"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/5-TransportBulkAction-BulkOperation-doRun-process.png" alt="TransportBulkAction-BulkOperation#doRun#process"></p>
 <h3 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h3><p>循环所有docRequest，确定其所属分片的shardId（分片id），然后根据shardId进行归类，就是将相同shard id的请求合并</p>
 <blockquote>
 <p>Map.computeIfAbsent 方法是JDK8中的新方法</p>
 </blockquote>
 <p>接着循环已经归类好的request，设定集群节点通信的必要参数。</p>
 <p>交给 TransportShardBulkAction#execute 准备进行转发给各个主分片，在listener等待响应。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/6-TransportBulkAction-BulkOperation#doRun2.png" alt="TransportBulkAction-BulkOperation#doRun-2"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/6-TransportBulkAction-BulkOperation-doRun2.png" alt="TransportBulkAction-BulkOperation#doRun-2"></p>
 <h2 id="8、TransportShardBulkAction-execute"><a href="#8、TransportShardBulkAction-execute" class="headerlink" title="8、TransportShardBulkAction#execute"></a>8、TransportShardBulkAction#execute</h2><p>协调节点转发数据节点（主分片节点）的具体实现，在其父类 TransportReplicationAction#doExecute 中</p>
 <p>ReroutePhase类，实现了Runnable，是个线程，核心方法doRun。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/7-TransportReplicationAction#doExecute.png" alt="TransportReplicationAction#doExecute"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/7-TransportReplicationAction-doExecute.png" alt="TransportReplicationAction#doExecute"></p>
 <ul>
 <li>获取最新集群状态信息</li>
 <li>检查索引是否关闭状态</li>
 <li>从路由表中找到目标主分片，根据shardId</li>
 <li>如果主分片是本机，则本机执行；非本机，则转发到主分片节点（数据节点）。</li>
 </ul>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/8-TransportReplicationAction#doRun.png" alt="TransportReplicationAction#doRun"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/8-TransportReplicationAction-doRun.png" alt="TransportReplicationAction#doRun"></p>
 <p>（由于我这里是本地源码debug，所以是本机执行。）</p>
 <p>不论是本机执行，还是发送到主分片节点，都会调用 performAction 方法；该方法参数列表中有一个isPrimaryAction字段，用来标识是否本机执行。</p>
 <p>至此，协调节点已处理完成，将消息发送至主分片节点（数据节点）进行处理。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/9-TransportReplicationAction#doRun-2.png" alt="TransportReplicationAction#doRun-2"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/9-TransportReplicationAction-doRun-2.png" alt="TransportReplicationAction#doRun-2"></p>
 <h2 id="9、TransportReplicationAction-PrimaryOperationTransportHandler-messageReceived"><a href="#9、TransportReplicationAction-PrimaryOperationTransportHandler-messageReceived" class="headerlink" title="9、TransportReplicationAction.PrimaryOperationTransportHandler#messageReceived"></a>9、TransportReplicationAction.PrimaryOperationTransportHandler#messageReceived</h2><p>这里是接收集群内其他节点请求的地方（协调节点 -&gt; 数据节点）。</p>
 <p>AsyncPrimaryAction类继承Runnable，主方法doRun。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/10-TransportReplicationAction-PrimaryOperationTransportHandler#messageReceived.png" alt="TransportReplicationAction-PrimaryOperationTransportHandler#messageReceived"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/10-TransportReplicationAction-PrimaryOperationTransportHandler-messageReceived.png" alt="TransportReplicationAction-PrimaryOperationTransportHandler#messageReceived"></p>
 <h2 id="10-TransportReplicationAction-acquirePrimaryShardReference"><a href="#10-TransportReplicationAction-acquirePrimaryShardReference" class="headerlink" title="10-TransportReplicationAction#acquirePrimaryShardReference"></a>10-TransportReplicationAction#acquirePrimaryShardReference</h2><p>获取索引引用，准备执行写索引动作。在本地（主分片）执行写操作，然后发送给副本分片。</p>
 <p>在写索引操作之前，有好几个地方会 primaryShardReference.isRelocated()方法，这个方法的作用是检查当前分片是否是主分片，防止在最后写分片的一刻，分片角色切换（主分片变为副本分片），如果当前分片不再是主分片，则会获取最新集群路由状态，将消息再次转发。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/11-TransportReplicationAction#acquirePrimaryShardReference.png" alt="TransportReplicationAction#acquirePrimaryShardReference"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/11-TransportReplicationAction-acquirePrimaryShardReference.png" alt="TransportReplicationAction#acquirePrimaryShardReference"></p>
 <p>检查当前分片角色，如果发生角色切换，获取最新集群路由状态，将请求转发至新主分片。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/12-TransportReplicationAction-AsyncPrimaryAction#onResponse.png" alt="TransportReplicationAction-AsyncPrimaryAction#onResponse"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/12-TransportReplicationAction-AsyncPrimaryAction-onResponse.png" alt="TransportReplicationAction-AsyncPrimaryAction#onResponse"></p>
 <h2 id="11、ReplicationOperation-execute"><a href="#11、ReplicationOperation-execute" class="headerlink" title="11、ReplicationOperation#execute"></a>11、ReplicationOperation#execute</h2><p>检查此次写操作涉及的 shard，活跃 shard 数量是否足够。</p>
 <p>然后执行，写主分片操作。写主分片成功后，向副本分片分发请求。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/13-ReplicationOperation#execute.png" alt="ReplicationOperation#execute"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/13-ReplicationOperation-execute.png" alt="ReplicationOperation#execute"></p>
 <h2 id="12、TransportReplicationAction-PrimaryShardReference-perform"><a href="#12、TransportReplicationAction-PrimaryShardReference-perform" class="headerlink" title="12、TransportReplicationAction.PrimaryShardReference#perform"></a>12、TransportReplicationAction.PrimaryShardReference#perform</h2><p>perform方法调用抽象方法：shardOperationOnPrimary。</p>
 <p>进入TransportShardBulkAction 类，它对这个方法进行了实现。</p>
-<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/14-TransportReplicationAction-PrimaryShardReference#perform.png" alt="TransportReplicationAction-PrimaryShardReference#perform"></p>
+<p><img src="//simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/14-TransportReplicationAction-PrimaryShardReference-perform.png" alt="TransportReplicationAction-PrimaryShardReference#perform"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
@@ -1559,7 +1559,7 @@ controller.registerHandler(POST, &quot;/{index}/{type}/{id}/_create&quot;, creat
         <p><span class="copy-title">文章字数:</span><span class="post-count">2.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-07-18, 21:11:11</p>
-        <p><span class="copy-title">最后更新:</span>2020-08-23, 18:36:29</p>
+        <p><span class="copy-title">最后更新:</span>2020-08-23, 18:58:38</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/" title="03-es源码-索引数据">https://simba-cheng.cn/2020/07/18/component/elasticsearch/06-es-源码/03-es源码-索引数据/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1621,7 +1621,7 @@ controller.registerHandler(POST, &quot;/{index}/{type}/{id}/_create&quot;, creat
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#hash','#索引','#linux','#Java8','#mysql','#并发','#设计模式','#spring','#缓存','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_update','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
