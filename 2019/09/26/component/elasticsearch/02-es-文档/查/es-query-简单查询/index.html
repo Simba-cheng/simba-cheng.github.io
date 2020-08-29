@@ -213,10 +213,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -228,6 +224,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -245,11 +245,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
@@ -265,11 +265,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
@@ -456,11 +456,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -476,11 +476,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1666,7 +1666,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

@@ -213,10 +213,6 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -228,6 +224,10 @@
                     </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -245,11 +245,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
@@ -265,11 +265,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
@@ -456,11 +456,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -476,11 +476,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1357,12 +1357,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-29 13:02:39'>2020-08-29 12:55</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-29 13:09:22'>2020-08-29 12:55</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:972</span>
+        <span>字数:973</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1381,7 +1381,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-查询过程"><span class="toc-text">Elasticsearch 查询过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Query阶段"><span class="toc-text">Query阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fetch阶段"><span class="toc-text">Fetch阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Search-Type"><span class="toc-text">Search Type</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elasticsearch-查询过程"><span class="toc-text">Elasticsearch 查询过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Query阶段"><span class="toc-text">Query阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fetch阶段"><span class="toc-text">Fetch阶段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Search-Type"><span class="toc-text">Search Type</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#QUERY-THEN-FETCH"><span class="toc-text">QUERY_THEN_FETCH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DFS-QUERY-THEN-FETCH"><span class="toc-text">DFS_QUERY_THEN_FETCH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QUERY-AND-FETCH"><span class="toc-text">QUERY_AND_FETCH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1416,26 +1416,17 @@
 <p>场景二：如果要支持准确排名，则需要首先从所有分片中收集词频，以计算全局词频，然后使用这些全局频率对每个分片执行查询。</p>
 <p>由于需要对结果集进行排序，因此在保持正确的排序行为的同时获取较大的文档集甚至滚动（scroll）它可能是非常昂贵的操作。</p>
 <p>Elasticsearch允许根据每个搜索请求控制要执行的搜索类型。可以通过在查询字符串中设置search_type参数来配置类型。</p>
-<ul>
-<li><p>QUERY_THEN_FETCH</p>
-<p><font color="red"><strong>默认的SearchType（仅针对6.5.0版本）</strong></font> ，分为两步：</p>
+<h2 id="QUERY-THEN-FETCH"><a href="#QUERY-THEN-FETCH" class="headerlink" title="QUERY_THEN_FETCH"></a>QUERY_THEN_FETCH</h2><p><font color="red"><strong>默认的SearchType（仅针对6.5.0版本）</strong></font> ，分为两步：</p>
 <p>第一步：<strong>“协调节点”</strong> 向索引相关的分片发出请求，各分片只返回文档、排序值等相关信息（from+size）；</p>
 <p>第二步：<strong>“协调节点”</strong> 根据排序值，对所有相关分片返回值进行排序后，再用文档id，去相关分片获取文档数据，返回用户。</p>
-</li>
-</ul>
-<ul>
-<li><p>DFS_QUERY_THEN_FETCH</p>
-<p>同 QUERY_THEN_FETCH 类似，只多了一个步骤。</p>
+<h2 id="DFS-QUERY-THEN-FETCH"><a href="#DFS-QUERY-THEN-FETCH" class="headerlink" title="DFS_QUERY_THEN_FETCH"></a>DFS_QUERY_THEN_FETCH</h2><p>同 QUERY_THEN_FETCH 类似，只多了一个步骤。</p>
 <p>在 <strong>“协调节点”</strong> 向索引相关的分片发出请求之前，先对所有分片发送请求，把所有分片中词频、文频率等打分依据全部汇总，再执行后面的操作。</p>
 <p><strong>该策略效率最低，性能最差，但结果最准确（精度最高）。</strong> </p>
-</li>
-</ul>
-<ul>
-<li><p>QUERY_AND_FETCH</p>
-<p><strong>Only used for pre 5.3 request where this type is still needed</strong> </p>
+<h2 id="QUERY-AND-FETCH"><a href="#QUERY-AND-FETCH" class="headerlink" title="QUERY_AND_FETCH"></a>QUERY_AND_FETCH</h2><p><strong>Only used for pre 5.3 request where this type is still needed</strong> </p>
 <p><strong>“协调节点”</strong> 向索引相关的分片发出请求，各分片将文档数据、排序值 等所有信息一起返回。</p>
 <p>这种搜索方式是最快的，相比上面两种方式，只需要去分片查询一次；但各个分片返回的结果集之和，可能是用户要求size的n倍。</p>
-</li>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/search-request-search-type.html#query-then-fetch" target="_blank" rel="noopener">Search Type</a> </li>
 </ul>
 
       
@@ -1451,10 +1442,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>es-查询过程</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">972</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">973</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-08-29, 12:55:41</p>
-        <p><span class="copy-title">最后更新:</span>2020-08-29, 13:02:39</p>
+        <p><span class="copy-title">最后更新:</span>2020-08-29, 13:09:22</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/29/component/elasticsearch/01-es-基础/es-查询过程/" title="es-查询过程">https://simba-cheng.cn/2020/08/29/component/elasticsearch/01-es-基础/es-查询过程/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1516,7 +1507,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
