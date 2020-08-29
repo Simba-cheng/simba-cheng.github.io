@@ -213,6 +213,10 @@
     
         
             
+        
+    
+        
+            
             <li><div data-rel="业务"><i class="fold iconfont icon-right"></i>业务<small>(2)</small></div>
                 
                     <ul class="sub hide">
@@ -224,10 +228,6 @@
                     </ul>
                 
             </li>
-            
-        
-    
-        
             
         
     
@@ -245,11 +245,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
@@ -265,11 +265,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -456,11 +456,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -476,11 +476,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">并发</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">并发</a>
+        <a href="javascript:" class="color3">缓存</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1357,7 +1357,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-29 13:09:22'>2020-08-29 12:55</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-29 13:10:07'>2020-08-29 12:55</time>
         
     </div>
     <div class="article-meta">
@@ -1397,6 +1397,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>ElasticSearch版本：6.5.0</p>
+<hr>
 <h1 id="Elasticsearch-查询过程"><a href="#Elasticsearch-查询过程" class="headerlink" title="Elasticsearch 查询过程"></a>Elasticsearch 查询过程</h1><p>一个搜索请求必须询问请求的索引中所有分片的某个副本来进行匹配。</p>
 <p>假设一个索引有5个主分片，每个主分片有l个副分片，共10个分片，一次搜索请求会由5个分片来共同完成；它们可能是主分片，也可能是副分片。也就是说，一次搜索请求只会命中所有分片副本中的一个。</p>
 <p>Elasticsearch 检索分为两个阶段：<strong>Query阶段</strong> 和 <strong>Fetch阶段</strong>。</p>
@@ -1445,7 +1446,7 @@
         <p><span class="copy-title">文章字数:</span><span class="post-count">973</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-08-29, 12:55:41</p>
-        <p><span class="copy-title">最后更新:</span>2020-08-29, 13:09:22</p>
+        <p><span class="copy-title">最后更新:</span>2020-08-29, 13:10:07</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/29/component/elasticsearch/01-es-基础/es-查询过程/" title="es-查询过程">https://simba-cheng.cn/2020/08/29/component/elasticsearch/01-es-基础/es-查询过程/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1507,7 +1508,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#索引','#hash','#linux','#mysql','#spring','#缓存','#并发','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
