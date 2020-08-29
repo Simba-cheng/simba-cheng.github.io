@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>es-查询过程</title>
+      <link href="/2020/08/29/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B/"/>
+      <url>/2020/08/29/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/es-%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p>ElasticSearch版本：6.5.0</p><h1 id="Elasticsearch-查询过程"><a href="#Elasticsearch-查询过程" class="headerlink" title="Elasticsearch 查询过程"></a>Elasticsearch 查询过程</h1><p>一个搜索请求必须询问请求的索引中所有分片的某个副本来进行匹配。</p><p>假设一个索引有5个主分片，每个主分片有l个副分片，共10个分片，一次搜索请求会由5个分片来共同完成；它们可能是主分片，也可能是副分片。也就是说，一次搜索请求只会命中所有分片副本中的一个。</p><p>Elasticsearch 检索分为两个阶段：<strong>Query阶段</strong> 和 <strong>Fetch阶段</strong>。</p><h2 id="Query阶段"><a href="#Query阶段" class="headerlink" title="Query阶段"></a>Query阶段</h2><ul><li><p>转发请求：<strong>“协调节点”</strong> 接收到用户检索请求后，将检索请求转发给相关索引的任意节点（主分片、副本分片都有可能）。</p></li><li><p>执行查询：<strong>“数据节点”</strong> 收到查询请求执行查询，并对结果进行排序。（每个节点都会根据请求中参数返回from+size个排序后的文档Id和排序值给<strong>“协调节点”</strong> ）</p></li></ul><p>查询阶段并不会对搜索请求的内容进行解析，无论搜索什么内容，只看本次搜索需要命中哪些 shard（分片），然后针对每个特定 shard（分片），转发搜索请求 。</p><h2 id="Fetch阶段"><a href="#Fetch阶段" class="headerlink" title="Fetch阶段"></a>Fetch阶段</h2><ul><li>重排序：<strong>“协调节点”</strong> 收到<strong>“数据节点”</strong> 返回的数据后，按照<strong>“排序值”</strong> 对所有分片取回的数据进行重排序，最终只选取客户端需要的from+size个文档的Id</li><li>获取文档数据：<strong>“协调节点”</strong> 根据选取的文档id，到相应的分片获取详细文档数据，并将最终结果集返回用户。</li></ul><h1 id="Search-Type"><a href="#Search-Type" class="headerlink" title="Search Type"></a>Search Type</h1><p>执行分布式搜索时，需要将搜索操作分散到所有相关的分片节点上，然后将所有结果收集回去。</p><p>场景一：假如我们有10个分片，第一个分片可能会保存0到10之间最相关的结果，其他分片的结果排在其后。但是，在执行请求时，我们需要从所有分片中获取0到10之间的结果，对它们进行排序，然后返回结果。</p><p>场景二：如果要支持准确排名，则需要首先从所有分片中收集词频，以计算全局词频，然后使用这些全局频率对每个分片执行查询。</p><p>由于需要对结果集进行排序，因此在保持正确的排序行为的同时获取较大的文档集甚至滚动（scroll）它可能是非常昂贵的操作。</p><p>Elasticsearch允许根据每个搜索请求控制要执行的搜索类型。可以通过在查询字符串中设置search_type参数来配置类型。</p><ul><li><p>QUERY_THEN_FETCH</p><p><font color="red"><strong>默认的SearchType（仅针对6.5.0版本）</strong></font> ，分为两步：</p><p>第一步：<strong>“协调节点”</strong> 向索引相关的分片发出请求，各分片只返回文档、排序值等相关信息（from+size）；</p><p>第二步：<strong>“协调节点”</strong> 根据排序值，对所有相关分片返回值进行排序后，再用文档id，去相关分片获取文档数据，返回用户。</p></li></ul><ul><li><p>DFS_QUERY_THEN_FETCH</p><p>同 QUERY_THEN_FETCH 类似，只多了一个步骤。</p><p>在 <strong>“协调节点”</strong> 向索引相关的分片发出请求之前，先对所有分片发送请求，把所有分片中词频、文频率等打分依据全部汇总，再执行后面的操作。</p><p><strong>该策略效率最低，性能最差，但结果最准确（精度最高）。</strong> </p></li></ul><ul><li><p>QUERY_AND_FETCH</p><p><strong>Only used for pre 5.3 request where this type is still needed</strong> </p><p><strong>“协调节点”</strong> 向索引相关的分片发出请求，各分片将文档数据、排序值 等所有信息一起返回。</p><p>这种搜索方式是最快的，相比上面两种方式，只需要去分片查询一次；但各个分片返回的结果集之和，可能是用户要求size的n倍。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 组件 </category>
+          
+          <category> es </category>
+          
+          <category> es_基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> es </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>04-es源码-search流程</title>
       <link href="/2020/08/29/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/04-es%E6%BA%90%E7%A0%81-search%E6%B5%81%E7%A8%8B/"/>
       <url>/2020/08/29/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/04-es%E6%BA%90%E7%A0%81-search%E6%B5%81%E7%A8%8B/</url>
