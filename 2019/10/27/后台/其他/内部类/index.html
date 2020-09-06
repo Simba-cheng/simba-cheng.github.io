@@ -169,10 +169,10 @@
                             
                                 <ul class="sub hide">
                                     
-                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
+                                    <li><div data-rel="es_基础">es_基础<small>(15)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_基础">es_基础<small>(15)</small></div>
+                                    <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
@@ -241,7 +241,7 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
@@ -249,11 +249,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="索引">索引<small>(2)</small></div>
+                        <li><div data-rel="hash">hash<small>(2)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                        <li><div data-rel="索引">索引<small>(2)</small></div>
                             
                         </li>
                             
@@ -265,15 +265,15 @@
                             
                         </li>
                             
-                        <li><div data-rel="hash">hash<small>(2)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="spring">spring<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -464,11 +464,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">索引</a>
+        <a href="javascript:" class="color5">hash</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">缓存</a>
+        <a href="javascript:" class="color3">索引</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -480,19 +480,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">hash</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">设计模式</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color2">spring</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color3">并发</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">缓存</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">设计模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -504,15 +504,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">bitmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color1">布隆过滤器</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">bitmap</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -536,11 +536,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1375,7 +1375,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-27 20:03:18'>2019-10-27 19:42</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-06 10:48:02'>2019-10-27 19:42</time>
         
     </div>
     <div class="article-meta">
@@ -1415,7 +1415,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="内部类-嵌套类-和-静态嵌套类"><a href="#内部类-嵌套类-和-静态嵌套类" class="headerlink" title="内部类(嵌套类) 和 静态嵌套类"></a>内部类(嵌套类) 和 静态嵌套类</h1><p>在Oracle官方文档中有这么一句：</p>
-<pre><code>Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner classes.
+<pre><code>Terminology: Nested classes are divided into two categories: static and non-static. 
+
+Nested classes that are declared static are called static nested classes. 
+
+Non-static nested classes are called inner classes.
 
 术语：嵌套类分为两类：静态和非静态。 声明为静态的嵌套类称为静态嵌套类。 非静态嵌套类称为内部类。</code></pre><p>Java中允许我们在一个类(A)中定义另一个类(b)。</p>
 <p>这样的类(b)被称作 内部类</p>
@@ -1741,7 +1745,7 @@ public class GeneralMotorsCompany {
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:55</p>
-        <p><span class="copy-title">最后更新:</span>2019-10-27, 20:03:18</p>
+        <p><span class="copy-title">最后更新:</span>2020-09-06, 10:48:02</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/其他/内部类/" title="内部类">https://simba-cheng.cn/2019/10/27/后台/其他/内部类/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1803,7 +1807,7 @@ public class GeneralMotorsCompany {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#索引','#缓存','#linux','#mysql','#hash','#设计模式','#spring','#并发','#es','#nginx','#后台_其他','#布隆过滤器','#bitmap','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_update','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

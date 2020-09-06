@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.cn/2019/10/27/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%86%85%E9%83%A8%E7%B1%BB/</loc>
+    
+    <lastmod>2020-09-06T02:48:02.721Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.cn/2020/08/29/component/elasticsearch/06-es-%E6%BA%90%E7%A0%81/04-es%E6%BA%90%E7%A0%81-search%E6%B5%81%E7%A8%8B/</loc>
     
     <lastmod>2020-09-06T02:34:29.443Z</lastmod>
@@ -677,13 +684,6 @@
     <loc>https://simba-cheng.cn/2019/10/27/%E5%90%8E%E5%8F%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/build-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2019-10-27T12:03:18.398Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.cn/2019/10/27/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%86%85%E9%83%A8%E7%B1%BB/</loc>
-    
-    <lastmod>2019-10-27T12:03:18.395Z</lastmod>
     
   </url>
   
