@@ -6,18 +6,17 @@
   <meta name="keywords" content=" 后台_其他 ">
   <meta name="description" content="内部类 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
-<meta name="keywords" content="nginx">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Nginx-upstream模块">
-<meta property="og:url" content="https://simba-cheng.cn/2020/09/04/component/nginx/Nginx-upstream模块/index.html">
+<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simba">
+<meta property="og:url" content="https://simba-cheng.cn/about/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
+<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-04T15:31:22.725Z">
+<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx-upstream模块">
-<meta name="twitter:description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
+<meta name="twitter:title" content="Simba">
+<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -509,11 +508,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1376,7 +1375,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-09-06 10:56:28'>2019-10-27 19:42</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-06 11:00:43'>2019-10-27 19:42</time>
         
     </div>
     <div class="article-meta">
@@ -1400,7 +1399,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类（嵌套类）-和-静态内部类（嵌套类）"><span class="toc-text">内部类（嵌套类） 和 静态内部类（嵌套类）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态嵌套类"><span class="toc-text">静态嵌套类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要使用-内部类"><span class="toc-text">为什么要使用 内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类（嵌套类）-和-静态嵌套类"><span class="toc-text">内部类（嵌套类） 和 静态嵌套类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态嵌套类"><span class="toc-text">静态嵌套类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要使用-内部类"><span class="toc-text">为什么要使用 内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1415,24 +1414,23 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="内部类（嵌套类）-和-静态内部类（嵌套类）"><a href="#内部类（嵌套类）-和-静态内部类（嵌套类）" class="headerlink" title="内部类（嵌套类） 和 静态内部类（嵌套类）"></a>内部类（嵌套类） 和 静态内部类（嵌套类）</h1><p>在Oracle官方文档中有这么一句：</p>
+        <h1 id="内部类（嵌套类）-和-静态嵌套类"><a href="#内部类（嵌套类）-和-静态嵌套类" class="headerlink" title="内部类（嵌套类） 和 静态嵌套类"></a>内部类（嵌套类） 和 静态嵌套类</h1><p>在Oracle官方文档中有这么一句：</p>
 <pre><code>Terminology: Nested classes are divided into two categories: static and non-static. 
 
 Nested classes that are declared static are called static nested classes. 
 
 Non-static nested classes are called inner classes.
 
-术语：嵌套类分为两类：静态和非静态。 声明为静态的嵌套类称为静态嵌套类。 非静态嵌套类称为内部类。</code></pre><p>Java中允许我们在一个类(A)中定义另一个类(b)，这样的类(b)被称作 内部类</p>
-<p>嵌套类可以分为两类：<strong>静态嵌套类（静态内部类）</strong> 和 <strong>内部类</strong>。</p>
+术语：嵌套类分为两类：静态和非静态。 声明为静态的嵌套类称为静态嵌套类。 非静态嵌套类称为内部类。</code></pre><p>Java中允许我们在一个类(A)中定义另一个类(b)，这样的类(b)被称作：内部类。</p>
+<p>嵌套类可以分为两类：<strong>静态嵌套类</strong> 和 <strong>内部类</strong>。</p>
 <br>
 
 <p>二者如何理解？</p>
-<p>借用知乎上大佬的回答：</p>
-<pre><code>什么是嵌套？
-    嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己。
+<p>借用知乎上大佬的回答：<br>    什么是嵌套？<br>        嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己。</p>
+<pre><code>什么是内部？
+    内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）
 
-什么是内部？
-    内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）</code></pre><h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类 是封闭类(外部类)的成员，例如：NestedClass 内部类是 OuterClass 的成员。</p>
+https://www.zhihu.com/question/28197253/answer/39814613</code></pre><h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类 是封闭类(外部类)的成员，例如：NestedClass 内部类是 OuterClass 的成员。</p>
 <p>内部类 可以访问 封闭类的其他成员，即使 其他成员 也被声明为私有。</p>
 <pre><code>class OuterClass {
 
@@ -1745,7 +1743,7 @@ public class GeneralMotorsCompany {
         <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2019-10-27, 19:42:55</p>
-        <p><span class="copy-title">最后更新:</span>2020-09-06, 10:56:28</p>
+        <p><span class="copy-title">最后更新:</span>2020-09-06, 11:00:43</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/27/后台/其他/内部类/" title="内部类">https://simba-cheng.cn/2019/10/27/后台/其他/内部类/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1807,7 +1805,7 @@ public class GeneralMotorsCompany {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#布隆过滤器','#后台_其他','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
