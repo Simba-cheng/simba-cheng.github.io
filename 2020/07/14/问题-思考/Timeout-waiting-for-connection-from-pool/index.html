@@ -6,17 +6,18 @@
   <meta name="keywords" content=" 问题-思考 ">
   <meta name="description" content="Timeout-waiting-for-connection-from-pool | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Simba">
-<meta property="og:url" content="https://simba-cheng.cn/about/index.html">
+<meta name="description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx-upstream模块">
+<meta property="og:url" content="https://simba-cheng.cn/2020/09/04/component/nginx/Nginx-upstream模块/index.html">
 <meta property="og:site_name" content="Simba">
-<meta property="og:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta property="og:description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-05T04:17:49.091Z">
+<meta property="og:updated_time" content="2020-09-04T15:31:22.725Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Simba">
-<meta name="twitter:description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
+<meta name="twitter:title" content="Nginx-upstream模块">
+<meta name="twitter:description" content="一般情况应用服务器的上游会部署一套nginx集群，用作反向代理、负载均衡，这个是很好的。 upstream容错重试假设有五台应用服务器（Backend Server），其中两台宕机不可用；这时某nginx发送请求到其中一台（Backend Server），由于其不可用，Backend Server 会超时或返回错误状态码，然后直接返回给Client，这种场景的处理是很不友好的。 nginx中的up">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -508,11 +509,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">后台_其他</a>
+        <a href="javascript:" class="color1">布隆过滤器</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">布隆过滤器</a>
+        <a href="javascript:" class="color1">后台_其他</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -1602,7 +1603,7 @@ public static byte[] toByteArray(final HttpEntity entity) throws IOException {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#布隆过滤器','#后台_其他','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
