@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://simba-cheng.cn/2020/05/03/component/kafka/kafka-consumer/</loc>
+    
+    <lastmod>2020-09-15T11:42:40.364Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://simba-cheng.cn/2019/10/27/%E5%90%8E%E5%8F%B0/%E5%85%B6%E4%BB%96/%E5%86%85%E9%83%A8%E7%B1%BB/</loc>
     
     <lastmod>2020-09-06T03:00:43.510Z</lastmod>
@@ -243,13 +250,6 @@
     <loc>https://simba-cheng.cn/2020/05/01/component/kafka/kafka-pageCache%E5%92%8CzeroCopy/</loc>
     
     <lastmod>2020-05-24T12:41:58.628Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://simba-cheng.cn/2020/05/03/component/kafka/kafka-consumer/</loc>
-    
-    <lastmod>2020-05-24T06:05:07.649Z</lastmod>
     
   </url>
   
