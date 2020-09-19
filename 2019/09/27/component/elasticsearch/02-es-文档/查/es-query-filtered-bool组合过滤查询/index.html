@@ -127,13 +127,13 @@
     
         
             
-        
-    
-        
-            
             <li><div data-rel="问题-思考">问题-思考<small>(4)</small></div>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -241,11 +241,23 @@
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
+                        <li><div data-rel="spring">spring<small>(6)</small></div>
                             
                         </li>
                             
                         <li><div data-rel="Java8">Java8<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="并发">并发<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
                             
                         </li>
                             
@@ -262,18 +274,6 @@
                         </li>
                             
                         <li><div data-rel="mysql">mysql<small>(3)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="spring">spring<small>(6)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="并发">并发<small>(2)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="缓存">缓存<small>(1)</small></div>
                             
                         </li>
                             
@@ -448,11 +448,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">lucene</a>
+        <a href="javascript:" class="color1">kafka</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">kafka</a>
+        <a href="javascript:" class="color2">lucene</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -552,22 +552,6 @@
     </div>
     
     <nav id="title-list-nav">
-        
-        <a id="top" class="组件 es es_实战 "
-           href="/2020/06/22/component/elasticsearch/实战/es-实战及优化/"
-           data-tag="es"
-           data-author="" >
-            <span class="post-title" title="es-实战及优化">es-实战及优化</span>
-            <span class="post-date" title="2020-06-22 21:10:28">2020/06/22</span>
-        </a>
-        
-        <a id="top" class="组件 es "
-           href="/2019/10/08/component/elasticsearch/elasticsearch-api-速查/"
-           data-tag="es"
-           data-author="" >
-            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
-            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
-        </a>
         
         <a  class="组件 nginx "
            href="/2020/09/04/component/nginx/Nginx-upstream模块/"
@@ -671,6 +655,14 @@
            data-author="" >
             <span class="post-title" title="es-脑裂">es-脑裂</span>
             <span class="post-date" title="2020-06-28 21:10:47">2020/06/28</span>
+        </a>
+        
+        <a  class="组件 es es_实战 "
+           href="/2020/06/22/component/elasticsearch/实战/es-实战及优化/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="es-实战及优化">es-实战及优化</span>
+            <span class="post-date" title="2020-06-22 21:10:28">2020/06/22</span>
         </a>
         
         <a  class="后台 其他 "
@@ -1169,6 +1161,14 @@
             <span class="post-date" title="2019-10-12 21:01:38">2019/10/12</span>
         </a>
         
+        <a  class="组件 es "
+           href="/2019/10/08/component/elasticsearch/elasticsearch-api-速查/"
+           data-tag="es"
+           data-author="" >
+            <span class="post-title" title="elasticsearch api 速查">elasticsearch api 速查</span>
+            <span class="post-date" title="2019-10-08 23:18:46">2019/10/08</span>
+        </a>
+        
         <a  class="组件 es es_query "
            href="/2019/09/27/component/elasticsearch/07-es-query/es-query-match-phrase短语查询/"
            data-tag="es_query"
@@ -1561,7 +1561,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#other','#问题-思考','#flink','#lucene','#kafka','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#资料','#other','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
