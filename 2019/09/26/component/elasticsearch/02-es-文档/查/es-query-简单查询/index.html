@@ -169,19 +169,19 @@
                             
                                 <ul class="sub hide">
                                     
-                                    <li><div data-rel="es_基础">es_基础<small>(15)</small></div>
-                                    </li>
-                                    
                                     <li><div data-rel="es_client">es_client<small>(2)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_问题">es_问题<small>(1)</small></div>
                                     </li>
                                     
+                                    <li><div data-rel="es_query">es_query<small>(4)</small></div>
+                                    </li>
+                                    
                                     <li><div data-rel="es_源码">es_源码<small>(4)</small></div>
                                     </li>
                                     
-                                    <li><div data-rel="es_query">es_query<small>(4)</small></div>
+                                    <li><div data-rel="es_基础">es_基础<small>(15)</small></div>
                                     </li>
                                     
                                     <li><div data-rel="es_实战">es_实战<small>(1)</small></div>
@@ -536,11 +536,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1694,7 +1694,7 @@ POST /&lt;index&gt;/_search</code></pre><p>可以看出get API和search API 在�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#资料','#other','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_update','#es_batch',],
+            'data': ['#资料','#other','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
