@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>es-master选举 | Simba</title>
-  <meta name="keywords" content=" es ">
-  <meta name="description" content="es-master选举 | Simba">
+  <title>性能优化 | Simba</title>
+  <meta name="keywords" content=" 问题-思考 ">
+  <meta name="description" content="性能优化 | Simba">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Simba_cheng个人简介 2015年加入编程、开发圈子；  目前就职于 南京本土某大型”互联网”企业   其他博客 CSDN(已不更新)：https://blog.csdn.net/Simba_cheng  GitHub：https://github.com/Simba-cheng   网络信息 邮箱: simba_cheng@163.com  关于本站本站是Simba的个人站。 本站所有文">
 <meta property="og:type" content="website">
@@ -1357,9 +1357,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-component/elasticsearch/01-es-基础/es-master选举" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-问题-思考/性能优化" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">es-master选举</h1>
+        <h1 class="article-title">性能优化</h1>
     
     <div class="article-meta">
         
@@ -1367,30 +1367,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="组件">组件</a>/
-            
-                <a href="javascript:" data-rel="es">es</a>/
-            
-                <a href="javascript:" data-rel="es_基础">es_基础</a>
+                <a href="javascript:" data-rel="问题-思考">问题-思考</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">es</a>
+            <a href="javascript:" class="color1">问题-思考</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-28 22:01:02'>2020-06-28 21:40</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-20 16:55:37'>2020-09-20 12:28</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:614</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1409,7 +1405,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#选举相关参数"><span class="toc-text">选举相关参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本规则"><span class="toc-text">基本规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bully算法"><span class="toc-text">Bully算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bully-选举流程"><span class="toc-text">Bully 选举流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主节点选举大致流程"><span class="toc-text">主节点选举大致流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#详细流程"><span class="toc-text">详细流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#木桶原理（短板理论）"><span class="toc-text">木桶原理（短板理论）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能瓶颈"><span class="toc-text">性能瓶颈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能指标"><span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能调优层次"><span class="toc-text">性能调优层次</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1424,114 +1420,26 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ElasticSearch 采用 Master - Slave（主从） 模式；</p>
-<p>主从模式：使用Master节点管理元信息，数据去中心化。</p>
-<p>master 主节点选举，是集群从已知的候选主节点中选举主节点。</p>
-<br>
-
-<p>关于节点角色可以在 <a href="https://simba-cheng.cn/2019/09/22/component/elasticsearch/01-es-%E5%9F%BA%E7%A1%80/02-es-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">02-es-基本概念</a> 这篇中了解。</p>
-<p>生产环境，尽量将 DataNode 和 MasterNode 角色分开。</p>
-<p>node.master 配置为true 的节点，才有资格参与Master节点的选举。（称之为：master eligible node，也叫 <strong>master候选节点</strong>。）</p>
-<h1 id="选举相关参数"><a href="#选举相关参数" class="headerlink" title="选举相关参数"></a>选举相关参数</h1><p>master选举过程是自动完成的，一下几个参数对选举很重要：</p>
+        <h1 id="木桶原理（短板理论）"><a href="#木桶原理（短板理论）" class="headerlink" title="木桶原理（短板理论）"></a>木桶原理（短板理论）</h1><p>一个木桶盛多少水，并不取决于桶壁上最高的那块木板，而是取决于桶壁上最短的那块。 </p>
+<p>即使程序、系统 拥有充足的内存和CPU，但是磁盘IO性能低下，那系统的总体性能取决于当前最慢磁盘IO速度，而不是CPU或内存。如果要提升程序、系统性能，优化内存或CPU毫无用处，磁盘IO就成了系统瓶颈，只有提高磁盘IO才能对系统系能进行优化。 </p>
+<p>系统、程序的最终性能取决于系统中性能表现最差的组件。为了提升性能，必须对系统中表现最差的组件进行优化，而不是对系统中表现良好的组件进行优化。 </p>
+<h1 id="性能瓶颈"><a href="#性能瓶颈" class="headerlink" title="性能瓶颈"></a>性能瓶颈</h1><p>根据程序、系统的特点不同，任何计算机资源都有可能成为系统瓶颈。</p>
 <ul>
-<li>discovery.zen.ping_timeout：选举超时时间，默认3秒，网络不好可以增加。</li>
-<li>discovery.zen.join_timeout：加入超时节点；新节点加入集群时，会向主节点发送加入请求，如果一次超时，默认重试20次。</li>
-<li>discovery.zen.master_election.ignore_non_master_pings：默认值false；如果master节点意外宕机，集群重新选举，如果值为true，那只有 <strong>master候选节点</strong> 才有资格参与选举；如果为false，那所有节点都可以参与选举。</li>
-<li>discovery.zen.minimum_master_nodes：配置最小master候选节点数；如果没有足够<strong>master候选节点</strong>时，就不要进行master节点选举。等master候选节点数量足够了才进行选举。</li>
+<li>磁盘IO：磁盘IO读写速度比内存慢很多。如果程序运行中需要等待磁盘IO完成，那低效IO操作会拖垮整个系统。</li>
+<li>网络环境：网络环境的不确定性，可能网络速度会比磁盘IO更慢。</li>
+<li>CPU：长时间、不间断的大量占用CPU资源，导致CPU资源争夺。</li>
+<li>代码异常：对Java应用来说，异常的捕获和处理是很耗资源的。如果程序高频率进行异常处理，整体性能会下降。</li>
+<li>存储：数据库、底层存储，海量数据读写很费时间。</li>
+<li>锁竞争：高并发系统中，如果存在大量锁竞争，会降低系统性能，锁竞争会增加线程上下文切换的开销。</li>
+<li>内存：如果程序设计合理，内存在读写速度上不会成为性能瓶颈。内存瓶颈更多的情况是内存大小不足。</li>
 </ul>
-<p>discovery.zen.minimum_master_nodes、discovery.zen.ping_timeout 这两个参数，用于防止出现脑裂。</p>
-<h1 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h1><p>ElasticSearch选举 采用quorum（多数派）思想，只有获得了超过半数选票的节点才能成为Master。</p>
-<p>quorum 为 discovery.zen.minimum_master_nodes 配置。</p>
-<h1 id="Bully算法"><a href="#Bully算法" class="headerlink" title="Bully算法"></a>Bully算法</h1><p>Bully算法，Master节点选举的基本算法之一。</p>
-<p>假定所有节点（候选主节点）都有一个唯一的ID，该ID对节点进行排序。拥有最高ID的节点，会成为Master节点。</p>
-<p>不过该算法在某些场景下会有问题，会造成脑裂的情况。</p>
-<p>ElasticSearch的选举与Bully算法有所出入，它选举的是ID最小的节点。</p>
-<h2 id="Bully-选举流程"><a href="#Bully-选举流程" class="headerlink" title="Bully 选举流程"></a>Bully 选举流程</h2><ol>
-<li>集群中有6个节点，每个节点都维护着和其他节点的联系，P6节点是当前集群的master。</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully0.png" alt="Bully0"></p>
-<ol start="2">
-<li>某时刻，P6节点/master节点 宕机了</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully1.png" alt="Bully1"></p>
-<ol start="3">
-<li>P3节点是集群中最先发现master节点宕机的，P3节点通知了比自己大编号大的P4、P5、P6节点。</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully2.png" alt="Bully2"></p>
-<ol start="4">
-<li>因为P6节点已宕机，所以只有P4、P5节点返回响应，它们通知P3节点（P4、P5），会取代P6节点称为master节点。</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully3.png" alt="Bully3"></p>
-<ol start="5">
-<li>P4节点向P5、P6节点发送通知</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully4.png" alt="Bully4"></p>
-<p>6.因为P6节点以及宕机，只有P5节点返回响应。</p>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully5.png" alt="Bully5"></p>
-<p>7.P5节点向P6发送通知，因为P6宕机没有响应，于是P5成了整个集群的master节点。</p>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully6.png" alt="Bully6"></p>
-<ol start="8">
-<li>P5节点（master）管理其他 Slave 节点。</li>
-</ol>
-<p><img src="//simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/Bully7.png" alt="Bully7"></p>
-<h1 id="主节点选举大致流程"><a href="#主节点选举大致流程" class="headerlink" title="主节点选举大致流程"></a>主节点选举大致流程</h1><p>ElectMasterService.java</p>
-<pre><code>/**
- * compares two candidates to indicate which the a better master.
- * A higher cluster state version is better
- *
- * @return -1 if c1 is a batter candidate, 1 if c2.
- */
-public static int compare(MasterCandidate c1, MasterCandidate c2) {
-    // we explicitly swap c1 and c2 here. the code expects &quot;better&quot; is lower in a sorted
-    // list, so if c2 has a higher cluster state version, it needs to come first.
-    int ret = Long.compare(c2.clusterStateVersion, c1.clusterStateVersion);
-    if (ret == 0) {
-        ret = compareNodes(c1.getNode(), c2.getNode());
-    }
-    return ret;
-}
-
-/** master nodes go before other nodes, with a secondary sort by id **/
- private static int compareNodes(DiscoveryNode o1, DiscoveryNode o2) {
-    if (o1.isMasterNode() &amp;&amp; !o2.isMasterNode()) {
-        return -1;
-    }
-    if (!o1.isMasterNode() &amp;&amp; o2.isMasterNode()) {
-        return 1;
-    }
-    return o1.getId().compareTo(o2.getId());
-}</code></pre><p>clusterStateVersion：elasticsearch版本</p>
-<p>先判断 clusterStateVersion，clusterStateVersion越大，优先级越高。</p>
-<p>clusterStateVersion 版本相同，则进入 compareNodes()，其内部按照 节点ID进行比较。</p>
-<ul>
-<li><p>clusterStateVersion越大，优先级越高。</p>
-</li>
-<li><p>clusterStateVersion相同，节点ID越小，优先级越高（倾向ID小的节点）。</p>
-<br>
-
-
-</li>
-</ul>
-<ol>
-<li><p>寻找 clusterStateVersion 比自己大的候选主节点，向其发送选举消息。</p>
-</li>
-<li><p>如果。如果 clusterStateVersion 一样，则计算自己能找到 候选主节点中（包括自己） 节点id最小的一个节点，并向该节点发送选票。</p>
-</li>
-<li><p>如果一个节点收到足够多的选票（minimum_master_nodes 设置），并且它也向自己投票了，那么该节点就成为Master节点；</p>
-<br>
-
-</li>
-</ol>
-<p>成功从’候选Master主节点’中选举出Master节点之后，该Master节点开始发布集群状态、负责集群和索引操作的请求处理。</p>
-<h1 id="详细流程"><a href="#详细流程" class="headerlink" title="详细流程"></a>详细流程</h1><p>源码位置：org.elasticsearch.discovery.zen.ZenDiscovery#startInitialJoin</p>
-<p>挖坑待填</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.easyice.cn/archives/164" target="_blank" rel="noopener">ELASTICSEARCH 选主流程</a></li>
-<li><a href="https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html" target="_blank" rel="noopener">Bully Election Algorithm Example</a></li>
-<li><a href="https://www.nosuchfield.com/2019/03/18/How-Elasticsearch-elected-the-master/" target="_blank" rel="noopener">Elasticsearch是如何选举出master的</a></li>
-<li><a href="https://yuzhouwan.com/posts/22654/" target="_blank" rel="noopener">搜索引擎 ElasticSearch</a></li>
-</ul>
-
+<h1 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h1><p>执行时间：从代码入口到代码运行结束，所使用的时间。</p>
+<p>CPU性能：函数执行、线程占用CPU时间、压力。</p>
+<p>内存分配：程序、系统运行时内存占用情况。</p>
+<p>磁盘吞吐：程序、系统运行时磁盘I/O吞吐压力。 </p>
+<p>网卡吞吐：程序、系统运行时网络吞吐能力 </p>
+<p>响应时间：程序、系统、接口 对用户/客户端 作出响应的时间。响应时间越短，性能越好。</p>
+<h1 id="性能调优层次"><a href="#性能调优层次" class="headerlink" title="性能调优层次"></a>性能调优层次</h1>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -1544,12 +1452,12 @@ public static int compare(MasterCandidate c1, MasterCandidate c2) {
 
 
     <div class="article_copyright">
-        <p><span class="copy-title">文章标题:</span>es-master选举</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+        <p><span class="copy-title">文章标题:</span>性能优化</p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">614</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
-        <p><span class="copy-title">发布时间:</span>2020-06-28, 21:40:04</p>
-        <p><span class="copy-title">最后更新:</span>2020-06-28, 22:01:02</p>
-        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/" title="es-master选举">https://simba-cheng.cn/2020/06/28/component/elasticsearch/01-es-基础/es-master选举/</a>
+        <p><span class="copy-title">发布时间:</span>2020-09-20, 12:28:19</p>
+        <p><span class="copy-title">最后更新:</span>2020-09-20, 16:55:37</p>
+        <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/20/问题-思考/性能优化/" title="性能优化">https://simba-cheng.cn/2020/09/20/问题-思考/性能优化/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
         </p>
