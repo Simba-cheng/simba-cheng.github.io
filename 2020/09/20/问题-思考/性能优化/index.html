@@ -103,6 +103,14 @@
     
         
             
+            <li><div data-rel="资料">资料<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="other"><i class="fold iconfont icon-right"></i>other<small>(1)</small></div>
                 
                     <ul class="sub hide">
@@ -112,14 +120,6 @@
                         </li>
                             
                     </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="资料">资料<small>(2)</small></div>
                 
             </li>
             
@@ -398,7 +398,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="99">
-<input type="hidden" id="yelog_site_word_count" value="132.1k">
+<input type="hidden" id="yelog_site_word_count" value="132.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -432,11 +432,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">other</a>
+        <a href="javascript:" class="color3">资料</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">资料</a>
+        <a href="javascript:" class="color1">other</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -536,11 +536,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color4">es_batch</a>
+        <a href="javascript:" class="color5">es_update</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">es_update</a>
+        <a href="javascript:" class="color4">es_batch</a>
     </li>
     
     <div class="clearfix"></div>
@@ -1381,12 +1381,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-09-20 20:04:33'>2020-09-20 12:28</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-20 20:18:34'>2020-09-20 12:28</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:965</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1405,7 +1405,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#木桶原理（短板理论）"><span class="toc-text">木桶原理（短板理论）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能瓶颈"><span class="toc-text">性能瓶颈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能指标"><span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能调优层次"><span class="toc-text">性能调优层次</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、设计调优"><span class="toc-text">1、设计调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、代码调优"><span class="toc-text">2、代码调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、JVM调优"><span class="toc-text">3、JVM调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、存储调优"><span class="toc-text">4、存储调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、操作系统调优"><span class="toc-text">5、操作系统调优</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#木桶原理（短板理论）"><span class="toc-text">木桶原理（短板理论）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能瓶颈"><span class="toc-text">性能瓶颈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能指标"><span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能调优层次"><span class="toc-text">性能调优层次</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、设计调优"><span class="toc-text">1、设计调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、代码调优"><span class="toc-text">2、代码调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、JVM调优"><span class="toc-text">3、JVM调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、存储调优"><span class="toc-text">4、存储调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、操作系统调优"><span class="toc-text">5、操作系统调优</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#性能优化注意"><span class="toc-text">性能优化注意</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1445,7 +1445,12 @@
 <p><strong>代码调优</strong>涉及诸多编码技巧，需要开发熟悉相关语言API，并在合适的场景使用相关API或类库。同时对算法、数据结构灵活使用也是重要内容。</p>
 <p>虽然<strong>代码调优</strong>是从微观上对性能进行调整，但是一个好实现和一个坏实现对系统的影响也是很大的。例如，LinkedList和ArrayList在随机访问上的性能有较大差别。</p>
 <p>虽然与<strong>设计调优</strong>相比，代码优化在<strong>微观层面</strong>上的优化，但它确实对系统性能产生最直接影响的。</p>
-<h2 id="3、JVM调优"><a href="#3、JVM调优" class="headerlink" title="3、JVM调优"></a>3、JVM调优</h2><h2 id="4、存储调优"><a href="#4、存储调优" class="headerlink" title="4、存储调优"></a>4、存储调优</h2><h2 id="5、操作系统调优"><a href="#5、操作系统调优" class="headerlink" title="5、操作系统调优"></a>5、操作系统调优</h2>
+<h2 id="3、JVM调优"><a href="#3、JVM调优" class="headerlink" title="3、JVM调优"></a>3、JVM调优</h2><p><strong>JVM调优</strong>通常在软件开发后期进行，比如 软件开发完成后、软件开发到某一里程碑时。<strong>JVM调优</strong> 需要对JVM层面的原理（堆结构、GC种类）、参数 有所了解。依据程序特点，设置合理的参数。</p>
+<h2 id="4、存储调优"><a href="#4、存储调优" class="headerlink" title="4、存储调优"></a>4、存储调优</h2><p>对绝大部分应用系统而言，存储（数据库、elasticsearch、solr、mongodb）的优化必不可少。</p>
+<h2 id="5、操作系统调优"><a href="#5、操作系统调优" class="headerlink" title="5、操作系统调优"></a>5、操作系统调优</h2><p>作为程序、系统 运行的平台，操作系统的性能对应用系统也有较大影响。Linux系统中，如共享内存段、文件句柄数等。</p>
+<h1 id="性能优化注意"><a href="#性能优化注意" class="headerlink" title="性能优化注意"></a>性能优化注意</h1><p>性能优化必须有明确目标，不可为了调优而调优；如果当前程序并没有明显的性能问题，盲目的进行调整。</p>
+<p>比如，优化一段代码的实现，需要重写原有算法，很有可能引入新BUG，而且之前的测试也变得毫无意义，需要对其进行完整的覆盖测试。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎指出任何有错误或不够清晰的表达，可以邮件至 simba_cheng@163.com </span>
     </div>
@@ -1459,10 +1464,10 @@
 
     <div class="article_copyright">
         <p><span class="copy-title">文章标题:</span>性能优化</p>
-        <p><span class="copy-title">文章字数:</span><span class="post-count">965</span></p>
+        <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
         <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Simba">Simba</a></p>
         <p><span class="copy-title">发布时间:</span>2020-09-20, 12:28:19</p>
-        <p><span class="copy-title">最后更新:</span>2020-09-20, 20:04:33</p>
+        <p><span class="copy-title">最后更新:</span>2020-09-20, 20:18:34</p>
         <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/20/问题-思考/性能优化/" title="性能优化">https://simba-cheng.cn/2020/09/20/问题-思考/性能优化/</a>
         <p>
             <span class="copy-title">版权声明:转载请保留原文链接及作者。</span>
@@ -1524,7 +1529,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#other','#资料','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_batch','#es_update',],
+            'data': ['#资料','#other','#问题-思考','#flink','#kafka','#lucene','#广告业务','#Java8','#hash','#索引','#linux','#mysql','#spring','#并发','#缓存','#设计模式','#es','#nginx','#bitmap','#后台_其他','#布隆过滤器','#es_client','#es问题','#es_query','#思考','#agent','#es_update','#es_batch',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
