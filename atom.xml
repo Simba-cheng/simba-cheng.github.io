@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>躺着好舒服</title>
+  <icon>https://simba-cheng.github.io/icon.png</icon>
+  
+  <link href="https://simba-cheng.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://simba-cheng.github.io/"/>
+  <updated>2025-06-23T05:14:48.595Z</updated>
+  <id>https://simba-cheng.github.io/</id>
+  
+  <author>
+    <name>yxcheng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PhotoPrism - 私人相册</title>
+    <link href="https://simba-cheng.github.io/posts/23130.html"/>
+    <id>https://simba-cheng.github.io/posts/23130.html</id>
+    <published>2025-06-23T05:13:29.000Z</published>
+    <updated>2025-06-23T05:14:48.595Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="折腾" scheme="https://simba-cheng.github.io/categories/%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="🐳 Docker" scheme="https://simba-cheng.github.io/tags/%F0%9F%90%B3-Docker/"/>
+    
+    <category term="折腾" scheme="https://simba-cheng.github.io/tags/%E6%8A%98%E8%85%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🔖 方案&amp;工具&amp;性能&amp;干中学 Cheat Sheet</title>
+    <link href="https://simba-cheng.github.io/posts/16958.html"/>
+    <id>https://simba-cheng.github.io/posts/16958.html</id>
+    <published>2025-06-18T07:28:05.000Z</published>
+    <updated>2025-06-20T01:10:12.067Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="Cheat Sheet" scheme="https://simba-cheng.github.io/categories/Cheat-Sheet/"/>
+    
+    
+    <category term="🔖 Cheat Sheet" scheme="https://simba-cheng.github.io/tags/%F0%9F%94%96-Cheat-Sheet/"/>
+    
+    <category term="方案解决" scheme="https://simba-cheng.github.io/tags/%E6%96%B9%E6%A1%88%E8%A7%A3%E5%86%B3/"/>
+    
+    <category term="性能优化" scheme="https://simba-cheng.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="事故分析" scheme="https://simba-cheng.github.io/tags/%E4%BA%8B%E6%95%85%E5%88%86%E6%9E%90/"/>
+    
+    <category term="干中学" scheme="https://simba-cheng.github.io/tags/%E5%B9%B2%E4%B8%AD%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有趣的PR</title>
+    <link href="https://simba-cheng.github.io/posts/13219.html"/>
+    <id>https://simba-cheng.github.io/posts/13219.html</id>
+    <published>2025-06-17T05:17:13.000Z</published>
+    <updated>2025-06-18T07:27:20.784Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="性能优化" scheme="https://simba-cheng.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="pr" scheme="https://simba-cheng.github.io/tags/pr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ffmpeg-实用脚本记录</title>
+    <link href="https://simba-cheng.github.io/posts/51711.html"/>
+    <id>https://simba-cheng.github.io/posts/51711.html</id>
+    <published>2025-06-09T02:57:26.000Z</published>
+    <updated>2025-06-23T05:23:48.936Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="折腾" scheme="https://simba-cheng.github.io/categories/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="ffmpeg" scheme="https://simba-cheng.github.io/categories/%E6%8A%98%E8%85%BE/ffmpeg/"/>
+    
+    
+    <category term="折腾" scheme="https://simba-cheng.github.io/tags/%E6%8A%98%E8%85%BE/"/>
+    
+    <category term="ffmpeg" scheme="https://simba-cheng.github.io/tags/ffmpeg/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Composition API 和 Options API</title>
+    <link href="https://simba-cheng.github.io/posts/30987.html"/>
+    <id>https://simba-cheng.github.io/posts/30987.html</id>
+    <published>2025-05-20T07:43:30.000Z</published>
+    <updated>2025-05-20T07:46:22.162Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue3 指令速查</title>
+    <link href="https://simba-cheng.github.io/posts/44191.html"/>
+    <id>https://simba-cheng.github.io/posts/44191.html</id>
+    <published>2025-05-20T06:31:46.000Z</published>
+    <updated>2025-05-23T01:59:06.664Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🔖 TypeScript-Cheat-Sheet</title>
+    <link href="https://simba-cheng.github.io/posts/64106.html"/>
+    <id>https://simba-cheng.github.io/posts/64106.html</id>
+    <published>2025-04-28T06:39:10.000Z</published>
+    <updated>2025-06-17T05:28:49.293Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="Cheat Sheet" scheme="https://simba-cheng.github.io/categories/Cheat-Sheet/"/>
+    
+    
+    <category term="TypeScript" scheme="https://simba-cheng.github.io/tags/TypeScript/"/>
+    
+    <category term="🔖 Cheat Sheet" scheme="https://simba-cheng.github.io/tags/%F0%9F%94%96-Cheat-Sheet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>📝 JavaScript 函数增强之高阶函数</title>
+    <link href="https://simba-cheng.github.io/posts/33480.html"/>
+    <id>https://simba-cheng.github.io/posts/33480.html</id>
+    <published>2025-03-11T01:56:28.000Z</published>
+    <updated>2025-06-17T05:26:02.338Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="JavaScript" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/JavaScript/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="📝 JavaScript" scheme="https://simba-cheng.github.io/tags/%F0%9F%93%9D-JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 中 exports 与 module.exports</title>
+    <link href="https://simba-cheng.github.io/posts/27462.html"/>
+    <id>https://simba-cheng.github.io/posts/27462.html</id>
+    <published>2025-03-09T04:17:32.000Z</published>
+    <updated>2025-04-21T01:14:59.009Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Node.js" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Node-js/"/>
+    
+    
+    <category term="Node.js" scheme="https://simba-cheng.github.io/tags/Node-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>📝 JavaScript 对象解构、展开语法和rest参数 – 实用指东</title>
+    <link href="https://simba-cheng.github.io/posts/48506.html"/>
+    <id>https://simba-cheng.github.io/posts/48506.html</id>
+    <published>2025-03-08T14:51:18.000Z</published>
+    <updated>2025-04-21T01:14:58.959Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="JavaScript" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/JavaScript/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="📝 JavaScript" scheme="https://simba-cheng.github.io/tags/%F0%9F%93%9D-JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通过代码来直观体验 Linux 零拷贝(Zero Copy)</title>
+    <link href="https://simba-cheng.github.io/posts/1148.html"/>
+    <id>https://simba-cheng.github.io/posts/1148.html</id>
+    <published>2025-02-23T05:59:08.000Z</published>
+    <updated>2025-06-18T03:06:22.599Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Java" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Java/"/>
+    
+    
+    <category term="kafka" scheme="https://simba-cheng.github.io/tags/kafka/"/>
+    
+    <category term="Java" scheme="https://simba-cheng.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🥦 Vue Events 事件</title>
+    <link href="https://simba-cheng.github.io/posts/45952.html"/>
+    <id>https://simba-cheng.github.io/posts/45952.html</id>
+    <published>2025-02-19T06:04:52.000Z</published>
+    <updated>2025-04-21T01:14:59.014Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🥦 Vue 响应式</title>
+    <link href="https://simba-cheng.github.io/posts/24719.html"/>
+    <id>https://simba-cheng.github.io/posts/24719.html</id>
+    <published>2025-02-14T07:14:52.000Z</published>
+    <updated>2025-05-19T06:24:49.429Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🥦 Vue props</title>
+    <link href="https://simba-cheng.github.io/posts/35252.html"/>
+    <id>https://simba-cheng.github.io/posts/35252.html</id>
+    <published>2025-02-11T01:58:23.000Z</published>
+    <updated>2025-04-21T01:14:59.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端工程化 - MPA与SPA</title>
+    <link href="https://simba-cheng.github.io/posts/47225.html"/>
+    <id>https://simba-cheng.github.io/posts/47225.html</id>
+    <published>2025-02-07T03:46:42.000Z</published>
+    <updated>2025-04-21T01:14:59.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="前端工程化" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/"/>
+    
+    
+    <category term="前端工程化" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网上常看到的知识蒸馏是什么意思?</title>
+    <link href="https://simba-cheng.github.io/posts/49506.html"/>
+    <id>https://simba-cheng.github.io/posts/49506.html</id>
+    <published>2025-02-06T06:49:27.000Z</published>
+    <updated>2025-04-21T01:14:58.912Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="AI" scheme="https://simba-cheng.github.io/categories/AI/"/>
+    
+    
+    <category term="AI" scheme="https://simba-cheng.github.io/tags/AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🥦 Vue 生命周期</title>
+    <link href="https://simba-cheng.github.io/posts/20538.html"/>
+    <id>https://simba-cheng.github.io/posts/20538.html</id>
+    <published>2025-01-25T09:12:16.000Z</published>
+    <updated>2025-04-21T01:14:59.014Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Vue" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/Vue/"/>
+    
+    
+    <category term="前端" scheme="https://simba-cheng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="🥦 Vue" scheme="https://simba-cheng.github.io/tags/%F0%9F%A5%A6-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通过 RabbitMQ 发送 MQTT 消息</title>
+    <link href="https://simba-cheng.github.io/posts/53331.html"/>
+    <id>https://simba-cheng.github.io/posts/53331.html</id>
+    <published>2025-01-14T08:29:27.000Z</published>
+    <updated>2025-04-21T01:14:58.992Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="MQTT" scheme="https://simba-cheng.github.io/categories/%E7%BC%96%E7%A8%8B/MQTT/"/>
+    
+    
+    <category term="RabbitMQ" scheme="https://simba-cheng.github.io/tags/RabbitMQ/"/>
+    
+    <category term="MQTT" scheme="https://simba-cheng.github.io/tags/MQTT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🔖 Linux-Cheat-Sheet</title>
+    <link href="https://simba-cheng.github.io/posts/15701.html"/>
+    <id>https://simba-cheng.github.io/posts/15701.html</id>
+    <published>2025-01-07T01:16:23.000Z</published>
+    <updated>2025-04-21T01:14:58.931Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="Cheat Sheet" scheme="https://simba-cheng.github.io/categories/Cheat-Sheet/"/>
+    
+    
+    <category term="🔖 Cheat Sheet" scheme="https://simba-cheng.github.io/tags/%F0%9F%94%96-Cheat-Sheet/"/>
+    
+    <category term="🐧 Linux" scheme="https://simba-cheng.github.io/tags/%F0%9F%90%A7-Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>知识不再是稀缺资源,人和人差距的拉开就变成了接受知识主观能动性和学习能力上</title>
+    <link href="https://simba-cheng.github.io/posts/62571.html"/>
+    <id>https://simba-cheng.github.io/posts/62571.html</id>
+    <published>2025-01-02T10:40:37.000Z</published>
+    <updated>2025-04-21T01:14:58.937Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;!-- 
+①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳
+&lt;font</summary>
+        
+      
+    
+    
+    
+    <category term="人生路漫漫" scheme="https://simba-cheng.github.io/categories/%E4%BA%BA%E7%94%9F%E8%B7%AF%E6%BC%AB%E6%BC%AB/"/>
+    
+    
+    <category term="人生路漫漫" scheme="https://simba-cheng.github.io/tags/%E4%BA%BA%E7%94%9F%E8%B7%AF%E6%BC%AB%E6%BC%AB/"/>
+    
+  </entry>
+  
+</feed>
